@@ -1,0 +1,2 @@
+MainPackage=C:\Sujit\dsmart\smc\SMC PROJECT\Project\VideoKallMCCST\VideoKallMCCST\bin\x86\Release\VideoKallMCCST_1.0.21.0_x86.msix
+SymbolPackage=C:\Sujit\dsmart\smc\SMC PROJECT\Project\build\VideoKallMCCST_1.0.21.0_Test\VideoKallMCCST_1.0.21.0_x86.appxsym

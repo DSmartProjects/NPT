@@ -1,0 +1,230 @@
+﻿using System;
+using System.Collections.Generic;
+ 
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using VideoKallMCCST.Communication;
+using VideoKallMCCST.View;
+using VideoKallMCCST.ViewModel;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Navigation;
+
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
+namespace VideoKallMCCST
+{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class MainPage : Page
+    {
+        public static MainPage mainPage;
+        public   MainPageViewModel mainpagecontext = new MainPageViewModel();
+        public delegate void NotifyStatus(string message, int code=0);
+        public delegate void CommandDelegate( );
+        public NotifyStatus NotifyStatusCallback;
+        DispatcherTimer watchdog = null;
+        public NotifyStatus StethoscopeNotification;
+        public CommandDelegate StethoscopeRecord;
+        public CommandDelegate OtoscopeComm;
+        public NotifyStatus StethoscopeStartStop;
+        public delegate void ImageDisplayNotification(string img);
+        public ImageDisplayNotification ImageDisplay;
+        public MainPage()
+        {
+            this.InitializeComponent();
+            mainPage = this;
+            this.DataContext = mainpagecontext;
+            RightPanelHolder.Navigate(typeof(LoginPage));
+            pagePlaceHolder.Navigate(typeof(LogoPage));
+            NotifyStatusCallback += UpdateNotification;
+           
+        }
+
+        public StorageFolder rootImageFolder { get; set; }
+        async void UpdateNotification(string s, int code)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                StatusTxt.Text = s;
+            });
+        }
+
+      
+        private   void Page_Loading(FrameworkElement sender, object args)
+        {
+            
+        }
+
+        private void SMCCommChannel_MessageReceived(object sender, CommunicationMsg msg)
+        {
+            string[] cmd = msg.Msg.ToLower().Split('>');
+             switch (cmd[0])
+            {
+                case "<smcr":
+                     mainpagecontext.IsSMCConnected = true;
+                    break;
+                case "<smpulr":
+                    break;
+                case "pulseres":
+                    mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.PULSEOXIMETERRESULT, msg.Msg.ToLower())) ;
+                    break;
+                case "pulsestatus":
+                    mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.PULSEOXIMETERSTATUS, msg.Msg.ToLower()));
+                    break;
+                case "glucmdres":
+                    mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.GLUCORESULT, msg.Msg.ToLower()));
+                    break;
+                case "glucoresultresstatus":
+                    mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.GLUCORESULTSTATUS, msg.Msg.ToLower()));
+                    break;
+                case "thermores":
+                    mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.THERMORESTULT, msg.Msg));
+                    break;
+                case "thermocon":
+                    mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.THERMORESTULTSTATUS, msg.Msg.ToLower()));
+                    break;
+                case "bpres":
+                    mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.BPRES, msg.Msg));
+                    break;
+                case "bpconected"://BPCONECTED
+                    mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.BPCONCHEC, msg.Msg));
+                    break;
+                case "bpconn": //BPCONN BPCONECTED>M:False>T:
+                    mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.BPCONMSG, msg.Msg));
+                    break;
+                case "streadey":
+                    StethoscopeNotification?.Invoke(msg.Msg.ToLower().Split('>')[1]);
+                    if(msg.Msg.ToLower().Split('>')[1].Contains(("Ready for streaming at").ToLower()))
+                    {
+                        isStethoscopeReadystreaming = true;
+                        StethoscopeStartStop?.Invoke("Ready",1);
+                        
+                    }
+                    break;
+                case "stmsg":
+                    StethoscopeNotification?.Invoke(msg.Msg.ToLower().Split('>')[1]);
+                    if (msg.Msg.ToLower().Split('>')[1].Contains(("streaming stopped").ToLower()))
+                    {
+                        
+                        isStethoscopeReadystreaming = false;
+                    }
+                    break;
+                case "stpic":
+                   // ImageDisplay?.Invoke(msg.Msg);
+                    break;
+                case "derpic":
+                   // ImageDisplay?.Invoke(msg.Msg);
+                    break;
+                case "mrpic":
+                    ImageDisplay?.Invoke(msg.Msg);
+                    break;
+                case "mrexp":
+                    UpdateNotification(cmd[1], 0);
+
+                     // ImageDisplay?.Invoke(msg.Msg);
+                    break;
+    }
+        }
+
+        public bool isStethoscopeStreaming { get; set; } = false;
+
+        public bool isStethoscopeReadystreaming { get; set; } = false;
+        void UpdateSMCStatus()
+        {
+            TxtSMCStatus.Text = mainpagecontext.IsSMCConnected ? "Available" : "Not Available";
+            
+            BorderStatus.Background = mainpagecontext.IsSMCConnected ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen): new SolidColorBrush(Windows.UI.Colors.Red);
+        }
+
+        private void Watchdog_Tick(object sender, object e)
+        {
+            watchdog.Stop();
+            UpdateSMCStatus();
+            if (!mainpagecontext.IsSMCConnected && intervalcount >= 5)
+            {
+                intervalcount = 0;
+                SMCCommChannel.IPAddress = mainpagecontext.TxtIpAddress;// "192.168.0.33";
+                SMCCommChannel.PortNo = mainpagecontext.TxtProtNo; // "9856"
+                SMCCommChannel.Connect();
+                SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);
+            }
+            else if (mainpagecontext.IsSMCConnected && statuscheckinterval >= 5)
+            {
+                statuscheckinterval = 0;
+                mainpagecontext.IsSMCConnected = false;
+                SMCCommChannel.SendMessage(CommunicationCommands.MCCConnectionStatusCheckCmd);
+            }
+            else if(!mainpagecontext.IsSMCConnected && intervalcount%2 == 0)
+            {
+                SMCCommChannel.SendMessage(CommunicationCommands.MCCConnectionStatusCheckCmd);
+            }
+            
+            intervalcount++;
+            statuscheckinterval++;
+           // mainpagecontext.UpdateStatus(mainpagecontext.IsSMCConnected);
+            watchdog.Start();
+        }
+
+        public CommunicationChannel SMCCommChannel { get; private set; }
+
+        int intervalcount = 0;
+        int statuscheckinterval = 0;
+        public void WriteMessage(string msg)
+        {
+            SMCCommChannel?.SendMessage(msg);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            SMCCommChannel = new CommunicationChannel();
+            SMCCommChannel.Initialize();
+
+            Utility ut = new Utility();
+
+            var result = Task.Run(async () => { return await ut.ReadIPaddress(); }).Result;
+            SMCCommChannel.IPAddress = mainpagecontext.TxtIpAddress;// "192.168.0.33";
+            SMCCommChannel.PortNo = mainpagecontext.TxtProtNo;// "9856";
+            SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;
+            mainpagecontext.IsSMCConnected = false;
+            SMCCommChannel.Connect();
+            SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);
+            watchdog = new DispatcherTimer();
+            watchdog.Tick += Watchdog_Tick;
+            watchdog.Interval = new TimeSpan(0, 0, 1);
+            watchdog.Start();
+        }
+
+     public   async void LogExceptions(string exception)
+        {
+          
+            try
+            {
+                string msg = exception + Environment.NewLine;
+                // msg = Environment.NewLine + msg + Environment.NewLine;
+                string filename = "Exceptionlogs.txt";
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                Windows.Storage.StorageFile pinfofile = await localFolder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
+                //  await Windows.Storage.FileIO.AppendTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                await Windows.Storage.FileIO.WriteTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            }
+            catch (Exception)
+            { }
+        }
+        public bool IsUserLogedin { get; set; }
+    }
+}

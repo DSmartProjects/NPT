@@ -1,0 +1,6 @@
+﻿[ResourceMetadata]
+"ResourceId"			"split.language-pt"
+"ResourceDimensions"		"language-pt-br"
+
+[Files]
+"C:\Sujit\dsmart\smc\SMC PROJECT\Project\VideoKallMCCST\VideoKallMCCST\obj\x86\Debug\split.language-pt.pri"			"resources.pri"

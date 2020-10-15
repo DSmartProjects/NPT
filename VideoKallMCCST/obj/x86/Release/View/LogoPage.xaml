@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="VideoKallMCCST.View.LogoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VideoKallMCCST.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <BitmapImage x:ConnectionId='2' x:Name="ImgMainScreenLogo1" CreateOptions="IgnoreImageCache"   UriSource="../Assets/Application.png"/>
+        
+    </Page.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Image x:ConnectionId='3' x:FieldModifier="public" x:Name="ImgMainScreenLogo" Grid.Row="0" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{StaticResource ImgMainScreenLogo1}"></Image>
+
+    </Grid>
+</Page>
+
