@@ -7,7 +7,7 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="820bee81-4964-40e4-a9ad-8a2cc09110f8" Publisher="CN=Videokall" Version="1.0.15.0" ProcessorArchitecture="x86" />
+  <Identity Name="820bee81-4964-40e4-a9ad-8a2cc09110f8" Publisher="CN=Videokall" Version="1.0.21.0" ProcessorArchitecture="x86" />
   <mp:PhoneIdentity PhoneProductId="820bee81-4964-40e4-a9ad-8a2cc09110f8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>VideoKallMCCST</DisplayName>
@@ -70,10 +70,10 @@
   </Extensions>
   <build:Metadata>
     <build:Item Name="TargetFrameworkMoniker" Value=".NETCore,Version=v5.0" />
-    <build:Item Name="VisualStudio" Version="15.0" />
-    <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Professional 2017" />
+    <build:Item Name="VisualStudio" Version="16.0" />
+    <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Community 2019" />
     <build:Item Name="OperatingSystem" Version="10.0.18362.1 (WinBuild.160101.0800)" />
-    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="15.0.28307.1089" />
+    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="16.0.30521.138" />
     <build:Item Name="ProjectGUID" Value="{11B95E3D-C800-4C56-9F72-6037159416BF}" />
     <build:Item Name="OptimizingToolset" Value="None" />
     <build:Item Name="TargetRuntime" Value="Managed" />

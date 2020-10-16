@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="VideoKallMCCST.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VideoKallMCCST"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+     xmlns:valueConverters="using:ValueConverters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+     <valueConverters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Page.Resources>
+    <Grid Background="LightBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--Login Controls-->
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="2"></Border>
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="2"></Border>
+
+        <TextBlock Margin="5,0,0,0" FontSize="18" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">User ID</TextBlock>
+        <TextBox x:ConnectionId='2' x:Name="txtUserID" Text="{Binding Userid,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,5,0" MaxLength="50"   Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+         
+        <TextBlock Margin="5,0,0,0" FontSize="18" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">Password</TextBlock>
+        <PasswordBox x:ConnectionId='3' Password="{Binding PasswordTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="pwdTxt" MaxLength="30" Margin="0,0,5,0" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"></PasswordBox>
+        <Button x:ConnectionId='4' Name="BtnLogin" IsEnabled="{Binding EnableSubmitButton, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding SubmitCommand}" Margin="0,5,0,0" Grid.Column="3" Grid.ColumnSpan="3" FontSize="20" Grid.Row="4" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Stretch" ></Button>
+   <!--Login Failure Message-->
+        <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:ConnectionId='5'  Visibility="{Binding LoginFailedMsg1Visible, Converter={StaticResource BoolToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" x:Name="txtLoginFailed" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"> Login failed:</TextBlock>
+            <TextBlock x:ConnectionId='6' Text="{Binding LoginErrorMessage, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding LoginFailedMsg2Visible,Converter={StaticResource BoolToVisibilityConverter},UpdateSourceTrigger=PropertyChanged}" x:Name="txtloginfailedMsg1" Foreground="Red" Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Left" >User id not exists.</TextBlock>
+            <TextBlock x:ConnectionId='7' Text="{Binding LoginErrorMessage2,UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding LoginFailedMsg3Visible, Converter={StaticResource BoolToVisibilityConverter},UpdateSourceTrigger=PropertyChanged}" x:Name="txtloginfailedMsg2" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" > Please enter valid user id or contact admin.</TextBlock>
+        </Grid>
+    </Grid>
+</Page>
+

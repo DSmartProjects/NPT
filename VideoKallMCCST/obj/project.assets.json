@@ -14288,8 +14288,8 @@
     },
     "SBCDBModule/1.0.0": {
       "type": "project",
-      "path": "../../../SBCDBModule/SBCDBModule/SBCDBModule/SBCDBModule.csproj",
-      "msbuildProject": "../../../SBCDBModule/SBCDBModule/SBCDBModule/SBCDBModule.csproj"
+      "path": "../SBCDBModule/SBCDBModule/SBCDBModule/SBCDBModule.csproj",
+      "msbuildProject": "../SBCDBModule/SBCDBModule/SBCDBModule/SBCDBModule.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -14313,11 +14313,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DSmart Projects\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST.csproj",
+      "projectUniqueName": "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST.csproj",
       "projectName": "VideoKallMCCST",
-      "projectPath": "C:\\DSmart Projects\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST.csproj",
+      "projectPath": "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST.csproj",
       "packagesPath": "C:\\Users\\sandyakumar\\.nuget\\packages\\",
-      "outputPath": "C:\\DSmart Projects\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST\\obj\\",
+      "outputPath": "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\VideoKallMCCST\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -14337,8 +14337,8 @@
       "frameworks": {
         "uap10.0.17763": {
           "projectReferences": {
-            "C:\\DSmart Projects\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj": {
-              "projectPath": "C:\\DSmart Projects\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj"
+            "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj": {
+              "projectPath": "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj"
             }
           }
         }

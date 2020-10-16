@@ -1,2 +1,2 @@
-C:\DSmart Projects\SBCDBModule\SBCDBModule\SBCDBModule\SBCDBModule.csproj;x86
-C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST.csproj;x86
+C:\Users\sandyakumar\Desktop\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\SBCDBModule.csproj;x86
+C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST.csproj;x86

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\DSmart Projects\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj": {}
+    "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj": {}
   },
   "projects": {
-    "C:\\DSmart Projects\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj": {
+    "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\DSmart Projects\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
+        "projectUniqueName": "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
         "projectName": "SBCDBModule",
-        "projectPath": "C:\\DSmart Projects\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
+        "projectPath": "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
         "packagesPath": "C:\\Users\\sandyakumar\\.nuget\\packages\\",
-        "outputPath": "C:\\DSmart Projects\\SBCDBModule\\SBCDBModule\\SBCDBModule\\obj\\",
+        "outputPath": "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [

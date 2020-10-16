@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d/jBjr9SVgpPY3z1RNzYAv/cniSMZXaBanBqocEMZX0i4MinavTztSa6BUYcWxFl84jDN6JbwTgu/v792GQVJA==",
+  "dgSpecHash": "JwUp710Ulx+BG/zAgABqgSM/A8bIIqxIsxu9lvexmHkngXw5nDu3H6A6FWkh+6vHZsuG7udY8kmDfMhp/kuWOg==",
   "success": true,
-  "projectFilePath": "C:\\DSmart Projects\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST.csproj",
+  "projectFilePath": "C:\\Users\\sandyakumar\\Desktop\\VideoKallMCCST\\VideoKallMCCST\\VideoKallMCCST.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sandyakumar\\.nuget\\packages\\commonservicelocator\\2.0.2\\commonservicelocator.2.0.2.nupkg.sha512",
     "C:\\Users\\sandyakumar\\.nuget\\packages\\livecharts\\0.8.0\\livecharts.0.8.0.nupkg.sha512",
