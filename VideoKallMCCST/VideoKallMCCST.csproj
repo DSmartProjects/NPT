@@ -373,12 +373,6 @@
     </Content>
     <None Include="VideoKallMCCST_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\SBCDBModule\SBCDBModule\SBCDBModule\SBCDBModule.csproj">
-      <Project>{8124fe77-ea75-47c9-b7b6-0988d4f4167b}</Project>
-      <Name>SBCDBModule</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

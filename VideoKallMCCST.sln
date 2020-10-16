@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoKallMCCST", "VideoKallMCCST\VideoKallMCCST.csproj", "{11B95E3D-C800-4C56-9F72-6037159416BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBCDBModule", "..\..\SBCDBModule\SBCDBModule\SBCDBModule\SBCDBModule.csproj", "{8124FE77-EA75-47C9-B7B6-0988D4F4167B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBCDBModule", "SBCDBModule\SBCDBModule\SBCDBModule\SBCDBModule.csproj", "{8124FE77-EA75-47C9-B7B6-0988D4F4167B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
