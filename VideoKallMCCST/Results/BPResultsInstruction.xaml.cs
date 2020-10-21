@@ -51,7 +51,7 @@ namespace VideoKallMCCST.Results
                             if (res[1].Split(':')[1].ToLower().Equals("true"))
                                 TxtConnectionstatus.Text = "Connected: " + msg.Msg.Split('>')[2];
                             else
-                                TxtConnectionstatus.Text = "BP Monitor is Not Connected. Please connect. ";
+                                TxtConnectionstatus.Text = "BP Monitor is Not Connected.<LineBreak/>Please connect. ";
 
                             //  BtnGlucoResult.IsEnabled = true;
                             break;
