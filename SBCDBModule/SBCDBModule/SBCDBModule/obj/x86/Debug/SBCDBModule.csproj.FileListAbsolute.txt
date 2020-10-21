@@ -92,3 +92,27 @@ C:\Users\sandyakumar\Desktop\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\
 C:\Users\sandyakumar\Desktop\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\qualifiers.txt
 C:\Users\sandyakumar\Desktop\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\qualifiers.txt.intermediate
 C:\Users\sandyakumar\Desktop\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\SBCDBModule.dll
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\SBCDBModule.pdb
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\SBCDBModule.pri
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\Microsoft.UI.Xaml.Markup.winmd
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.csprojAssemblyReference.cache
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.csproj.CoreCompileInputs.cache
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.csproj.CopyComplete
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.dll
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.pdb
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\priconfig.xml
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\priconfig.xml.intermediate
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\unfiltered.layout.resfiles
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\unfiltered.layout.resfiles.intermediate
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\filtered.layout.resfiles
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\filtered.layout.resfiles.intermediate
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\excluded.layout.resfiles
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\excluded.layout.resfiles.intermediate
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\resources.resfiles
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\resources.resfiles.intermediate
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\pri.resfiles
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\pri.resfiles.intermediate
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\qualifiers.txt
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\qualifiers.txt.intermediate
+C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt

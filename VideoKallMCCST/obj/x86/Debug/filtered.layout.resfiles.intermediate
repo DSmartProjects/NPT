@@ -1,4 +1,3 @@
-WinMetadata\Windows.winmd
 Assets\Application.ico
 Assets\Application.png
 Assets\bp.png
@@ -56,3 +55,4 @@ ssoipTXLib.dll
 ssoipTXLib.lib
 ssoipTXLib.pdb
 vccorlib120.dll
+WinMetadata\Windows.winmd

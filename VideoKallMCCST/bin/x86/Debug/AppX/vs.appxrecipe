@@ -10,7 +10,7 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>820bee81-4964-40e4-a9ad-8a2cc09110f8</PackageIdentityName>
     <PackageIdentityPublisher>CN=Videokall</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
     <PackageRegistrationPath>
@@ -18,7 +18,7 @@
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\AppX</LayoutDir>
+    <LayoutDir>C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\AppX</LayoutDir>
     <RegisteredManifestChecksum>EC883B4E2EB54D40881ED9083FCE4C90043BE7726ECE5F078AAB73DF2F2D89E4</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>820bee81-4964-40e4-a9ad-8a2cc09110f8_1.0.21.0_x86__e7qnvkzxasge0</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>820bee81-4964-40e4-a9ad-8a2cc09110f8_e7qnvkzxasge0!App</RegisteredUserModeAppID>
@@ -27,16 +27,16 @@
     <RegisteredVersion>1.0.21.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-10-16T10:56:04.859</Modified>
+      <Modified>2020-10-21T14:50:18.074</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\VideoKallMCCST.exe">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\VideoKallMCCST.exe">
       <PackagePath>entrypoint\VideoKallMCCST.exe</PackagePath>
-      <Modified>2020-10-16T10:54:43.733</Modified>
+      <Modified>2020-10-21T14:50:11.552</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sandyakumar\.nuget\packages\commonservicelocator\2.0.2\lib\netstandard2.0\CommonServiceLocator.dll">
       <PackagePath>CommonServiceLocator.dll</PackagePath>
@@ -210,9 +210,9 @@
       <PackagePath>WinRTXamlToolkit.Controls.DataVisualization.dll</PackagePath>
       <Modified>2017-02-12T06:48:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\SBCDBModule.dll">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\SBCDBModule.dll">
       <PackagePath>SBCDBModule.dll</PackagePath>
-      <Modified>2020-10-16T10:54:31.286</Modified>
+      <Modified>2020-10-21T14:49:59.197</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.18362.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
@@ -238,239 +238,239 @@
       <PackagePath>WinRTXamlToolkit.Controls.DataVisualization\Properties\WinRTXamlToolkit.Controls.DataVisualization.rd.xml</PackagePath>
       <Modified>2017-02-12T06:48:54.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\SBCDB.db">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\SBCDB.db">
       <PackagePath>Assets\SBCDB.db</PackagePath>
-      <Modified>2020-10-16T10:22:52.807</Modified>
+      <Modified>2020-10-21T14:34:09.773</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Application.ico">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Application.ico">
       <PackagePath>Assets\Application.ico</PackagePath>
-      <Modified>2020-10-16T10:22:52.758</Modified>
+      <Modified>2020-10-21T14:34:09.761</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Application.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Application.png">
       <PackagePath>Assets\Application.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.759</Modified>
+      <Modified>2020-10-21T14:34:09.762</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\bp.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\bp.png">
       <PackagePath>Assets\bp.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.822</Modified>
+      <Modified>2020-10-21T14:34:09.784</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Darmoscope.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Darmoscope.png">
       <PackagePath>Assets\Darmoscope.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.765</Modified>
+      <Modified>2020-10-21T14:34:09.763</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\EKG.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\EKG.png">
       <PackagePath>Assets\EKG.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.800</Modified>
+      <Modified>2020-10-21T14:34:09.764</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\GlucoseMonitor.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\GlucoseMonitor.png">
       <PackagePath>Assets\GlucoseMonitor.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.801</Modified>
+      <Modified>2020-10-21T14:34:09.766</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\logo.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\logo.png">
       <PackagePath>Assets\logo.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.824</Modified>
+      <Modified>2020-10-21T14:34:09.786</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Lungstethoscop.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Lungstethoscop.png">
       <PackagePath>Assets\Lungstethoscop.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.803</Modified>
+      <Modified>2020-10-21T14:34:09.769</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\OtoscopeCamera.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\OtoscopeCamera.png">
       <PackagePath>Assets\OtoscopeCamera.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.804</Modified>
+      <Modified>2020-10-21T14:34:09.770</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\pulseOxymeter.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\pulseOxymeter.png">
       <PackagePath>Assets\pulseOxymeter.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.825</Modified>
+      <Modified>2020-10-21T14:34:09.787</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\sbcimg.PNG">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\sbcimg.PNG">
       <PackagePath>Assets\sbcimg.PNG</PackagePath>
-      <Modified>2020-10-16T10:22:52.832</Modified>
+      <Modified>2020-10-21T14:34:09.792</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\seatedWeight.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\seatedWeight.png">
       <PackagePath>Assets\seatedWeight.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.834</Modified>
+      <Modified>2020-10-21T14:34:09.793</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Spirometer.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Spirometer.png">
       <PackagePath>Assets\Spirometer.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.809</Modified>
+      <Modified>2020-10-21T14:34:09.774</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\StandingHeight.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\StandingHeight.png">
       <PackagePath>Assets\StandingHeight.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.815</Modified>
+      <Modified>2020-10-21T14:34:09.779</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\stethoscop.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\stethoscop.png">
       <PackagePath>Assets\stethoscop.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.835</Modified>
+      <Modified>2020-10-21T14:34:09.795</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Thermometer.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Thermometer.png">
       <PackagePath>Assets\Thermometer.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.818</Modified>
+      <Modified>2020-10-21T14:34:09.782</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
-      <Modified>2020-10-16T10:22:52.802</Modified>
+      <Modified>2020-10-21T14:34:09.767</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-10-16T10:22:52.810</Modified>
+      <Modified>2020-10-21T14:34:09.775</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-10-16T10:22:52.811</Modified>
+      <Modified>2020-10-21T14:34:09.776</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-10-16T10:22:52.813</Modified>
+      <Modified>2020-10-21T14:34:09.777</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-10-16T10:22:52.814</Modified>
+      <Modified>2020-10-21T14:34:09.778</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-10-16T10:22:52.817</Modified>
+      <Modified>2020-10-21T14:34:09.780</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-10-16T10:22:52.821</Modified>
+      <Modified>2020-10-21T14:34:09.783</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2020-10-16T10:22:52.852</Modified>
+      <Modified>2020-10-21T14:34:09.817</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\sSOIP-RXAPI.dll">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\sSOIP-RXAPI.dll">
       <PackagePath>sSOIP-RXAPI.dll</PackagePath>
-      <Modified>2020-10-16T10:23:14.483</Modified>
+      <Modified>2020-10-21T14:34:32.321</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\sSOIP-TXAPI.dll">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\sSOIP-TXAPI.dll">
       <PackagePath>sSOIP-TXAPI.dll</PackagePath>
-      <Modified>2020-10-16T10:23:14.801</Modified>
+      <Modified>2020-10-21T14:34:32.913</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\ssoipRXLib.dll">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\ssoipRXLib.dll">
       <PackagePath>ssoipRXLib.dll</PackagePath>
-      <Modified>2020-10-16T10:23:14.905</Modified>
+      <Modified>2020-10-21T14:34:33.181</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\ssoipTXLib.dll">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\ssoipTXLib.dll">
       <PackagePath>ssoipTXLib.dll</PackagePath>
-      <Modified>2020-10-16T10:23:15.080</Modified>
+      <Modified>2020-10-21T14:34:33.316</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\vccorlib120.dll">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\vccorlib120.dll">
       <PackagePath>vccorlib120.dll</PackagePath>
-      <Modified>2020-10-16T10:23:15.107</Modified>
+      <Modified>2020-10-21T14:34:33.368</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\server.crt">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\server.crt">
       <PackagePath>server.crt</PackagePath>
-      <Modified>2020-10-16T10:23:14.903</Modified>
+      <Modified>2020-10-21T14:34:33.176</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\sSOIP-RXAPI.lib">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\sSOIP-RXAPI.lib">
       <PackagePath>sSOIP-RXAPI.lib</PackagePath>
-      <Modified>2020-10-16T10:23:14.486</Modified>
+      <Modified>2020-10-21T14:34:32.338</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\sSOIP-TXAPI.lib">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\sSOIP-TXAPI.lib">
       <PackagePath>sSOIP-TXAPI.lib</PackagePath>
-      <Modified>2020-10-16T10:23:14.804</Modified>
+      <Modified>2020-10-21T14:34:32.915</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\ssoipRXLib.lib">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\ssoipRXLib.lib">
       <PackagePath>ssoipRXLib.lib</PackagePath>
-      <Modified>2020-10-16T10:23:15.015</Modified>
+      <Modified>2020-10-21T14:34:33.185</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\ssoipTXLib.lib">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\ssoipTXLib.lib">
       <PackagePath>ssoipTXLib.lib</PackagePath>
-      <Modified>2020-10-16T10:23:15.090</Modified>
+      <Modified>2020-10-21T14:34:33.320</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\VideoKallMCCST.xr.xml">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\VideoKallMCCST.xr.xml">
       <PackagePath>VideoKallMCCST.xr.xml</PackagePath>
-      <Modified>2020-10-16T10:54:42.847</Modified>
+      <Modified>2020-10-21T14:34:24.858</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\App.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.928</Modified>
+      <Modified>2020-10-21T14:50:10.983</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\BPResultsInstruction.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\BPResultsInstruction.xbf">
       <PackagePath>Results\BPResultsInstruction.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.928</Modified>
+      <Modified>2020-10-21T14:50:10.983</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\GlucoMeterResultInstructions.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\GlucoMeterResultInstructions.xbf">
       <PackagePath>Results\GlucoMeterResultInstructions.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.928</Modified>
+      <Modified>2020-10-21T14:50:10.984</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\OtoscopeimageViewer.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\OtoscopeimageViewer.xbf">
       <PackagePath>Results\OtoscopeimageViewer.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.929</Modified>
+      <Modified>2020-10-21T14:50:10.984</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\PulseOximeterResult.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\PulseOximeterResult.xbf">
       <PackagePath>Results\PulseOximeterResult.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.929</Modified>
+      <Modified>2020-10-21T14:50:10.984</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\Resulttemplate.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\Resulttemplate.xbf">
       <PackagePath>Results\Resulttemplate.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.929</Modified>
+      <Modified>2020-10-21T14:50:10.985</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\StethoscopeChestInstructions.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\StethoscopeChestInstructions.xbf">
       <PackagePath>Results\StethoscopeChestInstructions.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.930</Modified>
+      <Modified>2020-10-21T14:50:10.985</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\Thermometerinstructions.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Results\Thermometerinstructions.xbf">
       <PackagePath>Results\Thermometerinstructions.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.930</Modified>
+      <Modified>2020-10-21T14:50:10.985</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\SpiroMeter\SpirometerChart.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\SpiroMeter\SpirometerChart.xbf">
       <PackagePath>SpiroMeter\SpirometerChart.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.930</Modified>
+      <Modified>2020-10-21T14:50:10.985</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\SpiroMeter\SPMChart.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\SpiroMeter\SPMChart.xbf">
       <PackagePath>SpiroMeter\SPMChart.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.931</Modified>
+      <Modified>2020-10-21T14:50:10.986</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Themes\Generic.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Themes\Generic.xbf">
       <PackagePath>Themes\Generic.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.927</Modified>
+      <Modified>2020-10-21T14:50:10.983</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\Accounts.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\Accounts.xbf">
       <PackagePath>View\Accounts.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.931</Modified>
+      <Modified>2020-10-21T14:50:10.986</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\LoginPage.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\LoginPage.xbf">
       <PackagePath>View\LoginPage.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.931</Modified>
+      <Modified>2020-10-21T14:50:10.986</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.932</Modified>
+      <Modified>2020-10-21T14:50:10.987</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\LogoPage.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\LogoPage.xbf">
       <PackagePath>View\LogoPage.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.932</Modified>
+      <Modified>2020-10-21T14:50:10.987</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\Settings.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\Settings.xbf">
       <PackagePath>View\Settings.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.932</Modified>
+      <Modified>2020-10-21T14:50:10.987</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\TestPanel.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\TestPanel.xbf">
       <PackagePath>View\TestPanel.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.926</Modified>
+      <Modified>2020-10-21T14:50:10.981</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\Videocallpage.xbf">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\View\Videocallpage.xbf">
       <PackagePath>View\Videocallpage.xbf</PackagePath>
-      <Modified>2020-10-16T10:56:00.933</Modified>
+      <Modified>2020-10-21T14:50:10.988</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
       <Modified>2019-03-18T12:03:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2020-10-16T10:54:47.055</Modified>
+      <Modified>2020-10-21T14:50:15.328</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\sandyakumar\Desktop\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Core\VideoKallMCCST.exe">
+    <AppxPackagedFile Include="C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\bin\x86\Debug\Core\VideoKallMCCST.exe">
       <PackagePath>VideoKallMCCST.exe</PackagePath>
-      <Modified>2020-10-16T10:56:04.845</Modified>
+      <Modified>2020-10-21T14:50:18.067</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
