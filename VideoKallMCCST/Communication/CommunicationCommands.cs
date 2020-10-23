@@ -60,5 +60,25 @@ namespace VideoKallMCCST.Communication
         public static readonly string DERPIC = "DRPIC>{0}>";
         public static readonly string MIROSCOPEPIC = "MRPIC>{0}>";
         public static readonly string MIREXCEPTION = "MREXP>{0}>";
+        public static readonly string OTOSAVEIMAGE = "<otosaveImage>";
+        public static readonly string DERSAVEIMAGE = "<dersaveImage>";
+       
+        public static readonly string NotifySAVEDIMAGE = "<imagesaved>";
+
+        public static readonly string SpirometerFVCdata = "SPIROFVC>{0}>";
+        public static readonly string SpirometerFVC = "SPIROVC>{0}>";
+
+        public static readonly string StartSpiroFVC = "<startspirofvc>{0}>";
+
+        public static readonly string StartSpiroVC = "<startspirovc>{0}>";
+        public static readonly string StopSpiro = "<stopspiro>";
+
+        public static readonly string Spirostatussuccess = "spirostatussucess>";
+        public static readonly string SpirostatusFailed = "spirostatusfailed>{0}> ";
+        public static readonly string StoppedSpiroMeter = "stoppedspirometer>";
+
+        public static readonly string SpiroVCResults = "spirovcresult>{0}>{1}>";
+
+        public static readonly string SpiroFVCResults = "spirofvcresult>{0}>{1}>";
     }
 }

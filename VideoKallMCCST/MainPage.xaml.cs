@@ -32,18 +32,7 @@ namespace VideoKallMCCST
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public static MainPage mainPage;
-        public   MainPageViewModel mainpagecontext = new MainPageViewModel();
-        public delegate void NotifyStatus(string message, int code=0);
-        public delegate void CommandDelegate( );
-        public NotifyStatus NotifyStatusCallback;
-        DispatcherTimer watchdog = null;
-        public NotifyStatus StethoscopeNotification;
-        public CommandDelegate StethoscopeRecord;
-        public CommandDelegate OtoscopeComm;
-        public NotifyStatus StethoscopeStartStop;
-        public delegate void ImageDisplayNotification(string img);
-        public ImageDisplayNotification ImageDisplay;
+       
         public MainPage()
         {
             this.InitializeComponent();
@@ -64,7 +53,7 @@ namespace VideoKallMCCST
             });
         }
 
-      
+        public bool TestIsInProgress { get; set; } = false;
         private   void Page_Loading(FrameworkElement sender, object args)
         {
             
@@ -138,9 +127,46 @@ namespace VideoKallMCCST
 
                      // ImageDisplay?.Invoke(msg.Msg);
                     break;
-    }
+                case "<imagesaved":
+                    ImageDisplay?.Invoke("imagesaved");
+                    UpdateNotification("Image Saved.", 0);
+                    break;
+                case "connectedmcc":
+                    isDataAcquitionappConnected = true;
+
+                    DQConnectionCallback?.Invoke(true);
+                    break;
+                case "spirofvc":
+                    isDataAcquitionappConnected = true;
+                    SPirotResults?.Invoke(msg.Msg);
+                    break;
+                case "spirovc":
+                    isDataAcquitionappConnected = true;
+                    SPirotResults?.Invoke(msg.Msg);
+                    break;
+                case "spirofvcvt":
+                    isDataAcquitionappConnected = true;
+                    SPirotResults?.Invoke(msg.Msg);
+                    break;
+                case "spirostatussucess":
+                case "stoppedspirometer":
+                    isDataAcquitionappConnected = true;
+                    SPirotResults?.Invoke(msg.Msg);
+                    break;
+                case "spirostatusfailed":
+                    isDataAcquitionappConnected = true;
+                    SPirotResults?.Invoke(msg.Msg);
+                    break;
+
+                case "spirovcresult":
+                case "spirofvcresult":
+                    isDataAcquitionappConnected = true;
+                    SPirotResults?.Invoke(msg.Msg);
+                    break;
+            }
         }
 
+        public bool isDataAcquitionappConnected { get; set; } = false;
         public bool isStethoscopeStreaming { get; set; } = false;
 
         public bool isStethoscopeReadystreaming { get; set; } = false;
@@ -154,7 +180,9 @@ namespace VideoKallMCCST
         private void Watchdog_Tick(object sender, object e)
         {
             watchdog.Stop();
+            if(statuscheckinterval>1 || mainpagecontext.IsSMCConnected)
             UpdateSMCStatus();
+
             if (!mainpagecontext.IsSMCConnected && intervalcount >= 5)
             {
                 intervalcount = 0;
@@ -173,8 +201,14 @@ namespace VideoKallMCCST
             {
                 SMCCommChannel.SendMessage(CommunicationCommands.MCCConnectionStatusCheckCmd);
             }
-            
+
+            if (intervalcount > 6)
+                intervalcount = 0;
+          //  if(!isDataAcquitionappConnected && statuscheckinterval>2)
+           //     CommToDataAcq.SendMessageToDataacquistionapp("ConnectionTest");
+
             intervalcount++;
+           
             statuscheckinterval++;
            // mainpagecontext.UpdateStatus(mainpagecontext.IsSMCConnected);
             watchdog.Start();
@@ -189,7 +223,7 @@ namespace VideoKallMCCST
             SMCCommChannel?.SendMessage(msg);
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private   void Page_Loaded(object sender, RoutedEventArgs e)
         {
             SMCCommChannel = new CommunicationChannel();
             SMCCommChannel.Initialize();
@@ -207,14 +241,19 @@ namespace VideoKallMCCST
             watchdog.Tick += Watchdog_Tick;
             watchdog.Interval = new TimeSpan(0, 0, 1);
             watchdog.Start();
+            CommToDataAcq.MessageReceived += SMCCommChannel_MessageReceived;
+            CommToDataAcq.Initialize();
+             CommToDataAcq.Connect();
         }
+
+        public DataacquistionappComm CommToDataAcq { get; set; } = new DataacquistionappComm();
 
      public   async void LogExceptions(string exception)
         {
           
             try
             {
-                string msg = exception + Environment.NewLine;
+                string msg =DateTime.Now.Date.ToString()+DateTime.Now.TimeOfDay.ToString()+ exception + Environment.NewLine;
                 // msg = Environment.NewLine + msg + Environment.NewLine;
                 string filename = "Exceptionlogs.txt";
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -226,5 +265,30 @@ namespace VideoKallMCCST
             { }
         }
         public bool IsUserLogedin { get; set; }
+
+        public static MainPage mainPage;
+        public MainPageViewModel mainpagecontext = new MainPageViewModel();
+        public delegate void NotifyStatus(string message, int code = 0);
+        public delegate void CommandDelegate();
+        public delegate void BoolDelegate(bool isDermascope);
+        public BoolDelegate DigitalMicroscope;
+        public NotifyStatus NotifyStatusCallback;
+        DispatcherTimer watchdog = null;
+        public NotifyStatus StethoscopeNotification;
+        public CommandDelegate StethoscopeRecord;
+        public CommandDelegate OtoscopeComm;
+        public NotifyStatus StethoscopeStartStop;
+        public delegate void ImageDisplayNotification(string img);
+        public ImageDisplayNotification ImageDisplay;
+        public CommandDelegate NextPatient;
+        public BoolDelegate StethoscopeStatus;
+        public BoolDelegate MicroscopeStatus;
+        public delegate void UpdateResults(string msg);
+        public UpdateResults SPirotResults;
+        public CommandDelegate Spirometercallback;
+        public BoolDelegate Spirometrystatus;
+        public CommandDelegate ResetSpirometr;
+
+        public BoolDelegate DQConnectionCallback;
     }
 }

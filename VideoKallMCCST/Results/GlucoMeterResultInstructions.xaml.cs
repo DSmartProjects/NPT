@@ -26,6 +26,16 @@ namespace VideoKallMCCST.Results
             this.InitializeComponent();
             MainPage.mainPage.mainpagecontext.NotifyResult += UpdateNotification;
             BtnGlucoResult.IsEnabled = true;
+            MainPage.mainPage.NextPatient += NextPatient;
+        }
+
+
+       async void NextPatient()
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                BtnGlucoResult.IsEnabled = true;
+            });
         }
 
         async void UpdateNotification(object sender, CommunicationMsg msg)

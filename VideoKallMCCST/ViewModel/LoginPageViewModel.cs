@@ -61,12 +61,6 @@ namespace VideoKallMCCST.ViewModel
  
         public void ExecuteSubmitCommand( )
         {
-            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanel));
-            if (videcallPage == null)
-                videcallPage = new Videocallpage();
-            MainPage.mainPage.RightPanelHolder.Navigate(typeof(Videocallpage), videcallPage);
-            MainPage.mainPage.IsUserLogedin = true;
-
             SBCDB dbmodule = new SBCDB();
             User loggedinUser =  dbmodule.GetLoggedinUser(Userid.Trim().ToLower());
             if (loggedinUser == null)

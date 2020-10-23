@@ -20,8 +20,12 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+      
         <Image   x:FieldModifier="public" x:Name="ImgMainScreenLogo" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4" Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{StaticResource ImgMainScreenLogo1}"></Image>
-
-        <ctrl:SPMChart  Grid.Row="2" Grid.RowSpan="3"  ></ctrl:SPMChart>
+        <StackPanel Margin="5"  Grid.Row="2">
+            <Button x:Name="BtnDoneCall" Content="Done" Click="BtnDoneCall_Click"></Button>
+        </StackPanel>
+       
+        <ctrl:SPMChart  Grid.Row="4" Grid.RowSpan="3"  ></ctrl:SPMChart>
     </Grid>
 </Page>

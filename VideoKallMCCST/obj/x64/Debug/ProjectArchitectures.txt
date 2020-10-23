@@ -1,2 +1,0 @@
-C:\DSmart Projects\SBCDBModule\SBCDBModule\SBCDBModule\SBCDBModule.csproj;x64
-C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST\VideoKallMCCST.csproj;x64

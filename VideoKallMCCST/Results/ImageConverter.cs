@@ -32,19 +32,19 @@ namespace VideoKallMCCST.Results
             }
         }
 
-        public static async Task<Image> LoadBitmapFromStorageFile(string aFileName)
-        {
-            StorageFile ImageFile;///= await Globals.picturesLibrary.GetFileAsync(aFileName);
+        //public static async Task<Image> LoadBitmapFromStorageFile(string aFileName)
+        //{
+        //    StorageFile ImageFile;///= await Globals.picturesLibrary.GetFileAsync(aFileName);
 
-            BitmapImage bimg = new BitmapImage();
-            FileRandomAccessStream stream = null;// = (FileRandomAccessStream)await ImageFile.OpenAsync(FileAccessMode.Read);
-            bimg.SetSource(stream);
+        //    BitmapImage bimg = new BitmapImage();
+        //    FileRandomAccessStream stream = null;// = (FileRandomAccessStream)await ImageFile.OpenAsync(FileAccessMode.Read);
+        //    bimg.SetSource(stream);
 
-            Image img = new Image();
-            img.Source = bimg;
+        //    Image img = new Image();
+        //    img.Source = bimg;
 
-            return img;
-        }
+        //    return img;
+        //}
 
         public async Task SaveImageToFileAsync(string fileName)
         {
@@ -68,10 +68,7 @@ namespace VideoKallMCCST.Results
                 await encoder.FlushAsync();
             }
         }
-        public async void Test()
-        {
-          //  await ImageFile.CopyAsync(await StorageFolder.GetFolderFromPathAsync(Path), "Bird.jpg", NameCollisionOption.GenerateUniqueName);
-        }
+        
         public async Task<ImageSource> SaveToImageSource(byte[] imageBuffer)
         {
             ImageSource imageSource = null;

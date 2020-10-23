@@ -8,6 +8,7 @@ using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,9 +29,20 @@ namespace VideoKallMCCST.View
         public Settings()
         {
             this.InitializeComponent();
-            TxtimageFolder.Text = "\\\\"+ MainPage.mainPage.SMCCommChannel.IPAddress+"\\" + strRootFolder; 
+            TxtimageFolder.Text = "\\\\"+ MainPage.mainPage.SMCCommChannel.IPAddress+"\\" + strRootFolder;
+            TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
+            
+            MainPage.mainPage.DQConnectionCallback += UpdateConnectionStatus;
         }
 
+      async  void UpdateConnectionStatus(bool status)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
+            });
+            
+        }
         private void TxtTmpUnitbtn_Toggled(object sender, RoutedEventArgs e)
         {
             MainPage.mainPage.mainpagecontext.ThermometerUnitF = TxtTmpUnitbtn.IsOn;
@@ -75,6 +87,13 @@ namespace VideoKallMCCST.View
             {
                 string s = ex.Message;
             }
+        }
+
+        private void BtnConnectdaq_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.mainPage.isDataAcquitionappConnected = false;
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp("ConnectionTest");
+             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
         }
     }
 }

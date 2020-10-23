@@ -78,6 +78,7 @@ namespace VideoKallMCCST.ViewModel
         }
         public void ExecuteSettingsCommand()
         {
+            if(!MainPage.mainPage.TestIsInProgress)
             MainPage.mainPage.pagePlaceHolder.Navigate(typeof(Settings));
         }
 

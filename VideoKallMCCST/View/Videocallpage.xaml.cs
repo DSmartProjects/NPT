@@ -26,5 +26,10 @@ namespace VideoKallMCCST.View
         {
             this.InitializeComponent();
         }
+
+        private void BtnDoneCall_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.mainPage.NextPatient?.Invoke();
+        }
     }
 }

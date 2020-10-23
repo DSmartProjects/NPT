@@ -12,12 +12,14 @@
     </UserControl.Resources>
     <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" x:Name="TxTHeader" HorizontalAlignment="Center" FontSize="18"></TextBlock>
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Image Name="ImageViewer" Grid.Row="1" Grid.Column="0" Stretch="Fill"
                     MaxWidth="{Binding Path=ViewportWidth, ElementName=ScrollViewerMain}"
                     MaxHeight="{Binding Path=ViewportHeight, ElementName=ScrollViewerMain}"
@@ -25,7 +27,7 @@
                    >
             </Image>
         </ScrollViewer>
-        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" >
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" >
             <Button x:Name="BtnTakePic" Content="Take Pic" Click="BtnTakePic_Click"></Button>
             <Button Name="BtnSave" Margin="5" Content="Save" Click="BtnSave_Click"></Button>
             <Button Visibility="Collapsed" x:Name="BtnBrowse" Content="Browse" Click="BtnBrowse_Click"></Button>

@@ -12,7 +12,7 @@
         <BitmapImage x:Name="Menuicon1" CreateOptions="IgnoreImageCache"   UriSource="Assets/Application.ico"/>
         <BitmapImage x:Name="logo" CreateOptions="IgnoreImageCache"   UriSource="Assets/logo.png"/>
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="rootgrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
@@ -101,7 +101,7 @@
             <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"  Source="{StaticResource logo}" Stretch="Fill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ></Image>
 
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="0" Grid.RowSpan="1">
+        <Grid  x:FieldModifier="public" x:Name="gridleftpanel" Grid.Row="2" Grid.Column="0" Grid.RowSpan="1">
             <Button Content="Settings" Grid.Column="0"  Command="{Binding SettingsCommand}" HorizontalAlignment="Left"   VerticalAlignment="Bottom"/>
 
         </Grid>

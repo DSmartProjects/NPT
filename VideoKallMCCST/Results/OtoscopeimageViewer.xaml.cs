@@ -32,7 +32,28 @@ namespace VideoKallMCCST.Results
             this.InitializeComponent();
 
             MainPage.mainPage.ImageDisplay += SetImage;
-          //  ImageViewer.Source = null;
+            MainPage.mainPage.DigitalMicroscope += InilializeMicroscope;
+            //  ImageViewer.Source = null;
+        }
+        bool isDermascope = false;
+
+       async void InilializeMicroscope(bool isdermo )
+        {
+            isDermascope = isdermo;
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+
+                ImageViewer.Source = null;
+                if (isDermascope)
+                    TxTHeader.Text = "Dermascope";
+                else
+                    TxTHeader.Text = "Otoscope";
+
+                BtnSave.IsEnabled = true;
+                BtnTakePic.IsEnabled = true;
+            });
+
+              
         }
 
         public async void SetImage(String img)
@@ -40,10 +61,14 @@ namespace VideoKallMCCST.Results
             string[] cmd = img.Split('>');
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-               switch(cmd[0].ToLower())
+               
+                switch (cmd[0].ToLower())
                 {
                     case "mrpic":
                         DisplayImage(ImageName);
+                        break;
+                    case "imagesaved":
+                        BtnSave.IsEnabled = true;
                         break;
                 }
                
@@ -51,6 +76,11 @@ namespace VideoKallMCCST.Results
         }
         private void Btndone_Click(object sender, RoutedEventArgs e)
         {
+            if (!isDermascope)
+                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
+            else
+                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
+
             ImageViewer.Source = null;
             BtnTakePic.IsEnabled = true;
             MainPage.mainPage.OtoscopeComm?.Invoke();
@@ -65,11 +95,16 @@ namespace VideoKallMCCST.Results
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            SetImagefolder();
-           // DisplayImage(ImageName);
+            // SetImagefolder();
+            // DisplayImage(ImageName);
+            if(!isDermascope)
+            MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.OTOSAVEIMAGE);
+            else
+                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.DERSAVEIMAGE);
+            BtnSave.IsEnabled = false;
         }
 
-       
+
         string strRootFolder = "VideoKall";
         string strRootFolderPath = @"\\192.168.0.33\";// VideoKall";
         string ImageName = "capturedImage.png";
@@ -122,6 +157,8 @@ namespace VideoKallMCCST.Results
                     ImageViewer.Source = bitmapImage;
                     BtnTakePic.IsEnabled = true;
                 });
+
+                MainPage.mainPage.MicroscopeStatus?.Invoke(true);
             }
             catch (Exception ex)
             {
@@ -135,7 +172,8 @@ namespace VideoKallMCCST.Results
                     //dlg.Content = "Please Browse Image Folder.\n" + "\\\\" + MainPage.mainPage.SMCCommChannel.IPAddress + "\\VideoKall";
                     //dlg.PrimaryButtonText = "YES";
                     //ContentDialogResult res = await dlg.ShowAsync();
-
+                    MainPage.mainPage.NotifyStatusCallback(ex.Message, 0);
+                    MainPage.mainPage.MicroscopeStatus?.Invoke(false);
                 });
             }
         }

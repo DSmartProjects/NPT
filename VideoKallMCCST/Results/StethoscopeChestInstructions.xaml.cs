@@ -37,6 +37,7 @@ namespace VideoKallMCCST.Results
             else if (s.ToLower().Contains("streaming at") || s.ToLower().Contains("receiving stream"))
             {
                 MainPage.mainPage.isStethoscopeStreaming = true;
+                MainPage.mainPage.StethoscopeStatus?.Invoke(true);
             }
             else if(s.ToLower().Contains("stopped receiving") || s.ToLower().Contains("streaming stopped"))
             {
@@ -46,6 +47,7 @@ namespace VideoKallMCCST.Results
             {
                 MainPage.mainPage.isStethoscopeStreaming = false;
                 MainPage.mainPage.isStethoscopeReadystreaming = false;
+                MainPage.mainPage.StethoscopeStatus?.Invoke(false);
             }
             
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>

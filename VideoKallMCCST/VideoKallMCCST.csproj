@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Communication\CommunicationChannel.cs" />
     <Compile Include="Communication\CommunicationCommands.cs" />
+    <Compile Include="Communication\DataacquistionappComm.cs" />
     <Compile Include="Communication\Utility.cs" />
     <Compile Include="DBModule\DBOperation.cs" />
     <Compile Include="Results\BPResultsInstruction.xaml.cs">
@@ -150,6 +151,9 @@
     </Compile>
     <Compile Include="Results\Resulttemplate.xaml.cs">
       <DependentUpon>Resulttemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Results\Spirometeruc.xaml.cs">
+      <DependentUpon>Spirometeruc.xaml</DependentUpon>
     </Compile>
     <Compile Include="Results\StethoscopeChestInstructions.xaml.cs">
       <DependentUpon>StethoscopeChestInstructions.xaml</DependentUpon>
@@ -204,6 +208,10 @@
     <Content Include="Assets\EKG.png" />
     <Content Include="Assets\GlucoseMonitor.png" />
     <Content Include="Assets\logo.png" />
+    <Content Include="Assets\logo1.png" />
+    <Content Include="Assets\lungs-%281%29%402x.png" />
+    <Content Include="Assets\lungs-%281%29%403x.png" />
+    <Content Include="Assets\lungs.png" />
     <Content Include="Assets\Lungstethoscop.png" />
     <Content Include="Assets\OtoscopeCamera.png" />
     <Content Include="Assets\pulseOxymeter.png" />
@@ -274,6 +282,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Results\Spirometeruc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Results\StethoscopeChestInstructions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -338,6 +350,15 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+      <Version>6.1.1</Version>
     </PackageReference>
     <PackageReference Include="MvvmLightLibs">
       <Version>5.4.1.1</Version>
