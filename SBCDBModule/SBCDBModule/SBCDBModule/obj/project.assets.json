@@ -11692,24 +11692,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sandyakumar\\.nuget\\packages\\": {},
+    "C:\\Users\\rama.atchut\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DSmart Projects\\NPT\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
+      "projectUniqueName": "C:\\Rama\\GIT\\DSmartProjects\\SourceCode\\NPT\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
       "projectName": "SBCDBModule",
-      "projectPath": "C:\\DSmart Projects\\NPT\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
-      "packagesPath": "C:\\Users\\sandyakumar\\.nuget\\packages\\",
-      "outputPath": "C:\\DSmart Projects\\NPT\\VideoKallMCCST\\SBCDBModule\\SBCDBModule\\SBCDBModule\\obj\\",
+      "projectPath": "C:\\Rama\\GIT\\DSmartProjects\\SourceCode\\NPT\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
+      "packagesPath": "C:\\Users\\rama.atchut\\.nuget\\packages\\",
+      "outputPath": "C:\\Rama\\GIT\\DSmartProjects\\SourceCode\\NPT\\SBCDBModule\\SBCDBModule\\SBCDBModule\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\sandyakumar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\rama.atchut\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

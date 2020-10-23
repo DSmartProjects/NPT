@@ -58,6 +58,15 @@ namespace VideoKallMCCST
         {
             
         }
+        private static Windows.Media.MediaExtensionManager mediaExtensionMgr;
+        public void EnsureMediaExtensionManager()
+        {
+            if (mediaExtensionMgr == null)
+            {
+                mediaExtensionMgr = new Windows.Media.MediaExtensionManager();
+                mediaExtensionMgr.RegisterSchemeHandler("Microsoft.Samples.SimpleCommunication.StspSchemeHandler", "stsp:");
+            }
+        }
 
         private void SMCCommChannel_MessageReceived(object sender, CommunicationMsg msg)
         {

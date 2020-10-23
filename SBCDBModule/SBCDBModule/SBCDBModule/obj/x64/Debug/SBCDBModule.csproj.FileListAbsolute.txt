@@ -45,3 +45,10 @@ C:\DSmart Projects\SBCDBModule\SBCDBModule\SBCDBModule\obj\x64\Debug\pri.resfile
 C:\DSmart Projects\SBCDBModule\SBCDBModule\SBCDBModule\obj\x64\Debug\qualifiers.txt
 C:\DSmart Projects\SBCDBModule\SBCDBModule\SBCDBModule\obj\x64\Debug\qualifiers.txt.intermediate
 C:\DSmart Projects\SBCDBModule\SBCDBModule\SBCDBModule\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT\SBCDBModule\SBCDBModule\SBCDBModule\bin\x64\Debug\SBCDBModule.dll
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT\SBCDBModule\SBCDBModule\SBCDBModule\bin\x64\Debug\Microsoft.UI.Xaml.Markup.winmd
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT\SBCDBModule\SBCDBModule\SBCDBModule\obj\x64\Debug\SBCDBModule.csprojAssemblyReference.cache
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT\SBCDBModule\SBCDBModule\SBCDBModule\obj\x64\Debug\SBCDBModule.csproj.CoreCompileInputs.cache
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT\SBCDBModule\SBCDBModule\SBCDBModule\obj\x64\Debug\SBCDBModule.csproj.CopyComplete
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT\SBCDBModule\SBCDBModule\SBCDBModule\obj\x64\Debug\SBCDBModule.dll
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT\SBCDBModule\SBCDBModule\SBCDBModule\obj\x64\Debug\SBCDBModule.pdb
