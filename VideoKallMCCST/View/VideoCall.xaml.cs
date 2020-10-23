@@ -148,11 +148,12 @@ namespace VideoKallMCCST.View
 
             if (Interlocked.CompareExchange(ref isTerminator, 1, 0) == 0)
             {
-                await EndCallAsync();
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
                 {
-
+                     EndCallAsync();
                 }));
+               
+              
             }
         }
 
