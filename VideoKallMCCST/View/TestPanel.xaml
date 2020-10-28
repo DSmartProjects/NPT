@@ -213,7 +213,7 @@
                     </Grid.RowDefinitions>
                     <Image  Grid.Row="0"  Source="{StaticResource GlucoseMonitor}"    >
                     </Image>
-                    <TextBlock Grid.Row="1" Text="Glucose"  FontSize="15"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="Gluco Monitor"  FontSize="15"></TextBlock>
                 </Grid>
             </Button.Content>
         </Button>
