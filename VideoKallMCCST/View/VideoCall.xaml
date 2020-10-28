@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="VideoKallMCCST.View.VideoCall"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VideoKallMCCST.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ctrl ="using:VideoKallMCCST.SpiroMeter"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="250"></RowDefinition>
+                <RowDefinition Height="150"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--<MediaPlayerElement x:Name="hiddenRemoteVideo"></MediaPlayerElement>-->
+            <MediaElement Stretch="Fill"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" x:Name="IncomingCallRing"  AutoPlay="False" Source="..\Assets\VideoCall_Ringtone.mp4" AudioCategory="Communications" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PosterSource="..\Assets\npt_video.png"></MediaElement>
+            <MediaElement  Visibility="Collapsed" Stretch="Fill"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" x:Name="RemoteVideo"  AudioCategory="Communications" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PosterSource="..\Assets\VideoPlaceHolder.png"></MediaElement>
+            <!--<Border Margin="0,0,0,0" Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Blue"></Border>-->
+            <CaptureElement Margin="0,0,0,0" Name="PreviewVideo"  Grid.Row="0" Grid.Column="1" Stretch="Fill"></CaptureElement>
+            <StackPanel   x:Name="rootGrid" Grid.Column="0" Grid.Row="2" Orientation="Vertical">
+                <!--<TextBlock Visibility="Collapsed" VerticalAlignment="Center">Enter IP address or hostname of remote PC:</TextBlock>-->
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+                    <!--<TextBox Grid.Column="0" Grid.Row="2" x:Name="HostNameTextbox" />-->
+                    
+                    <Button Margin="100,0,0,0" HorizontalAlignment="Center" Background="Transparent" Grid.Row="2" x:Name="Accept"  Click="Accept_Click">
+                        <Image Height="100" Width="100" Source="..\Assets\incoming-call.gif"></Image>
+                    </Button>
+                    <Button  HorizontalAlignment="Center" Background="Transparent" Grid.Row="2" x:Name="Reject"   Click="Reject_Click">
+                        <Image Height="100" Width="100" Source="..\Assets\reject-call.gif"></Image>
+                    </Button>
+                    <!--<Button Grid.Row="2" Visibility="Collapsed"  x:Name="VideoVisibility" Content="Show"  Click="VideoVisibility_Click"></Button>-->
+
+                    <Button Grid.Row="2"  Grid.Column="0" Background="White"  Margin="100,50,0,0"   x:Name="Mute"   Click="Mute_Click">
+                            <Image Margin="0,0,0,0" x:Name="MuteImg" Height="35" Width="35" Source="..\Assets\microphone.png"></Image>
+                        </Button>
+                    <Button Grid.Row="2" Grid.Column="1"  Margin="50,50,0,0" HorizontalAlignment="Center"  Background="Transparent"    x:Name="EndConsult"   Click="EndConsult_Click">
+                            <Image Height="35" Width="35"   Source="..\Assets\end-call.png"></Image>
+                        </Button>
+                   
+                   
+                </StackPanel>
+            </StackPanel>
+        </Grid>        
+    </Grid>
+    
+</Page>

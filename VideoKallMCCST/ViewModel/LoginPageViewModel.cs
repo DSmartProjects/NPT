@@ -83,9 +83,9 @@ namespace VideoKallMCCST.ViewModel
             if (string.Compare(PasswordTxt, loggedinUser.Password) == 0)
             { 
                 MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanel));
-                if (videcallPage == null)
-                    videcallPage = new Videocallpage();
-                MainPage.mainPage.RightPanelHolder.Navigate(typeof(Videocallpage), videcallPage);
+                if (videoCall == null)
+                    videoCall = new VideoCall();
+                MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCall), videoCall);
                 MainPage.mainPage.IsUserLogedin = true;
             }
             else
@@ -105,7 +105,7 @@ namespace VideoKallMCCST.ViewModel
             }
             
         }
-        Videocallpage videcallPage = null;
+        VideoCall videoCall = null;
        // TestPanelPageViewModel testPanel = null;
     }//class
 }

@@ -131,6 +131,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Communication\CaptureDevice.cs" />
     <Compile Include="Communication\CommunicationChannel.cs" />
     <Compile Include="Communication\CommunicationCommands.cs" />
     <Compile Include="Communication\DataacquistionappComm.cs" />
@@ -191,8 +192,8 @@
     <Compile Include="View\TestPanel.xaml.cs">
       <DependentUpon>TestPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Videocallpage.xaml.cs">
-      <DependentUpon>Videocallpage.xaml</DependentUpon>
+    <Compile Include="View\VideoCall.xaml.cs">
+      <DependentUpon>VideoCall.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -201,12 +202,16 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\answer.png" />
     <Content Include="Assets\Application.ico" />
     <Content Include="Assets\Application.png" />
     <Content Include="Assets\bp.png" />
+    <Content Include="Assets\CallRinger.gif" />
     <Content Include="Assets\Darmoscope.png" />
     <Content Include="Assets\EKG.png" />
+    <Content Include="Assets\end-call.png" />
     <Content Include="Assets\GlucoseMonitor.png" />
+    <Content Include="Assets\incoming-call.gif" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\logo1.png" />
     <Content Include="Assets\lungs-%281%29%402x.png" />
@@ -215,12 +220,17 @@
     <Content Include="Assets\Lungstethoscop.png" />
     <Content Include="Assets\OtoscopeCamera.png" />
     <Content Include="Assets\pulseOxymeter.png" />
+    <Content Include="Assets\reject-call.gif" />
     <Content Include="Assets\sbcimg.PNG" />
     <Content Include="Assets\seatedWeight.png" />
     <Content Include="Assets\Spirometer.png" />
     <Content Include="Assets\StandingHeight.png" />
     <Content Include="Assets\stethoscop.png" />
     <Content Include="Assets\Thermometer.png" />
+    <Content Include="Assets\VideoCall_Ringtone.mp4" />
+    <Content Include="Assets\VideoPlaceHolder.png" />
+    <Content Include="Images\microphone.png" />
+    <Content Include="Images\mute.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -330,9 +340,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Videocallpage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="View\VideoCall.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -399,6 +409,11 @@
       <Project>{8124fe77-ea75-47c9-b7b6-0988d4f4167b}</Project>
       <Name>SBCDBModule</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Samples.SimpleCommunication">
+      <HintPath>..\Debug\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
