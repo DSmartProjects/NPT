@@ -30,12 +30,12 @@
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Deployed" VerticalAlignment="Center"></TextBlock>
 
         <TextBlock Grid.Column="0" Grid.Row="2" x:Name="TxtStatus" Grid.ColumnSpan="10" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"></TextBlock>
-        <TextBlock Margin="5" x:Name="TxtInstruction" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  Grid.ColumnSpan="10" ></TextBlock>
+        <TextBlock x:Name="TxtInstruction" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  Grid.ColumnSpan="10" ></TextBlock>
 
         <Button x:Name="BtnRecord" Margin="5" Grid.Column="2" Grid.Row="5"   VerticalAlignment="Center" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Content="Record" Click="BtnRecord_Click"  />
 
         <Button Margin="5" x:Name="BtnStart"  Grid.Column="0" Grid.Row="5"  VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Content="Start streaming" Click="BtnStart_Click"  />
-        <Button x:Name="BtnSave" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Content="Save" VerticalAlignment="Center" Visibility="Visible" Click="BtnSave_Click"></Button> 
+        <Button x:Name="BtnSave" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Content="Save" VerticalAlignment="Center" Click="BtnSave_Click"></Button> 
 
     </Grid>
 </UserControl>

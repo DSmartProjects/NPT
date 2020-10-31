@@ -17,7 +17,7 @@ namespace VideoKallMCCST.Stethoscope
         extern static void SetLogFolder(String filewithfolder);
 
         [DllImport("ssoipRXLib.dll", CallingConvention = CallingConvention.Cdecl)]
-        extern static void Connect(bool islungs);
+        extern static void Connect();
         [DllImport("ssoipRXLib.dll", CallingConvention = CallingConvention.Cdecl)]
         extern static void Disconnect();
 
@@ -72,7 +72,7 @@ namespace VideoKallMCCST.Stethoscope
 
         public void ConnectTX()
         {
-            Connect(false);
+            Connect();
             //await Task.Run(() =>
             //{
             //    Connect();

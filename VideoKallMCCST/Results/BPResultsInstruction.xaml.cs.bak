@@ -44,10 +44,6 @@ namespace VideoKallMCCST.Results
                     {
                         case DeviceResponseType.BPCONMSG:
                             TxtConnectionstatus.Text = res[1].Split(':')[1];
-                            if(res.Length>2 && res[2].ToLower().Equals("error"))
-                            {
-                                MainPage.mainPage.Thermostatusdelegate?.Invoke(false, 2);
-                            }
                         //  BtnGlucoResult.IsEnabled = true;
                         break;
                         case DeviceResponseType.BPCONCHEC:
@@ -55,11 +51,7 @@ namespace VideoKallMCCST.Results
                             if (res[1].Split(':')[1].ToLower().Equals("true"))
                                 TxtConnectionstatus.Text = "Connected: " + msg.Msg.Split('>')[2];
                             else
-                            {
                                 TxtConnectionstatus.Text = "BP Monitor is Not Connected. Please connect. ";
-                                MainPage.mainPage.Thermostatusdelegate?.Invoke(false, 2);
-                            }
-
 
                             //  BtnGlucoResult.IsEnabled = true;
                             break;

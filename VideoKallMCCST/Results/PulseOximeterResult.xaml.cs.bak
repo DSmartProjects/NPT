@@ -31,7 +31,6 @@ namespace VideoKallMCCST.Results
         {
             if (msg.Id != DeviceResponseType.PULSEOXIMETERSTATUS)
                 return;
-            string []cmd = msg.Msg.ToLower().Split('>') ;
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
 
@@ -40,10 +39,6 @@ namespace VideoKallMCCST.Results
                     case DeviceResponseType.PULSEOXIMETERSTATUS:
                         BtnStreamdata.IsEnabled = true;
                         TxtSpiroMeterConnectionStatus.Text = msg.Msg.Split('>')[1];
-                        if(cmd.Length>2 && cmd[2].Equals("error"))
-                        {
-                            MainPage.mainPage.Thermostatusdelegate?.Invoke(false, 1);
-                        }
                         break;
 
                 }

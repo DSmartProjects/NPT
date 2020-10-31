@@ -30,46 +30,25 @@ namespace VideoKallMCCST.Results
 
         async void UpdateNotification(string s, int code)
         {
-            if (!MainPage.mainPage.IsStethescopeChest)
-                return;
-
-            if (s.ToLower().Contains(("ready for streaming at").ToLower()))
+            if(s.ToLower().Contains(("ready for streaming at").ToLower()))
             {
                 MainPage.mainPage.isStethoscopeReadystreaming = true;
             }
             else if (s.ToLower().Contains("streaming at") || s.ToLower().Contains("receiving stream"))
             {
                 MainPage.mainPage.isStethoscopeStreaming = true;
-              
-            }
-            else if (s.ToLower().Contains("stopped receiving") || s.ToLower().Contains("streaming stopped"))
-            {
-                if (MainPage.mainPage.isStethoscopeStreaming)
                 MainPage.mainPage.StethoscopeStatus?.Invoke(true);
-
-                MainPage.mainPage.isStethoscopeStreaming = false;
             }
-            else if (s.ToLower().Contains(("Cannot connect to TX failed to connect").ToLower() )   ||
-                s.ToLower().Contains(("Failed").ToLower()))
+            else if(s.ToLower().Contains("stopped receiving") || s.ToLower().Contains("streaming stopped"))
             {
                 MainPage.mainPage.isStethoscopeStreaming = false;
-                MainPage.mainPage.isStethoscopeReadystreaming = false;
-                MainPage.mainPage.StethoscopeStatus?.Invoke(false);
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                {
-                   if(startstoptoggle)
-                    {
-                        BtnStart_Click(null, null);
-                    }
-                });
             }
-            else if (s.ToLower().Contains(("Failed").ToLower()))
+            else if(s.ToLower().Contains(("Cannot connect to TX failed to connect").ToLower()))
             {
                 MainPage.mainPage.isStethoscopeStreaming = false;
                 MainPage.mainPage.isStethoscopeReadystreaming = false;
                 MainPage.mainPage.StethoscopeStatus?.Invoke(false);
             }
-
             
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
@@ -119,7 +98,7 @@ namespace VideoKallMCCST.Results
                 MainPage.mainPage.StethoscopeStartStop.Invoke("stopST", 1);
                 BtnStart.Content = startstoptoggle ? "Stop streaming" : "Start streaming";
 
-               // MainPage.mainPage.isStethoscopeStreaming = false;
+                MainPage.mainPage.isStethoscopeStreaming = false;
             }
         } 
 

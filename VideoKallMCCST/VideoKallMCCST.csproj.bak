@@ -159,9 +159,7 @@
     <Compile Include="Results\StethoscopeChestInstructions.xaml.cs">
       <DependentUpon>StethoscopeChestInstructions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Results\StethoscopeLungs.xaml.cs">
-      <DependentUpon>StethoscopeLungs.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Results\StethoscopeLungs.xaml.cs" />
     <Compile Include="Results\Thermometerinstructions.xaml.cs">
       <DependentUpon>Thermometerinstructions.xaml</DependentUpon>
     </Compile>

@@ -1,0 +1,95 @@
+﻿<UserControl
+    x:Class="VideoKallMCCST.Results.StethoscopeLungs"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VideoKallMCCST.Results"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <BitmapImage x:Key="downarrow" CreateOptions="IgnoreImageCache"   UriSource="../Assets\Down-arrow-50.png"/>
+        <BitmapImage x:Key="uparrow" CreateOptions="IgnoreImageCache"   UriSource="../Assets\UP_arrow_50.png"/>
+
+        <Style x:Key="CircleStyle" TargetType="Button"  >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Name="stethoscopeItem"  Stroke="Green"   Width="{Binding StlHeight}" Height="{Binding StlHeight}"
+                       StrokeThickness="2" Fill="{TemplateBinding Background}">
+                            </Ellipse>
+                            <ContentPresenter HorizontalAlignment="Center"  
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+        <Style x:Key="BtnArray" TargetType="Button" BasedOn="{StaticResource CircleStyle}">
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid Background="WhiteSmoke">
+        
+        <Pivot x:Name="pivotTab" Grid.Column="0" Grid.Row="0" Grid.RowSpan="6" Grid.ColumnSpan="6">
+        <PivotItem Header="Stethoscope lungs">
+
+                <Grid  x:Name="gridstarray">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Name="BtnST1" Padding="5" Grid.Row="1" Grid.Column="0" Content="1" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST1_Click"   ></Button>
+                <Button Name="BtnST2" Padding="5" Grid.Row="1" Grid.Column="1" Content="2" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST2_Click"   ></Button>
+                <Button Name="BtnST3" Padding="5" Grid.Row="1" Grid.Column="2" Content="3" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST3_Click"   ></Button>
+                <Button Name="BtnST4" Padding="5" Grid.Row="1" Grid.Column="3" Content="4" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST4_Click"   ></Button>
+
+                <Button Name="BtnST5" Padding="5" Grid.Row="2" Grid.Column="0" Content="5" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST5_Click"   ></Button>
+                <Button Name="BtnST6" Padding="5" Grid.Row="2" Grid.Column="1" Content="6" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST6_Click"   ></Button>
+                <Button Name="BtnST7" Padding="5" Grid.Row="2" Grid.Column="2" Content="7" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST7_Click"   ></Button>
+                <Button Name="BtnST8" Padding="5" Grid.Row="2" Grid.Column="3" Content="8" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST8_Click"   ></Button>
+
+                <Button Name="BtnST9" Padding="5" Grid.Row="3" Grid.Column="0" Content="9" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST9_Click"   ></Button>
+                <Button Name="BtnST10" Padding="5" Grid.Row="3" Grid.Column="1" Content="10" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST10_Click"   ></Button>
+                <Button Name="BtnST11" Padding="5" Grid.Row="3" Grid.Column="2" Content="11" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST11_Click"   ></Button>
+                <Button Name="BtnST12" Padding="5" Grid.Row="3" Grid.Column="3" Content="12" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST12_Click"   ></Button>
+
+                <Button Name="BtnST13" Padding="5" Grid.Row="4" Grid.Column="0" Content="13" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST13_Click"   ></Button>
+                <Button Name="BtnST14" Padding="5" Grid.Row="4" Grid.Column="1" Content="14" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST14_Click"   ></Button>
+                <Button Name="BtnST15" Padding="5" Grid.Row="4" Grid.Column="2" Content="15" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST15_Click"   ></Button>
+                <Button Name="BtnST16" Padding="5" Grid.Row="4" Grid.Column="3" Content="16" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST16_Click"   ></Button>
+
+                <Button   Name="BtnDone" Grid.Row="5" Grid.Column="4" Margin="5" Content="Start" BorderThickness="1" BorderBrush="Gray" Click="BtnDone_Click"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
+                <CheckBox Visibility="Visible"  Name="btnAuto" Grid.Row="3" Grid.Column="4" Margin="5" Content="Auto" Click="BtnAuto_Click" ></CheckBox>
+                <Button   Name="Btnup" Grid.Row="1" Grid.Column="4" Margin="5" Content="^" BorderThickness="1" BorderBrush="Gray"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Btnup_Click"   ></Button>
+                <Button   Name="Btndown" Grid.Row="2" Grid.Column="4" Margin="5" Content="v" BorderThickness="1" BorderBrush="Gray"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Btndown_Click"   ></Button>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal">
+                        <TextBlock Margin="5" Text="Status: " Grid.Row="0" Grid.Column="0"></TextBlock>
+                        <TextBlock Margin="5" x:Name="StStatus" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="10" HorizontalAlignment="Left"></TextBlock>
+                    </StackPanel>
+                    
+            </Grid>
+
+        </PivotItem>
+        </Pivot>
+        </Grid>
+</UserControl>

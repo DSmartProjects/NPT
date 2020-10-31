@@ -26,9 +26,9 @@
         </Grid.ColumnDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="Blue" BorderThickness="3"></Border>
         <TextBlock Text="BP Monitor Test Procedure"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" FontSize="20" VerticalAlignment="Stretch" HorizontalAlignment="Center"></TextBlock>
-        <TextBlock   Grid.Row="1" Grid.Column="0" Text="Status: " Margin="5" FontSize="15" ></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Status: " Margin="5" FontSize="15" ></TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Deployed" Margin="5" FontSize="15" ></TextBlock>
-        <TextBlock  Grid.Row="2" Grid.Column="0" Text="Connection status: " Margin="5" FontSize="15" ></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Connection status: " Margin="5" FontSize="15" ></TextBlock>
         <TextBlock Grid.Row="2" Grid.Column="1" Name="TxtConnectionstatus" Grid.ColumnSpan="5" Margin="5" FontSize="15" ></TextBlock>
         <TextBlock Grid.Row="3" Grid.Column="0" Margin="5" Grid.RowSpan="2" Grid.ColumnSpan="10" x:Name="TxtInstruction" TextWrapping ="Wrap"></TextBlock>
         <TextBlock Grid.Row="5" Grid.Column="0" Margin="5" Grid.RowSpan="3" Grid.ColumnSpan="10" x:Name="TxtInstruction2" TextWrapping ="Wrap"></TextBlock>

@@ -27,10 +27,9 @@ namespace VideoKallMCCST.Results
             MainPage.mainPage.mainpagecontext.NotifyResult += UpdateNotification;
             BtnGlucoResult.IsEnabled = true;
             MainPage.mainPage.NextPatient += NextPatient;
-            MainPage.mainPage.ResetGluco += NextPatient;
         }
 
-       
+
        async void NextPatient()
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -43,7 +42,7 @@ namespace VideoKallMCCST.Results
         {
             if (msg.Id != DeviceResponseType.GLUCORESULTSTATUS)
                 return;
-            string[] cmd = msg.Msg.ToLower().Split('>');
+                
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 switch (msg.Id)
@@ -51,10 +50,6 @@ namespace VideoKallMCCST.Results
                     case DeviceResponseType.GLUCORESULTSTATUS:
                         TxtGlucoTestStatus.Text = msg.Msg.Split('>')[1];
                         BtnGlucoResult.IsEnabled = true;
-                        if(cmd.Length>2 && cmd[2].Equals("error"))
-                        {
-                            MainPage.mainPage.Thermostatusdelegate?.Invoke(false, 3);
-                        }
                         break;
 
                 }

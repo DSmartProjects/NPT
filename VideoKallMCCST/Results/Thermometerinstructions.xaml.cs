@@ -35,17 +35,26 @@ namespace VideoKallMCCST.Results
         {
             if (msg.Id != DeviceResponseType.THERMORESTULTSTATUS)
                 return;
-
+            string[] cmd = msg.Msg.ToLower().Split('>');
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 BtnCMD.IsEnabled = true;
-                switch (msg.Id)
+                switch (cmd[0])
                 {
-                    case DeviceResponseType.THERMORESTULTSTATUS: 
-                       
+                    case "thermocon"://DeviceResponseType.THERMORESTULTSTATUS: 
+
                         TxtConnectionstatus.Text = msg.Msg.Split('>')[1]; 
                         break;
+                    
+                    case "thermoerror":
+                        TxtConnectionstatus.Text = msg.Msg.Split('>')[1];
+                        MainPage.mainPage.Thermostatusdelegate?.Invoke(false,0);
+                        break;
 
+                    case "thermonotpaired":
+                        MainPage.mainPage.Thermostatusdelegate?.Invoke(false,0);
+                        TxtConnectionstatus.Text = msg.Msg.Split('>')[1];
+                        break;
                 }
             });
         }

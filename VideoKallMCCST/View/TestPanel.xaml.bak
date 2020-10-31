@@ -388,7 +388,7 @@
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <StackPanel>
-                <uctrl:Resulttemplate x:Name="CtrlekgResult"></uctrl:Resulttemplate>
+                <uctrl:PulseOximeterResult x:Name="CtrlekgResult"></uctrl:PulseOximeterResult>
             </StackPanel>
         </Popup>
         <TextBlock x:Name="TxtResultekg" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBlock>
@@ -454,17 +454,6 @@
         <TextBlock x:Name="TxtResultstethoscopechest" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBlock>
 
         <!---->
-         <!--ResultResulStethoscopelungPopup-->
-        <Popup Name="ResulStethoscopelungPopup" IsOpen="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="6" >
-            <Popup.ChildTransitions>
-                <TransitionCollection>
-                    <PaneThemeTransition />
-                </TransitionCollection>
-            </Popup.ChildTransitions>
-            <StackPanel>
-                <uctrl:StethoscopeLungs x:Name="StethoscopeLungsResult"></uctrl:StethoscopeLungs>
-            </StackPanel>
-        </Popup>
         <!---->
         <!--Test Results History-->
         <Frame x:FieldModifier="public"  Background="LightGray" Grid.Row="6" Grid.RowSpan="8" Grid.Column="0" Grid.ColumnSpan="10" x:Name="TestResultHistoryFrame"></Frame>

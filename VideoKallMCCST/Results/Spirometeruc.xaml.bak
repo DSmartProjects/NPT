@@ -52,7 +52,7 @@
                     <TextBlock Margin="3,0,0,0" Grid.Row="1" Grid.Column="0" Text="1." VerticalAlignment="Center" ></TextBlock>
                     <TextBlock Margin="3,0,0,0" Grid.Row="1" FontSize="15" Grid.Column="1" Text="Start FVC test using FVC Option, once ready, suggest user to blow. " VerticalAlignment="Center" ></TextBlock>
                     <TextBlock Margin="3,0,0,0" Grid.Row="2" FontSize="15" Grid.Column="1" Text="Start VC test using VC Option, once ready, suggest user to blow. " VerticalAlignment="Center" ></TextBlock>
-                    <TextBlock Margin="3,0,0,0" Grid.Row="3" TextWrapping="Wrap" FontSize="15" Grid.Column="1" Text="Please wait for the test result, for 30-40 sec after stop blowing, test result will generate.  " VerticalAlignment="Center" ></TextBlock>
+                    <TextBlock Margin="3,0,0,0" Grid.Row="3" TextWrapping="Wrap" FontSize="15" Grid.Column="1" Text="Please wait for the test result, after 30-40 sec of stop blowing, test result will generate.  " VerticalAlignment="Center" ></TextBlock>
 
                     <TextBlock Margin="3,0,0,0" Grid.Row="2" Grid.Column="0" Text="2." VerticalAlignment="Center" ></TextBlock>
 
@@ -82,8 +82,8 @@
                       <TextBlock x:Name="fvcfv" Text="Flow Volume" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left"></TextBlock>
                     <TextBlock Text="Volume Time" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" HorizontalAlignment="left"></TextBlock>
                     <Button Margin="5" VerticalAlignment="Stretch" x:Name="StartFVC" Content="Start FVC" Grid.Row="4" Grid.Column="0" Click="StartFVC_Click"></Button>
-                    <Button Margin="5" VerticalAlignment="Stretch" x:Name="StopFVC" Content="Stop FVC" Grid.Row="4" Grid.Column="4"  Click="StopFVC_Click"></Button>
-                    <Button Margin="5" VerticalAlignment="Stretch" x:Name="BtnDone1" Content="Done" Grid.Row="4" Grid.Column="5" Click="BtnDone_Click"  ></Button>
+                    <Button Margin="5" VerticalAlignment="Stretch" x:Name="StopFVC" Content="Stop FVC" Grid.Row="4" Grid.Column="2"  Click="StopFVC_Click"></Button>
+                    <Button Margin="5" VerticalAlignment="Stretch" x:Name="BtnDone1" Content="Done" Grid.Row="4" Grid.Column="4" Click="BtnDone_Click"  ></Button>
 
                     <controls:DataGrid Margin="0"  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="Fvcvolflowgrid" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3" >
                         <controls:DataGrid.Columns>
@@ -164,7 +164,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Margin="5" VerticalAlignment="Stretch" x:Name="StartVC" Content="Start VC" Grid.Row="4" Grid.Column="0" Click="StartVC_Click"></Button>
-                    <Button Margin="5" VerticalAlignment="Stretch" x:Name="StopVC" Content="Stop VC" Grid.Row="4" Grid.Column="3" Click="StopVC_Click"></Button>
+                    <Button Margin="5" VerticalAlignment="Stretch" x:Name="StopVC" Content="Stop VC" Grid.Row="4" Grid.Column="2" Click="StopVC_Click"></Button>
                     <Button Visibility="Collapsed" VerticalAlignment="Stretch" x:Name="BtnDone" Content="Done" Grid.Row="4" Grid.Column="4" Click="BtnDone_Click"  ></Button>
                     <TextBlock x:Name="vctxt" Text="Volume Time" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" HorizontalAlignment="Left"></TextBlock>
 

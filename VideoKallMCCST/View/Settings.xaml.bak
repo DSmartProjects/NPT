@@ -18,10 +18,6 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -42,21 +38,11 @@
         <TextBox Margin="5"  x:Name="TxtIPaddressCtrl" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Text="{Binding TxtIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <TextBlock Margin="5" Grid.Column="0" Grid.Row="3" Text="Port Number"></TextBlock>
         <TextBox Margin="5" x:Name="TxtPortNoCtrl"  Grid.Column="1" Grid.Row="3" Text="{Binding TxtProtNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="Temp"></TextBlock>
-            <ToggleSwitch   Visibility="Visible"   x:Name="TxtTmpUnitbtn" Grid.Row="3" Grid.Column="2" IsOn="True" OffContent="C" OnContent="F"   Margin="0,2,0,0"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Toggled="TxtTmpUnitbtn_Toggled" Tapped="TxtTmpUnitbtn_Tapped"></ToggleSwitch>
-            <Button Margin="5" Content="Browse ImageFolder" x:Name="BtnBrowseFolder" Grid.Row="3" Grid.Column="4" Click="BtnBrowseFolder_Click"></Button>
-            <TextBlock Margin="5" x:Name="TxtimageFolder" Grid.Row="3" Grid.Column="5"></TextBlock>
+        <Button Margin="5" Command="{Binding SaveIPAddress}" Grid.Column="2" Grid.Row="3" Content="Save"></Button>
+        <ToggleSwitch   Visibility="Visible" x:Name="TxtTmpUnitbtn" Grid.Row="3" Grid.Column="3" IsOn="True" OffContent="C" OnContent="F"   Margin="0,2,0,0"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Toggled="TxtTmpUnitbtn_Toggled" Tapped="TxtTmpUnitbtn_Tapped"></ToggleSwitch>
+        <Button Margin="5" Content="Browse ImageFolder" x:Name="BtnBrowseFolder" Grid.Row="3" Grid.Column="4" Click="BtnBrowseFolder_Click"></Button>
+        <TextBlock Margin="5" x:Name="TxtimageFolder" Grid.Row="3" Grid.Column="5"></TextBlock>
+        <Button Margin="5" Command="{Binding Done}" Grid.Column="0" Grid.Row="10" Content="Done"></Button>
 
-
-        </StackPanel>
-      <Button Margin="5" Command="{Binding SaveIPAddress}" Grid.Column="2" Grid.Row="4" Content="Save"></Button>
-        <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBlock Text="Automode Time(sec):" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <Button x:Name="BtnMinus" FontSize="20" FontWeight="Bold" Content="-" Background="LightBlue" Click="BtnMinus_Click"></Button>
-            <TextBox IsReadOnly="True" x:Name="TxtautomodeTime" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text="5"></TextBox>
-            <Button x:Name="BtnPlus" FontSize="20" FontWeight="Bold" Content="+" Background="LightBlue" Click="BtnPlus_Click"></Button>
-        </StackPanel>
-        <Button Margin="5" Command="{Binding Done}" Grid.Column="0" Grid.Row="15" Content="Done"></Button>
     </Grid>
 </Page>

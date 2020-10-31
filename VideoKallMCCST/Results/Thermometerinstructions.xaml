@@ -24,12 +24,12 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock FontSize="20" Text="Test procedure for Thermometer" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"></TextBlock>
+        <TextBlock Margin="5" FontSize="20" Text="Test procedure for Thermometer" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"></TextBlock>
         <TextBlock FontSize="15" Margin="5" x:Name="TxtConnectionstatus"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="8"  ></TextBlock>
         <TextBlock FontSize="15" Margin="5" x:Name="TxtStatusThermo" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Text="Status" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
         <TextBlock FontSize="15" Margin="5" x:Name="TxtStatusThermodep" Grid.Row="1" Grid.Column="1" Text="Deployed" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="Blue" BorderThickness="3"></Border>
-        <TextBlock FontSize="15"  TextWrapping="Wrap" Margin="5" x:Name="TXTInstrction" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="10" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+        <TextBlock   FontSize="15"  TextWrapping="Wrap" Margin="5" x:Name="TXTInstrction" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="10" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
         <Button x:Name="BtnCMD" Content="Connect" Grid.Row="5" Grid.Column="0" Click="BtnCMD_Click"></Button>
     </Grid>
 </UserControl>

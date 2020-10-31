@@ -19,45 +19,43 @@ using Windows.UI.Xaml.Navigation;
 
 namespace VideoKallMCCST.Results
 {
-    public sealed partial class PulseOximeterResult : UserControl
+    public sealed partial class Thermometerinstructions : UserControl
     {
-        public PulseOximeterResult()
+        public Thermometerinstructions()
         {
             this.InitializeComponent();
             MainPage.mainPage.mainpagecontext.NotifyResult += UpdateNotification;
-            BtnStreamdata.IsEnabled = true;
+            BtnCMD.IsEnabled = true;
+            TXTInstrction.Text = @"1. Suggest user to Press temperature button on thermometer," +
+                $"then ress connect button. ";
+
         }
+
         async void UpdateNotification(object sender, CommunicationMsg msg)
         {
-            if (msg.Id != DeviceResponseType.PULSEOXIMETERSTATUS)
+            if (msg.Id != DeviceResponseType.THERMORESTULTSTATUS)
                 return;
-            string []cmd = msg.Msg.ToLower().Split('>') ;
+
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-
+                BtnCMD.IsEnabled = true;
                 switch (msg.Id)
                 {
-                    case DeviceResponseType.PULSEOXIMETERSTATUS:
-                        BtnStreamdata.IsEnabled = true;
-                        TxtSpiroMeterConnectionStatus.Text = msg.Msg.Split('>')[1];
-                        if(cmd.Length>2 && cmd[2].Equals("error"))
-                        {
-                            MainPage.mainPage.Thermostatusdelegate?.Invoke(false, 1);
-                        }
+                    case DeviceResponseType.THERMORESTULTSTATUS: 
+                       
+                        TxtConnectionstatus.Text = msg.Msg.Split('>')[1]; 
                         break;
 
                 }
             });
         }
-        private void BtnStreamdata_Click(object sender, RoutedEventArgs e)
-        {
-            MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.SMCPULSEOXIMETERSTART);
-            BtnStreamdata.IsEnabled = false;
-        }
 
-        private void BtnStreamdataDone_Click(object sender, RoutedEventArgs e)
+        private void BtnCMD_Click(object sender, RoutedEventArgs e)
         {
-            //TxtSpiroMeterConnectionStatus
+            MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.THERMORESULTCMD);
+             BtnCMD.IsEnabled = false;
+
+
         }
     }
 }

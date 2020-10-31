@@ -27,11 +27,11 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Pulse oximenter Test Procedure"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" FontSize="20" VerticalAlignment="Stretch" HorizontalAlignment="Center"></TextBlock>
-        <TextBlock Margin="5" Text="Status:"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" VerticalAlignment="Stretch" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock Text="Status:"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" VerticalAlignment="Stretch" HorizontalAlignment="Left"></TextBlock>
         <TextBlock Text="Deployed"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" VerticalAlignment="Stretch" HorizontalAlignment="Left"></TextBlock>
         <TextBlock x:Name="TxtSpiroMeterConnectionStatus"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" FontSize="15" VerticalAlignment="Stretch" HorizontalAlignment="Left"></TextBlock>
 
-        <TextBlock Margin="5" Text="1. Suggest user to Place figer in Pulse oximeter. Stream Data once Reading started."  
+        <TextBlock Text="1. Suggest user to Place figer in Pulse oximeter. Stream Data once Reading started."  
                    TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="8" FontSize="15" VerticalAlignment="Stretch" HorizontalAlignment="Left"></TextBlock>
         <Button Content="Stream Data" x:Name="BtnStreamdata"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" FontSize="15" VerticalAlignment="Stretch" HorizontalAlignment="Center" Click="BtnStreamdata_Click"></Button>
        
