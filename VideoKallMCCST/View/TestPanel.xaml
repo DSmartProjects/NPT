@@ -33,11 +33,11 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="0"></RowDefinition>
-            
- 
+
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-          
+
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -48,12 +48,12 @@
         <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
-        
+
         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
-        
+
         <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
@@ -63,7 +63,7 @@
         <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
-       
+
         <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="1" BorderBrush="Gray" BorderThickness="2"></Border>
@@ -78,8 +78,8 @@
         <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" BorderBrush="Gray" BorderThickness="2"></Border>
         <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" BorderBrush="Gray" BorderThickness="2"></Border>
-         
-     
+
+
         <!-- Test panel-->
         <Button x:Name="BtnHeight"  Grid.Row="0" Grid.Column="0"   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" Click="BtnHeight_Click"  >
             <Button.Content>
@@ -244,7 +244,7 @@
                 </Grid>
             </Button.Content>
         </Button>
-<!-- Result pulse oximeter poup-->
+        <!-- Result pulse oximeter poup-->
         <Popup Name="ResultPulseOximeterPopup" IsOpen="False" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="6" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
@@ -273,7 +273,7 @@
             <TextBlock Margin="3" x:Name="TxtLabelPulseTime" Text="Time :" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15"></TextBlock>
 
         </Grid>
-       <!--Result bp poup-->
+        <!--Result bp poup-->
         <Popup Name="ResultBPPopup" IsOpen="False" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="6" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
@@ -289,7 +289,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
- 
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -303,9 +303,9 @@
 
             <TextBlock   x:Name="TxtLabelpulsebp"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Text="Pulse(/min)" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="15" Margin="3,0,0,0"></TextBlock>
             <TextBlock  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"   x:Name="TxtPulse" VerticalAlignment="Center"   HorizontalAlignment="Center" FontSize="20"></TextBlock>
-           </Grid>
-      
-<!--Result Thermo meter-->
+        </Grid>
+
+        <!--Result Thermo meter-->
         <Popup Name="ResulThermoPopup" IsOpen="False" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="6" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
@@ -323,7 +323,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition> 
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock   Margin="0,0,0,0" Grid.Row="0" x:Name="TxtTemprature"  Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Stretch"></TextBlock>
             <ToggleSwitch Visibility="Collapsed" x:Name="TxtTmpUnitbtn" Grid.Row="0" Grid.Column="1" IsOn="True" OffContent="C" OnContent="F"   Margin="0,2,0,0"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Toggled="TxtTmpUnitbtn_Toggled" Tapped="TxtTmpUnitbtn_Tapped"></ToggleSwitch>
@@ -331,9 +331,9 @@
             <TextBlock   Margin="0,0,0,0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="TxtDateTime"  Grid.Column="0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Stretch"></TextBlock>
 
         </Grid>
-       
+
         <!-- Result Height-->
-         <Popup Name="ResulHeightPopup" IsOpen="False" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="6" >
+        <Popup Name="ResulHeightPopup" IsOpen="False" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="6" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
                     <PaneThemeTransition />
@@ -388,7 +388,7 @@
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <StackPanel>
-                <uctrl:Resulttemplate x:Name="CtrlekgResult"></uctrl:Resulttemplate>
+                <uctrl:PulseOximeterResult x:Name="CtrlekgResult"></uctrl:PulseOximeterResult>
             </StackPanel>
         </Popup>
         <TextBlock x:Name="TxtResultekg" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBlock>
@@ -409,7 +409,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition> 
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -428,7 +428,7 @@
             <TextBlock Margin="2,0,0,0" x:Name="TxtLabelTime" Text="Time: " Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
         </Grid>
-         <!--Result Spiro-->
+        <!--Result Spiro-->
         <Popup Name="Resultspiropopup" IsOpen="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="6" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
@@ -454,17 +454,6 @@
         <TextBlock x:Name="TxtResultstethoscopechest" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBlock>
 
         <!---->
-         <!--ResultResulStethoscopelungPopup-->
-        <Popup Name="ResulStethoscopelungPopup" IsOpen="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="6" >
-            <Popup.ChildTransitions>
-                <TransitionCollection>
-                    <PaneThemeTransition />
-                </TransitionCollection>
-            </Popup.ChildTransitions>
-            <StackPanel>
-                <uctrl:StethoscopeLungs x:Name="StethoscopeLungsResult"></uctrl:StethoscopeLungs>
-            </StackPanel>
-        </Popup>
         <!---->
         <!--Test Results History-->
         <Frame x:FieldModifier="public"  Background="LightGray" Grid.Row="6" Grid.RowSpan="8" Grid.Column="0" Grid.ColumnSpan="10" x:Name="TestResultHistoryFrame"></Frame>
