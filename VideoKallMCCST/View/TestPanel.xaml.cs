@@ -84,7 +84,13 @@ namespace VideoKallMCCST.View
             }
         }
 
-
+        private void isTestResultOpened()
+        {
+            MainPage.mainPage.TestIsInProgress =
+                ResulThermoPopup.IsOpen || ResultPulseOximeterPopup.IsOpen || ResultBPPopup.IsOpen || ResuWeightPopup.IsOpen || ResulHeightPopup.IsOpen
+                 || ResulOtoscopePopup.IsOpen || ResulDermascopePopup.IsOpen || ResultEKGpopup.IsOpen || Resultglucopopup.IsOpen ||
+                 Resultspiropopup.IsOpen || Resultstethoscopechestpopup.IsOpen;
+        }
 
         void ShowHidePulseoximeterdata(bool visible)
         {
@@ -403,6 +409,7 @@ namespace VideoKallMCCST.View
         bool BtnPulseoximeterToggle = false;
         private void BtnPulseoximeter_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
             if ((MainPage.mainPage.TestIsInProgress && !BtnPulseoximeterToggle) || (!ConnectionCheck && !BtnPulseoximeterToggle))
                 return;
 
@@ -439,6 +446,7 @@ namespace VideoKallMCCST.View
         bool _thermotoggle = false;
         private void BtnThermoMeter_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
 
             if ((MainPage.mainPage.TestIsInProgress && !_thermotoggle) || (!ConnectionCheck && !_thermotoggle))
                 return;
@@ -461,7 +469,7 @@ namespace VideoKallMCCST.View
         bool _resultBpToggle = false;
         private void BtnBP_Click(object sender, RoutedEventArgs e)
         {
-
+            isTestResultOpened();
 
             if ((MainPage.mainPage.TestIsInProgress && !_resultBpToggle) || (!ConnectionCheck && !_resultBpToggle))
                 return;
@@ -488,6 +496,7 @@ namespace VideoKallMCCST.View
         bool btnWeightToggle = false;
         private void BtnWeight_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
 
             if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
                 return;
@@ -511,7 +520,7 @@ namespace VideoKallMCCST.View
         bool btnHeighttoggle = false;
         private void BtnHeight_Click(object sender, RoutedEventArgs e)
         {
-
+            isTestResultOpened();
 
             if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) || (!ConnectionCheck && !btnHeighttoggle))
                 return;
@@ -535,6 +544,7 @@ namespace VideoKallMCCST.View
         bool _otoscopeToggle = false;
         private async void BtnOtoscope_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
 
             if ((MainPage.mainPage.TestIsInProgress && !_otoscopeToggle) || (!ConnectionCheck && !_otoscopeToggle))
                 return;
@@ -573,6 +583,7 @@ namespace VideoKallMCCST.View
         bool _dermascopeToggle = false;
         private async void BtnDermoscope_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
             if ((MainPage.mainPage.TestIsInProgress && !_dermascopeToggle) || (!ConnectionCheck && !_dermascopeToggle))
                 return;
 
@@ -658,6 +669,7 @@ namespace VideoKallMCCST.View
         bool _ekgToggle = false;
         private void BtnEKG_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
 
             if ((MainPage.mainPage.TestIsInProgress && !_ekgToggle) || (!ConnectionCheck && !_ekgToggle))
                 return;
@@ -681,6 +693,7 @@ namespace VideoKallMCCST.View
         bool _glucoToggle = false;
         private void BtnGlucometer_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
             if (!ConnectionCheck && !_glucoToggle)
                 return;
 
@@ -709,6 +722,7 @@ namespace VideoKallMCCST.View
         bool _spirometerToggle = false;
         private void BtnSpirometer_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
             if ((MainPage.mainPage.TestIsInProgress && !_spirometerToggle) || (!ConnectionCheck && !_spirometerToggle))
                 return;
 
@@ -749,6 +763,7 @@ namespace VideoKallMCCST.View
 
         private void BtnSthethoscope_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
             if (MainPage.mainPage.isStethoscopeStreaming || (!ConnectionCheck && !_stethoscopeChest))
                 return;
 
@@ -792,6 +807,7 @@ namespace VideoKallMCCST.View
         bool _stethoscopelungs = false;
         private void BtnSthethoscopeLungs_Click(object sender, RoutedEventArgs e)
         {
+            isTestResultOpened();
 
             if ((MainPage.mainPage.TestIsInProgress && !_stethoscopelungs) ||
                 (!ConnectionCheck && !_stethoscopelungs) ||
