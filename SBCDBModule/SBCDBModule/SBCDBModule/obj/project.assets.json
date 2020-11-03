@@ -11698,11 +11698,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Rama\\GIT\\DSmartProjects\\SourceCode\\NPT\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
+      "projectUniqueName": "C:\\Rama\\GIT\\DSmartProjects\\SourceCode\\NPT-Dev\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
       "projectName": "SBCDBModule",
-      "projectPath": "C:\\Rama\\GIT\\DSmartProjects\\SourceCode\\NPT\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
+      "projectPath": "C:\\Rama\\GIT\\DSmartProjects\\SourceCode\\NPT-Dev\\SBCDBModule\\SBCDBModule\\SBCDBModule\\SBCDBModule.csproj",
       "packagesPath": "C:\\Users\\rama.atchut\\.nuget\\packages\\",
-      "outputPath": "C:\\Rama\\GIT\\DSmartProjects\\SourceCode\\NPT\\SBCDBModule\\SBCDBModule\\SBCDBModule\\obj\\",
+      "outputPath": "C:\\Rama\\GIT\\DSmartProjects\\SourceCode\\NPT-Dev\\SBCDBModule\\SBCDBModule\\SBCDBModule\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [

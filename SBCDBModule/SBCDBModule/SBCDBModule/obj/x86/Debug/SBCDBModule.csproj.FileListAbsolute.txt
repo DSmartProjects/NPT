@@ -116,3 +116,27 @@ C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBMo
 C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\qualifiers.txt
 C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\qualifiers.txt.intermediate
 C:\DSmart Projects\VideoKallMCCST\VideoKallMCCST\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\SBCDBModule.dll
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\SBCDBModule.pdb
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\SBCDBModule.pri
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\Microsoft.UI.Xaml.Markup.winmd
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.csprojAssemblyReference.cache
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.csproj.CoreCompileInputs.cache
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.csproj.CopyComplete
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.dll
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\SBCDBModule.pdb
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\priconfig.xml
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\priconfig.xml.intermediate
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\unfiltered.layout.resfiles
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\unfiltered.layout.resfiles.intermediate
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\filtered.layout.resfiles
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\filtered.layout.resfiles.intermediate
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\excluded.layout.resfiles
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\excluded.layout.resfiles.intermediate
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\resources.resfiles
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\resources.resfiles.intermediate
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\pri.resfiles
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\pri.resfiles.intermediate
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\qualifiers.txt
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\qualifiers.txt.intermediate
+C:\Rama\GIT\DSmartProjects\SourceCode\NPT-Dev\SBCDBModule\SBCDBModule\SBCDBModule\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt

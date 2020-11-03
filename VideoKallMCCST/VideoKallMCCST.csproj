@@ -418,8 +418,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Samples.SimpleCommunication">
-      <HintPath>..\Debug\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+    <Reference Include="Microsoft.Samples.SimpleCommunication, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
