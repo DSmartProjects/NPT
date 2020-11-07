@@ -32,14 +32,7 @@ namespace VideoKallMCCST.Communication
                         case "TEMP":
                             MainPage.mainPage.mainpagecontext.ThermometerUnitF = data[1].Equals("1");
                             break;
-                        case "AUTOMODETIME":
-                            try {
-                                MainPage.mainPage.STAutomodeTime = Convert.ToInt32(data[1]);
-                            } catch(Exception  ) {
-                                MainPage.mainPage.STAutomodeTime = 30;
-                            }
-                            
-                            break;
+                       
                         default:
                             break;
                     }

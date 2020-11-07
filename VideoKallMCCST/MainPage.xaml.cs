@@ -14,6 +14,7 @@ using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,7 +42,6 @@ namespace VideoKallMCCST
             RightPanelHolder.Navigate(typeof(LoginPage));
             pagePlaceHolder.Navigate(typeof(LogoPage));
             NotifyStatusCallback += UpdateNotification;
-           
         }
 
         public StorageFolder rootImageFolder { get; set; }
@@ -325,7 +325,5 @@ namespace VideoKallMCCST
         public CommandDelegate ResetSTLungs;
         public CommandDelegate ResetGluco;
         public bool IsStethescopeChest { get; set; } = false;
-        public int STAutomodeTime { get; set; } = 30;
-        public int STTempAutomodeTime { get; set; } = 30;
     }
 }

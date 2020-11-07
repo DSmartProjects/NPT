@@ -21,8 +21,6 @@ namespace VideoKallMCCST.Results
 {
     public sealed partial class StethoscopeLungs : UserControl
     {
-        DispatcherTimer  StethoscopeTimerobj = null;
-        
         public StethoscopeLungs()
         {
             this.InitializeComponent();
@@ -33,7 +31,7 @@ namespace VideoKallMCCST.Results
 
         private void BtnDone_Click(object sender, RoutedEventArgs e)
         {
-            if (isAutomode || (selectedIndex ==-1 && !isoperationStarted))
+            if (  (selectedIndex ==-1 && !isoperationStarted))
                 
                 return;
 
@@ -54,8 +52,6 @@ namespace VideoKallMCCST.Results
             {
                 MainPage.mainPage.StethoscopeStartStop.Invoke("startST", 1);
                 SetBtnColor(selectedIndex, 1);
-                if(!isAutomode)
-                stinprogressIndex = currentStethescope;
             } 
             else
             {
@@ -91,7 +87,7 @@ namespace VideoKallMCCST.Results
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     if (MainPage.mainPage.isStethoscopeStreaming  )
-                    SetBtnColor(stinprogressIndex, 2);
+                    SetBtnColor(currentStethescope, 2);
                 });
 
                 MainPage.mainPage.isStethoscopeStreaming = false;
@@ -121,71 +117,8 @@ namespace VideoKallMCCST.Results
                 StStatus.Text = s;
             });
         }
-
-        bool isAutomode = false;
-        private void BtnAuto_Click(object sender, RoutedEventArgs e)
-        {
-            if (btnAuto.IsChecked == true)
-            {
-                isAutomode = true;
-                Clearall();
-            
-                if (StethoscopeTimerobj == null)
-                {
-                    StethoscopeTimerobj = new DispatcherTimer();
-                    StethoscopeTimerobj.Tick += StethoscopeTimerobj_Tick;
-                    
-                }
-                if (!StethoscopeTimerobj.IsEnabled)
-                {
-                   
-                    StethoscopeTimerobj.Interval = new TimeSpan(0, 0, 2);
-                    StethoscopeTimerobj.Start();
-                }
-               
-            }
-            else
-            {
-                StethoscopeTimerobj.Stop();
-                isAutomode = false;
-
-                if (isoperationStarted)
-                    StartStopST();
-            }
-
-        }
-
-        int stinprogressIndex = 0;
-        private void StethoscopeTimerobj_Tick(object sender, object e)
-        {
-            StethoscopeTimerobj.Stop(); 
-            
-            StethoscopeTimerobj.Interval = new TimeSpan(0, 0, MainPage.mainPage.STAutomodeTime);
-            //   if (MainPage.mainPage.isStethoscopeStreaming)
-            //       SetBtnColor(currentStethescope, 2);
-            stinprogressIndex = currentStethescope;
-            if (isoperationStarted)
-            StartStopST();
-
-            
-            if (travarseSTIndex > 15)
-            {
-                StethoscopeTimerobj.Stop();
-                travarseSTIndex = 0;
-                btnAuto.IsChecked = false;
-                isAutomode = false;
-                return;
-            }
-            travarseSTIndex++;
-            if(travarseSTIndex<16)
-            {
-                SetBtnColor(selectedIndex, -1);
-                SetBtnColor(travarseSTIndex, 0);
-
-                StartStopST();
-            }
-            StethoscopeTimerobj.Start();
-        }
+         
+      
 
         public   double StlHeight
         {
@@ -304,36 +237,20 @@ namespace VideoKallMCCST.Results
 
         private void Btnup_Click(object sender, RoutedEventArgs e)
         {
-            if (isAutomode)
-                return;
-
-            if (travarseSTIndex <= 0)
-                travarseSTIndex = 0;
-            else
-                travarseSTIndex--;
-            SetBtnColor(selectedIndex, -1);
-            SetBtnColor(travarseSTIndex, 0);
+            
+ 
 
         }
 
 
         private void Btndown_Click(object sender, RoutedEventArgs e)
-        {
-            if (isAutomode)
-                return;
-            if (travarseSTIndex >= 15)
-                travarseSTIndex = 15;
-            else
-                travarseSTIndex++;
-
-            SetBtnColor(selectedIndex, -1);
-            SetBtnColor(travarseSTIndex, 0);
+        { 
         }
 
       async  void Clearall()
         {
            
-              travarseSTIndex = -1;
+              
               isoperationStarted = false;
               selectedIndex = -1;
               currentStethescope = -1; 
@@ -357,9 +274,7 @@ namespace VideoKallMCCST.Results
                 BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.White);
                 BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.White);
                 BtnDone.Content = isoperationStarted ? "Stop" : "Start";
-                if(isAutomode)
-                    StStatus.Text = "Streaming will start within 5 sec.";
-                else
+                
                 StStatus.Text = "";
                  
 
@@ -377,7 +292,7 @@ namespace VideoKallMCCST.Results
             );
         }
 
-        int travarseSTIndex = -1;
+        
         bool isoperationStarted = false;
         int selectedIndex = -1;
         int currentStethescope = 0;

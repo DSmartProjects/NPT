@@ -34,8 +34,6 @@ namespace VideoKallMCCST.View
             
             MainPage.mainPage.DQConnectionCallback += UpdateConnectionStatus;
             TxtTmpUnitbtn.IsOn = MainPage.mainPage.mainpagecontext.ThermometerUnitF;
-            MainPage.mainPage.STTempAutomodeTime = MainPage.mainPage.STAutomodeTime;
-            TxtautomodeTime.Text = MainPage.mainPage.STTempAutomodeTime.ToString();
         }
 
       async  void UpdateConnectionStatus(bool status)
@@ -97,19 +95,6 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.isDataAcquitionappConnected = false;
             MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp("ConnectionTest");
              TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
-        }
-
-
-        private void BtnMinus_Click(object sender, RoutedEventArgs e)
-        {
-            MainPage.mainPage.STTempAutomodeTime--;
-            TxtautomodeTime.Text = MainPage.mainPage.STTempAutomodeTime.ToString();
-        }
-
-        private void BtnPlus_Click(object sender, RoutedEventArgs e)
-        {
-            MainPage.mainPage.STTempAutomodeTime++;
-            TxtautomodeTime.Text = MainPage.mainPage.STTempAutomodeTime.ToString();
         }
     }
 }

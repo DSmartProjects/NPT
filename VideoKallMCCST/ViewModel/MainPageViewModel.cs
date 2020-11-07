@@ -125,19 +125,13 @@ namespace VideoKallMCCST.ViewModel
             MainPage.mainPage.SMCCommChannel.IPAddress = TxtIpAddress.Trim();
             MainPage.mainPage.SMCCommChannel.PortNo = TxtProtNo.Trim();
             MainPage.mainPage.mainpagecontext.ThermometerUnitF = MainPage.mainPage.mainpagecontext.ThermometerTempUnitF;
-            if (MainPage.mainPage.STTempAutomodeTime < 5)
-                MainPage.mainPage.STAutomodeTime = 5;
-            else
-                MainPage.mainPage.STAutomodeTime = MainPage.mainPage.STTempAutomodeTime;
-             
+                        
             try
             {
                 string msg = "IP" + ":" + TxtIpAddress.Trim() + Environment.NewLine +
                    "PORT:" + TxtProtNo.Trim() + Environment.NewLine +
-                   "TEMP:" + (MainPage.mainPage.mainpagecontext.ThermometerUnitF ? "1" : "0") + Environment.NewLine +
-                   "AUTOMODETIME:" + MainPage.mainPage.STAutomodeTime.ToString();
-                    ;
-               // msg = Environment.NewLine + msg + Environment.NewLine;
+                   "TEMP:" + (MainPage.mainPage.mainpagecontext.ThermometerUnitF ? "1" : "0");
+                 // msg = Environment.NewLine + msg + Environment.NewLine;
                 string filename = "SMCIPAddress.txt";
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 Windows.Storage.StorageFile pinfofile = await localFolder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);

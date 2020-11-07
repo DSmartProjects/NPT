@@ -72,7 +72,7 @@ namespace VideoKallMCCST.Stethoscope
 
         public void ConnectTX()
         {
-            Connect(false);
+            Connect(!MainPage.mainPage.IsStethescopeChest);
             //await Task.Run(() =>
             //{
             //    Connect();

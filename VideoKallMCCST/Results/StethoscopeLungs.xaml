@@ -79,7 +79,6 @@
                 <Button Name="BtnST16" Padding="5" Grid.Row="4" Grid.Column="3" Content="16" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST16_Click"   ></Button>
 
                 <Button   Name="BtnDone" Grid.Row="5" Grid.Column="4" Margin="5" Content="Start" BorderThickness="1" BorderBrush="Gray" Click="BtnDone_Click"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Button>
-                <CheckBox Visibility="Visible"  Name="btnAuto" Grid.Row="3" Grid.Column="4" Margin="5" Content="Auto" Click="BtnAuto_Click" ></CheckBox>
                 <Button   Name="Btnup" Grid.Row="1" Grid.Column="4" Margin="5" Content="^" BorderThickness="1" BorderBrush="Gray"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Btnup_Click"   ></Button>
                 <Button   Name="Btndown" Grid.Row="2" Grid.Column="4" Margin="5" Content="v" BorderThickness="1" BorderBrush="Gray"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Btndown_Click"   ></Button>
                     <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal">

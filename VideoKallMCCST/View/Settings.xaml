@@ -51,12 +51,7 @@
 
         </StackPanel>
       <Button Margin="5" Command="{Binding SaveIPAddress}" Grid.Column="2" Grid.Row="4" Content="Save"></Button>
-        <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <TextBlock Text="Automode Time(sec):" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <Button x:Name="BtnMinus" FontSize="20" FontWeight="Bold" Content="-" Background="LightBlue" Click="BtnMinus_Click"></Button>
-            <TextBox IsReadOnly="True" x:Name="TxtautomodeTime" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text="5"></TextBox>
-            <Button x:Name="BtnPlus" FontSize="20" FontWeight="Bold" Content="+" Background="LightBlue" Click="BtnPlus_Click"></Button>
-        </StackPanel>
+        
         <Button Margin="5" Command="{Binding Done}" Grid.Column="0" Grid.Row="15" Content="Done"></Button>
     </Grid>
 </Page>
