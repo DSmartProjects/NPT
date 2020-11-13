@@ -81,11 +81,12 @@ namespace VideoKallMCCST.ViewModel
             }
 
             if (string.Compare(PasswordTxt, loggedinUser.Password) == 0)
-            { 
-                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanel));
+            {
+               // VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
+                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelPage));
                 if (videoCall == null)
-                    videoCall = new VideoCall();
-                MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCall), videoCall);
+                    videoCall = new VideoCallPage();
+                MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage), videoCall);
                 MainPage.mainPage.IsUserLogedin = true;
             }
             else
@@ -105,7 +106,7 @@ namespace VideoKallMCCST.ViewModel
             }
             
         }
-        VideoCall videoCall = null;
+        VideoCallPage videoCall = null;
        // TestPanelPageViewModel testPanel = null;
     }//class
 }

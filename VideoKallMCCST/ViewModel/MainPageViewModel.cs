@@ -161,9 +161,9 @@ namespace VideoKallMCCST.ViewModel
         public  void ExecuteDoneCommand()
         {
             if (!MainPage.mainPage.IsUserLogedin)
-                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
             else
-                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanel));
+                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
         }
 
 

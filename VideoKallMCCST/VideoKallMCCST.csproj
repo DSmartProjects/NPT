@@ -11,7 +11,7 @@
     <AssemblyName>VideoKallMCCST</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -172,6 +172,9 @@
       <DependentUpon>SPMChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Stethoscope\StethescopeRX.cs" />
+    <Compile Include="VideoKallLoginPage.xaml.cs">
+      <DependentUpon>VideoKallLoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />
@@ -195,8 +198,17 @@
     <Compile Include="View\TestPanel.xaml.cs">
       <DependentUpon>TestPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TestPanelExpander.xaml.cs">
+      <DependentUpon>TestPanelExpander.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TestPanelPage.xaml.cs">
+      <DependentUpon>TestPanelPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\VideoCall.xaml.cs">
       <DependentUpon>VideoCall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VideoCallPage.xaml.cs">
+      <DependentUpon>VideoCallPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -210,28 +222,44 @@
     <Content Include="Assets\Application.png" />
     <Content Include="Assets\bp.png" />
     <Content Include="Assets\CallRinger.gif" />
+    <Content Include="Assets\connecting.gif" />
     <Content Include="Assets\Darmoscope.png" />
     <Content Include="Assets\EKG.png" />
     <Content Include="Assets\end-call.png" />
+    <Content Include="Assets\glucosemeter.png" />
     <Content Include="Assets\GlucoseMonitor.png" />
+    <Content Include="Assets\Group.png" />
     <Content Include="Assets\incoming-call.gif" />
+    <Content Include="Assets\information.png" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\logo1.png" />
+    <Content Include="Assets\logout.png" />
+    <Content Include="Assets\lung sethascope.svg" />
     <Content Include="Assets\lungs-%281%29%402x.png" />
     <Content Include="Assets\lungs-%281%29%403x.png" />
     <Content Include="Assets\lungs.png" />
     <Content Include="Assets\Lungstethoscop.png" />
+    <Content Include="Assets\medical.png" />
+    <Content Include="Assets\mute.png" />
     <Content Include="Assets\OtoscopeCamera.png" />
+    <Content Include="Assets\Oximeter.png" />
+    <Content Include="Assets\phone-pulse%402x.png" />
     <Content Include="Assets\pulseOxymeter.png" />
+    <Content Include="Assets\recline.png" />
     <Content Include="Assets\reject-call.gif" />
     <Content Include="Assets\sbcimg.PNG" />
     <Content Include="Assets\seatedWeight.png" />
+    <Content Include="Assets\settings.png" />
     <Content Include="Assets\Spirometer.png" />
     <Content Include="Assets\StandingHeight.png" />
     <Content Include="Assets\stethoscop.png" />
+    <Content Include="Assets\stethoscoplungs.png" />
     <Content Include="Assets\Thermometer.png" />
+    <Content Include="Assets\unmute.png" />
+    <Content Include="Assets\Upstraight.png" />
     <Content Include="Assets\VideoCall_Ringtone.mp4" />
     <Content Include="Assets\VideoPlaceHolder.png" />
+    <Content Include="Assets\vk-icon.png" />
     <Content Include="Images\microphone.png" />
     <Content Include="Images\mute.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -323,6 +351,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="VideoKallLoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Accounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -347,7 +379,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\TestPanelExpander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TestPanelPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\VideoCall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VideoCallPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

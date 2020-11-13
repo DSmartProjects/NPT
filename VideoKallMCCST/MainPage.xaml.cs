@@ -39,9 +39,10 @@ namespace VideoKallMCCST
             this.InitializeComponent();
             mainPage = this;
             this.DataContext = mainpagecontext;
-            RightPanelHolder.Navigate(typeof(LoginPage));
-            pagePlaceHolder.Navigate(typeof(LogoPage));
+            RightPanelHolder.Navigate(typeof(VideoCallPage));
+            pagePlaceHolder.Navigate(typeof(TestPanelExpander));
             NotifyStatusCallback += UpdateNotification;
+           
         }
 
         public StorageFolder rootImageFolder { get; set; }
@@ -49,7 +50,7 @@ namespace VideoKallMCCST
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                StatusTxt.Text = s;
+                //StatusTxt.Text = s;
             });
         }
 
@@ -202,9 +203,9 @@ namespace VideoKallMCCST
         public bool isStethoscopeReadystreaming { get; set; } = false;
         void UpdateSMCStatus()
         {
-            TxtSMCStatus.Text = mainpagecontext.IsSMCConnected ? "Available" : "Not Available";
+            //TxtSMCStatus.Text = mainpagecontext.IsSMCConnected ? "Available" : "Not Available";
             
-            BorderStatus.Background = mainpagecontext.IsSMCConnected ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen): new SolidColorBrush(Windows.UI.Colors.Red);
+            //BorderStatus.Background = mainpagecontext.IsSMCConnected ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen): new SolidColorBrush(Windows.UI.Colors.Red);
         }
 
         private void Watchdog_Tick(object sender, object e)

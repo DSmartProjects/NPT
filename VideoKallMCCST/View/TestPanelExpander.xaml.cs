@@ -30,12 +30,11 @@ namespace VideoKallMCCST.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TestPanel : Page
+    public sealed partial class TestPanelExpander : Page
     {
-
-        public TestPanel()
+        public TestPanelExpander()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();             
             MainPage.mainPage.mainpagecontext.NotifyResult += UpdateNotification;
             MainPage.mainPage.StethoscopeRecord += RecordStethocopeStream;
             MainPage.mainPage.OtoscopeComm += OtoscopecommandHandler;
@@ -51,9 +50,8 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.MicroscopeStatus += MicroscopeStatus;
 
             MainPage.mainPage.Thermostatusdelegate += UpdateThermoStatus;
+
         }
-
-
 
 
         string strRootFolder = "VideoKall";
@@ -134,8 +132,6 @@ namespace VideoKallMCCST.View
                 TxtResultglucoTestMode.Text = "";
                 TxtTime.Text = "";
                 TxtDate.Text = "";
-
-
             }
 
         }
@@ -248,10 +244,10 @@ namespace VideoKallMCCST.View
                 BtnOtoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 BtnDermoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 BtnSthethoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnEKG.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnEKG.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 BtnWeight.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 BtnHeight.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnEKG.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+               // BtnEKG.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 BtnSpirometer.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
             }
             );
@@ -414,7 +410,7 @@ namespace VideoKallMCCST.View
                 return;
 
             BtnPulseoximeterToggle = !BtnPulseoximeterToggle;
-            //if (BtnPulseoximeterToggle)
+            if (BtnPulseoximeterToggle)
                 //MainPage.mainPage.StatusTxt.Text = "";
             MainPage.mainPage.TestIsInProgress = BtnPulseoximeterToggle;
             if (BtnPulseoximeterToggle)
@@ -452,7 +448,7 @@ namespace VideoKallMCCST.View
                 return;
 
             _thermotoggle = !_thermotoggle;
-            //if (_thermotoggle)
+            if (_thermotoggle)
                 //MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = _thermotoggle;
@@ -461,7 +457,7 @@ namespace VideoKallMCCST.View
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlThermoResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
+            CtrlThermoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
             CtrlThermoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResulThermoPopup.IsOpen = _thermotoggle;
         }
@@ -475,7 +471,7 @@ namespace VideoKallMCCST.View
                 return;
 
             _resultBpToggle = !_resultBpToggle;
-           // if (_resultBpToggle)
+            if (_resultBpToggle)
                 //MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = _resultBpToggle;
@@ -484,7 +480,7 @@ namespace VideoKallMCCST.View
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlBPResultsInstructions.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
+            CtrlBPResultsInstructions.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
             CtrlBPResultsInstructions.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResultBPPopup.IsOpen = _resultBpToggle;
         }
@@ -503,7 +499,7 @@ namespace VideoKallMCCST.View
 
             btnWeightToggle = !btnWeightToggle;
 
-            //if (btnWeightToggle)
+            if (btnWeightToggle)
                 //MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = btnWeightToggle;
@@ -512,7 +508,7 @@ namespace VideoKallMCCST.View
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlWeightResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
+            CtrlWeightResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
             CtrlWeightResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResuWeightPopup.IsOpen = btnWeightToggle;
         }
@@ -527,8 +523,8 @@ namespace VideoKallMCCST.View
 
             btnHeighttoggle = !btnHeighttoggle;
 
-            //if (btnHeighttoggle)
-               // MainPage.mainPage.StatusTxt.Text = "";
+            if (btnHeighttoggle)
+                //MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
             if (btnHeighttoggle)
@@ -536,7 +532,7 @@ namespace VideoKallMCCST.View
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlHeightoResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
+            CtrlHeightoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
             CtrlHeightoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResulHeightPopup.IsOpen = btnHeighttoggle;
         }
@@ -555,7 +551,7 @@ namespace VideoKallMCCST.View
 
 
                 _otoscopeToggle = !_otoscopeToggle;
-               // if (_otoscopeToggle)
+                if (_otoscopeToggle)
                     //MainPage.mainPage.StatusTxt.Text = "";
                 MainPage.mainPage.TestIsInProgress = _otoscopeToggle;
                 if (_otoscopeToggle)
@@ -570,7 +566,7 @@ namespace VideoKallMCCST.View
                 double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
                 double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-                CtrlOtoscopeResult.Height = ht * 6;//gridInstrumentPanel.ActualHeight;
+                CtrlOtoscopeResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
                 CtrlOtoscopeResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
                 ResulOtoscopePopup.IsOpen = _otoscopeToggle;
             }
@@ -594,8 +590,8 @@ namespace VideoKallMCCST.View
 
                 _dermascopeToggle = !_dermascopeToggle;
                 MainPage.mainPage.TestIsInProgress = _dermascopeToggle;
-               // if (_dermascopeToggle)
-                   // MainPage.mainPage.StatusTxt.Text = "";
+                if (_dermascopeToggle)
+                    //MainPage.mainPage.StatusTxt.Text = "";
                 if (_dermascopeToggle)
                 {
                     MainPage.mainPage.DigitalMicroscope?.Invoke(true);
@@ -609,7 +605,7 @@ namespace VideoKallMCCST.View
                 double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
                 double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-                CtrlDermascopeResult.Height = ht * 6;//gridInstrumentPanel.ActualHeight;
+                CtrlDermascopeResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
                 CtrlDermascopeResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
                 ResulDermascopePopup.IsOpen = _dermascopeToggle;
 
@@ -641,7 +637,6 @@ namespace VideoKallMCCST.View
                     BtnDermoscope_Click(null, null);
                 }
 
-
             });
 
         }
@@ -669,24 +664,24 @@ namespace VideoKallMCCST.View
         bool _ekgToggle = false;
         private void BtnEKG_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_ekgToggle) || (!ConnectionCheck && !_ekgToggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !_ekgToggle) || (!ConnectionCheck && !_ekgToggle))
+            //    return;
 
 
-            _ekgToggle = !_ekgToggle;
+            //_ekgToggle = !_ekgToggle;
             //if (_ekgToggle)
-                //MainPage.mainPage.StatusTxt.Text = "";
-            MainPage.mainPage.TestIsInProgress = _ekgToggle;
-            if (_ekgToggle)
-                BtnEKG.Background = GetColorFromHexa("#FFBF00");  //_ekgToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
-            double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
+            //    // MainPage.mainPage.StatusTxt.Text = "";
+            //    MainPage.mainPage.TestIsInProgress = _ekgToggle;
+            //if (_ekgToggle)
+            //    BtnEKG.Background = GetColorFromHexa("#FFBF00");  //_ekgToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
+            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlekgResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-            CtrlekgResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
-            ResultEKGpopup.IsOpen = _ekgToggle;
+            //CtrlekgResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
+            //CtrlekgResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
+            //ResultEKGpopup.IsOpen = _ekgToggle;
         }
 
 
@@ -704,7 +699,7 @@ namespace VideoKallMCCST.View
 
             if (_glucoToggle)
             {
-               // MainPage.mainPage.StatusTxt.Text = "";
+                //MainPage.mainPage.StatusTxt.Text = "";
                 MainPage.mainPage.ResetGluco?.Invoke();
             }
 
@@ -727,7 +722,7 @@ namespace VideoKallMCCST.View
                 return;
 
             _spirometerToggle = !_spirometerToggle;
-            //if (_spirometerToggle)
+            if (_spirometerToggle)
                 //MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = _spirometerToggle;
@@ -774,8 +769,8 @@ namespace VideoKallMCCST.View
             _stethoscopeChest = !_stethoscopeChest;
             MainPage.mainPage.IsStethescopeChest = _stethoscopeChest;
 
-            //if (_stethoscopeChest)
-            //    MainPage.mainPage.StatusTxt.Text = "";
+            if (_stethoscopeChest)
+               // MainPage.mainPage.StatusTxt.Text = "";
             MainPage.mainPage.TestIsInProgress = _stethoscopeChest;
             if (_stethoscopeChest)
                 BtnSthethoscope.Background = GetColorFromHexa("#FFBF00"); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
@@ -819,8 +814,8 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.IsStethescopeChest = false;
             MainPage.mainPage.ResetSTLungs?.Invoke();
 
-            //if (_stethoscopelungs)
-            //    MainPage.mainPage.StatusTxt.Text = "";
+            if (_stethoscopelungs)
+               // MainPage.mainPage.StatusTxt.Text = "";
             MainPage.mainPage.TestIsInProgress = _stethoscopelungs;
             if (_stethoscopelungs)
             {
@@ -835,9 +830,7 @@ namespace VideoKallMCCST.View
             StethoscopeLungsResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
             ResulStethoscopelungPopup.IsOpen = _stethoscopelungs;
             //  StethoscopeLungs
-
         }
-
 
         private void RecordStethocopeStream()
         {
@@ -850,14 +843,16 @@ namespace VideoKallMCCST.View
             {
                 MainPage.mainPage.LogExceptions(ex.Message);
             }
-
         }
-
-
-
         private void TxtTmpUnitbtn_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
         }
     }
 }
+
+
+      
+       
+    
+
