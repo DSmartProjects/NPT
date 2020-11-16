@@ -201,9 +201,6 @@
     <Compile Include="View\TestPanelExpander.xaml.cs">
       <DependentUpon>TestPanelExpander.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TestPanelPage.xaml.cs">
-      <DependentUpon>TestPanelPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\VideoCall.xaml.cs">
       <DependentUpon>VideoCall.xaml</DependentUpon>
     </Compile>
@@ -380,10 +377,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TestPanelExpander.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\TestPanelPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

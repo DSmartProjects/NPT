@@ -8,28 +8,28 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="590"/>
-            <RowDefinition Height="16"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>       
         <Grid x:Name="grImage" Grid.Row="0" Grid.Column="0" BorderBrush="#ECECEC" BorderThickness="1">
-            <Image x:Name="logo" Margin="10,0,25,0" HorizontalAlignment="Center" VerticalAlignment="Center"  Width="400" Source="..\Assets/Group.png"/>
+            <Image x:Name="logo"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Source="..\Assets/Group.png"/>
         </Grid>
         <Grid x:Name="grTextBlock" Grid.Row="0"  Grid.Column="1" Background="#F0F0F0" BorderBrush="#ECECEC" BorderThickness="1">
-            <TextBlock  Text="VideoKall SMC - Nurse Practitioner Terminal" Padding="5,5,5,5" FontWeight="SemiBold"  Foreground="#5B5B5B" FontSize="16" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,220,0"/>
+            <TextBlock  Text="VideoKall SMC - Nurse Practitioner Terminal" Padding="5,5,5,5" FontWeight="SemiBold"  Foreground="#5B5B5B" FontSize="16" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,20,0,0"/>
         </Grid>
-        <TextBlock  Text="Username and Password is Incorrect" FontSize="12" Grid.Row="1" HorizontalAlignment="Right" FontWeight="Medium" Grid.Column="1" Padding="10,10,5,10" Margin="0,0,20,0" Foreground="Red" FontFamily="Open Sans" />
+        <TextBlock  Text="Username and Password is Incorrect" FontSize="12" Grid.Row="1" HorizontalAlignment="Right" FontWeight="Medium" Grid.Column="1" Padding="10,10,5,10" Margin="0,0,20,0" Foreground="Red" FontFamily="Open Sans" Visibility="Collapsed" />
         <Grid x:Name="grTextBbox" Grid.Row="1"  Grid.ColumnSpan="2"  Background="#F9F9F9" Width="400" Height="250"  CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="#ECECEC" BorderThickness="1">
-            <StackPanel Orientation="Horizontal"  Width="400" Margin="10,10,10,10" Padding="10,10,0,0">
+            <StackPanel Orientation="Horizontal"   Margin="10,10,10,10" Padding="10,10,0,0">
                 <TextBlock Text="User ID       :"  Padding="10,10,10,10" Margin="30,33,0,0" Foreground="#4D4D4D" FontSize="15" FontWeight="SemiBold" FontFamily="Open Sans"/>
                 <TextBox x:Name="txtusdid" Text="{Binding Userid,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Top" Margin="0,35,0,0" MaxLength="50" HorizontalAlignment="Stretch" CornerRadius="5" BorderThickness="1" Background="#F9F9F9" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal"  Width="400" Margin="10,10,10,10" Padding="10,20,0,0">
+            <StackPanel Orientation="Horizontal"   Margin="10,10,10,10" Padding="10,20,0,0">
                 <TextBlock Text="Password   :"  Padding="10,10,10,10" Margin="30,83,0,0" Foreground="#4D4D4D" FontSize="15" FontWeight="SemiBold" FontFamily="Open Sans"/>
                 <PasswordBox Password="{Binding PasswordTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="pwdTxt" Width="200" MaxLength="50" CornerRadius="5"  BorderThickness="1" Background="#F9F9F9" Margin="2,18,0,25" HorizontalAlignment="Stretch" VerticalAlignment="Center"></PasswordBox>
             </StackPanel>
