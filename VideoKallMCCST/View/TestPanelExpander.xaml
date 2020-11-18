@@ -12,7 +12,7 @@
     <ScrollViewer ZoomMode="Enabled" 
               HorizontalScrollMode="Enabled"  HorizontalScrollBarVisibility="Visible">
 
-        <Grid x:Name="gridInstrumentPanel">
+        <Grid x:Name="gridInstrumentPanel" BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -29,8 +29,8 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid x:Name="grbutton1" Grid.Row="0" Grid.Column="0"  >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5">
-                    <Button x:Name="BtnHeight" Background="#F2F2F2"  CornerRadius="5,5,0,0" Click="BtnHeight_Click">
+                <StackPanel Orientation="Vertical" Width="150" Padding="0">
+                    <Button x:Name="BtnHeight" Background="#F2F2F2"  CornerRadius="5,5,0,0" Click="BtnHeight_Click"  Margin="0, 30, 0, 0">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image  Source="..\Assets/StandingHeight.png"  Height="50" Width="50" Stretch="UniformToFill"/>
                             <TextBlock Text="Height Scale" FontSize="12"  Margin="5,10,0,0" FontFamily="Open Sans" TextAlignment="Center"/>
@@ -40,8 +40,8 @@
                 </StackPanel>
             </Grid>
             <Grid x:Name="grbutton2" Grid.Row="0" Grid.Column="1"   >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5">
-                    <Button Name="BtnWeight" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnWeight_Click">
+                <StackPanel Orientation="Vertical" Width="150" Padding="0">
+                    <Button Name="BtnWeight" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnWeight_Click" Margin="0, 30, 0, 0">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/seatedWeight.png"  Height="50" Width="50" Stretch="UniformToFill"/>
                             <TextBlock Text="Weight Scale" FontSize="12"  Margin="5,10,0,0" FontFamily="Open Sans" TextAlignment="Center"/>
@@ -51,8 +51,8 @@
                 </StackPanel>
             </Grid>
             <Grid x:Name="grbutton3" Grid.Row="0" Grid.Column="2" >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5">
-                    <Button Name="BtnBP" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnBP_Click">
+                <StackPanel Orientation="Vertical" Width="150" Padding="0">
+                    <Button Name="BtnBP" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnBP_Click" Margin="0, 30, 0, 0">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/bp.png"  Height="50" Width="50" Stretch="UniformToFill"/>
                             <TextBlock Text="Blood Pressure Cuff" FontSize="12"  Margin="5,10,0,0" FontFamily="Open Sans" TextAlignment="Center"/>
@@ -63,19 +63,19 @@
 
             </Grid>
             <Grid x:Name="grbutton4" Grid.Row="0" Grid.Column="3" >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5">
-                    <Button  Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnPulseoximeter_Click">
+                <StackPanel Orientation="Vertical" Width="150" Padding="0">
+                    <Button  Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnPulseoximeter_Click" Margin="0, 30, 0, 0">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/Oximeter.png"  Height="50" Width="50" />
                             <TextBlock Text="Pulse Oximeter" FontSize="12"  Margin="5,10,0,0" FontFamily="Open Sans" TextAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <TextBox Name="BtnPulseoximeter"  CornerRadius="0,0,5,5" Height="60" IsReadOnly="True"  BorderThickness="1,0,1,1"  TextWrapping="Wrap" FontSize="12" FontFamily="Open Sans"/>
+                    <TextBox Name="BtnPulseoximeter"  CornerRadius="0,0,5,5" Height="60" IsReadOnly="True" BorderBrush="#F2F2F2" BorderThickness="1,0,1,1"  TextWrapping="Wrap" FontSize="12" FontFamily="Open Sans"/>
                 </StackPanel>
 
             </Grid>
             <Grid x:Name="grbutton5" Grid.Row="2" Grid.Column="0"    >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" >
+                <StackPanel Orientation="Vertical" Width="150" Padding="0" >
                     <Button x:Name="BtnThermoMeter" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnThermoMeter_Click">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/Thermometer.png"  Height="50" Width="50" Stretch="UniformToFill"/>
@@ -88,7 +88,7 @@
             </Grid>
 
             <Grid x:Name="grbutton6" Grid.Row="2" Grid.Column="1"   >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5">
+                <StackPanel Orientation="Vertical" Width="150" Padding="0">
                     <Button Name="BtnDermoscope" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnDermoscope_Click">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/Darmoscope.png"  Height="50" Width="50" />
@@ -100,7 +100,7 @@
             </Grid>
 
             <Grid x:Name="grbutton7" Grid.Row="2" Grid.Column="2"  >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" >
+                <StackPanel Orientation="Vertical" Width="150" Padding="0" >
                     <Button Name="BtnOtoscope" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnOtoscope_Click">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/OtoscopeCamera.png"  Height="50" Width="50" />
@@ -113,7 +113,7 @@
             </Grid>
 
             <Grid x:Name="grbutton8" Grid.Row="2" Grid.Column="3" >
-                <StackPanel Orientation="Vertical"  Width="150" Padding="5,5,5,5" >
+                <StackPanel Orientation="Vertical"  Width="150" Padding="0" >
                     <Button Name="BtnSpirometer" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnSpirometer_Click">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/Spirometer.png"  Height="50" Width="50" Stretch="UniformToFill"/>
@@ -125,7 +125,7 @@
             </Grid>
 
             <Grid x:Name="grbutton9" Grid.Row="4" Grid.Column="0" >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5">
+                <StackPanel Orientation="Vertical" Width="150" Padding="0">
                     <Button Name="BtnGlucometer" Background="#F2F2F2" CornerRadius="5,5,0,0"  Click="BtnGlucometer_Click">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5"  HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/glucosemeter.png"  Height="50" Width="50" />
@@ -162,7 +162,7 @@
                 </StackPanel>
             </Grid>
             <Grid x:Name="grbutton10" Grid.Row="4" Grid.Column="1"   >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5">
+                <StackPanel Orientation="Vertical" Width="150" Padding="0">
                     <Button x:Name="BtnSthethoscope" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnSthethoscope_Click">
                         <StackPanel Orientation="Vertical" Width="150"  Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/Lungstethoscop.png"  Height="50" Width="50" Stretch="UniformToFill"/>
@@ -174,7 +174,7 @@
 
             </Grid>
             <Grid x:Name="grbutton11" Grid.Row="4" Grid.Column="2" >
-                <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5">
+                <StackPanel Orientation="Vertical" Width="150" Padding="0">
                     <Button x:Name="BtnSthethoscopeLungs" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnSthethoscopeLungs_Click">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/stethoscoplungs.png"  Height="50" Width="50" />
