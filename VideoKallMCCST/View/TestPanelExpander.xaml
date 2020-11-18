@@ -23,7 +23,6 @@
                 <RowDefinition Height="0"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -65,17 +64,16 @@
             </Grid>
             <Grid x:Name="grbutton4" Grid.Row="0" Grid.Column="3" >
                 <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5">
-                    <Button Name="BtnPulseoximeter" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnPulseoximeter_Click">
+                    <Button  Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnPulseoximeter_Click">
                         <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="..\Assets/Oximeter.png"  Height="50" Width="50" />
                             <TextBlock Text="Pulse Oximeter" FontSize="12"  Margin="5,10,0,0" FontFamily="Open Sans" TextAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <TextBox  CornerRadius="0,0,5,5" Height="60" IsReadOnly="True" BorderBrush="#F2F2F2" BorderThickness="1,0,1,1"  TextWrapping="Wrap" FontSize="12" FontFamily="Open Sans"/>
+                    <TextBox Name="BtnPulseoximeter"  CornerRadius="0,0,5,5" Height="60" IsReadOnly="True"  BorderThickness="1,0,1,1"  TextWrapping="Wrap" FontSize="12" FontFamily="Open Sans"/>
                 </StackPanel>
 
             </Grid>
-
             <Grid x:Name="grbutton5" Grid.Row="2" Grid.Column="0"    >
                 <StackPanel Orientation="Vertical" Width="150" Padding="5,5,5,5" >
                     <Button x:Name="BtnThermoMeter" Background="#F2F2F2" CornerRadius="5,5,0,0" Click="BtnThermoMeter_Click">
@@ -387,6 +385,6 @@
             <Frame x:FieldModifier="public"  Background="LightGray" Grid.Row="6" Grid.RowSpan="8" Grid.Column="0" Grid.ColumnSpan="10" x:Name="TestResultHistoryFrame"></Frame>
 
         </Grid>
-      
+
     </ScrollViewer>
 </Page>

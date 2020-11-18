@@ -11,6 +11,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.MediaProperties;
 using Windows.System.Display;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -200,7 +201,7 @@ namespace VideoKallMCCST.View
         }
         private async void Accept_Click(object sender, RoutedEventArgs e)
         {
-            await AcceptCall();
+            await AcceptCall();   
         }
         private async Task AcceptCall()
         {
@@ -215,7 +216,8 @@ namespace VideoKallMCCST.View
             Accept.Visibility = Visibility.Collapsed;
             EndConsult.IsEnabled = true;
             Accept.Visibility = Visibility.Collapsed;
-
+            TxtSMCStatus.Text = string.Empty;
+            TxtSMCStatus.Text = "In Use";
             if (incommingCall == null)
                 return;
             incommingCall.Accept();
@@ -299,6 +301,8 @@ namespace VideoKallMCCST.View
                 }));
 
             }
+            TxtSMCStatus.Text = string.Empty;
+            TxtSMCStatus.Text = "Not Ready";
             DefaultVisibilities();
         }
 
@@ -325,6 +329,81 @@ namespace VideoKallMCCST.View
             }
 
         }
-        
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            //SMCConnecteionStatus();
+
+            SMCCommChannel = new CommunicationChannel();
+            SMCCommChannel.Initialize();
+
+            Utility ut = new Utility();
+
+            var result = Task.Run(async () => { return await ut.ReadIPaddress(); }).Result;
+            SMCCommChannel.IPAddress = MainPage.mainPage.mainpagecontext.TxtIpAddress;// "192.168.0.33";
+            SMCCommChannel.PortNo = MainPage.mainPage.mainpagecontext.TxtProtNo;// "9856";
+            //SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;
+            MainPage.mainPage.mainpagecontext.IsSMCConnected = false;
+            SMCCommChannel.Connect();
+            SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);
+            watchdog = new DispatcherTimer();
+            watchdog.Tick += Watchdog_Tick;
+            watchdog.Interval = new TimeSpan(0, 0, 1);
+            watchdog.Start();
+            //CommToDataAcq.MessageReceived += SMCCommChannel_MessageReceived;
+            //CommToDataAcq.Initialize();
+            //CommToDataAcq.Connect();
+        }
+
+
+
+        public void SMCConnecteionStatus()
+        {
+            MainPage.mainPage.GettingSMCStatus();
+            TxtSMCStatus.Text = MainPage.mainPage.mainpagecontext.IsSMCConnected ? "Ready" : "Not Ready";
+        }
+
+        private void Watchdog_Tick(object sender, object e)
+        {
+            watchdog.Stop();
+            if (statuscheckinterval > 1 || MainPage.mainPage.mainpagecontext.IsSMCConnected)
+                SMCConnecteionStatus();
+
+            if (!MainPage.mainPage.mainpagecontext.IsSMCConnected && intervalcount >= 5)
+            {
+                intervalcount = 0;
+                SMCCommChannel.IPAddress = MainPage.mainPage.mainpagecontext.TxtIpAddress;// "192.168.0.33";
+                SMCCommChannel.PortNo = MainPage.mainPage.mainpagecontext.TxtProtNo; // "9856"
+                SMCCommChannel.Connect();
+                SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);
+            }
+            else if (MainPage.mainPage.mainpagecontext.IsSMCConnected && statuscheckinterval >= 5)
+            {
+                statuscheckinterval = 0;
+                MainPage.mainPage.mainpagecontext.IsSMCConnected = false;
+                SMCCommChannel.SendMessage(CommunicationCommands.MCCConnectionStatusCheckCmd);
+            }
+            else if (!MainPage.mainPage.mainpagecontext.IsSMCConnected && intervalcount % 2 == 0)
+            {
+                SMCCommChannel.SendMessage(CommunicationCommands.MCCConnectionStatusCheckCmd);
+            }
+
+            if (intervalcount > 6)
+                intervalcount = 0;
+            //  if(!isDataAcquitionappConnected && statuscheckinterval>2)
+            //     CommToDataAcq.SendMessageToDataacquistionapp("ConnectionTest");
+
+            intervalcount++;
+
+            statuscheckinterval++;
+            // mainpagecontext.UpdateStatus(mainpagecontext.IsSMCConnected);
+            watchdog.Start();
+        }
+        public CommunicationChannel SMCCommChannel { get; private set; }
+
+        int intervalcount = 0;
+        int statuscheckinterval = 0;
+
+        DispatcherTimer watchdog = null;
     }
 }

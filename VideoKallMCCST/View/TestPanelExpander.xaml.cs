@@ -238,7 +238,7 @@ namespace VideoKallMCCST.View
                 ShowTemppdata(false);
 
                 BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 BtnOtoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
@@ -414,7 +414,9 @@ namespace VideoKallMCCST.View
                 //MainPage.mainPage.StatusTxt.Text = "";
             MainPage.mainPage.TestIsInProgress = BtnPulseoximeterToggle;
             if (BtnPulseoximeterToggle)
-                BtnPulseoximeter.Background = GetColorFromHexa("#FFBF00"); //BtnPulseoximeterToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnPulseoximeter.Background = GetColorFromHexa("#FFBF00"); //BtnPulseoximeterToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            BtnPulseoximeter.BorderBrush = GetColorFromHexa("#FFBF00");
+            BtnPulseoximeter.BorderThickness = new Thickness(0, 0, 0, 10);
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
@@ -516,25 +518,28 @@ namespace VideoKallMCCST.View
         bool btnHeighttoggle = false;
         private void BtnHeight_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) || (!ConnectionCheck && !btnHeighttoggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) || (!ConnectionCheck && !btnHeighttoggle))
+            //    return;
 
-            btnHeighttoggle = !btnHeighttoggle;
+            //btnHeighttoggle = !btnHeighttoggle;
 
-            if (btnHeighttoggle)
-                //MainPage.mainPage.StatusTxt.Text = "";
+            //if (btnHeighttoggle)
+            //    //MainPage.mainPage.StatusTxt.Text = "";
 
-            MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
-            if (btnHeighttoggle)
-                BtnHeight.Background = GetColorFromHexa("#FFBF00");// btnHeighttoggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
-            double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
+            //MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
+            //if (btnHeighttoggle)
+            //    BtnHeight.Background = GetColorFromHexa("#FFBF00");// btnHeighttoggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
+            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlHeightoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
-            CtrlHeightoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
-            ResulHeightPopup.IsOpen = btnHeighttoggle;
+            //CtrlHeightoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
+            //CtrlHeightoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
+            //ResulHeightPopup.IsOpen = btnHeighttoggle;
+
+
         }
 
         bool _otoscopeToggle = false;

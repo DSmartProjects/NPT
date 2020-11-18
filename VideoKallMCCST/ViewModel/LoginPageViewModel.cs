@@ -61,49 +61,50 @@ namespace VideoKallMCCST.ViewModel
  
         public void ExecuteSubmitCommand( )
         {
-            SBCDB dbmodule = new SBCDB();
-            User loggedinUser =  dbmodule.GetLoggedinUser(Userid.Trim().ToLower());
-            if (loggedinUser == null)
-            {
-                LoginFailedMsg1Visible = true;
-                LoginFailedMsg2Visible = true;
-                LoginFailedMsg3Visible = true;
+            VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
+            //SBCDB dbmodule = new SBCDB();
+            //User loggedinUser =  dbmodule.GetLoggedinUser(Userid.Trim().ToLower());
+            //if (loggedinUser == null)
+            //{
+            //    LoginFailedMsg1Visible = true;
+            //    LoginFailedMsg2Visible = true;
+            //    LoginFailedMsg3Visible = true;
                
-                LoginErrorMessage = "User name: " + Userid + " not found.";
-                LoginErrorMessage2 = "Please enter valid user id or contact admin.";
-                OnPropertyChanged("LoginFailedMsg1Visible");
-                OnPropertyChanged("LoginFailedMsg2Visible");
-                OnPropertyChanged("LoginFailedMsg3Visible");
-                OnPropertyChanged("LoginErrorMessage");
-                OnPropertyChanged("LoginErrorMessage2");
-               MainPage.mainPage.IsUserLogedin = false;
-                return;
-            }
+            //    LoginErrorMessage = "User name: " + Userid + " not found.";
+            //    LoginErrorMessage2 = "Please enter valid user id or contact admin.";
+            //    OnPropertyChanged("LoginFailedMsg1Visible");
+            //    OnPropertyChanged("LoginFailedMsg2Visible");
+            //    OnPropertyChanged("LoginFailedMsg3Visible");
+            //    OnPropertyChanged("LoginErrorMessage");
+            //    OnPropertyChanged("LoginErrorMessage2");
+            //   MainPage.mainPage.IsUserLogedin = false;
+            //    return;
+            //}
 
-            if (string.Compare(PasswordTxt, loggedinUser.Password) == 0)
-            {
-               // VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
-                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelPage));
-                if (videoCall == null)
-                    videoCall = new VideoCallPage();
-                MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage), videoCall);
-                MainPage.mainPage.IsUserLogedin = true;
-            }
-            else
-            {
-                LoginFailedMsg1Visible = true;
-                LoginFailedMsg2Visible = true;
-                LoginFailedMsg3Visible = true;
-                LoginErrorMessage = "Password not matched.";
-                LoginErrorMessage2 = "Please enter valid password or contact admin.";
+            //if (string.Compare(PasswordTxt, loggedinUser.Password) == 0)
+            //{
+            //    VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
+            //    //MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelPage));
+            //    if (videoCall == null)
+            //        videoCall = new VideoCallPage();
+            //    MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage), videoCall);
+            //    MainPage.mainPage.IsUserLogedin = true;
+            //}
+            //else
+            //{
+            //    LoginFailedMsg1Visible = true;
+            //    LoginFailedMsg2Visible = true;
+            //    LoginFailedMsg3Visible = true;
+            //    LoginErrorMessage = "Password not matched.";
+            //    LoginErrorMessage2 = "Please enter valid password or contact admin.";
 
-                OnPropertyChanged("LoginFailedMsg1Visible");
-                OnPropertyChanged("LoginFailedMsg2Visible");
-                OnPropertyChanged("LoginFailedMsg3Visible");
-                OnPropertyChanged("LoginErrorMessage");
-                OnPropertyChanged("LoginErrorMessage2");
-                MainPage.mainPage.IsUserLogedin = false;
-            }
+            //    OnPropertyChanged("LoginFailedMsg1Visible");
+            //    OnPropertyChanged("LoginFailedMsg2Visible");
+            //    OnPropertyChanged("LoginFailedMsg3Visible");
+            //    OnPropertyChanged("LoginErrorMessage");
+            //    OnPropertyChanged("LoginErrorMessage2");
+            //    MainPage.mainPage.IsUserLogedin = false;
+            //}
             
         }
         VideoCallPage videoCall = null;
