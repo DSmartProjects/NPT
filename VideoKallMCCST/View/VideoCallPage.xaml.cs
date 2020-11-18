@@ -341,7 +341,7 @@ namespace VideoKallMCCST.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //SMCConnecteionStatus();
+            SMCConnecteionStatus();
 
             SMCCommChannel = new CommunicationChannel();
             SMCCommChannel.Initialize();
@@ -368,8 +368,16 @@ namespace VideoKallMCCST.View
 
         public void SMCConnecteionStatus()
         {
-            MainPage.mainPage.GettingSMCStatus();
-            TxtSMCStatus.Text = MainPage.mainPage.mainpagecontext.IsSMCConnected ? "Ready" : "Not Ready";
+            string status = TxtSMCStatus.Text;
+            if (status == "In Use")
+            {
+                TxtSMCStatus.Text = "In Use";
+                ColorChange();
+            }
+            else {
+                TxtSMCStatus.Text = MainPage.mainPage.mainpagecontext.IsSMCConnected ? "Ready" : "Not Ready";
+                ColorChange();
+            }
         }
 
         private void Watchdog_Tick(object sender, object e)
@@ -408,11 +416,38 @@ namespace VideoKallMCCST.View
             // mainpagecontext.UpdateStatus(mainpagecontext.IsSMCConnected);
             watchdog.Start();
         }
+
+        public SolidColorBrush GetColorFromHexa(string hexaColor)
+        {
+            return new SolidColorBrush(
+                Color.FromArgb(
+                    255,
+                    Convert.ToByte(hexaColor.Substring(1, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(3, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(5, 2), 16)
+                )
+            );
+        }
+        public void ColorChange()
+        {
+            if (!MainPage.mainPage.mainpagecontext.IsSMCConnected)
+                TxtSMCStatus.Background = GetColorFromHexa("#ED604A");
+            else
+                TxtSMCStatus.Background = GetColorFromHexa("#34CBA8");
+
+            string status = TxtSMCStatus.Text;
+            if (status == "In Use")
+            {
+                TxtSMCStatus.Background = GetColorFromHexa("#FFC10D");
+            }
+        }
         public CommunicationChannel SMCCommChannel { get; private set; }
 
         int intervalcount = 0;
         int statuscheckinterval = 0;
 
         DispatcherTimer watchdog = null;
+
+
     }
 }

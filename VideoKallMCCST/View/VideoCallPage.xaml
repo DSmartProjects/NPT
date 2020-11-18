@@ -67,15 +67,18 @@
                 </StackPanel>
                 <Line StrokeThickness="0.2" Stroke="#434343" Margin="10,73,5,0" X1="0" X2="330" Y1="13" Y2="13" />
                 <StackPanel x:Name="spNotes"  Orientation="Vertical" Margin="5,0,0,0">
-                    <TextBlock Text="Attendant Medic Notes :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="5,100,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
+                    <TextBlock Text="Clinical Notes :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="5,100,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
                     <TextBlock  TextWrapping="WrapWholeWords" FontFamily="Open Sans" Margin="0,5,15,5" Height="200"  Width="320" FontSize="12" Foreground="Black"/>
                 </StackPanel>
                 <Line StrokeThickness="0.2" Stroke="#434343" Margin="10,260,5,0" X1="0" X2="330" Y1="13" Y2="13" />
                 <StackPanel x:Name="spChairStatus"  Orientation="Horizontal" Margin="5,5,0,0">
-                    <TextBlock Text="Chair ID :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="5,280,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
-                    <TextBlock Text="123456" Width="50" VerticalAlignment="Top" FontFamily="Open Sans" Margin="30,280,0,0"  FontSize="12" />
-                    <TextBlock Text="Chair Status :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="40,280,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
-                    <TextBlock x:Name="TxtSMCStatus"   Height="23"   FontFamily="Open Sans" Margin="10,280,0,0" FontWeight="SemiBold" FontSize="12" />
+                    <TextBlock Text="Chair ID :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="5,275,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
+                    <TextBlock Text="123456" Width="50" VerticalAlignment="Top" FontFamily="Open Sans" Margin="30,275,0,0"  FontSize="12" />
+                    <TextBlock Text="Chair Status :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="40,275,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
+                    <!--<TextBlock  x:Name="TxtSMCStatus" Height="23"  FontFamily="Open Sans" Margin="10,280,0,0" FontWeight="SemiBold" FontSize="12" />-->
+                    
+                    <TextBox x:Name="TxtSMCStatus" Width="80" Height="20" BorderThickness="0,0,0,0" FontFamily="Open Sans" Foreground="White" CornerRadius="5,5,5,5" Margin="10,265,0,0" FontWeight="SemiBold" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                   
                 </StackPanel>
             </Grid>
         </Grid>
