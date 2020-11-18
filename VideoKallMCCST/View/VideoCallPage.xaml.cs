@@ -187,6 +187,7 @@ namespace VideoKallMCCST.View
 
             PreviewVideo.Source = null;
 
+            TestPanelExpander.TestPanelExp.Frame.Navigate(typeof(LogoPage));
         }
 
         private void Apchair1_Click(object sender, RoutedEventArgs e)
@@ -211,6 +212,7 @@ namespace VideoKallMCCST.View
         }
         private async Task AcceptCall()
         {
+            //LogoPage._logoPage.Frame.Navigate(typeof(TestPanelExpander));
             IncomingCallRing.Stop();
             CallDevice();
             RemoteVideo.Visibility = Visibility.Visible;

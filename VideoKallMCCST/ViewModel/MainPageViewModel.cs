@@ -165,7 +165,5 @@ namespace VideoKallMCCST.ViewModel
             else
                 MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
         }
-
-
     }//class
 }

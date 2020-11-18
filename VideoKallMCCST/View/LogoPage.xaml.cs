@@ -22,9 +22,11 @@ namespace VideoKallMCCST.View
     /// </summary>
     public sealed partial class LogoPage : Page
     {
+        public static LogoPage _logoPage;
         public LogoPage()
         {
             this.InitializeComponent();
+            _logoPage = this;
         }
     }
 }

@@ -41,9 +41,8 @@ namespace VideoKallMCCST
             this.DataContext = mainpagecontext;
             VideoCallVM = new VideoCallViewModel();
             RightPanelHolder.Navigate(typeof(VideoCallPage));
-            pagePlaceHolder.Navigate(typeof(TestPanelExpander));
+            pagePlaceHolder.Navigate(typeof(LogoPage));
             NotifyStatusCallback += UpdateNotification;
-           
         }
 
         public StorageFolder rootImageFolder { get; set; }

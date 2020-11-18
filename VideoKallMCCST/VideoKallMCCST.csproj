@@ -237,6 +237,7 @@
     <Content Include="Assets\GlucoseMonitor.png" />
     <Content Include="Assets\Group.png" />
     <Content Include="Assets\incoming-call.gif" />
+    <Content Include="Assets\Incoming_Video_Call.mp4" />
     <Content Include="Assets\information.png" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\logo1.png" />
@@ -267,6 +268,7 @@
     <Content Include="Assets\VideoCall_Ringtone.mp4" />
     <Content Include="Assets\VideoPlaceHolder.png" />
     <Content Include="Assets\vk-icon.png" />
+    <Content Include="Assets\VK_PlaceHolder_Logo.png" />
     <Content Include="Images\microphone.png" />
     <Content Include="Images\mute.png" />
     <Content Include="Properties\Default.rd.xml" />

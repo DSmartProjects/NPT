@@ -80,6 +80,7 @@ namespace VideoKallMCCST.View
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             MainPage.VideoCallVM.PatientDetails = patient;
+            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
         }
 
         private void GridPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
