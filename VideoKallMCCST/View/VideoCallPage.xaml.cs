@@ -7,6 +7,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
+using VideoKallMCCST.Model;
+using VideoKallMCCST.ViewModel;
+using VideoKallMCCST.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.MediaProperties;
@@ -36,15 +39,17 @@ namespace VideoKallMCCST.View
         bool? roleIsActive = null;
         int isTerminator = 0;
         bool activated = false;
-        bool isMuted = false;
-
+        bool isMuted = false;   
         IncomingConnectionEventArgs incommingCall = null;
+        public VideoCallViewModel _videoCallVM = null;
         public VideoCallPage()
         {
             this.InitializeComponent();
             rootPage.EnsureMediaExtensionManager();
             DefaultVisibilities();
-        }
+            _videoCallVM = MainPage.VideoCallVM;          
+            this.DataContext =_videoCallVM;            
+        }    
         public void DefaultVisibilities()
         {
             RemoteVideo.Visibility = Visibility.Collapsed;
@@ -98,7 +103,7 @@ namespace VideoKallMCCST.View
             }
         }
         private async Task InitializeAsync(CancellationToken cancel = default(CancellationToken))
-        {         
+        {
 
             try
             {
@@ -108,7 +113,7 @@ namespace VideoKallMCCST.View
                 RemoteVideo.Source = null;
                 // Each client starts out as passive
                 roleIsActive = false;
-                Interlocked.Exchange(ref isTerminator, 0);              
+                Interlocked.Exchange(ref isTerminator, 0);
             }
             catch (Exception)
             {
@@ -137,7 +142,7 @@ namespace VideoKallMCCST.View
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
             {
                 IncomingCallRing.Play();
-               // Reject.Visibility = Visibility.Visible;
+                // Reject.Visibility = Visibility.Visible;
                 Accept.Visibility = Visibility.Visible;
                 Incall.Visibility = Visibility.Visible;
             }));
@@ -195,9 +200,11 @@ namespace VideoKallMCCST.View
 
         }
 
-        private void BtnSearchPatient_Click(object sender, RoutedEventArgs e)
+        private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)
         {
-
+            SearchPatient searchPatient = new SearchPatient();
+            await searchPatient.ShowAsync();
+            //SearchPatientPOP.IsOpen = true;
         }
         private async void Accept_Click(object sender, RoutedEventArgs e)
         {
@@ -238,7 +245,7 @@ namespace VideoKallMCCST.View
             }));
 
         }
-        
+
 
         async Task EndVideoCall()
         {
