@@ -34,33 +34,33 @@
             </Grid>
             <Grid Grid.Row="1"  Height="200" VerticalAlignment="Top" Background="#F2F2F2"  BorderThickness="1">
                 <Image x:Name="VideoLogo" Visibility="Visible" Source="..\Assets\video-logo.png"></Image>
-                <MediaElement  x:Name="IncomingCallRing" Height="200"  RenderTransformOrigin="0.5,0.5" Stretch="Fill" AutoPlay="False"  Source="..\Assets\Incoming_Call_Notification.mp4" PosterSource="..\Assets\phone-pulse@2x.png" />
-                <MediaElement  Visibility="Collapsed" Stretch="Fill"  Height="200" RenderTransformOrigin="0.5,0.5" x:Name="RemoteVideo"  AudioCategory="Communications"   PosterSource="..\Assets\VideoPlaceHolder.png"></MediaElement>
+                <MediaElement  x:Name="IncomingCallRing" Height="200"  RenderTransformOrigin="0.5,0.5" Stretch="Fill" AutoPlay="False"  Source="..\Assets\Incoming_Call_Notification.mp4" PosterSource="..\Assets\video-logo.png" />
+                <MediaElement  Visibility="Collapsed" Stretch="UniformToFill"  Height="200" RenderTransformOrigin="0.5,0.5" x:Name="RemoteVideo"  AudioCategory="Communications"   PosterSource="..\Assets\video-logo.png"></MediaElement>
                 <CaptureElement  Name="PreviewVideo"  Margin="250,0,0,110" RenderTransformOrigin="0.5,0.5" Stretch="Fill"></CaptureElement>
                 <Button Margin="320,150,0,0"  Visibility="Collapsed" Background="Transparent" Height="50"   x:Name="Accept" Click="Accept_Click" >
                     <Image  Source="..\Assets\answer.png"></Image>
                 </Button>
                 <!--<TextBlock x:Name="Incall" Text="Incoming Call...." Margin="30,180,0,0" TextAlignment="Center" FontSize="11" Visibility="Collapsed" />-->
 
-                <Button Margin="0,150,0,0"  Background="Transparent" Height="50"   x:Name="Mute"   Click="Mute_Click" >
+                <Button Margin="0,150,0,0"  Background="Transparent" Height="50"   x:Name="Mute"   Click="Mute_Click">
                     <Image x:Name="MuteImg" Source="..\Assets\unmute.png"></Image>
                 </Button>
-                <Button Margin="0,150,0,0" Background="Transparent" Height="50" Visibility="Collapsed"  x:Name="MuteUn" Click="UnMute_Click">
+                <Button Margin="0,150,0,0" Background="Transparent" Height="50" Visibility="Collapsed"  x:Name="UnMute" Click="UnMute_Click">
                     <Image x:Name="UnMuteImg" Source="..\Assets\mute.png"></Image>
                 </Button>
                 <Button Margin="350,150,0,0" Background="Transparent" Height="50"    x:Name="EndConsult"   Click="EndConsult_Click" >
                     <Image  Source="..\Assets\end-call.png"></Image>
                 </Button>
             </Grid>
-            <Grid  VerticalAlignment="Bottom"  Padding="15,10,0,0"  Grid.Row="2" >
+            <Grid  VerticalAlignment="Bottom"  Padding="20,10,0,0"  Grid.Row="2" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -69,32 +69,36 @@
                     <ColumnDefinition Width="AUTO"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Row="0" x:Name="sppatientInfo" Margin="5,0,0,0">
+                <StackPanel Grid.Row="0" x:Name="sppatientInfo" Margin="0,0,0,0">
                     <Button x:Name="btnSearchPatient" Click="BtnSearchPatient_Click"  Background="#26639B" FontSize="12" Height="28" Width="100" Margin="2,5,0,0"  CornerRadius="10" Foreground="White" Content="Search Patient" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </StackPanel>
-                <StackPanel Grid.Row="1" x:Name="spPatientDetails"  Orientation="Horizontal" Margin="5,0,0,0">
-                    <TextBlock Text="Patient Name :" VerticalAlignment="Center" FontFamily="Open Sans" Margin="5,0,0,0" FontWeight="SemiBold"   FontSize="12" Foreground="#194F82"/>
-                    <TextBlock x:Name="tblPatientName" Text="{Binding PatientDetails.Name,Mode=TwoWay}" Width="Auto" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <StackPanel Grid.Row="1" x:Name="spPatientDetails"  Orientation="Horizontal" Margin="0,0,0,0">
+                    <TextBlock Text="Patient Name :" VerticalAlignment="Center" FontFamily="Open Sans" Margin="0,0,0,0" FontWeight="SemiBold"   FontSize="12" Foreground="#194F82"/>
+                    <TextBlock x:Name="tblPatientName" Text="{Binding PatientDetails.Name,Mode=TwoWay}" Width="Auto" VerticalAlignment="Center" FontSize="12" Margin="5,0,0,0" Foreground="#194F82"/>
                 </StackPanel>
-                <StackPanel x:Name="spPatientID" Grid.Row="2" Orientation="Horizontal" Margin="5,0,0,0">
-                    <TextBlock  Text="Patient ID :" VerticalAlignment="Center" FontFamily="Open Sans" Margin="5,0,0,0" FontWeight="SemiBold"   FontSize="12"  Foreground="#194F82"/>
-                    <TextBlock x:Name="tblPatientId" Text="{Binding PatientDetails.ID,Mode=TwoWay}" Width="50" VerticalAlignment="Center" FontFamily="Open Sans" Margin="24,0,0,0"  FontSize="12" />
+                <StackPanel x:Name="spPatientID" Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,0">
+                    <TextBlock  Text="Patient ID :" VerticalAlignment="Center" FontFamily="Open Sans" Margin="0,0,0,0" FontWeight="SemiBold"   FontSize="12"  Foreground="#194F82"/>
+                    <TextBlock x:Name="tblPatientId" Text="{Binding PatientDetails.ID,Mode=TwoWay}" Width="50" VerticalAlignment="Center" FontFamily="Open Sans" Margin="5,0,0,0"  FontSize="12" Foreground="#194F82"/>
                     <TextBlock  Text="Patient DOB :" VerticalAlignment="Center"  Margin="70,0,0,0"  FontWeight="SemiBold"   FontSize="12"  Foreground="#194F82"/>
-                    <TextBlock  x:Name="tblPatientDob" Text="{Binding PatientDetails.DOB,Converter={StaticResource DateToStringFormatConverter},Mode=TwoWay}" Width="100" VerticalAlignment="Center" FontFamily="Open Sans" Margin="10,0,0,0"  FontSize="12" />
+                    <TextBlock  x:Name="tblPatientDob" Text="{Binding PatientDetails.DOB,Converter={StaticResource DateToStringFormatConverter},Mode=TwoWay}" Width="100" VerticalAlignment="Center" FontFamily="Open Sans" Margin="5,0,0,0"  FontSize="12" Foreground="#194F82"/>
                 </StackPanel>
-                <Line Grid.Row="3" StrokeThickness="0.2" Stroke="#434343" Margin="10,0,5,0" X1="0" X2="372" Y1="13" Y2="13" />
-                <StackPanel Grid.Row="4" x:Name="spNotes"  Orientation="Vertical" Margin="5,0,0,0">
-                    <TextBlock Text="Clinical Notes :" VerticalAlignment="Top" Margin="5,0,0,0" FontWeight="SemiBold" Foreground="#194F82"/>
-                    <TextBlock  TextWrapping="WrapWholeWords" Margin="0,5,15,5" Height="200"  Width="320"  Foreground="Black"/>
+                <!--<Line Grid.Row="3" StrokeThickness="0.2" Stroke="#434343" Margin="10,0,5,0" X1="0" X2="372" Y1="13" Y2="13" />-->
+                <StackPanel Grid.Row="4" x:Name="spNotes"  Orientation="Vertical" Margin="0,0,0,0">
+                    <TextBlock Text="Clinical Notes :" VerticalAlignment="Top" Margin="0,0,0,0" FontWeight="SemiBold" Foreground="#194F82"/>
+                    <TextBlock  TextWrapping="WrapWholeWords"  Height="200"  Width="320"  Foreground="Black"/>
                 </StackPanel>
-                <Line Grid.Row="5" StrokeThickness="0.2" Stroke="#434343" Margin="10,0,5,0" X1="0" X2="372" Y1="13" Y2="13" />
-                <StackPanel Grid.Row="6" x:Name="spChairStatus" VerticalAlignment="Center" Orientation="Horizontal" Margin="5,5,0,0">
-                    <TextBlock  Text="Chair ID :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="5,0,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
-                    <TextBlock Text="123456" Width="50" VerticalAlignment="Top" FontFamily="Open Sans" Margin="30,0,0,0"  FontSize="12" />
-                    <TextBlock Text="Chair Status :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="100,0,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
-                    <!--<TextBlock  x:Name="TxtSMCStatus" Height="23"  FontFamily="Open Sans" Margin="10,280,0,0" FontWeight="SemiBold" FontSize="12" />-->                                      
-                    <TextBox x:Name="TxtSMCStatus" Width="80" Height="20" BorderThickness="0,0,0,0" FontFamily="Open Sans" Foreground="White" CornerRadius="5,5,5,5"  FontWeight="SemiBold" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                </StackPanel>
+               
+                <StackPanel Grid.Row="5" Orientation="Vertical">
+                    <Line  StrokeThickness="0.2" Stroke="#434343" Margin="0,0,0,0" X1="0" X2="385" Y1="13" Y2="13" />
+                    <StackPanel  x:Name="spChairStatus" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,4,0,0">
+                        <TextBlock  Text="Chair ID :" VerticalAlignment="Center" FontFamily="Open Sans" Margin="0,0,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
+                        <TextBlock Text="123456" Width="50" VerticalAlignment="Center" FontFamily="Open Sans" Margin="5,0,0,0"  FontSize="12" />
+                        <TextBlock Text="Chair Status :" VerticalAlignment="Center" FontFamily="Open Sans" Margin="100,0,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
+                        <!--<TextBlock  x:Name="TxtSMCStatus" Height="23"  FontFamily="Open Sans" Margin="10,280,0,0" FontWeight="SemiBold" FontSize="12" />-->
+                        <!--<TextBox x:Name="TxtSMCStatus" Width="80" Height="15" BorderThickness="0,0,0,0" FontFamily="Open Sans" Foreground="White" CornerRadius="5,5,5,5"  FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>-->
+                        <Button x:Name="TxtSMCStatus" Width="80" Height="20" Margin="5,0,0,0" FontSize="10" BorderThickness="0,0,0,0" FontFamily="Open Sans" Foreground="White" CornerRadius="10"   FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </StackPanel>
+                </StackPanel>           
             </Grid>
         </Grid>
     </Grid>
