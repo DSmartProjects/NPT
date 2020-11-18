@@ -7,11 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:VideoKallMCCST.Helpers" 
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
+    
     <Page.Resources>
         <conv:DateFormatConverter x:Name="DateToStringFormatConverter"/>
     </Page.Resources>
-    
     <Grid>
         
         <Grid>
@@ -74,7 +75,7 @@
                     <TextBlock Text="Chair ID :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="5,280,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
                     <TextBlock Text="123456" Width="50" VerticalAlignment="Top" FontFamily="Open Sans" Margin="30,280,0,0"  FontSize="12" />
                     <TextBlock Text="Chair Status :" VerticalAlignment="Top" FontFamily="Open Sans" Margin="40,280,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
-                    <TextBlock Text="Not Ready"  Height="23"   Foreground="#ED604A"  FontFamily="Open Sans" Margin="10,280,0,0" FontWeight="SemiBold" FontSize="12" />
+                    <TextBlock x:Name="TxtSMCStatus"   Height="23"   FontFamily="Open Sans" Margin="10,280,0,0" FontWeight="SemiBold" FontSize="12" />
                 </StackPanel>
             </Grid>
         </Grid>

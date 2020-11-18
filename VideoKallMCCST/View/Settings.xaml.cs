@@ -8,6 +8,7 @@ using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -34,6 +35,7 @@ namespace VideoKallMCCST.View
             
             MainPage.mainPage.DQConnectionCallback += UpdateConnectionStatus;
             TxtTmpUnitbtn.IsOn = MainPage.mainPage.mainpagecontext.ThermometerUnitF;
+            ColorChange();
         }
 
       async  void UpdateConnectionStatus(bool status)
@@ -94,7 +96,30 @@ namespace VideoKallMCCST.View
         {
             MainPage.mainPage.isDataAcquitionappConnected = false;
             MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp("ConnectionTest");
-             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
+            TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
+            ColorChange();
+        }
+
+        public SolidColorBrush GetColorFromHexa(string hexaColor)
+        {
+            return new SolidColorBrush(
+                Color.FromArgb(
+                    255,
+                    Convert.ToByte(hexaColor.Substring(1, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(3, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(5, 2), 16)
+                )
+            );
+        }
+
+
+
+        public void ColorChange()
+        {
+            if (!MainPage.mainPage.isDataAcquitionappConnected)
+                TxtDataAcq.Foreground = GetColorFromHexa("#ED604A");
+            else
+                TxtDataAcq.Foreground = GetColorFromHexa("#26639B");
         }
     }
 }

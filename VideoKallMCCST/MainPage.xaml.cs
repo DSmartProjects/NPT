@@ -277,6 +277,28 @@ namespace VideoKallMCCST
              CommToDataAcq.Connect();
         }
 
+        public void GettingSMCStatus() {
+
+            SMCCommChannel = new CommunicationChannel();
+            SMCCommChannel.Initialize();
+
+            Utility ut = new Utility();
+
+            var result = Task.Run(async () => { return await ut.ReadIPaddress(); }).Result;
+            SMCCommChannel.IPAddress = mainpagecontext.TxtIpAddress;// "192.168.0.33";
+            SMCCommChannel.PortNo = mainpagecontext.TxtProtNo;// "9856";
+            SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;
+            mainpagecontext.IsSMCConnected = false;
+            SMCCommChannel.Connect();
+            SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);
+            watchdog = new DispatcherTimer();
+            watchdog.Tick += Watchdog_Tick;
+            watchdog.Interval = new TimeSpan(0, 0, 1);
+            watchdog.Start();
+            CommToDataAcq.MessageReceived += SMCCommChannel_MessageReceived;
+            CommToDataAcq.Initialize();
+            CommToDataAcq.Connect();
+        }
         public DataacquistionappComm CommToDataAcq { get; set; } = new DataacquistionappComm();
 
      public   async void LogExceptions(string exception)
