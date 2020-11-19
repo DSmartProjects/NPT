@@ -165,6 +165,7 @@ namespace VideoKallMCCST.View
 
                 //TxtMode.Text = "";
                 TxtTemprature.Text = "";
+                TblTemp.Visibility = Visibility.Collapsed;
                // TxtDateTime.Text = "";
             }
 
@@ -420,13 +421,14 @@ namespace VideoKallMCCST.View
 
                             if (Convert.ToBoolean(res[3].Split(':')[1]))
                                 ///  TxtTemprature.Text = string.Format(tempformat, Conversion.ToString(), TxtTmpUnitbtn.IsOn ? TxtTmpUnitbtn.OnContent : TxtTmpUnitbtn.OffContent);
-                                TxtTemprature.Text = string.Format(tempformat, Conversion.ToString(), MainPage.mainPage.mainpagecontext.ThermometerUnitF ? "F" : "C");
+                                TxtTemprature.Text = string.Format(tempformat, Conversion.ToString(), MainPage.mainPage.mainpagecontext.ThermometerUnitF ? " F" : "C");
                             else
                                 TxtTemprature.Text = "Error: Lo";
 
+                            TblTemp.Visibility = Visibility.Visible;
                             //TxtMode.Text = res[2].Split(':')[1];
                             //    "THERMORES>R:{0}>M:{1}>S:{2}>{3}";
-                           // TxtDateTime.Text = res[4];
+                            // TxtDateTime.Text = res[4];
 
                         }
 
