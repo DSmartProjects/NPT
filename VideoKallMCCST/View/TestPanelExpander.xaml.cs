@@ -98,16 +98,16 @@ namespace VideoKallMCCST.View
             {
                 TxtLableSPO2.Visibility = Visibility.Visible;
                 TxtLabelPulseRate.Visibility = Visibility.Visible;
-                TxtLabelPulseTime.Visibility = Visibility.Visible;
+                //TxtLabelPulseTime.Visibility = Visibility.Visible;
             }
             else
             {
                 TxtLableSPO2.Visibility = Visibility.Collapsed;
                 TxtLabelPulseRate.Visibility = Visibility.Collapsed;
-                TxtLabelPulseTime.Visibility = Visibility.Collapsed;
+                //TxtLabelPulseTime.Visibility = Visibility.Collapsed;
                 TxtResultPulseOximeter.Text = "";
                 TxtResultPulseOximeterpulse.Text = "";
-                TxtResultPulseOximeterpulsedate.Text = "";
+                //TxtResultPulseOximeterpulsedate.Text = "";
             }
 
         }
@@ -117,23 +117,23 @@ namespace VideoKallMCCST.View
             if (visible)
             {
                 TxtLabelResultgluco.Visibility = Visibility.Visible;
-                TxtLabeltestType.Visibility = Visibility.Visible;
-                TxtLabelTestMode.Visibility = Visibility.Visible;
-                TxtlabelDate.Visibility = Visibility.Visible;
-                TxtLabelTime.Visibility = Visibility.Visible;
+                //TxtLabeltestType.Visibility = Visibility.Visible;
+                //TxtLabelTestMode.Visibility = Visibility.Visible;
+                //TxtlabelDate.Visibility = Visibility.Visible;
+                //TxtLabelTime.Visibility = Visibility.Visible;
             }
             else
             {
                 TxtLabelResultgluco.Visibility = Visibility.Collapsed;
-                TxtLabeltestType.Visibility = Visibility.Collapsed;
-                TxtLabelTestMode.Visibility = Visibility.Collapsed;
-                TxtlabelDate.Visibility = Visibility.Collapsed;
-                TxtLabelTime.Visibility = Visibility.Collapsed;
-                TxtResultgluco.Text = "";
-                TxtTestType.Text = "";
-                TxtResultglucoTestMode.Text = "";
-                TxtTime.Text = "";
-                TxtDate.Text = "";
+                //TxtLabeltestType.Visibility = Visibility.Collapsed;
+                //TxtLabelTestMode.Visibility = Visibility.Collapsed;
+                //TxtlabelDate.Visibility = Visibility.Collapsed;
+                //TxtLabelTime.Visibility = Visibility.Collapsed;
+                //TxtResultgluco.Text = "";
+                //TxtTestType.Text = "";
+                //TxtResultglucoTestMode.Text = "";
+                //TxtTime.Text = "";
+                //TxtDate.Text = "";
             }
 
         }
@@ -143,17 +143,17 @@ namespace VideoKallMCCST.View
             if (visible)
             {
                 TxtLabelSys.Visibility = Visibility.Visible;
-                Txtlabeldia.Visibility = Visibility.Visible;
-                TxtLabelpulsebp.Visibility = Visibility.Visible;
+               // Txtlabeldia.Visibility = Visibility.Visible;
+               // TxtLabelpulsebp.Visibility = Visibility.Visible;
             }
             else
             {
                 TxtLabelSys.Visibility = Visibility.Collapsed;
-                Txtlabeldia.Visibility = Visibility.Collapsed;
-                TxtLabelpulsebp.Visibility = Visibility.Collapsed;
+                //Txtlabeldia.Visibility = Visibility.Collapsed;
+                //TxtLabelpulsebp.Visibility = Visibility.Collapsed;
                 TxtSys.Text = "";
-                TxtDia.Text = "";
-                TxtPulse.Text = "";
+                //TxtDia.Text = "";
+                //TxtPulse.Text = "";
             }
 
         }
@@ -163,9 +163,9 @@ namespace VideoKallMCCST.View
             if (!visible)
             {
 
-                TxtMode.Text = "";
+                //TxtMode.Text = "";
                 TxtTemprature.Text = "";
-                TxtDateTime.Text = "";
+               // TxtDateTime.Text = "";
             }
 
         }
@@ -381,9 +381,9 @@ namespace VideoKallMCCST.View
                         //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         grdPulse.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         grdPulse.BorderThickness = new Thickness(1, 0, 1, 10);
-                        TxtResultPulseOximeter.Text = res[1].Split(':')[1];
-                        TxtResultPulseOximeterpulse.Text = res[2].Split(':')[1];
-                        TxtResultPulseOximeterpulsedate.Text = res[4];
+                        TxtResultPulseOximeter.Text = res[1].Split(':')[1]+" %";
+                        TxtResultPulseOximeterpulse.Text = res[2].Split(':')[1]+" bpm";
+                        //TxtResultPulseOximeterpulsedate.Text = res[4];
                         break;
                     case DeviceResponseType.GLUCORESULT:
                         ShowHideglucodata(true);
@@ -391,11 +391,11 @@ namespace VideoKallMCCST.View
                         grdGluco.BorderThickness = new Thickness(1, 0, 1, 10);
                         //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         //"GLUCMDRES>V:{0}>U:{1}>T:{2}>M:{3}>D:{4}>T:{5}";
-                        TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1];
-                        TxtTestType.Text = res[3].Split(':')[1];
-                        TxtResultglucoTestMode.Text = res[4].Split(':')[1];
-                        TxtDate.Text = res[5].Split(':')[1];
-                        TxtTime.Text = res[7];
+                         TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1];
+                        //TxtTestType.Text = res[3].Split(':')[1];
+                        //TxtResultglucoTestMode.Text = res[4].Split(':')[1];
+                        //TxtDate.Text = res[5].Split(':')[1];
+                        //TxtTime.Text = res[7];
                         break;
                     case DeviceResponseType.THERMORESTULT:
                         {
@@ -424,9 +424,9 @@ namespace VideoKallMCCST.View
                             else
                                 TxtTemprature.Text = "Error: Lo";
 
-                            TxtMode.Text = res[2].Split(':')[1];
+                            //TxtMode.Text = res[2].Split(':')[1];
                             //    "THERMORES>R:{0}>M:{1}>S:{2}>{3}";
-                            TxtDateTime.Text = res[4];
+                           // TxtDateTime.Text = res[4];
 
                         }
 
@@ -438,9 +438,10 @@ namespace VideoKallMCCST.View
 
                         //BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         // "BPRES>D:{0}>S:{1}>P:{2}>DT:{3}>T:{4}";
-                        TxtSys.Text = res[2].Split(':')[1];
-                        TxtDia.Text = res[1].Split(':')[1];
-                        TxtPulse.Text = res[3].Split(':')[1];
+                        TxtSys.Text = res[2].Split(':')[1]+"/"+ res[1].Split(':')[1]+" mmHg";                      
+                       
+                        //TxtDia.Text = res[1].Split(':')[1];
+                        //TxtPulse.Text = res[3].Split(':')[1];
                         //  TxttestTime.Text = res[4].Split(':')[1] + " " + res[5];
                         break;
 
@@ -478,9 +479,9 @@ namespace VideoKallMCCST.View
         bool BtnPulseoximeterToggle = false;
         private void BtnPulseoximeter_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
-            //if ((MainPage.mainPage.TestIsInProgress && !BtnPulseoximeterToggle) || (!ConnectionCheck && !BtnPulseoximeterToggle))
-            //    return;
+            isTestResultOpened();
+            if ((MainPage.mainPage.TestIsInProgress && !BtnPulseoximeterToggle) || (!ConnectionCheck && !BtnPulseoximeterToggle))
+                return;
 
             BtnPulseoximeterToggle = !BtnPulseoximeterToggle;
             //if (BtnPulseoximeterToggle)
@@ -519,10 +520,10 @@ namespace VideoKallMCCST.View
         bool _thermotoggle = false;
         private void BtnThermoMeter_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
+            isTestResultOpened();
 
-            //if ((MainPage.mainPage.TestIsInProgress && !_thermotoggle) || (!ConnectionCheck && !_thermotoggle))
-            //    return;
+            if ((MainPage.mainPage.TestIsInProgress && !_thermotoggle) || (!ConnectionCheck && !_thermotoggle))
+                return;
 
             _thermotoggle = !_thermotoggle;
             //if (_thermotoggle)
@@ -546,10 +547,10 @@ namespace VideoKallMCCST.View
         bool _resultBpToggle = false;
         private void BtnBP_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
+            isTestResultOpened();
 
-            //if ((MainPage.mainPage.TestIsInProgress && !_resultBpToggle) || (!ConnectionCheck && !_resultBpToggle))
-            //    return;
+            if ((MainPage.mainPage.TestIsInProgress && !_resultBpToggle) || (!ConnectionCheck && !_resultBpToggle))
+                return;
 
             _resultBpToggle = !_resultBpToggle;
            // if (_resultBpToggle)
@@ -577,10 +578,10 @@ namespace VideoKallMCCST.View
         bool btnWeightToggle = false;
         private void BtnWeight_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
+            isTestResultOpened();
 
-            //if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
-            //    return;
+            if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
+                return;
 
             btnWeightToggle = !btnWeightToggle;
 
@@ -607,13 +608,13 @@ namespace VideoKallMCCST.View
         bool btnHeighttoggle = false;
         private void BtnHeight_Click(object sender, RoutedEventArgs e)
         {
-            
-            //isTestResultOpened();
 
-            //if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) || (!ConnectionCheck && !btnHeighttoggle))
-            //    return;
+            isTestResultOpened();
 
-            //btnHeighttoggle = !btnHeighttoggle;
+            if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) || (!ConnectionCheck && !btnHeighttoggle))
+                return;
+
+            btnHeighttoggle = !btnHeighttoggle;
 
             //if (btnHeighttoggle)
             //    //MainPage.mainPage.StatusTxt.Text = "";
@@ -628,24 +629,27 @@ namespace VideoKallMCCST.View
             //CtrlHeightoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             //ResulHeightPopup.IsOpen = btnHeighttoggle;
 
-                MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
+            MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
             if (btnHeighttoggle)
             { 
                 TxtResultHeight.BorderBrush = GetColorFromHexa("#FFBF00");
-            TxtResultHeight.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultHeight.BorderThickness = new Thickness(1, 0, 1, 10);
             }// btnHeighttoggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
+            CtrlHeightoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
+            CtrlHeightoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
+            ResulHeightPopup.IsOpen = btnHeighttoggle;
 
         }
 
         bool _otoscopeToggle = false;
         private async void BtnOtoscope_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
+            isTestResultOpened();
 
-            //if ((MainPage.mainPage.TestIsInProgress && !_otoscopeToggle) || (!ConnectionCheck && !_otoscopeToggle))
-            //    return;
+            if ((MainPage.mainPage.TestIsInProgress && !_otoscopeToggle) || (!ConnectionCheck && !_otoscopeToggle))
+                return;
             try
             {
                 if (MainPage.mainPage.rootImageFolder == null)
@@ -683,9 +687,9 @@ namespace VideoKallMCCST.View
         bool _dermascopeToggle = false;
         private async void BtnDermoscope_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
-            //if ((MainPage.mainPage.TestIsInProgress && !_dermascopeToggle) || (!ConnectionCheck && !_dermascopeToggle))
-            //    return;
+            isTestResultOpened();
+            if ((MainPage.mainPage.TestIsInProgress && !_dermascopeToggle) || (!ConnectionCheck && !_dermascopeToggle))
+                return;
 
             try
             {
@@ -796,12 +800,12 @@ namespace VideoKallMCCST.View
         bool _glucoToggle = false;
         private void BtnGlucometer_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
-            //if (!ConnectionCheck && !_glucoToggle)
-            //    return;
+            isTestResultOpened();
+            if (!ConnectionCheck && !_glucoToggle)
+                return;
 
-            //if (MainPage.mainPage.TestIsInProgress && !_glucoToggle)
-            //    return;
+            if (MainPage.mainPage.TestIsInProgress && !_glucoToggle)
+                return;
 
             _glucoToggle = !_glucoToggle;
 
@@ -821,7 +825,7 @@ namespace VideoKallMCCST.View
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlglucoResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
+            CtrlglucoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
             CtrlglucoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             Resultglucopopup.IsOpen = _glucoToggle;
         }
@@ -829,9 +833,9 @@ namespace VideoKallMCCST.View
         bool _spirometerToggle = false;
         private void BtnSpirometer_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
-            //if ((MainPage.mainPage.TestIsInProgress && !_spirometerToggle) || (!ConnectionCheck && !_spirometerToggle))
-            //    return;
+            isTestResultOpened();
+            if ((MainPage.mainPage.TestIsInProgress && !_spirometerToggle) || (!ConnectionCheck && !_spirometerToggle))
+                return;
 
             _spirometerToggle = !_spirometerToggle;
             //if (_spirometerToggle)
@@ -849,7 +853,7 @@ namespace VideoKallMCCST.View
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlspiroResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
+            CtrlspiroResult.Height = ht * 3;//gridInstrumentPanel.ActualHeight;
             CtrlspiroResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
             Resultspiropopup.IsOpen = _spirometerToggle;
         }
@@ -872,13 +876,13 @@ namespace VideoKallMCCST.View
 
         private void BtnSthethoscope_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
-            //if (MainPage.mainPage.isStethoscopeStreaming || (!ConnectionCheck && !_stethoscopeChest))
-            //    return;
+            isTestResultOpened();
+            if (MainPage.mainPage.isStethoscopeStreaming || (!ConnectionCheck && !_stethoscopeChest))
+                return;
 
 
-            //if (MainPage.mainPage.TestIsInProgress && !_stethoscopeChest)
-            //    return;
+            if (MainPage.mainPage.TestIsInProgress && !_stethoscopeChest)
+                return;
 
             _stethoscopeChest = !_stethoscopeChest;
             MainPage.mainPage.IsStethescopeChest = _stethoscopeChest;
@@ -920,13 +924,13 @@ namespace VideoKallMCCST.View
         bool _stethoscopelungs = false;
         private void BtnSthethoscopeLungs_Click(object sender, RoutedEventArgs e)
         {
-            //isTestResultOpened();
+            isTestResultOpened();
 
-            //if ((MainPage.mainPage.TestIsInProgress && !_stethoscopelungs) ||
-            //    (!ConnectionCheck && !_stethoscopelungs) ||
-            //     MainPage.mainPage.isStethoscopeStreaming
-            //    )
-            //    return;
+            if ((MainPage.mainPage.TestIsInProgress && !_stethoscopelungs) ||
+                (!ConnectionCheck && !_stethoscopelungs) ||
+                 MainPage.mainPage.isStethoscopeStreaming
+                )
+                return;
 
             _stethoscopelungs = !_stethoscopelungs;
             MainPage.mainPage.IsStethescopeChest = false;
