@@ -39,7 +39,7 @@ namespace VideoKallMCCST.View
         bool? roleIsActive = null;
         int isTerminator = 0;
         bool activated = false;
-        bool isMuted = false;   
+        bool isMuted = false;
         IncomingConnectionEventArgs incommingCall = null;
         public VideoCallViewModel _videoCallVM = null;
         public VideoCallPage()
@@ -47,18 +47,19 @@ namespace VideoKallMCCST.View
             this.InitializeComponent();
             rootPage.EnsureMediaExtensionManager();
             DefaultVisibilities();
-            _videoCallVM = MainPage.VideoCallVM;          
-            this.DataContext =_videoCallVM;            
-        }    
+            _videoCallVM = MainPage.VideoCallVM;
+            this.DataContext = _videoCallVM;
+        }
         public void DefaultVisibilities()
         {
             RemoteVideo.Visibility = Visibility.Collapsed;
-            IncomingCallRing.Visibility = Visibility.Visible;
-            //VideoVisibility.Visibility = Visibility.Collapsed;
+            IncomingCallRing.Visibility = Visibility.Collapsed;
             Mute.Visibility = Visibility.Collapsed;
             EndConsult.Visibility = Visibility.Collapsed;
             Accept.Visibility = Visibility.Collapsed;
-            MuteUn.Visibility = Visibility.Collapsed;
+            UnMute.Visibility = Visibility.Collapsed;
+            VideoLogo.Visibility = Visibility.Visible;
+            //VideoVisibility.Visibility = Visibility.Collapsed;
             //Reject.Visibility = Visibility.Collapsed;
 
         }
@@ -125,26 +126,25 @@ namespace VideoKallMCCST.View
         async void RemoteVideo_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
             if (Interlocked.CompareExchange(ref isTerminator, 1, 0) == 0)
-            {
-                await EndCallAsync();
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
+            {               
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (async () =>
                 {
-
+                    await EndCallAsync();
                 }));
-
             }
         }
 
         async void Device_IncomingConnectionArrived(object sender, IncomingConnectionEventArgs e)
         {
             incommingCall = e;
-
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
             {
+                VideoLogo.Visibility = Visibility.Collapsed;
+                IncomingCallRing.Visibility = Visibility.Visible;
                 IncomingCallRing.Play();
-                // Reject.Visibility = Visibility.Visible;
                 Accept.Visibility = Visibility.Visible;
-                Incall.Visibility = Visibility.Visible;
+                //Incall.Visibility = Visibility.Visible;
+                // Reject.Visibility = Visibility.Visible;
             }));
 
         }
@@ -155,11 +155,10 @@ namespace VideoKallMCCST.View
 
             if (Interlocked.CompareExchange(ref isTerminator, 1, 0) == 0)
             {
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (async () =>
                 {
-                    EndCallAsync();
+                    await EndCallAsync();
                 }));
-
 
             }
         }
@@ -176,18 +175,18 @@ namespace VideoKallMCCST.View
 
         private async Task EndCallAsync()
         {
-
-            //DefaultVisibilities();
+           
+            DefaultVisibilities();
             await device.CleanUpAsync();
-
-
             RemoteVideo.Stop();
 
             // Start waiting for a new CallButton.
             await InitializeAsync();
 
-            PreviewVideo.Source = null;
-
+            PreviewVideo.Source = device.CaptureSource;
+            PreviewVideo.Visibility = Visibility.Collapsed;
+            RemoteVideo.Visibility = Visibility.Collapsed;
+            VideoLogo.Visibility = Visibility.Visible;
             TestPanelExpander.TestPanelExp.Frame.Navigate(typeof(LogoPage));
         }
 
@@ -209,7 +208,7 @@ namespace VideoKallMCCST.View
         }
         private async void Accept_Click(object sender, RoutedEventArgs e)
         {
-            await AcceptCall();   
+            await AcceptCall();
         }
         private async Task AcceptCall()
         {
@@ -219,14 +218,14 @@ namespace VideoKallMCCST.View
             RemoteVideo.Visibility = Visibility.Visible;
             PreviewVideo.Visibility = Visibility.Visible;
             //VideoVisibility.Visibility = Visibility.Visible;
-            Mute.Visibility = Visibility.Visible;
+            Mute.Visibility = Visibility.Visible;        
             EndConsult.Visibility = Visibility.Visible;
-            Incall.Visibility = Visibility.Collapsed;
+            //Incall.Visibility = Visibility.Collapsed;
             Accept.Visibility = Visibility.Collapsed;
             EndConsult.IsEnabled = true;
             Accept.Visibility = Visibility.Collapsed;
-            TxtSMCStatus.Text = string.Empty;
-            TxtSMCStatus.Text = "In Use";
+            TxtSMCStatus.Content = string.Empty;
+            TxtSMCStatus.Content = "In Use";
             if (incommingCall == null)
                 return;
             incommingCall.Accept();
@@ -310,8 +309,8 @@ namespace VideoKallMCCST.View
                 }));
 
             }
-            TxtSMCStatus.Text = string.Empty;
-            TxtSMCStatus.Text = "Not Ready";
+            TxtSMCStatus.Content = string.Empty;
+            TxtSMCStatus.Content = "Not Ready";
             DefaultVisibilities();
         }
 
@@ -322,7 +321,7 @@ namespace VideoKallMCCST.View
                 RemoteVideo.IsMuted = true;
                 isMuted = true;
                 Mute.Visibility = Visibility.Collapsed;
-                MuteUn.Visibility = Visibility.Visible;
+                UnMute.Visibility = Visibility.Visible;
             }
 
         }
@@ -334,7 +333,7 @@ namespace VideoKallMCCST.View
                 RemoteVideo.IsMuted = false;
                 isMuted = false;
                 Mute.Visibility = Visibility.Visible;
-                MuteUn.Visibility = Visibility.Collapsed;
+                UnMute.Visibility = Visibility.Collapsed;
             }
 
         }
@@ -368,14 +367,15 @@ namespace VideoKallMCCST.View
 
         public void SMCConnecteionStatus()
         {
-            string status = TxtSMCStatus.Text;
+            string status =(string) TxtSMCStatus.Content;
             if (status == "In Use")
             {
-                TxtSMCStatus.Text = "In Use";
+                TxtSMCStatus.Content = "In Use";
                 ColorChange();
             }
-            else {
-                TxtSMCStatus.Text = MainPage.mainPage.mainpagecontext.IsSMCConnected ? "Ready" : "Not Ready";
+            else
+            {
+                TxtSMCStatus.Content = MainPage.mainPage.mainpagecontext.IsSMCConnected ? "Ready" : "Not Ready";
                 ColorChange();
             }
         }
@@ -435,7 +435,7 @@ namespace VideoKallMCCST.View
             else
                 TxtSMCStatus.Background = GetColorFromHexa("#34CBA8");
 
-            string status = TxtSMCStatus.Text;
+            string status = (string)TxtSMCStatus.Content;
             if (status == "In Use")
             {
                 TxtSMCStatus.Background = GetColorFromHexa("#FFC10D");

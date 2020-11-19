@@ -53,7 +53,13 @@ namespace VideoKallMCCST.View
             if (!string.IsNullOrWhiteSpace(name))
             {
                 _patientVM.Patients = null;
-                _patientVM.Patients = new ObservableCollection<Patient>(await httpClient.PatientsAsync(name));               
+
+                var patients = await httpClient.PatientsAsync(name);
+                if (patients!=null&&patients.Count>0)
+                {
+
+                    _patientVM.Patients = new ObservableCollection<Patient>(patients);
+                }             
             }
             else
             {
