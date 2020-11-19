@@ -12,7 +12,7 @@
         <BitmapImage x:Name="ImgMainScreenLogo1" CreateOptions="IgnoreImageCache" UriSource="../Assets/VK_PlaceHolder_Logo.png"/>
         
     </Page.Resources>
-    <Grid >
+    <Grid BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>

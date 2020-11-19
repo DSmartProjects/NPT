@@ -248,7 +248,7 @@
                     <uctrl:PulseOximeterResult x:Name="CtrlPulseoximterResult"></uctrl:PulseOximeterResult>
                 </StackPanel>
             </Popup>
-	    
+
             <!--Result bp poup-->
             <Popup Name="ResultBPPopup" IsOpen="False" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="6" >
                 <Popup.ChildTransitions>
@@ -260,7 +260,7 @@
                     <uctrl:BPResultsInstructions x:Name="CtrlBPResultsInstructions"></uctrl:BPResultsInstructions>
                 </StackPanel>
             </Popup>
-           
+
 
             <!--Result Thermo meter-->
             <Popup Name="ResulThermoPopup" IsOpen="False"  >
@@ -272,7 +272,7 @@
                 <StackPanel >
                     <uctrl:Thermometerinstructions x:Name="CtrlThermoResult"></uctrl:Thermometerinstructions>
                 </StackPanel>
-            </Popup>           
+            </Popup>
 
             <!-- Result Height-->
             <Popup Name="ResulHeightPopup" IsOpen="False" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="6" >
@@ -345,7 +345,7 @@
                     <uctrl:GlucoMeterResultInstructions x:Name="CtrlglucoResult"></uctrl:GlucoMeterResultInstructions>
                 </StackPanel>
             </Popup>
-          
+
             <!--Result Spiro-->
             <Popup Name="Resultspiropopup" IsOpen="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="6" >
                 <Popup.ChildTransitions>
@@ -372,7 +372,7 @@
             <!--<TextBlock x:Name="TxtResultstethoscopechest" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBlock>-->
 
             <!---->
-         <!--ResultResulStethoscopelungPopup-->
+            <!--ResultResulStethoscopelungPopup-->
             <Popup Name="ResulStethoscopelungPopup" IsOpen="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="6" >
                 <Popup.ChildTransitions>
                     <TransitionCollection>
@@ -384,7 +384,7 @@
                 </StackPanel>
             </Popup>
             <!---->
-        <!--Test Results History-->
+            <!--Test Results History-->
             <Frame x:FieldModifier="public"  Background="LightGray" Grid.Row="6" Grid.RowSpan="8" Grid.Column="0" Grid.ColumnSpan="10" x:Name="TestResultHistoryFrame"></Frame>
 
         </Grid>
