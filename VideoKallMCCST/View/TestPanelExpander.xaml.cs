@@ -239,18 +239,51 @@ namespace VideoKallMCCST.View
                 ShowHidebpdata(false);
                 ShowTemppdata(false);
 
-                BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnOtoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnDermoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnSthethoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                //BtnEKG.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnWeight.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnHeight.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                // BtnEKG.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
-                BtnSpirometer.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                ////BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnOtoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnDermoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnSthethoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                ////BtnEKG.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnWeight.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnHeight.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //// BtnEKG.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                //BtnSpirometer.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+
+                grdGluco.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                grdGluco.BorderThickness = new Thickness(1, 0, 1, 10);
+
+
+                TxtResultstethoscopechest.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+
+
+                gridThermo.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                gridThermo.BorderThickness = new Thickness(1, 0, 1, 10);
+
+                grBp.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                grBp.BorderThickness = new Thickness(1, 0, 1, 10);
+
+                TxtResultWeight.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                TxtResultWeight.BorderThickness = new Thickness(1, 0, 1, 10);
+
+                TxtResultHeight.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                TxtResultHeight.BorderThickness = new Thickness(1, 0, 1, 10);
+
+                TxtResultOtoscope.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                TxtResultOtoscope.BorderThickness = new Thickness(1, 0, 1, 10);
+
+                TxtResultDermascope.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                TxtResultDermascope.BorderThickness = new Thickness(1, 0, 1, 10);
+
+                TxtResultspiro.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                TxtResultspiro.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultstethoscopechest.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+
+                BtnSthethoscopeLungs.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
             }
             );
 
@@ -264,16 +297,34 @@ namespace VideoKallMCCST.View
                 if (issuccess)
                 {
                     if (_stethoscopeChest)
-                        BtnSthethoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                    {
+                        //BtnSthethoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        TxtResultstethoscopechest.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+                    }
+                       
                     else if (_stethoscopelungs)
-                        BtnSthethoscopeLungs.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                    {
+                        //BtnSthethoscopeLungs.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        TxtResultstethoscopechest.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+                    }
+                        
                 }
                 else if (!issuccess)
                 {
                     if (_stethoscopeChest)
-                        BtnSthethoscope.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                    {
+                        TxtResultstethoscopechest.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red); 
+                        TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+                    }
+                        //BtnSthethoscope.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     else if (_stethoscopelungs)
-                        BtnSthethoscopeLungs.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                    {
+                        TxtResultstethoscopechest.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                        TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+                    }
+                        //BtnSthethoscopeLungs.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                 }
             }
             );
@@ -285,18 +336,29 @@ namespace VideoKallMCCST.View
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 if (!success && devicetypes == 0)
-                    BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                {
+                    gridThermo.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                    gridThermo.BorderThickness = new Thickness(1, 0, 1, 10);
+                    //BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                }
+                    
                 else if (!success && devicetypes == 1)
                 {
-                    BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                    //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                    grdPulse.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                    grdPulse.BorderThickness = new Thickness(1, 0, 1, 10);
                 }
                 else if (!success && devicetypes == 2)
                 {
-                    BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                    // BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                    grBp.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                    grBp.BorderThickness = new Thickness(1, 0, 1, 10);
                 }
                 else if (!success && devicetypes == 3)
                 {
-                    BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                    //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                    grdGluco.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                    grdGluco.BorderThickness = new Thickness(1, 0, 1, 10);
                 }
 
             });
@@ -316,14 +378,18 @@ namespace VideoKallMCCST.View
                     case DeviceResponseType.PULSEOXIMETERRESULT:
 
                         ShowHidePulseoximeterdata(true);
-                        BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        grdPulse.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        grdPulse.BorderThickness = new Thickness(1, 0, 1, 10);
                         TxtResultPulseOximeter.Text = res[1].Split(':')[1];
                         TxtResultPulseOximeterpulse.Text = res[2].Split(':')[1];
                         TxtResultPulseOximeterpulsedate.Text = res[4];
                         break;
                     case DeviceResponseType.GLUCORESULT:
                         ShowHideglucodata(true);
-                        BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        grdGluco.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        grdGluco.BorderThickness = new Thickness(1, 0, 1, 10);
+                        //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         //"GLUCMDRES>V:{0}>U:{1}>T:{2}>M:{3}>D:{4}>T:{5}";
                         TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1];
                         TxtTestType.Text = res[3].Split(':')[1];
@@ -335,7 +401,9 @@ namespace VideoKallMCCST.View
                         {
                             if (res[2].Split(':')[1].ToLower().Contains("object"))
                                 return;
-                            BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                            //BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                            gridThermo.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                            gridThermo.BorderThickness = new Thickness(1, 0, 1, 10);
                             tempresultreceived = true;
                             //"THERMORES>R:{0}>M:{1}>S:{2}>DT:{3}"
                             string tempformat = "{0}°{1}";
@@ -365,7 +433,10 @@ namespace VideoKallMCCST.View
                         break;
                     case DeviceResponseType.BPRES:
                         ShowHidebpdata(true);
-                        BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        grBp.BorderBrush = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        grBp.BorderThickness = new Thickness(1, 0, 1, 10);
+
+                        //BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         // "BPRES>D:{0}>S:{1}>P:{2}>DT:{3}>T:{4}";
                         TxtSys.Text = res[2].Split(':')[1];
                         TxtDia.Text = res[1].Split(':')[1];
@@ -407,22 +478,24 @@ namespace VideoKallMCCST.View
         bool BtnPulseoximeterToggle = false;
         private void BtnPulseoximeter_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
-            if ((MainPage.mainPage.TestIsInProgress && !BtnPulseoximeterToggle) || (!ConnectionCheck && !BtnPulseoximeterToggle))
-                return;
+            //isTestResultOpened();
+            //if ((MainPage.mainPage.TestIsInProgress && !BtnPulseoximeterToggle) || (!ConnectionCheck && !BtnPulseoximeterToggle))
+            //    return;
 
             BtnPulseoximeterToggle = !BtnPulseoximeterToggle;
+            //if (BtnPulseoximeterToggle)
+            //MainPage.mainPage.StatusTxt.Text = "";
+            MainPage.mainPage.TestIsInProgress = BtnPulseoximeterToggle;
             if (BtnPulseoximeterToggle)
-                //MainPage.mainPage.StatusTxt.Text = "";
-                MainPage.mainPage.TestIsInProgress = BtnPulseoximeterToggle;
-            if (BtnPulseoximeterToggle)
+            {
                 //BtnPulseoximeter.Background = GetColorFromHexa("#FFBF00"); //BtnPulseoximeterToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
-            BtnPulseoximeter.BorderBrush = GetColorFromHexa("#FFBF00");
-            BtnPulseoximeter.BorderThickness = new Thickness(0, 0, 0, 10);
+                grdPulse.BorderBrush = GetColorFromHexa("#FFBF00");
+                grdPulse.BorderThickness = new Thickness(1, 0, 1, 10);
+            }
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlPulseoximterResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
+            CtrlPulseoximterResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
             CtrlPulseoximterResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResultPulseOximeterPopup.IsOpen = BtnPulseoximeterToggle;
             if (BtnPulseoximeterToggle)
@@ -446,22 +519,26 @@ namespace VideoKallMCCST.View
         bool _thermotoggle = false;
         private void BtnThermoMeter_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_thermotoggle) || (!ConnectionCheck && !_thermotoggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !_thermotoggle) || (!ConnectionCheck && !_thermotoggle))
+            //    return;
 
             _thermotoggle = !_thermotoggle;
-            if (_thermotoggle)
+            //if (_thermotoggle)
                 //MainPage.mainPage.StatusTxt.Text = "";
 
                 MainPage.mainPage.TestIsInProgress = _thermotoggle;
             if (_thermotoggle)
-                BtnThermoMeter.Background = GetColorFromHexa("#FFBF00"); // : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            { 
+                //BtnThermoMeter.Background = GetColorFromHexa("#FFBF00"); // : new SolidColorBrush(Windows.UI.Colors.LightGray);
+                gridThermo.BorderBrush= GetColorFromHexa("#FFBF00");
+               gridThermo.BorderThickness = new Thickness(1, 0, 1, 10);
+            }
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlThermoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
+            CtrlThermoResult.Height = ht * 1.5;//gridInstrumentPanel.ActualHeight;
             CtrlThermoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResulThermoPopup.IsOpen = _thermotoggle;
         }
@@ -469,18 +546,22 @@ namespace VideoKallMCCST.View
         bool _resultBpToggle = false;
         private void BtnBP_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_resultBpToggle) || (!ConnectionCheck && !_resultBpToggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !_resultBpToggle) || (!ConnectionCheck && !_resultBpToggle))
+            //    return;
 
             _resultBpToggle = !_resultBpToggle;
-            if (_resultBpToggle)
+           // if (_resultBpToggle)
                 //MainPage.mainPage.StatusTxt.Text = "";
 
                 MainPage.mainPage.TestIsInProgress = _resultBpToggle;
             if (_resultBpToggle)
-                BtnBP.Background = GetColorFromHexa("#FFBF00");//_resultBpToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            { 
+                //BtnBP.Background = GetColorFromHexa("#FFBF00");//_resultBpToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+                grBp.BorderBrush = GetColorFromHexa("#FFBF00");
+                grBp.BorderThickness = new Thickness(1, 0, 1, 10);
+            }
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
@@ -496,19 +577,25 @@ namespace VideoKallMCCST.View
         bool btnWeightToggle = false;
         private void BtnWeight_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
+            //    return;
 
             btnWeightToggle = !btnWeightToggle;
 
-            if (btnWeightToggle)
+            //if (btnWeightToggle)
                 //MainPage.mainPage.StatusTxt.Text = "";
 
                 MainPage.mainPage.TestIsInProgress = btnWeightToggle;
             if (btnWeightToggle)
-                BtnWeight.Background = GetColorFromHexa("#FFBF00");// btnWeightToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            {
+                TxtResultWeight.BorderBrush = GetColorFromHexa("#FFBF00");
+                TxtResultWeight.BorderThickness = new Thickness(1, 0, 1, 10);
+            }
+                //BtnWeight.Background = GetColorFromHexa("#FFBF00");// btnWeightToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+               
+            grBp.BorderThickness = new Thickness(1, 0, 1, 10);
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
@@ -543,7 +630,10 @@ namespace VideoKallMCCST.View
 
                 MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
             if (btnHeighttoggle)
-                BtnHeight.Background = GetColorFromHexa("#FFBF00");// btnHeighttoggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            { 
+                TxtResultHeight.BorderBrush = GetColorFromHexa("#FFBF00");
+            TxtResultHeight.BorderThickness = new Thickness(1, 0, 1, 10);
+            }// btnHeighttoggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
@@ -552,10 +642,10 @@ namespace VideoKallMCCST.View
         bool _otoscopeToggle = false;
         private async void BtnOtoscope_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_otoscopeToggle) || (!ConnectionCheck && !_otoscopeToggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !_otoscopeToggle) || (!ConnectionCheck && !_otoscopeToggle))
+            //    return;
             try
             {
                 if (MainPage.mainPage.rootImageFolder == null)
@@ -563,7 +653,7 @@ namespace VideoKallMCCST.View
 
 
                 _otoscopeToggle = !_otoscopeToggle;
-                if (_otoscopeToggle)
+               // if (_otoscopeToggle)
                     //MainPage.mainPage.StatusTxt.Text = "";
                     MainPage.mainPage.TestIsInProgress = _otoscopeToggle;
                 if (_otoscopeToggle)
@@ -574,12 +664,14 @@ namespace VideoKallMCCST.View
                 // else
                 //   MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
                 if (_otoscopeToggle)
-                    BtnOtoscope.Background = GetColorFromHexa("#FFBF00"); // _otoscopeToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+                    TxtResultOtoscope.BorderBrush = GetColorFromHexa("#FFBF00");
+                TxtResultOtoscope.BorderThickness = new Thickness(1, 0, 1, 10);
+                /* BtnOtoscope.Background = GetColorFromHexa("#FFBF00");*/ // _otoscopeToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
                 double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-                CtrlOtoscopeResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-                CtrlOtoscopeResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
+                CtrlOtoscopeResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
+                CtrlOtoscopeResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
                 ResulOtoscopePopup.IsOpen = _otoscopeToggle;
             }
             catch (Exception ex)
@@ -591,9 +683,9 @@ namespace VideoKallMCCST.View
         bool _dermascopeToggle = false;
         private async void BtnDermoscope_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
-            if ((MainPage.mainPage.TestIsInProgress && !_dermascopeToggle) || (!ConnectionCheck && !_dermascopeToggle))
-                return;
+            //isTestResultOpened();
+            //if ((MainPage.mainPage.TestIsInProgress && !_dermascopeToggle) || (!ConnectionCheck && !_dermascopeToggle))
+            //    return;
 
             try
             {
@@ -602,23 +694,27 @@ namespace VideoKallMCCST.View
 
                 _dermascopeToggle = !_dermascopeToggle;
                 MainPage.mainPage.TestIsInProgress = _dermascopeToggle;
+                // if (_dermascopeToggle)
+                //MainPage.mainPage.StatusTxt.Text = "";
                 if (_dermascopeToggle)
-                    //MainPage.mainPage.StatusTxt.Text = "";
-                    if (_dermascopeToggle)
-                    {
-                        MainPage.mainPage.DigitalMicroscope?.Invoke(true);
-                        MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STARTDERMO);
+                {
+                    MainPage.mainPage.DigitalMicroscope?.Invoke(true);
+                    MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STARTDERMO);
 
-                    }
+                }
                 //   else
                 // MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
                 if (_dermascopeToggle)
-                    BtnDermoscope.Background = GetColorFromHexa("#FFBF00"); //_dermascopeToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+                {
+                    TxtResultDermascope.BorderBrush = GetColorFromHexa("#FFBF00");
+                    TxtResultDermascope.BorderThickness = new Thickness(1, 0, 1, 10);
+                }
+                //BtnDermoscope.Background = GetColorFromHexa("#FFBF00"); //_dermascopeToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
                 double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-                CtrlDermascopeResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-                CtrlDermascopeResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
+                CtrlDermascopeResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
+                CtrlDermascopeResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
                 ResulDermascopePopup.IsOpen = _dermascopeToggle;
 
             }
@@ -700,12 +796,12 @@ namespace VideoKallMCCST.View
         bool _glucoToggle = false;
         private void BtnGlucometer_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
-            if (!ConnectionCheck && !_glucoToggle)
-                return;
+            //isTestResultOpened();
+            //if (!ConnectionCheck && !_glucoToggle)
+            //    return;
 
-            if (MainPage.mainPage.TestIsInProgress && !_glucoToggle)
-                return;
+            //if (MainPage.mainPage.TestIsInProgress && !_glucoToggle)
+            //    return;
 
             _glucoToggle = !_glucoToggle;
 
@@ -717,7 +813,11 @@ namespace VideoKallMCCST.View
 
             MainPage.mainPage.TestIsInProgress = _glucoToggle;
             if (_glucoToggle)
-                BtnGlucometer.Background = GetColorFromHexa("#FFBF00");// _glucoToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            {
+                grdGluco.BorderBrush = GetColorFromHexa("#FFBF00");
+                grdGluco.BorderThickness = new Thickness(1, 0, 1, 10);
+            }
+           // BtnGlucometer.Background = GetColorFromHexa("#FFBF00");// _glucoToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
@@ -729,25 +829,27 @@ namespace VideoKallMCCST.View
         bool _spirometerToggle = false;
         private void BtnSpirometer_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
-            if ((MainPage.mainPage.TestIsInProgress && !_spirometerToggle) || (!ConnectionCheck && !_spirometerToggle))
-                return;
+            //isTestResultOpened();
+            //if ((MainPage.mainPage.TestIsInProgress && !_spirometerToggle) || (!ConnectionCheck && !_spirometerToggle))
+            //    return;
 
             _spirometerToggle = !_spirometerToggle;
-            if (_spirometerToggle)
+            //if (_spirometerToggle)
                 //MainPage.mainPage.StatusTxt.Text = "";
 
                 MainPage.mainPage.TestIsInProgress = _spirometerToggle;
             if (_spirometerToggle)
             {
                 MainPage.mainPage.ResetSpirometr?.Invoke();
-                BtnSpirometer.Background = GetColorFromHexa("#FFBF00"); //_spirometerToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+                TxtResultspiro.BorderBrush = GetColorFromHexa("#FFBF00");
+                TxtResultspiro.BorderThickness = new Thickness(1, 0, 1, 10);
+                /*BtnSpirometer.Background = GetColorFromHexa("#FFBF00");*/ //_spirometerToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             }
 
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
-            CtrlspiroResult.Height = ht * 6;//gridInstrumentPanel.ActualHeight;
+            CtrlspiroResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
             CtrlspiroResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
             Resultspiropopup.IsOpen = _spirometerToggle;
         }
@@ -770,22 +872,26 @@ namespace VideoKallMCCST.View
 
         private void BtnSthethoscope_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
-            if (MainPage.mainPage.isStethoscopeStreaming || (!ConnectionCheck && !_stethoscopeChest))
-                return;
+            //isTestResultOpened();
+            //if (MainPage.mainPage.isStethoscopeStreaming || (!ConnectionCheck && !_stethoscopeChest))
+            //    return;
 
 
-            if (MainPage.mainPage.TestIsInProgress && !_stethoscopeChest)
-                return;
+            //if (MainPage.mainPage.TestIsInProgress && !_stethoscopeChest)
+            //    return;
 
             _stethoscopeChest = !_stethoscopeChest;
             MainPage.mainPage.IsStethescopeChest = _stethoscopeChest;
 
-            if (_stethoscopeChest)
+            //if (_stethoscopeChest)
                 // MainPage.mainPage.StatusTxt.Text = "";
                 MainPage.mainPage.TestIsInProgress = _stethoscopeChest;
             if (_stethoscopeChest)
-                BtnSthethoscope.Background = GetColorFromHexa("#FFBF00"); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            {
+                TxtResultstethoscopechest.BorderBrush = GetColorFromHexa("#FFBF00");
+                TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+            }
+                //BtnSthethoscope.Background = GetColorFromHexa("#FFBF00"); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
@@ -814,32 +920,32 @@ namespace VideoKallMCCST.View
         bool _stethoscopelungs = false;
         private void BtnSthethoscopeLungs_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_stethoscopelungs) ||
-                (!ConnectionCheck && !_stethoscopelungs) ||
-                 MainPage.mainPage.isStethoscopeStreaming
-                )
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !_stethoscopelungs) ||
+            //    (!ConnectionCheck && !_stethoscopelungs) ||
+            //     MainPage.mainPage.isStethoscopeStreaming
+            //    )
+            //    return;
 
             _stethoscopelungs = !_stethoscopelungs;
             MainPage.mainPage.IsStethescopeChest = false;
             MainPage.mainPage.ResetSTLungs?.Invoke();
 
-            if (_stethoscopelungs)
+            //if (_stethoscopelungs)
                 // MainPage.mainPage.StatusTxt.Text = "";
                 MainPage.mainPage.TestIsInProgress = _stethoscopelungs;
             if (_stethoscopelungs)
             {
                 MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTLUNGS));
-                BtnSthethoscopeLungs.Background = GetColorFromHexa("#FFBF00"); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+               // BtnSthethoscopeLungs.Background = GetColorFromHexa("#FFBF00"); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             }
 
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
             // StethoscopeLungs.StlHeight = ht;
-            StethoscopeLungsResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-            StethoscopeLungsResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
+            StethoscopeLungsResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
+            StethoscopeLungsResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResulStethoscopelungPopup.IsOpen = _stethoscopelungs;
             //  StethoscopeLungs
         }
