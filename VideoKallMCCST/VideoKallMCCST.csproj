@@ -265,6 +265,7 @@
     <Content Include="Assets\stethoscoplungs.png" />
     <Content Include="Assets\Thermometer.png" />
     <Content Include="Assets\unmute.png" />
+    <Content Include="Assets\Upstraight_trans.png" />
     <Content Include="Assets\Upstraight.png" />
     <Content Include="Assets\video-logo.png" />
     <Content Include="Assets\VideoCall_Ringtone.mp4" />

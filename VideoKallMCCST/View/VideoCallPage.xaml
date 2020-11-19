@@ -85,7 +85,7 @@
                 </StackPanel>
                 <Line Grid.Row="3" StrokeThickness="0.2" Stroke="#434343" Margin="0,0,5,0" X1="0" X2="385" Y1="13" Y2="13" />
                 <StackPanel Grid.Row="4" x:Name="spNotes" VerticalAlignment="Top"  Orientation="Vertical" Margin="0,0,0,0">
-                    <TextBlock Text="Clinical Notes :" VerticalAlignment="Top" Margin="0,0,0,0" FontWeight="SemiBold" Foreground="#194F82"/>
+                    <TextBlock Text="Clinical Notes :" VerticalAlignment="Top" Margin="0,0,0,0" FontWeight="SemiBold" Foreground="#194F82" FontSize="12"/>
                     <TextBlock  TextWrapping="WrapWholeWords"  Height="200"  Width="320"  Foreground="Black"/>
                 </StackPanel>
             </Grid>
@@ -94,7 +94,7 @@
                     <Line  StrokeThickness="0.2" Stroke="#434343" Margin="0,0,0,0" X1="0" X2="385" Y1="13" Y2="13" />
                     <StackPanel  x:Name="spChairStatus" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,4,0,0">
                         <TextBlock  Text="Chair ID :" VerticalAlignment="Center" FontFamily="Open Sans" Margin="0,0,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
-                        <TextBlock Text="123456" Width="50" VerticalAlignment="Center" FontFamily="Open Sans" Margin="5,0,0,0"  FontSize="12" />
+                        <TextBlock Text="123456" Width="50" VerticalAlignment="Center" FontFamily="Open Sans" Margin="5,0,0,0"  FontSize="12" FontWeight="Normal" Foreground="#194F82" />
                         <TextBlock Text="Chair Status :" VerticalAlignment="Center" FontFamily="Open Sans" Margin="100,0,0,0" FontWeight="SemiBold" FontSize="12" Foreground="#194F82"/>
                         <!--<TextBlock  x:Name="TxtSMCStatus" Height="23"  FontFamily="Open Sans" Margin="10,280,0,0" FontWeight="SemiBold" FontSize="12" />-->
                         <!--<TextBox x:Name="TxtSMCStatus" Width="80" Height="15" BorderThickness="0,0,0,0" FontFamily="Open Sans" Foreground="White" CornerRadius="5,5,5,5"  FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>-->
