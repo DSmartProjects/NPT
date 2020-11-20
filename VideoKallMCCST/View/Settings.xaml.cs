@@ -32,7 +32,7 @@ namespace VideoKallMCCST.View
         public Settings()
         {
             this.InitializeComponent();
-            //MainPage.mainPage.SaveSTConfig += SaveConfig;
+            MainPage.mainPage.SaveSTConfig += SaveConfig;
             TxtimageFolder.Text = "\\\\"+ MainPage.mainPage.SMCCommChannel.IPAddress+"\\" + strRootFolder;
             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
             
