@@ -24,7 +24,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Test procedure for Stethoscope Chest" FontSize="20" HorizontalTextAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"></TextBlock>
+        <TextBlock Text="Test procedure for Chest Stethoscope" FontSize="20" HorizontalTextAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"></TextBlock>
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="Blue" BorderThickness="3"></Border>
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Status: " HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Deployed" VerticalAlignment="Center"></TextBlock>
