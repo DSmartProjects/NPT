@@ -7,103 +7,81 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loading="Page_Loading" Loaded="Page_Loaded">
-    <Page.Resources>
-        <BitmapImage x:Key="StandingHeight" CreateOptions="IgnoreImageCache"   UriSource="Assets/StandingHeight.png"/>
-        <BitmapImage x:Name="Menuicon1" CreateOptions="IgnoreImageCache"   UriSource="Assets/Application.ico"/>
-        <BitmapImage x:Name="logo" CreateOptions="IgnoreImageCache"   UriSource="Assets/logo.png"/>
-    </Page.Resources>
-    <Grid x:Name="rootgrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.Column="1">
-            
-        </Grid>
-        <!--Border-->
-                <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Gray"></Border>
-        
-        <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="Gray"></Border>
-        <Border Grid.Column="0" Grid.Row="2"   BorderThickness="1" BorderBrush="Gray"></Border>
-        <!--Page Container-->
-        <Frame x:FieldModifier="public" Background="White" Grid.Row="2" Grid.Column="1" x:Name="pagePlaceHolder"></Frame>
-        <Frame x:FieldModifier="public"  Background="WhiteSmoke" Grid.Row="2" Grid.RowSpan="3" Grid.Column="2" x:Name="RightPanelHolder"></Frame>
-
-        <!--status bar-->
-        <Border Background="WhiteSmoke" Grid.Row="3" Grid.Column="0" BorderBrush="Gray" Grid.ColumnSpan="5" BorderThickness="1"></Border>
-        <TextBlock x:FieldModifier="public" x:Name="StatusTxt" Grid.ColumnSpan="5" Grid.Row="3">Status</TextBlock>
-
-        <!---->
-        <Grid Grid.Row="0"  Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Border Grid.Column="0" Grid.ColumnSpan="1" BorderBrush="Gray" Margin="1,1,0,1" Background="WhiteSmoke" BorderThickness="2"></Border>
-            <Border Name="BorderStatus" Grid.Column="1" Grid.ColumnSpan="1" BorderBrush="Gray" Margin="1,1,0,1" Background="WhiteSmoke" BorderThickness="2"></Border>
-            <Border Grid.Column="2" Grid.ColumnSpan="1" BorderBrush="Gray" Margin="1,1,0,1" Background="WhiteSmoke" BorderThickness="2"></Border>
-            <Border Grid.Column="3" Grid.ColumnSpan="1" BorderBrush="Gray" Margin="1,1,0,1" Background="WhiteSmoke" BorderThickness="2"></Border>
-            <Border  Grid.Column="4" Grid.ColumnSpan="1" BorderBrush="Gray" Margin="1,1,0,1" Background="WhiteSmoke" BorderThickness="2"></Border>
-
-            <TextBlock Text="Chair Status " Grid.Column="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBlock  Name="TxtSMCStatus" Grid.Column="1" Grid.ColumnSpan="1" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="Chair ID" Grid.Column="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text="123" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"></TextBlock>
-        </Grid>
-
-        <!--
-        <CommandBar     Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="LightGray" IsOpen="False" DefaultLabelPosition="Collapsed">
-             <AppBarSeparator/>
-            <AppBarButton    Label="Patient List" HorizontalAlignment="Center"  ></AppBarButton>
-            <AppBarSeparator/>
-            <AppBarButton Label="Prescription"  ></AppBarButton>
-            <AppBarSeparator/>
-            <AppBarButton Label="Report"  ></AppBarButton>
-            <AppBarSeparator/>
-            <AppBarButton Label="Instrument Panel"  ></AppBarButton>
-            <AppBarSeparator/>
-            <AppBarButton Label="Patient Info"  ></AppBarButton>
-
-            <AppBarSeparator/>
-            <AppBarButton Icon="Find" Label="Search"></AppBarButton>
-
-            <AppBarSeparator/>
-            <AppBarButton Icon="Contact" Label="Nurse"></AppBarButton>
-            <AppBarSeparator/>
-            <AppBarButton Icon="Setting" Label="Settings" Command="{Binding SettingsCommand}"></AppBarButton>
-            <AppBarSeparator/>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton   Label="Accounts" Command="{Binding AccountCommand}"  />
-                <AppBarSeparator/>
-                <AppBarButton   Label="Log off" Command="{Binding LogOffCommand}"/>
-            </CommandBar.SecondaryCommands>
-            <CommandBar.Content>
-                <TextBlock Text=" " Margin="12,14"/>
- 
-            </CommandBar.Content>
-        </CommandBar>
--->
-        <Grid  Grid.Column="0" Grid.RowSpan="2">
-            <Grid.RowDefinitions >
-                <RowDefinition Height="*"></RowDefinition>
-               
+    <ScrollViewer ZoomMode="Enabled" 
+              HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
-            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"  Source="{StaticResource logo}" Stretch="Fill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ></Image>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-        </Grid>
-        <Grid  x:FieldModifier="public" x:Name="gridleftpanel" Grid.Row="2" Grid.Column="0" Grid.RowSpan="1">
-            <Button Content="Settings" Grid.Column="0"  Command="{Binding SettingsCommand}" HorizontalAlignment="Left"   VerticalAlignment="Bottom"/>
+            <Grid x:Name="grImage" Grid.Row="0" Grid.Column="0" >
+                <Image x:Name="logo" Source="..\Assets/vk-icon.png"/>
+            </Grid>
 
+            <Grid x:Name="grMenu" Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Main Stack Panel -->
+                <StackPanel x:Name="spButtons" Orientation="Vertical" Margin="10" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <!-- First Group Stack Panel -->
+                    <StackPanel BorderBrush="#CFE8FF" Width="Auto" Height="Auto" BorderThickness="1" CornerRadius="10" Orientation="Vertical">
+                        <StackPanel x:Name="spConsultation" Orientation="Vertical" Margin="0,5,0,5">
+                            <Button CornerRadius="2" Height="40" Width="Auto" x:Name="btnConsultation" Background="Transparent" ToolTipService.ToolTip="Consultation" >
+                                <Image x:Name="logo1" Source="..\Assets/Upstraight_trans.png"/>
+                            </Button>
+                        </StackPanel>
+
+                        <!--<Line StrokeThickness="0.2" Stroke="#434343" X1="0" X2="0" Y1="0" Y2="0" />-->
+
+                        <StackPanel x:Name="spMedical" Orientation="Vertical" Margin="0,5,0,5">
+                            <Button CornerRadius="2" Height="40" x:Name="btnMedical" Background="Transparent" ToolTipService.ToolTip="Manage Patients">
+                                <Image x:Name="Medical" Source="..\Assets/medical.png"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Second Group Stack Panel -->
+                    <StackPanel Width="Auto" Height="Auto" BorderBrush="#CFE8FF" BorderThickness="1" CornerRadius="10" Orientation="Vertical" Margin="0 ,10, 0, 0">
+                        <StackPanel x:Name="spSettings" Orientation="Vertical" Margin="0,5,0,5" >
+                            <Button CornerRadius="2" Height="40" x:Name="btnSettings" Background="Transparent" ToolTipService.ToolTip="Settings" Command="{Binding SettingsCommand}">
+                                <Image x:Name="Settings" Source="..\Assets/settings.png"/>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel x:Name="spInformation" Orientation="Vertical" Margin="0,5,0,5">
+                            <Button CornerRadius="2" Height="40" x:Name="btnInformation" Background="Transparent" ToolTipService.ToolTip="Help">
+                                <Image x:Name="Information" Source="..\Assets/information.png"/>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel x:Name="spLogout" Orientation="Vertical" Margin="0,5,0,5">
+                            <Button CornerRadius="2" Height="40" x:Name="btnlogout" Background="Transparent" ToolTipService.ToolTip="Log Out">
+                                <Image x:Name="Logout" Source="..\Assets/logout.png"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="grTextBlock" Grid.Row="0"  Grid.Column="1" Background="#F0F0F0" Grid.ColumnSpan="2" BorderBrush="#ECECEC" BorderThickness="1">
+                <TextBlock  Text="VideoKall SMC - Nurse Practitioner Terminal" Padding="5,5,5,5" FontWeight="SemiBold"  Foreground="#5B5B5B" FontSize="16" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+            </Grid>
+
+            <Grid Grid.Row="3"  Grid.ColumnSpan="3" Padding="10,3" Background="#F9F9F9"  BorderBrush="#ECECEC" BorderThickness="1"  Margin="0,1,0,0">
+                <TextBlock x:FieldModifier="public" x:Name="StatusTxt" Text="© Copyright 2020 VideoKall Inc. All Rights Reserved."  Foreground="#575757"  FontSize="10" FontFamily="Open Sans"  />
+            </Grid>
+
+            <Frame x:FieldModifier="public" Margin="0,0,5,0" Grid.RowSpan="2"  Grid.Row="1" Grid.Column="1" x:Name="pagePlaceHolder"></Frame>
+            <Frame x:FieldModifier="public" Margin="0,0,5,0" Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" x:Name="RightPanelHolder"></Frame>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </Page>

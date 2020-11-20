@@ -11,10 +11,11 @@ using VideoKallMCCST.View;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace VideoKallMCCST.ViewModel
 {
-  public  class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public EventHandler<CommunicationMsg> NotifyResult;
@@ -35,7 +36,7 @@ namespace VideoKallMCCST.ViewModel
         public bool IsSMCConnected { get; set; }
         public string TxtSBCConnected { get; set; }
         private ICommand _accountCommand = null;
-        public ICommand AccountCommand 
+        public ICommand AccountCommand
         {
             get
             {
@@ -46,7 +47,7 @@ namespace VideoKallMCCST.ViewModel
         }
         void ExecuteAccountCommand()
         {
-            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(Accounts) );
+            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(Accounts));
         }
 
         private ICommand _logoffCommand = null;
@@ -61,9 +62,12 @@ namespace VideoKallMCCST.ViewModel
         }
         public void ExecuteLogOffCommand()
         {
-             MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
-             MainPage.mainPage.RightPanelHolder.Navigate(typeof(LoginPage));
+            //MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+            //MainPage.mainPage.RightPanelHolder.Navigate(typeof(LoginPage));
+            Frame rootFrame = Window.Current.Content as Frame;
+            Window.Current.Content = rootFrame;
             MainPage.mainPage.IsUserLogedin = false;
+            rootFrame.Navigate(typeof(VideoKallLoginPage));
 
         }
         //Settings
@@ -79,8 +83,8 @@ namespace VideoKallMCCST.ViewModel
         }
         public void ExecuteSettingsCommand()
         {
-            if(!MainPage.mainPage.TestIsInProgress)
-            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(Settings));
+            if (!MainPage.mainPage.TestIsInProgress)
+                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(Settings));
         }
 
         private ICommand _browserCommand = null;
@@ -117,7 +121,7 @@ namespace VideoKallMCCST.ViewModel
             OnPropertyChanged(TxtIpAddress);
             OnPropertyChanged(TxtProtNo);
         }
-      async  void ExecuteSaveIPAddress()
+        async void ExecuteSaveIPAddress()
         {
             if (string.IsNullOrEmpty(TxtIpAddress) || string.IsNullOrEmpty(TxtProtNo))
                 return;
@@ -125,24 +129,25 @@ namespace VideoKallMCCST.ViewModel
             MainPage.mainPage.SMCCommChannel.IPAddress = TxtIpAddress.Trim();
             MainPage.mainPage.SMCCommChannel.PortNo = TxtProtNo.Trim();
             MainPage.mainPage.mainpagecontext.ThermometerUnitF = MainPage.mainPage.mainpagecontext.ThermometerTempUnitF;
-                        
+
             try
             {
                 string msg = "IP" + ":" + TxtIpAddress.Trim() + Environment.NewLine +
                    "PORT:" + TxtProtNo.Trim() + Environment.NewLine +
                    "TEMP:" + (MainPage.mainPage.mainpagecontext.ThermometerUnitF ? "1" : "0");
-                 // msg = Environment.NewLine + msg + Environment.NewLine;
+                // msg = Environment.NewLine + msg + Environment.NewLine;
                 string filename = "SMCIPAddress.txt";
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 Windows.Storage.StorageFile pinfofile = await localFolder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
                 //  await Windows.Storage.FileIO.AppendTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);
                 await Windows.Storage.FileIO.WriteTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                ExecuteSaveNavigate();
             }
             catch (Exception)
             { }
             MainPage.mainPage.SaveSTConfig?.Invoke();
         }
-     
+
         public async void ExecuteBrowserCommand()
         {
             StorageFolder appFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -159,14 +164,45 @@ namespace VideoKallMCCST.ViewModel
                 return _Done;
             }
         }
-        public  void ExecuteDoneCommand()
+        public void ExecuteDoneCommand()
         {
             if (!MainPage.mainPage.IsUserLogedin)
-                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
             else
-                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanel));
+                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
         }
 
+        private ICommand _consultation = null;
+        public ICommand Consultation
+        {
+            get
+            {
+                if (_consultation == null)
+                    _consultation = new RelayCommand(ExecuteConsultationCommand);
+                return _consultation;
+            }
+        }
+        public void ExecuteConsultationCommand()
+        {
+            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
+        }
+        //public void ExecuteSaveNavigate()
+        //{​​​​​​​
+        //    if (!MainPage.mainPage.IsUserLogedin)
+        //        MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+        //    else
+        //        MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
+        //}​​​​
+        public void ExecuteSaveNavigate() {
+
+            if (!MainPage.mainPage.IsUserLogedin) {
+                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+            }
+            else {
+                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
+            }
+        
+        }
 
     }//class
 }

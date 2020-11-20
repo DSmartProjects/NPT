@@ -9,17 +9,18 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <BitmapImage x:Name="ImgMainScreenLogo1" CreateOptions="IgnoreImageCache"   UriSource="../Assets/Application.png"/>
+        <BitmapImage x:Name="ImgMainScreenLogo1" CreateOptions="IgnoreImageCache" UriSource="../Assets/VK_PlaceHolder_Logo.png"/>
         
     </Page.Resources>
-    <Grid >
+    <Grid BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Image x:FieldModifier="public" x:Name="ImgMainScreenLogo" Grid.Row="0" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{StaticResource ImgMainScreenLogo1}"></Image>
+        
+        <Image x:FieldModifier="public" x:Name="ImgMainScreenLogo" Grid.Row="0" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{StaticResource ImgMainScreenLogo1}" Height="100" Margin="0,0,0,0" Width="Auto"></Image>
 
     </Grid>
 </Page>

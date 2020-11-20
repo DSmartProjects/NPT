@@ -414,8 +414,8 @@ namespace VideoKallMCCST.View
                 return;
 
             BtnPulseoximeterToggle = !BtnPulseoximeterToggle;
-            if (BtnPulseoximeterToggle)
-                MainPage.mainPage.StatusTxt.Text = "";
+            //if (BtnPulseoximeterToggle)
+                //MainPage.mainPage.StatusTxt.Text = "";
             MainPage.mainPage.TestIsInProgress = BtnPulseoximeterToggle;
             if (BtnPulseoximeterToggle)
                 BtnPulseoximeter.Background = GetColorFromHexa("#FFBF00"); //BtnPulseoximeterToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
@@ -452,8 +452,8 @@ namespace VideoKallMCCST.View
                 return;
 
             _thermotoggle = !_thermotoggle;
-            if (_thermotoggle)
-                MainPage.mainPage.StatusTxt.Text = "";
+            //if (_thermotoggle)
+                //MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = _thermotoggle;
             if (_thermotoggle)
@@ -475,8 +475,8 @@ namespace VideoKallMCCST.View
                 return;
 
             _resultBpToggle = !_resultBpToggle;
-            if (_resultBpToggle)
-                MainPage.mainPage.StatusTxt.Text = "";
+           // if (_resultBpToggle)
+                //MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = _resultBpToggle;
             if (_resultBpToggle)
@@ -503,8 +503,8 @@ namespace VideoKallMCCST.View
 
             btnWeightToggle = !btnWeightToggle;
 
-            if (btnWeightToggle)
-                MainPage.mainPage.StatusTxt.Text = "";
+            //if (btnWeightToggle)
+                //MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = btnWeightToggle;
             if (btnWeightToggle)
@@ -527,8 +527,8 @@ namespace VideoKallMCCST.View
 
             btnHeighttoggle = !btnHeighttoggle;
 
-            if (btnHeighttoggle)
-                MainPage.mainPage.StatusTxt.Text = "";
+            //if (btnHeighttoggle)
+               // MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
             if (btnHeighttoggle)
@@ -555,8 +555,8 @@ namespace VideoKallMCCST.View
 
 
                 _otoscopeToggle = !_otoscopeToggle;
-                if (_otoscopeToggle)
-                    MainPage.mainPage.StatusTxt.Text = "";
+               // if (_otoscopeToggle)
+                    //MainPage.mainPage.StatusTxt.Text = "";
                 MainPage.mainPage.TestIsInProgress = _otoscopeToggle;
                 if (_otoscopeToggle)
                 {
@@ -594,8 +594,8 @@ namespace VideoKallMCCST.View
 
                 _dermascopeToggle = !_dermascopeToggle;
                 MainPage.mainPage.TestIsInProgress = _dermascopeToggle;
-                if (_dermascopeToggle)
-                    MainPage.mainPage.StatusTxt.Text = "";
+               // if (_dermascopeToggle)
+                   // MainPage.mainPage.StatusTxt.Text = "";
                 if (_dermascopeToggle)
                 {
                     MainPage.mainPage.DigitalMicroscope?.Invoke(true);
@@ -676,8 +676,8 @@ namespace VideoKallMCCST.View
 
 
             _ekgToggle = !_ekgToggle;
-            if (_ekgToggle)
-                MainPage.mainPage.StatusTxt.Text = "";
+            //if (_ekgToggle)
+                //MainPage.mainPage.StatusTxt.Text = "";
             MainPage.mainPage.TestIsInProgress = _ekgToggle;
             if (_ekgToggle)
                 BtnEKG.Background = GetColorFromHexa("#FFBF00");  //_ekgToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
@@ -704,7 +704,7 @@ namespace VideoKallMCCST.View
 
             if (_glucoToggle)
             {
-                MainPage.mainPage.StatusTxt.Text = "";
+               // MainPage.mainPage.StatusTxt.Text = "";
                 MainPage.mainPage.ResetGluco?.Invoke();
             }
 
@@ -727,8 +727,8 @@ namespace VideoKallMCCST.View
                 return;
 
             _spirometerToggle = !_spirometerToggle;
-            if (_spirometerToggle)
-                MainPage.mainPage.StatusTxt.Text = "";
+            //if (_spirometerToggle)
+                //MainPage.mainPage.StatusTxt.Text = "";
 
             MainPage.mainPage.TestIsInProgress = _spirometerToggle;
             if (_spirometerToggle)
@@ -774,8 +774,8 @@ namespace VideoKallMCCST.View
             _stethoscopeChest = !_stethoscopeChest;
             MainPage.mainPage.IsStethescopeChest = _stethoscopeChest;
 
-            if (_stethoscopeChest)
-                MainPage.mainPage.StatusTxt.Text = "";
+            //if (_stethoscopeChest)
+            //    MainPage.mainPage.StatusTxt.Text = "";
             MainPage.mainPage.TestIsInProgress = _stethoscopeChest;
             if (_stethoscopeChest)
                 BtnSthethoscope.Background = GetColorFromHexa("#FFBF00"); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
@@ -819,8 +819,8 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.IsStethescopeChest = false;
             MainPage.mainPage.ResetSTLungs?.Invoke();
 
-            if (_stethoscopelungs)
-                MainPage.mainPage.StatusTxt.Text = "";
+            //if (_stethoscopelungs)
+            //    MainPage.mainPage.StatusTxt.Text = "";
             MainPage.mainPage.TestIsInProgress = _stethoscopelungs;
             if (_stethoscopelungs)
             {

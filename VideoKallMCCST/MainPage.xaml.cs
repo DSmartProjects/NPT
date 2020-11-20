@@ -39,7 +39,8 @@ namespace VideoKallMCCST
             this.InitializeComponent();
             mainPage = this;
             this.DataContext = mainpagecontext;
-            RightPanelHolder.Navigate(typeof(LoginPage));
+            VideoCallVM = new VideoCallViewModel();
+            RightPanelHolder.Navigate(typeof(VideoCallPage));
             pagePlaceHolder.Navigate(typeof(LogoPage));
             NotifyStatusCallback += UpdateNotification;
         }
@@ -49,7 +50,7 @@ namespace VideoKallMCCST
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                StatusTxt.Text = s;
+                //StatusTxt.Text = s;
             });
         }
 
@@ -202,9 +203,9 @@ namespace VideoKallMCCST
         public bool isStethoscopeReadystreaming { get; set; } = false;
         void UpdateSMCStatus()
         {
-            TxtSMCStatus.Text = mainpagecontext.IsSMCConnected ? "Available" : "Not Available";
+            //TxtSMCStatus.Text = mainpagecontext.IsSMCConnected ? "Available" : "Not Available";
             
-            BorderStatus.Background = mainpagecontext.IsSMCConnected ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen): new SolidColorBrush(Windows.UI.Colors.Red);
+            //BorderStatus.Background = mainpagecontext.IsSMCConnected ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen): new SolidColorBrush(Windows.UI.Colors.Red);
         }
 
         private void Watchdog_Tick(object sender, object e)
@@ -276,6 +277,28 @@ namespace VideoKallMCCST
              CommToDataAcq.Connect();
         }
 
+        public void GettingSMCStatus() {
+
+            SMCCommChannel = new CommunicationChannel();
+            SMCCommChannel.Initialize();
+
+            Utility ut = new Utility();
+
+            var result = Task.Run(async () => { return await ut.ReadIPaddress(); }).Result;
+            SMCCommChannel.IPAddress = mainpagecontext.TxtIpAddress;// "192.168.0.33";
+            SMCCommChannel.PortNo = mainpagecontext.TxtProtNo;// "9856";
+            SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;
+            mainpagecontext.IsSMCConnected = false;
+            SMCCommChannel.Connect();
+            SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);
+            watchdog = new DispatcherTimer();
+            watchdog.Tick += Watchdog_Tick;
+            watchdog.Interval = new TimeSpan(0, 0, 1);
+            watchdog.Start();
+            CommToDataAcq.MessageReceived += SMCCommChannel_MessageReceived;
+            CommToDataAcq.Initialize();
+            CommToDataAcq.Connect();
+        }
         public DataacquistionappComm CommToDataAcq { get; set; } = new DataacquistionappComm();
 
      public   async void LogExceptions(string exception)
@@ -295,7 +318,7 @@ namespace VideoKallMCCST
             { }
         }
         public bool IsUserLogedin { get; set; }
-
+        public static VideoCallViewModel VideoCallVM = null;
         public static MainPage mainPage;
         public MainPageViewModel mainpagecontext = new MainPageViewModel();
         public delegate void NotifyStatus(string message, int code = 0);

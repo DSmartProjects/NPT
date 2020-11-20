@@ -6,13 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -48,24 +46,13 @@
         <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Temp"></TextBlock>
             <ToggleSwitch   Visibility="Visible"   x:Name="TxtTmpUnitbtn" Grid.Row="3" Grid.Column="2" IsOn="True" OffContent="C" OnContent="F"   Margin="0,2,0,0"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Toggled="TxtTmpUnitbtn_Toggled" Tapped="TxtTmpUnitbtn_Tapped"></ToggleSwitch>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="2">
             <Button Margin="5" Content="Browse ImageFolder" x:Name="BtnBrowseFolder" Grid.Row="3" Grid.Column="4" Click="BtnBrowseFolder_Click"></Button>
-            <TextBlock Margin="5" x:Name="TxtimageFolder" TextWrapping="Wrap" Grid.Row="3" Grid.Column="5"></TextBlock>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="2" Grid.Row="4" Grid.Column="0">
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Filter Heart"></TextBlock>
+            <TextBlock Margin="5" x:Name="TxtimageFolder" Grid.Row="3" Grid.Column="5"></TextBlock>
 
-            <TextBox x:Name="TxtFilterHeart"  TextChanged="TxtFilterHeart_TextChanged"></TextBox>
-            <TextBlock Text="Hz"></TextBlock>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="2" Grid.Row="4" Grid.Column="1">
-            <TextBlock Grid.Row="4" Grid.Column="1" Text="Filter lungs"></TextBlock>
-            <TextBox x:Name="TxtFilterlungs"  TextChanged="TxtFilterlungs_TextChanged"></TextBox>
-            <TextBlock Text="Hz"></TextBlock>
-        </StackPanel>
-        <Button Margin="5" Command="{Binding SaveIPAddress}" Grid.Column="1" Grid.Row="5" Content="Save"></Button>
 
-        <Button Margin="5" Command="{Binding Done}" Grid.Column="0" Grid.Row="30" Content="Done"></Button>
+        </StackPanel>
+        <Button Margin="5" Command="{Binding SaveIPAddress}" Grid.Column="2" Grid.Row="4" Content="Save"></Button>
+
+        <Button Margin="5" Command="{Binding Done}" Grid.Column="0" Grid.Row="15" Content="Done"></Button>
     </Grid>
 </Page>
