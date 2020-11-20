@@ -38,8 +38,8 @@
             </StackPanel>
 
         </Grid>
-        <Grid Grid.Row="2"  Grid.ColumnSpan="2" Background="#F9F9F9"  BorderBrush="#ECECEC" BorderThickness="1"  Margin="0,1,0,0">
-            <TextBlock x:FieldModifier="public" x:Name="StatusTxt" Text="© Copyright 2020 VideoKall. All Rights Reserved."  Foreground="#575757"  FontSize="10" FontFamily="Open Sans"  />
+        <Grid Grid.Row="2"  Padding="10,3,10,3" Grid.ColumnSpan="2" Background="#F9F9F9"  BorderBrush="#ECECEC" BorderThickness="1"  Margin="0,1,0,0">
+            <TextBlock x:FieldModifier="public" x:Name="StatusTxt" Text="© Copyright 2020 VideoKall Inc. All Rights Reserved."  Foreground="#575757"  FontSize="10" FontFamily="Open Sans"  />
         </Grid>
     </Grid>
 </Page>
