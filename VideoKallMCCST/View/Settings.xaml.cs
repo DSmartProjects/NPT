@@ -26,17 +26,49 @@ namespace VideoKallMCCST.View
     /// </summary>
     public sealed partial class Settings : Page
     {
+        StConfig Dfaultsettings;
+        StConfig StSettings;
+        string StConfigFile = "ST_MCC_Config.txt";
         public Settings()
         {
             this.InitializeComponent();
+            MainPage.mainPage.SaveSTConfig += SaveConfig;
             TxtimageFolder.Text = "\\\\"+ MainPage.mainPage.SMCCommChannel.IPAddress+"\\" + strRootFolder;
             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
             
             MainPage.mainPage.DQConnectionCallback += UpdateConnectionStatus;
             TxtTmpUnitbtn.IsOn = MainPage.mainPage.mainpagecontext.ThermometerUnitF;
+            Dfaultsettings.IP = MainPage.mainPage.SMCCommChannel.IPAddress;
+            Dfaultsettings.PORT = "8445";
+            Dfaultsettings.USERNAME = "rnk";
+            Dfaultsettings.PASSWORD = "test";
+            Dfaultsettings.CUTOFFFILTER = "0";
+            Dfaultsettings.CUTOFFFILTERLUNGS = "-259"; 
+            Dfaultsettings.GAIN = "0";
+            Dfaultsettings.CODEC = ""; 
+
+            StSettings.IP = MainPage.mainPage.SMCCommChannel.IPAddress;
+            StSettings.PORT = "8445";
+            StSettings.USERNAME = "rnk";
+            StSettings.PASSWORD = "test";
+            StSettings.CUTOFFFILTER = "0";
+            StSettings.CUTOFFFILTERLUNGS = "-259"; 
+            StSettings.GAIN = "0";
+            StSettings.CODEC = "";
+
+            //IP: 192.168.0.33
+            //PORT: 8445
+            //USERNAME: rnk
+            // PASSWORD:test
+            // CUTOFF:No filter
+            //FILTER - CUTOFF - LUNGS:-250
+            //GAIN: 0
+            //CODEC: ""
         }
 
-      async  void UpdateConnectionStatus(bool status)
+        
+
+        async  void UpdateConnectionStatus(bool status)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
@@ -96,5 +128,117 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp("ConnectionTest");
              TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
         }
+
+        private void TxtFilterlungs_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string val = TxtFilterlungs.Text;
+            if (val.Contains("-"))
+            {
+                string txt = val.Substring(1);
+                if (!txt.All(char.IsDigit))
+                    TxtFilterlungs.Text = "";
+            }
+            else
+            {
+                if (!TxtFilterlungs.Text.All(char.IsDigit))
+                    TxtFilterlungs.Text = "";
+            }
+        }
+
+        private void TxtFilterHeart_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!TxtFilterHeart.Text.All(char.IsDigit))
+                TxtFilterHeart.Text = "";
+        }
+
+       async void ReadSTConfigFile()
+        {
+            try
+            {
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                Windows.Storage.StorageFile IpAddressFile = await localFolder.GetFileAsync(StConfigFile);
+                var alltext = await Windows.Storage.FileIO.ReadLinesAsync(IpAddressFile);
+                foreach (var line in alltext)
+                {
+                    string[] data = line.Split(':');
+                    switch (data[0])
+                    {
+                        case "IP":
+                            StSettings.IP = data[1];
+                            break;
+                        case "PORT":// 8445
+                            StSettings.PORT = data[1];
+                            break;
+                        case "USERNAME":
+                            StSettings.USERNAME = data[1];
+                            break;
+                        case "PASSWORD":
+                            StSettings.PASSWORD = data[1];
+                            break;
+                        case "CUTOFF":
+                            StSettings.CUTOFFFILTER = data[1];
+                            break;
+                        case "FILTER-CUTOFF-LUNGS":
+                            StSettings.CUTOFFFILTERLUNGS = data[1];
+                            break; 
+                        case "GAIN":
+                            StSettings.GAIN = data[1];
+                            break;
+                        case "CODEC":
+                            StSettings.CODEC = data[1];
+                            break; 
+
+                    }
+                }
+            }
+            catch (Exception) { }
+            TxtFilterHeart.Text = StSettings.CUTOFFFILTER.Contains("No filter")?"0": StSettings.CUTOFFFILTER.Trim();
+            TxtFilterlungs.Text = StSettings.CUTOFFFILTERLUNGS.Trim();
+        }
+      async  void WriteSTConfigFile()
+        {
+            try
+            {
+                StSettings.CUTOFFFILTER = TxtFilterHeart.Text.Equals("0")? "No filter": TxtFilterHeart.Text.Trim();
+                StSettings.CUTOFFFILTERLUNGS = TxtFilterlungs.Text.Trim();
+
+                string msg = Environment.NewLine+ "IP:" + StSettings.IP.Trim() + Environment.NewLine +
+                             "PORT" + ":" + StSettings.PORT.Trim() + Environment.NewLine +
+                             "USERNAME" + ":" + StSettings.USERNAME.Trim() + Environment.NewLine +
+                             "PASSWORD" + ":" + StSettings.PASSWORD.Trim() + Environment.NewLine +
+                             "CUTOFF" + ":" + StSettings.CUTOFFFILTER + Environment.NewLine +
+                             "FILTER-CUTOFF-LUNGS" + ":" + StSettings.CUTOFFFILTERLUNGS + Environment.NewLine +
+                             "GAIN" + ":" + StSettings.GAIN + Environment.NewLine +
+                             "CODEC" + ":" + StSettings.CODEC ;
+                             
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                Windows.Storage.StorageFile pinfofile = await localFolder.CreateFileAsync(StConfigFile, CreationCollisionOption.OpenIfExists);
+                await Windows.Storage.FileIO.WriteTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            }
+            catch (Exception)
+            { }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ReadSTConfigFile();
+        }
+
+        private void SaveConfig()
+        {
+            WriteSTConfigFile();
+        }
+    }
+
+    struct StConfig
+    {
+        public string IP;
+        public string PORT;//:8445
+        public string USERNAME;//:rnk
+        public string PASSWORD;//:test
+        public string CUTOFFFILTER;//:0
+        public string CUTOFFFILTERLUNGS;//:-259 
+        public string GAIN;//:0
+        public string CODEC;//:"" 
     }
 }
