@@ -407,7 +407,7 @@ namespace VideoKallMCCST.View
                             gridThermo.BorderThickness = new Thickness(1, 0, 1, 10);
                             tempresultreceived = true;
                             //"THERMORES>R:{0}>M:{1}>S:{2}>DT:{3}"
-                            string tempformat = "{0}°{1}";
+                            string tempformat = " {0}°{1}";
                             decimal Conversion = Convert.ToDecimal(res[1].Split(':')[1]);
                             tempResult = Conversion;
                             if (MainPage.mainPage.mainpagecontext.ThermometerUnitF)
@@ -421,7 +421,7 @@ namespace VideoKallMCCST.View
 
                             if (Convert.ToBoolean(res[3].Split(':')[1]))
                                 ///  TxtTemprature.Text = string.Format(tempformat, Conversion.ToString(), TxtTmpUnitbtn.IsOn ? TxtTmpUnitbtn.OnContent : TxtTmpUnitbtn.OffContent);
-                                TxtTemprature.Text = string.Format(tempformat, Conversion.ToString(), MainPage.mainPage.mainpagecontext.ThermometerUnitF ? " F" : "C");
+                                TxtTemprature.Text = string.Format(tempformat, Conversion.ToString(), MainPage.mainPage.mainpagecontext.ThermometerUnitF ? "F" : "C");
                             else
                                 TxtTemprature.Text = "Error: Lo";
 

@@ -12,7 +12,7 @@
     <ScrollViewer ZoomMode="Enabled" 
               HorizontalScrollMode="Enabled"  HorizontalScrollBarVisibility="Visible">
 
-        <Grid x:Name="gridInstrumentPanel">
+        <Grid x:Name="gridInstrumentPanel" BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -238,7 +238,7 @@
                             <TextBlock Text="Seat Back Stethoscope" FontSize="12"  Margin="0,10,0,0" FontFamily="Open Sans" TextAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <TextBox CornerRadius="0,0,5,5" IsReadOnly="True" Height="60"  BorderBrush="#F2F2F2"  BorderThickness="1,0,1,1"  TextWrapping="Wrap" FontSize="12" FontFamily="Open Sans"/>
+                    <TextBox x:Name="TbxSeatBackSet" CornerRadius="0,0,5,5" IsReadOnly="True" Height="60"  BorderBrush="#F2F2F2"  BorderThickness="1,0,1,1"  TextWrapping="Wrap" FontSize="12" FontFamily="Open Sans"/>
                 </StackPanel>
             </Grid>
             <Popup Name="ResultPulseOximeterPopup" IsOpen="False"  >
