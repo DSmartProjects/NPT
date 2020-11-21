@@ -41,6 +41,8 @@
     <uap:Capability Name="enterpriseAuthentication" />
     <uap3:Capability Name="userNotificationListener" />
     <iot:Capability Name="lowLevelDevices" />
+    <uap:Capability Name="voipCall" />
+    <uap4:Capability Name="userDataTasks" />
     <DeviceCapability Name="bluetooth" />
     <DeviceCapability Name="microphone" />
     <DeviceCapability Name="webcam" />
@@ -50,11 +52,11 @@
     <DeviceCapability Name="broadFileSystemAccess" />
   </Capabilities>
   <Extensions>
-    <Extension Category="windows.activatableClass.inProcessServer">
-      <InProcessServer>
-        <Path>Microsoft.Samples.SimpleCommunication.dll</Path>
-        <ActivatableClass ActivatableClassId="Microsoft.Samples.SimpleCommunication.StspSchemeHandler" ThreadingModel="both" />
-      </InProcessServer>
-    </Extension>
-  </Extensions>
+      <Extension Category="windows.activatableClass.inProcessServer">
+        <InProcessServer>
+          <Path>Microsoft.Samples.SimpleCommunication.dll</Path>
+          <ActivatableClass ActivatableClassId="Microsoft.Samples.SimpleCommunication.StspSchemeHandler" ThreadingModel="both"/>
+        </InProcessServer>
+      </Extension>
+    </Extensions>
 </Package>

@@ -324,7 +324,6 @@ namespace VideoKallMCCST
         public BoolDelegate DQConnectionCallback;
         public CommandDelegate ResetSTLungs;
         public CommandDelegate ResetGluco;
-        public CommandDelegate SaveSTConfig;
         public bool IsStethescopeChest { get; set; } = false;
     }
 }
