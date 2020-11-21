@@ -229,6 +229,7 @@
     <Content Include="Assets\Spirometer.png" />
     <Content Include="Assets\StandingHeight.png" />
     <Content Include="Assets\stethoscop.png" />
+    <Content Include="Assets\ST_MCC_Config.txt" />
     <Content Include="Assets\Thermometer.png" />
     <Content Include="Assets\VideoCall_Ringtone.mp4" />
     <Content Include="Assets\VideoPlaceHolder.png" />
@@ -412,15 +413,13 @@
     <None Include="VideoKallMCCST_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SBCDBModule\SBCDBModule\SBCDBModule\SBCDBModule.csproj">
-      <Project>{8124fe77-ea75-47c9-b7b6-0988d4f4167b}</Project>
-      <Name>SBCDBModule</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Microsoft.Samples.SimpleCommunication, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+    </Reference>
+    <Reference Include="SBCDBModule, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SBCDBModule\SBCDBModule\SBCDBModule\bin\x86\Debug\SBCDBModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

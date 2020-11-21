@@ -87,9 +87,18 @@ namespace VideoKallMCCST.View
         private void isTestResultOpened()
         {
             MainPage.mainPage.TestIsInProgress =
-                ResulThermoPopup.IsOpen || ResultPulseOximeterPopup.IsOpen || ResultBPPopup.IsOpen || ResuWeightPopup.IsOpen || ResulHeightPopup.IsOpen
-                 || ResulOtoscopePopup.IsOpen || ResulDermascopePopup.IsOpen || ResultEKGpopup.IsOpen || Resultglucopopup.IsOpen ||
-                 Resultspiropopup.IsOpen || Resultstethoscopechestpopup.IsOpen;
+                ResulThermoPopup.IsOpen ||
+                ResultPulseOximeterPopup.IsOpen ||                
+                ResultBPPopup.IsOpen || 
+                ResuWeightPopup.IsOpen || 
+                ResulHeightPopup.IsOpen || 
+                ResulOtoscopePopup.IsOpen || 
+                 ResulDermascopePopup.IsOpen || 
+                 ResultEKGpopup.IsOpen || 
+                 Resultglucopopup.IsOpen ||
+                 Resultspiropopup.IsOpen || 
+                 Resultstethoscopechestpopup.IsOpen||
+                 ResulStethoscopelungPopup.IsOpen;
         }
 
         void ShowHidePulseoximeterdata(bool visible)
