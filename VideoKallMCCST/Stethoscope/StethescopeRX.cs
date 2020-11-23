@@ -94,5 +94,6 @@ namespace VideoKallMCCST.Stethoscope
         {
             TXevents?.Invoke(message, null);
         }
+        
     }
 }
