@@ -764,14 +764,17 @@ namespace VideoKallMCCST.View
             {
                 if (_otoscopeToggle)
                 {
-                    BtnOtoscope.Background = issuccess ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.Red);
+                    //BtnOtoscope.Background = issuccess ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.Red);
+                    TxtResultOtoscope.BorderBrush= issuccess ? GetColorFromHexa("#34CBA8") : GetColorFromHexa("#E96056");
+                    TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 }
 
                 if (_dermascopeToggle)
                 {
-                    BtnDermoscope.Background = issuccess ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.Red);
-
+                    // BtnDermoscope.Background = issuccess ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.Red);
+                    TxtResultDermascope.BorderBrush= issuccess ? GetColorFromHexa("#34CBA8") : GetColorFromHexa("#E96056");
+                    TxtResultDermascope.BorderThickness = new Thickness(0, 0, 0, 10);
                 }
 
             });
@@ -867,7 +870,11 @@ namespace VideoKallMCCST.View
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                BtnSpirometer.Background = issuccess ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.Red);
+                //BtnSpirometer.Background = issuccess ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.Red);           
+             
+                TxtResultspiro.BorderBrush = issuccess ? GetColorFromHexa("#34CBA8") : GetColorFromHexa("#E96056");
+                TxtResultspiro.BorderThickness = new Thickness(0, 0, 0, 10);
+
 
             });
         }
