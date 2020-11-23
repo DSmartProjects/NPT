@@ -192,15 +192,14 @@ namespace VideoKallMCCST.View
             DefaultVisibilities();
             await device.CleanUpAsync();
             RemoteVideo.Stop();
-
-            // Start waiting for a new CallButton.
-            await InitializeAsync();
-
             PreviewVideo.Source = device.CaptureSource;
             PreviewVideo.Visibility = Visibility.Collapsed;
             RemoteVideo.Visibility = Visibility.Collapsed;
             VideoLogo.Visibility = Visibility.Visible;
-            TestPanelExpander.TestPanelExp.Frame.Navigate(typeof(LogoPage));
+            // Start waiting for a new CallButton.
+            await InitializeAsync();
+            rootPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+            //TestPanelExpander.TestPanelExp.Frame.Navigate(typeof(LogoPage));
         }
 
         private void Apchair1_Click(object sender, RoutedEventArgs e)

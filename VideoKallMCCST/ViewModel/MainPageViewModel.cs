@@ -145,6 +145,7 @@ namespace VideoKallMCCST.ViewModel
             }
             catch (Exception)
             { }
+            MainPage.mainPage.SaveSTConfig?.Invoke();
         }
 
         public async void ExecuteBrowserCommand()

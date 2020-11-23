@@ -31,11 +31,19 @@ namespace VideoKallMCCST.Communication
                 client.BaseAddress = new Uri(uri);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                patients = new List<Patient>();              
-                HttpResponseMessage response = await client.SendAsync(request);              
-              
+                patients = new List<Patient>();
                 string httpResponseBody = "";
-                httpResponseBody = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    HttpResponseMessage response = await client.SendAsync(request);                   
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                }
+                catch (Exception ex)
+                {
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return patients;
+                }
+    
                 var resultObjects = AllChildren(JObject.Parse(httpResponseBody))
                 .First(c => c.Type == JTokenType.Array && c.Path.Contains("data"))
                 .Children<JObject>();

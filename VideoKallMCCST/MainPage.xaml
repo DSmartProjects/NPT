@@ -11,10 +11,10 @@
               HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" >
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40*"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -76,11 +76,11 @@
                 <TextBlock  Text="VideoKall SMC - Nurse Practitioner Terminal" Padding="5,5,5,5" FontWeight="SemiBold"  Foreground="#5B5B5B" FontSize="16" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"  />
             </Grid>
 
-            <Grid Grid.Row="3"  Grid.ColumnSpan="3" Background="#F9F9F9"  BorderBrush="#ECECEC" BorderThickness="1"  Margin="0,1,0,0">
-                <TextBlock x:FieldModifier="public" x:Name="StatusTxt" Text="© Copyright 2020 VideoKall. All Rights Reserved."  Foreground="#575757"  FontSize="10" FontFamily="Open Sans"  />
+            <Grid Grid.Row="3"  Grid.ColumnSpan="3" Padding="10,3" Background="#F9F9F9"  BorderBrush="#ECECEC" BorderThickness="1"  Margin="0,1,0,0">
+                <TextBlock x:FieldModifier="public" x:Name="StatusTxt" Text="© Copyright 2020 VideoKall Inc. All Rights Reserved."  Foreground="#575757"  FontSize="10" FontFamily="Open Sans"  />
             </Grid>
 
-            <Frame x:FieldModifier="public" Margin="0,0,5,0" Grid.RowSpan="2" Grid.Row="1" Grid.Column="1" x:Name="pagePlaceHolder"></Frame>
+            <Frame x:FieldModifier="public" Margin="0,0,5,0" Grid.RowSpan="2"  Grid.Row="1" Grid.Column="1" x:Name="pagePlaceHolder"></Frame>
             <Frame x:FieldModifier="public" Margin="0,0,5,0" Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" x:Name="RightPanelHolder"></Frame>
         </Grid>
     </ScrollViewer>

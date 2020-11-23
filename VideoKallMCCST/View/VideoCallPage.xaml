@@ -34,7 +34,7 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1"  Height="200" VerticalAlignment="Top" Background="#F2F2F2"  BorderThickness="1">
-                <Image x:Name="VideoLogo" Visibility="Visible" Source="..\Assets\video-logo.png"></Image>
+                <Image x:Name="VideoLogo" Stretch="Fill"  Visibility="Visible" Source="..\Assets\video-logo.png"></Image>
                 <MediaElement  x:Name="IncomingCallRing" Height="200"  RenderTransformOrigin="0.5,0.5" Stretch="Fill" AutoPlay="False"  Source="..\Assets\Incoming_Call_Notification.mp4" PosterSource="..\Assets\video-logo.png" />
                 <MediaElement  Visibility="Collapsed" Stretch="UniformToFill"  Height="200" RenderTransformOrigin="0.5,0.5" x:Name="RemoteVideo"  AudioCategory="Communications"   PosterSource="..\Assets\video-logo.png"></MediaElement>
                 <CaptureElement  Name="PreviewVideo"  Margin="250,0,0,110" RenderTransformOrigin="0.5,0.5" Stretch="Fill"></CaptureElement>
