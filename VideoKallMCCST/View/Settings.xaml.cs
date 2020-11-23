@@ -8,7 +8,6 @@ using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -30,21 +29,20 @@ namespace VideoKallMCCST.View
         public Settings()
         {
             this.InitializeComponent();
-            TxtimageFolder.Text = "\\\\"+ MainPage.mainPage.SMCCommChannel.IPAddress+"\\" + strRootFolder;
+            TxtimageFolder.Text = "\\\\" + MainPage.mainPage.SMCCommChannel.IPAddress + "\\" + strRootFolder;
             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
-            
+
             MainPage.mainPage.DQConnectionCallback += UpdateConnectionStatus;
             TxtTmpUnitbtn.IsOn = MainPage.mainPage.mainpagecontext.ThermometerUnitF;
-            ColorChange();
         }
 
-      async  void UpdateConnectionStatus(bool status)
+        async void UpdateConnectionStatus(bool status)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
             });
-            
+
         }
         private void TxtTmpUnitbtn_Toggled(object sender, RoutedEventArgs e)
         {
@@ -56,15 +54,15 @@ namespace VideoKallMCCST.View
 
         }
 
-      //  private StorageFolder rootFolder;
+        //  private StorageFolder rootFolder;
         string strRootFolder = "VideoKall";
         string strRootFolderPath = "";//@"\\192.168.0.17\VideoKall";
-       // string ImageName = "capturedImage.png";
+                                      // string ImageName = "capturedImage.png";
         private async void BtnBrowseFolder_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-               
+
                 FolderPicker folderPicker = new FolderPicker();
                 folderPicker.FileTypeFilter.Add(".png");
 
@@ -97,29 +95,6 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.isDataAcquitionappConnected = false;
             MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp("ConnectionTest");
             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
-            ColorChange();
-        }
-
-        public SolidColorBrush GetColorFromHexa(string hexaColor)
-        {
-            return new SolidColorBrush(
-                Color.FromArgb(
-                    255,
-                    Convert.ToByte(hexaColor.Substring(1, 2), 16),
-                    Convert.ToByte(hexaColor.Substring(3, 2), 16),
-                    Convert.ToByte(hexaColor.Substring(5, 2), 16)
-                )
-            );
-        }
-
-
-
-        public void ColorChange()
-        {
-            if (!MainPage.mainPage.isDataAcquitionappConnected)
-                TxtDataAcq.Foreground = GetColorFromHexa("#ED604A");
-            else
-                TxtDataAcq.Foreground = GetColorFromHexa("#26639B");
         }
     }
 }

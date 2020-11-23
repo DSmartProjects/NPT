@@ -8,55 +8,51 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
+
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
-        <Grid Grid.Row="0" Grid.Column="0" Margin="30,10,10,10">
-            <StackPanel Orientation="Vertical" Padding="10,10,10,10" >
-                <Button  Command="{Binding BrowserCommand}"  Content="Config Folder" FontFamily="Open Sans" FontWeight="SemiBold" FontSize="12" Foreground="#FFF" CornerRadius="5,5,5,5" Background="#56ACE0"></Button>
-                <TextBlock  Text="Data Acquisition App status        :" Margin="0,25,5,5" FontFamily="Open Sans" Foreground="#194F82" FontSize="12" FontWeight="SemiBold"></TextBlock>
-                <Button  Content="Images Folder" x:Name="BtnBrowseFolder" Margin="0,20,0,5" FontFamily="Open Sans" FontWeight="SemiBold" FontSize="12" Foreground="#FFF" CornerRadius="5,5,5,5" Background="#56ACE0" ></Button>
-            </StackPanel>
-        </Grid>
-
-
-
-        <Grid Grid.Row="1" Grid.Column="1" Margin="0,20,10,10">
-            <StackPanel Orientation="Vertical" >
-                <TextBox  x:Name="TxtIPaddressCtrl" Width="Auto"  Padding="0,5,0,0" CornerRadius="5,5,5,5"  Grid.Column="2"  Text="{Binding TxtIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBox  x:Name="TxtPortNoCtrl"  Margin="0,10,0,0" CornerRadius="5,5,5,5" Grid.Column="2" Text="{Binding TxtProtNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <ToggleSwitch   Visibility="Visible" Margin="0,10,0,0"  x:Name="TxtTmpUnitbtn"  Grid.Column="2" IsOn="True" OffContent="C" OnContent="F"   Foreground="#194F82"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" ></ToggleSwitch>
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="0" Margin="30,10,10,10">
-            <StackPanel Orientation="Vertical" Padding="10,10,10,10" >
-                <TextBlock  Margin="0,5,0,0" Text="SMC IP Address     :" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                <TextBlock Margin="0,30,0,0"  Text="Port Number         :" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                <TextBlock Text="Temperature          :" Margin="0,25,0,0" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                <Button Margin="0,20,0,0" CornerRadius="5,5,5,5" Width="100" Command="{Binding SaveIPAddress}"  Content="Save" FontSize="12" FontWeight="SemiBold" Foreground="#FFF" Background="#34CBA8"></Button>
-            </StackPanel>
-        </Grid>
-        <Button Grid.Row="0" Grid.Column="2" Padding="5,5,5,5" Margin="0,0,0,50" x:Name="BtnConnectdaq" Content="Test Connection" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Foreground="#FFF" Background="#26639B"></Button>
+        <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="10-12-2020"></TextBlock>
+        <TextBlock Margin="5" Grid.Row="1" Grid.Column="3" Name="TxtDataAcq" Text=" "></TextBlock>
+        <TextBlock Margin="5" Grid.Row="1" Grid.Column="2"  Text="DataAcquisitionApp status: "></TextBlock>
+        <Button Margin="5" Grid.Row="1" Grid.Column="4"  x:Name="BtnConnectdaq" Content="Test Connection" Click="BtnConnectdaq_Click"></Button>
+        <Button Margin="5" Command="{Binding BrowserCommand}" Grid.Column="0" Grid.Row="1" Content="DB folder"></Button>
+        <TextBlock Margin="5"  Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="2" Text="SMC IP Address"></TextBlock>
+        <TextBox Margin="5"  x:Name="TxtIPaddressCtrl" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Text="{Binding TxtIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBlock Margin="5" Grid.Column="0" Grid.Row="3" Text="Port Number"></TextBlock>
+        <TextBox Margin="5" x:Name="TxtPortNoCtrl"  Grid.Column="1" Grid.Row="3" Text="{Binding TxtProtNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="Temp"></TextBlock>
+            <ToggleSwitch   Visibility="Visible"   x:Name="TxtTmpUnitbtn" Grid.Row="3" Grid.Column="2" IsOn="True" OffContent="C" OnContent="F"   Margin="0,2,0,0"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Toggled="TxtTmpUnitbtn_Toggled" Tapped="TxtTmpUnitbtn_Tapped"></ToggleSwitch>
+            <Button Margin="5" Content="Browse ImageFolder" x:Name="BtnBrowseFolder" Grid.Row="3" Grid.Column="4" Click="BtnBrowseFolder_Click"></Button>
+            <TextBlock Margin="5" x:Name="TxtimageFolder" Grid.Row="3" Grid.Column="5"></TextBlock>
 
 
+        </StackPanel>
+        <Button Margin="5" Command="{Binding SaveIPAddress}" Grid.Column="2" Grid.Row="4" Content="Save"></Button>
 
-        <Grid Grid.Row="0" Grid.Column="1" Margin="0,25,10,10">
-            <StackPanel Orientation="Vertical" >
-                <TextBlock   FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#26639B" Text="11/19/2020"/>
-                <TextBlock  Name="TxtDataAcq" Margin="0,32,0,0" FontWeight="SemiBold"   FontSize="12" Text=" "></TextBlock>
-                <TextBlock  x:Name="TxtimageFolder" Margin="0,30,0,0" FontWeight="Normal" Foreground="#194F82"  FontSize="12" Padding='5,5,5,5' ></TextBlock>
-            </StackPanel>
-        </Grid>
+        <Button Margin="5" Command="{Binding Done}" Grid.Column="0" Grid.Row="15" Content="Done"></Button>
     </Grid>
 </Page>
