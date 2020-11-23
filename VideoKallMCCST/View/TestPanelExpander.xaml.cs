@@ -254,39 +254,39 @@ namespace VideoKallMCCST.View
                 //BtnSpirometer.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
 
                 grdGluco.BorderBrush = GetColorFromHexa("#EEEEEE");
-                grdGluco.BorderThickness = new Thickness(1, 0, 1, 10);
+                grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
 
 
                 TxtResultstethoscopechest.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultstethoscopechest.BorderThickness = new Thickness(0, 0, 0, 10);
 
 
                 gridThermo.BorderBrush = GetColorFromHexa("#EEEEEE");
-                gridThermo.BorderThickness = new Thickness(1, 0, 1, 10);
+                gridThermo.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 grBp.BorderBrush = GetColorFromHexa("#EEEEEE");
-                grBp.BorderThickness = new Thickness(1, 0, 1, 10);
+                grBp.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 TxtResultWeight.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultWeight.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultWeight.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 TxtResultHeight.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultHeight.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultHeight.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 TxtResultOtoscope.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultOtoscope.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 TxtResultDermascope.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultDermascope.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultDermascope.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 TxtResultspiro.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultspiro.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultspiro.BorderThickness = new Thickness(0, 0, 0, 10);
                 TxtResultstethoscopechest.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultstethoscopechest.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 //BtnSthethoscopeLungs.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 TbxSeatBackSet.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TbxSeatBackSet.BorderThickness = new Thickness(1, 0, 1, 10);
+                TbxSeatBackSet.BorderThickness = new Thickness(0, 0, 0, 10);
             }
             );
 
@@ -303,14 +303,14 @@ namespace VideoKallMCCST.View
                     {
                         //BtnSthethoscope.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         TxtResultstethoscopechest.BorderBrush = GetColorFromHexa("#34CBA8");
-                        TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+                        TxtResultstethoscopechest.BorderThickness = new Thickness(0, 0, 0, 10);
                     }
                        
                     else if (_stethoscopelungs)
                     {
                         //BtnSthethoscopeLungs.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);                     
                         TbxSeatBackSet.BorderBrush = GetColorFromHexa("#34CBA8");
-                        TbxSeatBackSet.BorderThickness = new Thickness(1, 0, 1, 10);
+                        TbxSeatBackSet.BorderThickness = new Thickness(0, 0, 0, 10);
                     }
                         
                 }
@@ -319,13 +319,13 @@ namespace VideoKallMCCST.View
                     if (_stethoscopeChest)
                     {
                         TxtResultstethoscopechest.BorderBrush = GetColorFromHexa("#E96056");
-                        TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+                        TxtResultstethoscopechest.BorderThickness = new Thickness(0, 0, 0, 10);
                     }
                         //BtnSthethoscope.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     else if (_stethoscopelungs)
                     {
                         TbxSeatBackSet.BorderBrush = GetColorFromHexa("#E96056");
-                        TbxSeatBackSet.BorderThickness = new Thickness(1, 0, 1, 10);
+                        TbxSeatBackSet.BorderThickness = new Thickness(0, 0, 0, 10);
                     }
                         //BtnSthethoscopeLungs.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                 }
@@ -341,7 +341,7 @@ namespace VideoKallMCCST.View
                 if (!success && devicetypes == 0)
                 {
                     gridThermo.BorderBrush = GetColorFromHexa("#E96056");
-                    gridThermo.BorderThickness = new Thickness(1, 0, 1, 10);
+                    gridThermo.BorderThickness = new Thickness(0, 0, 0, 10);
                     //BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                 }
                     
@@ -349,20 +349,20 @@ namespace VideoKallMCCST.View
                 {
                     //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     grdPulse.BorderBrush = GetColorFromHexa("#E96056");
-                    grdPulse.BorderThickness = new Thickness(1, 0, 1, 10);
+                    grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
                 }
                 else if (!success && devicetypes == 2)
                 {
                     // BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     grBp.BorderBrush = GetColorFromHexa("#E96056");
-                    grBp.BorderThickness = new Thickness(1, 0, 1, 10);
+                    grBp.BorderThickness = new Thickness(0, 0, 0, 10);
                 }
                 else if (!success && devicetypes == 3)
                 {
                     //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     //grdGluco.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
                     grdGluco.BorderBrush =GetColorFromHexa("#E96056");
-                    grdGluco.BorderThickness = new Thickness(1, 0, 1, 10);
+                    grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
                 }
 
             });
@@ -384,15 +384,15 @@ namespace VideoKallMCCST.View
                         ShowHidePulseoximeterdata(true);
                         //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         grdPulse.BorderBrush = GetColorFromHexa("#34CBA8");
-                        grdPulse.BorderThickness = new Thickness(1, 0, 1, 10);
-                        TxtResultPulseOximeter.Text = res[1].Split(':')[1]+" %";
+                        grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
+                        TxtResultPulseOximeter.Text =res[1].Split(':')[1]+" %";
                         TxtResultPulseOximeterpulse.Text = res[2].Split(':')[1]+" bpm";
                         //TxtResultPulseOximeterpulsedate.Text = res[4];
                         break;
                     case DeviceResponseType.GLUCORESULT:
                         ShowHideglucodata(true);
                         grdGluco.BorderBrush = GetColorFromHexa("#34CBA8");
-                        grdGluco.BorderThickness = new Thickness(1, 0, 1, 10);
+                        grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
                         //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         //"GLUCMDRES>V:{0}>U:{1}>T:{2}>M:{3}>D:{4}>T:{5}";
                          TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1];
@@ -407,7 +407,7 @@ namespace VideoKallMCCST.View
                                 return;
                             //BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             gridThermo.BorderBrush = GetColorFromHexa("#34CBA8");
-                            gridThermo.BorderThickness = new Thickness(1, 0, 1, 10);
+                            gridThermo.BorderThickness = new Thickness(0, 0, 0, 10);
                             tempresultreceived = true;
                             //"THERMORES>R:{0}>M:{1}>S:{2}>DT:{3}"
                             string tempformat = "{0} °{1}";
@@ -439,7 +439,7 @@ namespace VideoKallMCCST.View
                     case DeviceResponseType.BPRES:
                         ShowHidebpdata(true);
                         grBp.BorderBrush = GetColorFromHexa("#34CBA8"); ;
-                        grBp.BorderThickness = new Thickness(1, 0, 1, 10);
+                        grBp.BorderThickness = new Thickness(0, 0, 0, 10);
 
                         //BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         // "BPRES>D:{0}>S:{1}>P:{2}>DT:{3}>T:{4}";
@@ -496,7 +496,7 @@ namespace VideoKallMCCST.View
             {
                 //BtnPulseoximeter.Background = GetColorFromHexa("#FFBF00"); //BtnPulseoximeterToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 grdPulse.BorderBrush = GetColorFromHexa("#FFC10D");
-                grdPulse.BorderThickness = new Thickness(1, 0, 1, 10);
+                grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
             }
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
@@ -539,7 +539,7 @@ namespace VideoKallMCCST.View
             { 
                 //BtnThermoMeter.Background = GetColorFromHexa("#FFBF00"); // : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 gridThermo.BorderBrush= GetColorFromHexa("#FFC10D");
-               gridThermo.BorderThickness = new Thickness(1, 0, 1, 10);
+               gridThermo.BorderThickness = new Thickness(0, 0, 0, 10);
             }
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
@@ -566,7 +566,7 @@ namespace VideoKallMCCST.View
             { 
                 //BtnBP.Background = GetColorFromHexa("#FFBF00");//_resultBpToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 grBp.BorderBrush = GetColorFromHexa("#FFC10D");
-                grBp.BorderThickness = new Thickness(1, 0, 1, 10);
+                grBp.BorderThickness = new Thickness(0, 0, 0, 10);
             }
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
@@ -597,7 +597,7 @@ namespace VideoKallMCCST.View
             if (btnWeightToggle)
             {
                 TxtResultWeight.BorderBrush = GetColorFromHexa("#FFC10D");
-                TxtResultWeight.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultWeight.BorderThickness = new Thickness(0, 0, 0, 10);
             }
                 //BtnWeight.Background = GetColorFromHexa("#FFBF00");// btnWeightToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                
@@ -638,7 +638,7 @@ namespace VideoKallMCCST.View
             if (btnHeighttoggle)
             { 
                 TxtResultHeight.BorderBrush = GetColorFromHexa("#FFC10D");
-                TxtResultHeight.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultHeight.BorderThickness = new Thickness(0, 0, 0, 10);
             }// btnHeighttoggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
@@ -674,7 +674,7 @@ namespace VideoKallMCCST.View
                 //   MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
                 if (_otoscopeToggle)
                     TxtResultOtoscope.BorderBrush = GetColorFromHexa("#FFC10D");
-                TxtResultOtoscope.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
                 /* BtnOtoscope.Background = GetColorFromHexa("#FFBF00");*/ // _otoscopeToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
                 double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
@@ -716,7 +716,7 @@ namespace VideoKallMCCST.View
                 if (_dermascopeToggle)
                 {
                     TxtResultDermascope.BorderBrush = GetColorFromHexa("#FFC10D");
-                    TxtResultDermascope.BorderThickness = new Thickness(1, 0, 1, 10);
+                    TxtResultDermascope.BorderThickness = new Thickness(0, 0, 0, 10);
                 }
                 //BtnDermoscope.Background = GetColorFromHexa("#FFBF00"); //_dermascopeToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
@@ -824,15 +824,15 @@ namespace VideoKallMCCST.View
             if (_glucoToggle)
             {
                 grdGluco.BorderBrush = GetColorFromHexa("#FFC10D");
-                grdGluco.BorderThickness = new Thickness(1, 0, 1, 10);
-            }
-           // BtnGlucometer.Background = GetColorFromHexa("#FFBF00");// _glucoToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+                grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
+            }           
+            // BtnGlucometer.Background = GetColorFromHexa("#FFBF00");// _glucoToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
 
             CtrlglucoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
             CtrlglucoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
-            Resultglucopopup.IsOpen = _glucoToggle;
+            Resultglucopopup.IsOpen = _glucoToggle;         
         }
 
         bool _spirometerToggle = false;
@@ -851,7 +851,7 @@ namespace VideoKallMCCST.View
             {
                 MainPage.mainPage.ResetSpirometr?.Invoke();
                 TxtResultspiro.BorderBrush = GetColorFromHexa("#FFC10D");
-                TxtResultspiro.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultspiro.BorderThickness = new Thickness(0, 0, 0, 10);
                 /*BtnSpirometer.Background = GetColorFromHexa("#FFBF00");*/ //_spirometerToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             }
 
@@ -898,7 +898,7 @@ namespace VideoKallMCCST.View
             if (_stethoscopeChest)
             {
                 TxtResultstethoscopechest.BorderBrush = GetColorFromHexa("#FFC10D");
-                TxtResultstethoscopechest.BorderThickness = new Thickness(1, 0, 1, 10);
+                TxtResultstethoscopechest.BorderThickness = new Thickness(0, 0, 0, 10);
             }
                 //BtnSthethoscope.Background = GetColorFromHexa("#FFBF00"); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
@@ -948,7 +948,7 @@ namespace VideoKallMCCST.View
             {
                 MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTLUNGS));
                 TbxSeatBackSet.BorderBrush = GetColorFromHexa("#FFC10D");
-                TbxSeatBackSet.BorderThickness = new Thickness(1, 0, 1, 10);
+                TbxSeatBackSet.BorderThickness = new Thickness(0, 0, 0, 10);
                 // BtnSthethoscopeLungs.Background = GetColorFromHexa("#FFBF00"); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
             }
 
