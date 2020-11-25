@@ -23,7 +23,7 @@ namespace VideoKallMCCST.Communication
             if (MainPage.mainPage.mainpagecontext.PMMConfig != null)
             {
                 var pmm_config = MainPage.mainPage.mainpagecontext.PMMConfig;
-                baseAPIUrl = !string.IsNullOrWhiteSpace(pmm_config.URL) ? pmm_config.URL : string.Empty;
+                baseAPIUrl = !string.IsNullOrWhiteSpace(pmm_config.API_URL) ? pmm_config.API_URL : string.Empty;
             }
             else
             {

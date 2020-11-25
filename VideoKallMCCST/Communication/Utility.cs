@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.IO;
+﻿using System;
 using System.Threading.Tasks;
 using VideoKallMCCST.Model;
-using Windows.Storage;
 
 namespace VideoKallMCCST.Communication
 {
@@ -57,15 +54,20 @@ namespace VideoKallMCCST.Communication
                 Windows.Storage.StorageFile PmmConfigFile = await localFolder.GetFileAsync("PMM_Config.txt");
                 var fileTextData = await Windows.Storage.FileIO.ReadLinesAsync(PmmConfigFile);              
                 string url = string.Empty;
+                string api_url = string.Empty;
                 foreach (var line in fileTextData)
                 {
                     var urlData = line;
-                    if (urlData.Contains("URL"))
+                    if (urlData.Contains("API_URL"))
+                        api_url = urlData.Substring(urlData.IndexOf("http") + 0);
+                    else if (urlData.Contains("URL"))
                         url = urlData.Substring(urlData.IndexOf("http") + 0);
+                  
                     //url = JsonConvert.DeserializeObject<string>(urlData.Substring(urlData.IndexOf("http")+0));                    
                 }
                 PMMConfiguration pmmConfig = new PMMConfiguration();
                 pmmConfig.URL =!string.IsNullOrWhiteSpace(url)?url.ToString().Trim():string.Empty;
+                pmmConfig.API_URL = !string.IsNullOrWhiteSpace(api_url) ? api_url.ToString().Trim() : string.Empty;
                 MainPage.mainPage.mainpagecontext.PMMConfig = pmmConfig;
             }
             catch (Exception ex)

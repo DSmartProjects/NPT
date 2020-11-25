@@ -45,7 +45,7 @@
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="btnSearchPatient" Grid.Column="0" Content="Search" Click="BtnSearchPatient_Click" ></Button>
-                <HyperlinkButton Foreground="Black" Content="Add Patient" Margin="10,0,0,0" Grid.Column="1"   NavigateUri="http://183.82.119.28/VK-PMM/#/login"/>
+                <HyperlinkButton Foreground="Black" Content="Add Patient" Margin="10,0,0,0" Grid.Column="1"   NavigateUri="{Binding PMM_URL,Mode=TwoWay}"/>
                
                 
             </Grid>

@@ -157,7 +157,7 @@ namespace VideoKallMCCST.ViewModel
             try
             {
                 string pmm_Config_FileName = "PMM_Config.txt";
-                string msg = Environment.NewLine + "URL :"+" "+PMMConfig.URL;
+                string msg ="URL :"+" "+PMMConfig.URL+ Environment.NewLine + "API_URL :" + " " + PMMConfig.API_URL;
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 Windows.Storage.StorageFile pinfofile = await localFolder.CreateFileAsync(pmm_Config_FileName, CreationCollisionOption.OpenIfExists);
                 await Windows.Storage.FileIO.WriteTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);

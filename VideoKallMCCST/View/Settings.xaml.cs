@@ -255,10 +255,15 @@ namespace VideoKallMCCST.View
         {
             WriteSTConfigFile();
         }
-
-        private void TxtPMMURL_TextChanged(object sender, TextChangedEventArgs e)
+             
+        private void TxtPMM_URL_TextChanged(object sender, TextChangedEventArgs e)
         {
-            MainPage.mainPage.mainpagecontext.PMMConfig.URL = txtPMMURL.Text;
+            MainPage.mainPage.mainpagecontext.PMMConfig.URL = txtPMM_URL.Text;
+        }
+
+        private void TxtPMM_API_URL_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            MainPage.mainPage.mainpagecontext.PMMConfig.API_URL = txtPMM_API_URL.Text;
         }
     }
 
