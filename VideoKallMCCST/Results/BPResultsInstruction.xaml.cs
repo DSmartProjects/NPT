@@ -25,9 +25,9 @@ namespace VideoKallMCCST.Results
         {
             this.InitializeComponent();
             MainPage.mainPage.mainpagecontext.NotifyResult += UpdateNotification;
-            TxtInstruction.Text = @"1. To connect with BP Monitor, Press data transmission button for 2 sec," +
-                " then press Connect button.";
-             TxtInstruction2.Text=@"2. If connected then don't have to connect again. 3. Result will display around 30 sec after test completed.";
+            //TxtInstruction.Text = @"1. To connect with BP Monitor, Press data transmission button for 2 sec," +
+            //    " then press Connect button.";
+            // TxtInstruction2.Text=@"2. If connected then don't have to connect again. 3. Result will display around 30 sec after test completed.";
 
         }
 
@@ -53,10 +53,10 @@ namespace VideoKallMCCST.Results
                         case DeviceResponseType.BPCONCHEC:
                             // "BPCONCTED>M:{0}>T:{1}";
                             if (res[1].Split(':')[1].ToLower().Equals("true"))
-                                TxtConnectionstatus.Text = "Connected: " + msg.Msg.Split('>')[2];
+                                TxtConnectionstatus.Text = "Connected";
                             else
                             {
-                                TxtConnectionstatus.Text = "BP Monitor is Not Connected. Please connect. ";
+                                TxtConnectionstatus.Text = "Not Connected";
                                 MainPage.mainPage.Thermostatusdelegate?.Invoke(false, 2);
                             }
 

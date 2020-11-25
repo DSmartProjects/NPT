@@ -44,10 +44,10 @@ namespace VideoKallMCCST.Results
             {
 
                 ImageViewer.Source = null;
-                if (isDermascope)
-                    TxTHeader.Text = "Dermascope";
-                else
-                    TxTHeader.Text = "Otoscope";
+                //if (isDermascope)
+                //    TxTHeader.Text = "Dermatoscope";
+                //else
+                //    TxTHeader.Text = "Otoscope";
 
                 BtnSave.IsEnabled = true;
                 BtnTakePic.IsEnabled = true;
@@ -102,6 +102,15 @@ namespace VideoKallMCCST.Results
             else
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.DERSAVEIMAGE);
             BtnSave.IsEnabled = false;
+            ///Done----------------------
+            if (!isDermascope)
+                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
+            else
+                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
+
+            ImageViewer.Source = null;
+            BtnTakePic.IsEnabled = true;
+            MainPage.mainPage.OtoscopeComm?.Invoke();
         }
 
 

@@ -22,11 +22,12 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>024AFAADDCB67D32DB592C11324CEBAB62320B99</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>
+    </PackageCertificateThumbprint>
     <PackageCertificateKeyFile>VideoKallMCCST_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
-    <AppxPackageDir>C:\Sujit\dsmart\smc\SMC PROJECT\Project\build\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\sandyakumar\Desktop\New Build\</AppxPackageDir>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
@@ -169,6 +170,9 @@
     </Compile>
     <Compile Include="Results\Thermometerinstructions.xaml.cs">
       <DependentUpon>Thermometerinstructions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Results\Weight.xaml.cs">
+      <DependentUpon>Weight.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpiroMeter\SpirometerChart.xaml.cs">
       <DependentUpon>SpirometerChart.xaml</DependentUpon>
@@ -349,6 +353,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Results\Thermometerinstructions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Results\Weight.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

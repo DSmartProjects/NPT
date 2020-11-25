@@ -42,27 +42,14 @@ namespace VideoKallMCCST.View
         bool isMuted = false;
         IncomingConnectionEventArgs incommingCall = null;
         public VideoCallViewModel _videoCallVM = null;
-        bool isChairInclined = false;
         public VideoCallPage()
         {
             this.InitializeComponent();
             rootPage.EnsureMediaExtensionManager();
-            this.DefaultVisibilities();
-            this.SetChairPosition();
+            DefaultVisibilities();
             _videoCallVM = MainPage.VideoCallVM;
             this.DataContext = _videoCallVM;
         }
-
-        public void SetChairPosition()
-        {
-            if (isChairInclined == false)
-            {
-                isChairInclined = true;
-                UprightChair.IsEnabled = false;
-                LeaningChair.IsEnabled = true;
-            }
-        }
-
         public void DefaultVisibilities()
         {
             RemoteVideo.Visibility = Visibility.Collapsed;
@@ -204,22 +191,12 @@ namespace VideoKallMCCST.View
 
         private void Apchair1_Click(object sender, RoutedEventArgs e)
         {
-            if (isChairInclined == false)
-            {
-                isChairInclined = true;
-                UprightChair.IsEnabled = false;
-                LeaningChair.IsEnabled = true;
-            }
+
         }
 
         private void Apchair2_Click(object sender, RoutedEventArgs e)
         {
-            if (isChairInclined == true)
-            {
-                isChairInclined = false;
-                LeaningChair.IsEnabled = false;
-                UprightChair.IsEnabled = true;
-            }
+
         }
 
         private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)

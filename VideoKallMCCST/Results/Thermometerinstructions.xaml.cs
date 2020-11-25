@@ -26,8 +26,8 @@ namespace VideoKallMCCST.Results
             this.InitializeComponent();
             MainPage.mainPage.mainpagecontext.NotifyResult += UpdateNotification;
             BtnCMD.IsEnabled = true;
-            TXTInstrction.Text = @"1. Suggest user to Press temperature button on thermometer," +
-                $"then ress connect button. ";
+            //TXTInstrction.Text = @"1. Suggest user to Press temperature button on thermometer," +
+            //    $"then Press connect button. ";
 
         }
 

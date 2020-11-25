@@ -9,7 +9,31 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid Background="WhiteSmoke">
+    <Grid BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5"  Background="#F0F8FF" CornerRadius="10,10,10,10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="150">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" >
+                <TextBlock  Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
+                <TextBlock   Foreground="#464646" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold"  x:Name="TxtConnectionstatus"></TextBlock>
+            </StackPanel>
+            <Button Grid.Row="2" x:Name="BtnCMD" Content="Connect"  Width="120"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF" Click="BtnCMD_Click"></Button>        
+        </Grid>
+    </Grid>
+
+    <!--<Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -24,12 +48,12 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Margin="5" FontSize="20" Text="Test procedure for Thermometer" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"></TextBlock>
-        <TextBlock FontSize="15" Margin="5" x:Name="TxtConnectionstatus"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="8"  ></TextBlock>
-        <TextBlock FontSize="15" Margin="5" x:Name="TxtStatusThermo" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Text="Status" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-        <TextBlock FontSize="15" Margin="5" x:Name="TxtStatusThermodep" Grid.Row="1" Grid.Column="1" Text="Deployed" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="Blue" BorderThickness="3"></Border>
-        <TextBlock   FontSize="15"  TextWrapping="Wrap" Margin="5" x:Name="TXTInstrction" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="10" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-        <Button x:Name="BtnCMD" Content="Connect" Grid.Row="5" Grid.Column="0" Click="BtnCMD_Click"></Button>
-    </Grid>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5" CornerRadius="10,10,10,10"  Background="#F0F8FF"></Border>
+        <TextBlock FontFamily="Open Sans" Foreground="#464646" Padding="5,5,5,5" FontWeight="SemiBold" FontSize="15" Text="Test Procedure For Thermometer"  Visibility="Collapsed" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"  VerticalAlignment="Center" Margin="5,10,5,5" TextAlignment="Center"></TextBlock>
+        <TextBlock   Padding="5,5,5,5" Foreground="#464646" FontFamily="Open Sans"  FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" x:Name="TxtConnectionstatus"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="10"  ></TextBlock>
+        <TextBlock FontFamily="Open Sans"  Foreground="#464646" Margin="30,5,0,0" Padding="5,5,5,5" FontSize="12" FontWeight="SemiBold"  x:Name="TxtStatusThermo"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10" Text="Status  : "></TextBlock>
+        <TextBlock FontFamily="Open Sans" Visibility="Collapsed" FontSize="12" FontWeight="SemiBold" Margin="5" x:Name="TxtStatusThermodep" Grid.Row="1" Grid.Column="1" Text="Deployed"  VerticalAlignment="Center"></TextBlock>
+        <TextBlock Foreground="#464646" FontFamily="Open Sans" Margin="30,0,0,10" Padding="5,5,5,5" FontSize="12" FontWeight="SemiBold"  TextWrapping="Wrap"  x:Name="TXTInstrction" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="10" Grid.Column="0"  VerticalAlignment="Center"></TextBlock>
+        <Button x:Name="BtnCMD" Content="Connect"  Width="100" Grid.Row="4" Margin="80,5,5,0"  Grid.Column="1" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF" Click="BtnCMD_Click"></Button>
+    </Grid>-->
 </UserControl>
