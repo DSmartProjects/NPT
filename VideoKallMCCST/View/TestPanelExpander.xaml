@@ -140,7 +140,7 @@
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock  Visibility="Collapsed" Margin="15,0,0,0" Grid.Row="0" x:Name="TblTemp" Text="Temprature :" Grid.Column="0"  FontFamily="Open Sans" FontSize="12" Foreground="#464646" FontWeight="SemiBold"  VerticalAlignment="Center"></TextBlock>
+                            <TextBlock  Visibility="Collapsed" Margin="15,0,0,0" Grid.Row="0" x:Name="TblTemp" Text="Temperature :" Grid.Column="0"  FontFamily="Open Sans" FontSize="12" Foreground="#464646" FontWeight="SemiBold"  VerticalAlignment="Center"></TextBlock>
                             <!--<TextBlock    Grid.Row="0"   x:Name="Temprature :"  Grid.Column="0" FontSize="12" FontWeight="SemiBold" Foreground="#464646" VerticalAlignment="Center"></TextBlock>-->
                             <TextBlock   Grid.Row="0" x:Name="TxtTemprature"  Grid.Column="1" Margin="5,1,0,0"  FontFamily="Open Sans" FontSize="12" Foreground="#464646" FontWeight="Normal"  VerticalAlignment="Center"></TextBlock>
                             <ToggleSwitch Visibility="Collapsed" x:Name="TxtTmpUnitbtn" Grid.Row="0" Grid.Column="1" IsOn="True" OffContent="C" OnContent="F"   Margin="0,2,0,0"   FontFamily="Open Sans" FontSize="12" Foreground="#464646" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Toggled="TxtTmpUnitbtn_Toggled" Tapped="TxtTmpUnitbtn_Tapped"></ToggleSwitch>

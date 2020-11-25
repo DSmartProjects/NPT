@@ -22,11 +22,12 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>024AFAADDCB67D32DB592C11324CEBAB62320B99</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>
+    </PackageCertificateThumbprint>
     <PackageCertificateKeyFile>VideoKallMCCST_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
-    <AppxPackageDir>C:\Sujit\dsmart\smc\SMC PROJECT\Project\build\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\sandyakumar\Desktop\New Build\</AppxPackageDir>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
