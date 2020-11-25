@@ -25,7 +25,7 @@ namespace VideoKallMCCST.Results
         {
             this.InitializeComponent();
             MainPage.mainPage.StethoscopeNotification += UpdateNotification;
-            TxtInstruction.Text = @"1. The chest piece should be held in your dominant hand, between the index and middle fingers, just above the knuckle. To prevent interfering noise, curl the thumb under the tube to keep it still";
+            //TxtInstruction.Text = @"1. The chest piece should be held in your dominant hand, between the index and middle fingers, just above the knuckle. To prevent interfering noise, curl the thumb under the tube to keep it still";
         }
 
         async void UpdateNotification(string s, int code)

@@ -58,6 +58,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="80"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5" CornerRadius="10,10,10,10"  Background="#F0F8FF"></Border>
                 <Button Name="BtnST1" Padding="5" Grid.Row="1" Grid.Column="0" Content="1" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST1_Click"   ></Button>
                 <Button Name="BtnST2" Padding="5" Grid.Row="1" Grid.Column="1" Content="2" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST2_Click"   ></Button>
                 <Button Name="BtnST3" Padding="5" Grid.Row="1" Grid.Column="2" Content="3" Margin="3" Style="{StaticResource BtnArray}" Click="BtnST3_Click"   ></Button>

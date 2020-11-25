@@ -26,7 +26,7 @@
     <PackageCertificateKeyFile>VideoKallMCCST_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
-    <AppxPackageDir>C:\Sujit\dsmart\smc\SMC PROJECT\Project\build\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\lakshmi.paruchuri\Desktop\NPT\</AppxPackageDir>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>

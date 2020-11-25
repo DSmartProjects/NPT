@@ -8,31 +8,74 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    <Grid Background="WhiteSmoke">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-        </Grid.RowDefinitions>
+
+    <Grid BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5"  Background="#F0F8FF" CornerRadius="10,10,10,10" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition> 
-            
+            <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="Blue" BorderThickness="3"></Border>
-        <TextBlock Text="BP Monitor Test Procedure"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" FontSize="20" VerticalAlignment="Stretch" HorizontalAlignment="Center"></TextBlock>
-        <TextBlock   Grid.Row="1" Grid.Column="0" Text="Status: " Margin="5" FontSize="15" ></TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Deployed" Margin="5" FontSize="15" ></TextBlock>
-        <TextBlock  Grid.Row="2" Grid.Column="0" Text="Connection status: " Margin="5" FontSize="15" ></TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="1" Name="TxtConnectionstatus" Grid.ColumnSpan="5" Margin="5" FontSize="15" ></TextBlock>
-        <TextBlock Grid.Row="3" Grid.Column="0" Margin="5" Grid.RowSpan="2" Grid.ColumnSpan="10" x:Name="TxtInstruction" TextWrapping ="Wrap"></TextBlock>
-        <TextBlock Grid.Row="5" Grid.Column="0" Margin="5" Grid.RowSpan="3" Grid.ColumnSpan="10" x:Name="TxtInstruction2" TextWrapping ="Wrap"></TextBlock>
-        <Button x:Name="BtnConnect" Grid.Row="9" Grid.Column="0" Content="Connect"  Click="Connect_Click"></Button>
-        <Button Grid.Row="9" Grid.Column="2" Content="Check Connection" Click="CheckConn_Click"></Button>
-    </Grid>
+        <StackPanel Grid.Column="0" Orientation="Vertical" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="140">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock  Margin="30,0,0,0" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
+                        <TextBlock Name="TxtConnectionstatus" Text="Connected" FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="Normal" ></TextBlock>
+                    </StackPanel>
+                    <Button x:Name="BtnConnect" Width="120"  Grid.Row="2" Grid.Column="1" Content="Connect"  Click="Connect_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"></Button>
+                    <Button   Content="Check Connection" Width="120"   Grid.Row="2" Margin="15,0,0,0" Grid.Column="2" Background="#FFC10D" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#515151" CornerRadius="5,5,5,5" Click="CheckConn_Click"></Button>
+                </Grid>
+            </Grid>           
+        </StackPanel>
+        <Grid Grid.Column="1"></Grid>
+    </Grid>    
 </UserControl>
+
+
+<!--<Grid Background="WhiteSmoke">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>        
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>    
+        <RowDefinition Height="50"></RowDefinition>
+        <RowDefinition Height="32"></RowDefinition>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto"></ColumnDefinition>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+
+    </Grid.ColumnDefinitions>
+    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5" CornerRadius="10,10,10,10"  Background="#F0F8FF"></Border>
+    <TextBlock Text="BP Monitor"  Visibility="Collapsed" Foreground="#464646" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="6" FontSize="15" FontFamily="Open Sans" VerticalAlignment="Center" Margin="5,10,5,5" TextAlignment="Center" FontWeight="SemiBold" ></TextBlock>
+    <TextBlock Margin="30,0,5,5"  Grid.Row="1" Foreground="#464646"  Grid.Column="0" Text="Status                      :"   FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" ></TextBlock>
+    <TextBlock Grid.Row="1" Foreground="#464646"  Grid.Column="1" Text="Deployed" Margin="30,0,5,5" FontFamily="Open Sans"  FontSize="12" FontWeight="SemiBold" ></TextBlock>
+    <TextBlock  Grid.Row="2" Foreground="#464646"  Grid.Column="0"  Text="Connection Status  : " Margin="30,10,5,5"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" ></TextBlock>
+    <TextBlock Grid.Row="2" Grid.Column="1"  Foreground="#464646" Name="TxtConnectionstatus" Grid.ColumnSpan="5"  Margin="30,0,10,10" FontFamily="Open Sans" FontSize="12" FontWeight="Normal" ></TextBlock>
+    <TextBlock Grid.Row="3" Grid.Column="0"  Grid.RowSpan="2" Foreground="#464646" Grid.ColumnSpan="10" Margin="30,5,10,10" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold"  x:Name="TxtInstruction" TextWrapping ="Wrap"></TextBlock>
+    <TextBlock Grid.Row="5" Visibility="Collapsed" Grid.Column="0"  Foreground="#464646" Grid.RowSpan="3" Grid.ColumnSpan="10" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold"  x:Name="TxtInstruction2" TextWrapping ="Wrap"></TextBlock>
+    <StackPanel Orientation="Horizontal"   Margin="60,20,0,0" Grid.Row="5" Grid.Column="2">
+        <Button x:Name="BtnConnect" Width="120" FontStretch="Expanded"  Content="Connect"  Click="Connect_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"></Button>
+        <Button   Content="Check Connection" Width="120"   Grid.Column="2" Margin="20,0,0,0" Background="#FFC10D" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#515151" CornerRadius="5,5,5,5" Click="CheckConn_Click"></Button>
+    </StackPanel>
+</Grid>-->
+
+
+

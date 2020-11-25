@@ -24,8 +24,8 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Test procedure for" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"></TextBlock>
-        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="Blue" BorderThickness="3"></Border>
+        <TextBlock Text="Test procedure for"  Visibility="Collapsed" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"></TextBlock>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5" CornerRadius="10,10,10,10"  Background="#F0F8FF"></Border>
 
     </Grid>
 </UserControl>
