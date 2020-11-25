@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VideoKallMCCST.Communication;
+using VideoKallMCCST.Model;
 using VideoKallMCCST.View;
 using Windows.Storage;
 using Windows.System;
@@ -114,6 +115,9 @@ namespace VideoKallMCCST.ViewModel
         public string TxtIpAddress { get;
             set; }
 
+        private PMMConfiguration _pmmConfig = null;
+        public PMMConfiguration PMMConfig { get { return _pmmConfig; } set { _pmmConfig = value; } }
+
         public void UpadateIPaddress(string Ip, string Port)
         {
             TxtIpAddress = Ip;
@@ -146,6 +150,20 @@ namespace VideoKallMCCST.ViewModel
             catch (Exception)
             { }
             MainPage.mainPage.SaveSTConfig?.Invoke();
+            Write_PMM_ConfigFile();
+        }
+        async void Write_PMM_ConfigFile()
+        {
+            try
+            {
+                string pmm_Config_FileName = "PMM_Config.txt";
+                string msg = Environment.NewLine + "URL :"+" "+PMMConfig.URL;
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                Windows.Storage.StorageFile pinfofile = await localFolder.CreateFileAsync(pmm_Config_FileName, CreationCollisionOption.OpenIfExists);
+                await Windows.Storage.FileIO.WriteTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            }
+            catch (Exception)
+            { }
         }
 
         public async void ExecuteBrowserCommand()

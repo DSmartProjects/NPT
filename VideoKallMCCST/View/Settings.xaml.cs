@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using VideoKallMCCST.Communication;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -221,12 +223,19 @@ namespace VideoKallMCCST.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            Utility ut = new Utility();
+            var pmm_Config = Task.Run(async () => { return await ut.ReadPMMConfigurationFile(); }).Result;
             ReadSTConfigFile();
         }
 
         private void SaveConfig()
         {
             WriteSTConfigFile();
+        }
+
+        private void TxtPMMURL_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            MainPage.mainPage.mainpagecontext.PMMConfig.URL = txtPMMURL.Text;
         }
     }
 

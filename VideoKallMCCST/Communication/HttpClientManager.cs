@@ -16,11 +16,34 @@ namespace VideoKallMCCST.Communication
     public class HttpClientManager
     {
         HttpResponseMessage response = null;
-        static string baseAPIUrl = "http://183.82.119.28:5003/api";
+        string baseAPIUrl =string.Empty;
+
+        public HttpClientManager(){
+
+            if (MainPage.mainPage.mainpagecontext.PMMConfig != null)
+            {
+                var pmm_config = MainPage.mainPage.mainpagecontext.PMMConfig;
+                baseAPIUrl = !string.IsNullOrWhiteSpace(pmm_config.URL) ? pmm_config.URL : string.Empty;
+            }
+            else
+            {
+                Utility ut = new Utility();
+                var pmm_Config = Task.Run(async () => { return await ut.ReadPMMConfigurationFile(); }).Result;
+            }
+            
+        }
+
         public async Task<List<Patient>> PatientsAsync(string user)
         {
-            List<Patient> patients = null;
-            var uri =baseAPIUrl+ "/v1/patient/searchpatients?name=" + user;
+            List<Patient> patients =  new List<Patient>();
+            var uri = string.Empty;
+            if (!string.IsNullOrEmpty(baseAPIUrl))
+            {
+                uri = baseAPIUrl + "/v1/patient/searchpatients?name=" + user;
+            }
+            else
+                return patients;
+           
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
@@ -30,8 +53,7 @@ namespace VideoKallMCCST.Communication
             {
                 client.BaseAddress = new Uri(uri);
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                patients = new List<Patient>();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));              
                 string httpResponseBody = "";
                 try
                 {
