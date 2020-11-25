@@ -9,8 +9,8 @@
     xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"   
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
-
-    <Grid x:Name="gridInstrumentPanel" MinHeight="700" BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid x:Name="gridInstrumentPanel" MinHeight="700" BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="AUTO"></RowDefinition>
@@ -128,10 +128,10 @@
 
                     </Grid>
                 </Grid>
-                
+
                 <Popup Margin="30,20,0,20" Grid.Row="1" Name="ResulHeightPopup" IsOpen="False" >
                     <StackPanel>
-                        <uctrl:Resulttemplate Width="790" Height="195" x:Name="CtrlHeightoResult"></uctrl:Resulttemplate>
+                        <uctrl:Resulttemplate Width="790" Height="200" x:Name="CtrlHeightoResult"></uctrl:Resulttemplate>
                     </StackPanel>
                 </Popup>
                 <Popup Margin="30,20,0,20" Grid.Row="1" Name="ResultBPPopup" Width="auto" Height="auto" IsOpen="False">
@@ -369,4 +369,6 @@
 
             </Grid>
         </Grid>
+    </ScrollViewer>
+
 </Page>
