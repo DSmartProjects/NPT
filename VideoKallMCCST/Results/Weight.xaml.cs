@@ -17,14 +17,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace VideoKallMCCST.Results
 {
-    public sealed partial class Resulttemplate : UserControl
+    public sealed partial class Weight : UserControl
     {
-        public Resulttemplate()
+        public Weight()
         {
             this.InitializeComponent();
-        }       
+        }
 
-        private void BtnGetHeight_Click(object sender, RoutedEventArgs e)
+        private void BtnGetWeight_Click(object sender, RoutedEventArgs e)
         {
 
         }

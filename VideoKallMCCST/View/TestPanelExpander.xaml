@@ -142,7 +142,7 @@
                 <Popup Margin="30,20,0,20" Grid.Row="1" Name="ResuWeightPopup" IsOpen="False">
 
                     <StackPanel>
-                        <uctrl:Resulttemplate Width="790" Height="200" x:Name="CtrlWeightResult"></uctrl:Resulttemplate>
+                        <uctrl:Weight Width="790" Height="200" x:Name="CtrlWeightResult"></uctrl:Weight>
                     </StackPanel>
                 </Popup>
                 <Popup Margin="30,20,0,20" Grid.Row="1" Name="ResultPulseOximeterPopup" IsOpen="False"  >

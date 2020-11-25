@@ -35,17 +35,15 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                         <TextBlock Margin="10,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
-                        <TextBlock x:Name="TxtStatus" Text="Ready" FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="Normal" ></TextBlock>
+                        <TextBlock x:Name="TxtStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="Normal" ></TextBlock>
                     </StackPanel> 
                     <Button x:Name="BtnTakePic" Grid.Row="2" Grid.Column="1" Content="Capture" Click="BtnTakePic_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"></Button>
                     <Button Name="BtnSave" Grid.Row="2" Grid.Column="3"  Content="Save" Click="BtnSave_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"></Button>
                 </Grid>
             </Grid>            
         </StackPanel>
-        <Grid Grid.Column="1" Grid.RowSpan="2">
-            <Image Name="ImageViewer"  Stretch="Fill"
-                    MaxWidth="{Binding Path=ViewportWidth, ElementName=ScrollViewerMain}"
-                    MaxHeight="{Binding Path=ViewportHeight, ElementName=ScrollViewerMain}"
+        <Grid Grid.Column="1" BorderBrush="Black" BorderThickness="1,1,1,1" >
+            <Image Name="ImageViewer"  Stretch="Fill"                    
                    RenderTransformOrigin="0.5,0.5" Source="..\Assets/settings.png">
             </Image>
         </Grid>

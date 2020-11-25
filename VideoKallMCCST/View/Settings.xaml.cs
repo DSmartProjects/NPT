@@ -8,6 +8,7 @@ using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,7 +36,11 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.SaveSTConfig += SaveConfig;
             TxtimageFolder.Text = "\\\\"+ MainPage.mainPage.SMCCommChannel.IPAddress+"\\" + strRootFolder;
             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
-            
+            if(MainPage.mainPage.isDataAcquitionappConnected)
+                TxtDataAcq.Foreground= GetColorFromHexa("#34CBA8");
+            else
+                TxtDataAcq.Foreground = GetColorFromHexa("#ED604A");
+
             MainPage.mainPage.DQConnectionCallback += UpdateConnectionStatus;
             TxtTmpUnitbtn.IsOn = MainPage.mainPage.mainpagecontext.ThermometerUnitF;
             Dfaultsettings.IP = MainPage.mainPage.SMCCommChannel.IPAddress;
@@ -66,7 +71,17 @@ namespace VideoKallMCCST.View
             //CODEC: ""
         }
 
-        
+        public SolidColorBrush GetColorFromHexa(string hexaColor)
+        {
+            return new SolidColorBrush(
+                Color.FromArgb(
+                    255,
+                    Convert.ToByte(hexaColor.Substring(1, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(3, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(5, 2), 16)
+                )
+            );
+        }
 
         async  void UpdateConnectionStatus(bool status)
         {
@@ -74,7 +89,11 @@ namespace VideoKallMCCST.View
             {
                 TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
             });
-            
+            if (MainPage.mainPage.isDataAcquitionappConnected)
+                TxtDataAcq.Foreground = GetColorFromHexa("#34CBA8");
+            else
+                TxtDataAcq.Foreground = GetColorFromHexa("#ED604A");
+
         }
         private void TxtTmpUnitbtn_Toggled(object sender, RoutedEventArgs e)
         {
@@ -127,6 +146,10 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.isDataAcquitionappConnected = false;
             MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp("ConnectionTest");
              TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
+            if (MainPage.mainPage.isDataAcquitionappConnected)
+                TxtDataAcq.Foreground = GetColorFromHexa("#34CBA8");
+            else
+                TxtDataAcq.Foreground = GetColorFromHexa("#ED604A");
         }
 
         private void TxtFilterlungs_TextChanged(object sender, TextChangedEventArgs e)

@@ -552,10 +552,10 @@ namespace VideoKallMCCST.View
         bool _resultBpToggle = false;
         private void BtnBP_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_resultBpToggle) || (!ConnectionCheck && !_resultBpToggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !_resultBpToggle) || (!ConnectionCheck && !_resultBpToggle))
+            //    return;
 
             _resultBpToggle = !_resultBpToggle;
            // if (_resultBpToggle)
@@ -583,10 +583,10 @@ namespace VideoKallMCCST.View
         bool btnWeightToggle = false;
         private void BtnWeight_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
+            //    return;
 
             btnWeightToggle = !btnWeightToggle;
 
@@ -614,10 +614,10 @@ namespace VideoKallMCCST.View
         private void BtnHeight_Click(object sender, RoutedEventArgs e)
         {
 
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) || (!ConnectionCheck && !btnHeighttoggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) || (!ConnectionCheck && !btnHeighttoggle))
+            //    return;
 
             btnHeighttoggle = !btnHeighttoggle;
 
@@ -652,10 +652,10 @@ namespace VideoKallMCCST.View
         bool _otoscopeToggle = false;
         private async void BtnOtoscope_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_otoscopeToggle) || (!ConnectionCheck && !_otoscopeToggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !_otoscopeToggle) || (!ConnectionCheck && !_otoscopeToggle))
+            //    return;
             try
             {
                 if (MainPage.mainPage.rootImageFolder == null)
@@ -694,9 +694,9 @@ namespace VideoKallMCCST.View
         bool _dermascopeToggle = false;
         private async void BtnDermoscope_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
-            if ((MainPage.mainPage.TestIsInProgress && !_dermascopeToggle) || (!ConnectionCheck && !_dermascopeToggle))
-                return;
+            //isTestResultOpened();
+            //if ((MainPage.mainPage.TestIsInProgress && !_dermascopeToggle) || (!ConnectionCheck && !_dermascopeToggle))
+            //    return;
 
             try
             {
@@ -881,13 +881,13 @@ namespace VideoKallMCCST.View
 
         private void BtnSthethoscope_Click(object sender, RoutedEventArgs e)
         {
-            isTestResultOpened();
-            if (MainPage.mainPage.isStethoscopeStreaming || (!ConnectionCheck && !_stethoscopeChest))
-                return;
+            //isTestResultOpened();
+            //if (MainPage.mainPage.isStethoscopeStreaming || (!ConnectionCheck && !_stethoscopeChest))
+            //    return;
 
 
-            if (MainPage.mainPage.TestIsInProgress && !_stethoscopeChest)
-                return;
+            //if (MainPage.mainPage.TestIsInProgress && !_stethoscopeChest)
+            //    return;
 
             _stethoscopeChest = !_stethoscopeChest;
             MainPage.mainPage.IsStethescopeChest = _stethoscopeChest;

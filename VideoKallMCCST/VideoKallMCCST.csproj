@@ -170,6 +170,9 @@
     <Compile Include="Results\Thermometerinstructions.xaml.cs">
       <DependentUpon>Thermometerinstructions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Results\Weight.xaml.cs">
+      <DependentUpon>Weight.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SpiroMeter\SpirometerChart.xaml.cs">
       <DependentUpon>SpirometerChart.xaml</DependentUpon>
     </Compile>
@@ -349,6 +352,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Results\Thermometerinstructions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Results\Weight.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
