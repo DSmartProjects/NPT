@@ -261,7 +261,7 @@
                 <Popup Margin="30,0,0,20" Name="Resultspiropopup" IsOpen="False"  Grid.Row="3">
 
                     <StackPanel>
-                        <uctrl:Spirometeruc x:Name="CtrlspiroResult"  Width="790" Height="400"></uctrl:Spirometeruc>
+                        <uctrl:Spirometeruc x:Name="CtrlspiroResult"  Width="790" Height="300"></uctrl:Spirometeruc>
                     </StackPanel>
                 </Popup>
                 <!--<TextBlock x:Name="TxtResultspiro" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBlock>-->

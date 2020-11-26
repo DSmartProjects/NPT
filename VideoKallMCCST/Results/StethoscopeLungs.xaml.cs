@@ -46,7 +46,7 @@ namespace VideoKallMCCST.Results
         {
             isoperationStarted = !isoperationStarted;
 
-            BtnDone.Content = isoperationStarted ? "Stop" : "Start";
+             BtnDone.Content = isoperationStarted ? "Stop" : "Start";
 
             if (isoperationStarted)
             {
@@ -133,7 +133,7 @@ namespace VideoKallMCCST.Results
 
         void SelectedStethoscope(int index,string msg = "selected")
         {
-            StStatus.Text = string.Format( "Stethoscope number {0 } {1}", index + 1, msg);
+            StStatus.Text = string.Format("Number {0 } {1}",index + 1, msg);
         }
 
        
@@ -305,7 +305,8 @@ namespace VideoKallMCCST.Results
                case 0:
                     if(state == 0)
                     {//selected
-                        BtnST1.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                     // BtnST1.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST1.Background = GetColorFromHexa("#EEEEEE");
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -324,12 +325,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                       //  currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST1.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST1.Background = GetColorFromHexa("#34CBA8"); //new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+
+
                     }
                     else if(state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST1.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                        BtnST1.Background = GetColorFromHexa("#E96056"); //new SolidColorBrush(Windows.UI.Colors.Red);
                       //  currentStethescope = -2;
                         //error
                     }
@@ -343,9 +346,9 @@ namespace VideoKallMCCST.Results
                             if(st == 1)
                                 BtnST1.Background = GetColorFromHexa("#FFBF00");
                             else if(st == 2)
-                                BtnST1.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST1.Background = GetColorFromHexa("#34CBA8"); //new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if(st == 3)
-                                BtnST1.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST1.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if(st == 0)
                                 BtnST1.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }       
@@ -354,7 +357,7 @@ namespace VideoKallMCCST.Results
                 case 1:
                     if (state == 0)
                     {//selected
-                        BtnST2.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST2.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -373,12 +376,12 @@ namespace VideoKallMCCST.Results
                     {//completed
                        // currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST2.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST2.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST2.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                        BtnST2.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                       //  currentStethescope = -2;
                         //error
                     }
@@ -392,9 +395,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST2.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST2.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST2.Background = GetColorFromHexa("#34CBA8"); //new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST2.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST2.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST2.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -403,7 +406,7 @@ namespace VideoKallMCCST.Results
                 case 2:
                     if (state == 0)
                     {//selected
-                        BtnST3.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST3.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -422,14 +425,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                         //currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST3.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST3.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST3.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                       // currentStethescope = -2;
-                        //error
+                        BtnST3.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                        // currentStethescope = -2;
+                                                                        //error
                     }
                     else if (state == -1)
                     {
@@ -441,9 +444,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST3.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST3.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST3.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST3.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST3.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST3.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -452,7 +455,7 @@ namespace VideoKallMCCST.Results
                 case 3:
                     if (state == 0)
                     {//selected
-                        BtnST4.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST4.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -471,12 +474,12 @@ namespace VideoKallMCCST.Results
                     {//completed
                        // currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST4.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST4.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST4.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                        BtnST4.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                         //currentStethescope = -2;
                         //error
                     }
@@ -490,9 +493,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST4.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST4.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST4.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST4.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST4.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST4.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -520,14 +523,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                        // currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST5.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST5.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST5.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                       // currentStethescope = -2;
-                        //error
+                        BtnST5.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                        // currentStethescope = -2;
+                                                                        //error
                     }
                     else if (state == -1)
                     {
@@ -539,9 +542,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST5.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST5.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST5.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST5.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST5.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST5.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -550,7 +553,7 @@ namespace VideoKallMCCST.Results
                 case 5:
                     if (state == 0)
                     {//selected
-                        BtnST6.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST6.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -569,14 +572,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                        // currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST6.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST6.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST6.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                       // currentStethescope = -2;
-                        //error
+                        BtnST6.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                        // currentStethescope = -2;
+                                                                        //error
                     }
                     else if (state == -1)
                     {
@@ -588,9 +591,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST6.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST6.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST6.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST6.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST6.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST6.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -599,7 +602,7 @@ namespace VideoKallMCCST.Results
                 case 6:
                     if (state == 0)
                     {//selected
-                        BtnST7.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST7.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -618,14 +621,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                        // currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST7.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST7.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST7.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                       // currentStethescope = -2;
-                        //error
+                        BtnST7.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                        // currentStethescope = -2;
+                                                                        //error
                     }
                     else if (state == -1)
                     {
@@ -637,9 +640,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST7.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST7.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST7.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST7.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST7.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST7.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -648,7 +651,7 @@ namespace VideoKallMCCST.Results
                 case 7:
                     if (state == 0)
                     {//selected
-                        BtnST8.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST8.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -667,12 +670,12 @@ namespace VideoKallMCCST.Results
                     {//completed
                         //currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST8.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST8.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST8.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                        BtnST8.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                         //currentStethescope = -2;
                         //error
                     }
@@ -686,9 +689,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST8.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST8.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST8.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST8.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST8.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST8.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -697,7 +700,7 @@ namespace VideoKallMCCST.Results
                 case 8:
                     if (state == 0)
                     {//selected
-                        BtnST9.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST9.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -716,14 +719,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                      //   currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST9.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST9.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST9.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                      //  currentStethescope = -2;
-                        //error
+                        BtnST9.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                        //  currentStethescope = -2;
+                                                                        //error
                     }
                     else if (state == -1)
                     {
@@ -735,9 +738,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST9.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST9.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST9.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST9.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST9.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST9.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -746,7 +749,7 @@ namespace VideoKallMCCST.Results
                 case 9:
                     if (state == 0)
                     {//selected
-                        BtnST10.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST10.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -765,14 +768,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                       //  currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST10.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST10.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST10.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                      //  currentStethescope = -2;
-                        //error
+                        BtnST10.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                         //  currentStethescope = -2;
+                                                                         //error
                     }
                     else if (state == -1)
                     {
@@ -784,9 +787,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST10.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST10.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST10.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST10.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST10.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST10.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -795,7 +798,7 @@ namespace VideoKallMCCST.Results
                 case 10:
                     if (state == 0)
                     {//selected
-                        BtnST11.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST11.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -814,14 +817,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                        // currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST11.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST11.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST11.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                      //  currentStethescope = -2;
-                        //error
+                        BtnST11.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                         //  currentStethescope = -2;
+                                                                         //error
                     }
                     else if (state == -1)
                     {
@@ -833,9 +836,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST11.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST11.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST11.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST11.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST11.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST11.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -844,7 +847,7 @@ namespace VideoKallMCCST.Results
                 case 11:
                     if (state == 0)
                     {//selected
-                        BtnST12.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST12.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -863,14 +866,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                        // currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST12.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST12.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST12.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                       // currentStethescope = -2;
-                        //error
+                        BtnST12.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                         // currentStethescope = -2;
+                                                                         //error
                     }
                     else if (state == -1)
                     {
@@ -882,9 +885,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST12.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST12.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST12.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST12.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST12.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST12.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -893,7 +896,7 @@ namespace VideoKallMCCST.Results
                 case 12:
                     if (state == 0)
                     {//selected
-                        BtnST13.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST13.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -912,14 +915,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                        // currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST13.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST13.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST13.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                       // currentStethescope = -2;
-                        //error
+                        BtnST13.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                         // currentStethescope = -2;
+                                                                         //error
                     }
                     else if (state == -1)
                     {
@@ -931,9 +934,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST13.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST13.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST13.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST13.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST13.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST13.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -942,7 +945,7 @@ namespace VideoKallMCCST.Results
                 case 13:
                     if (state == 0)
                     {//selected
-                        BtnST14.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST14.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -961,13 +964,13 @@ namespace VideoKallMCCST.Results
                     {//completed
                         //currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST14.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST14.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST14.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                      ///  currentStethescope = -2;
+                        BtnST14.Background = GetColorFromHexa("#E96056"); //new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                          ///  currentStethescope = -2;
                         //error
                     }
                     else if (state == -1)
@@ -980,9 +983,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST14.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST14.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST14.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST14.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST14.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST14.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -991,7 +994,7 @@ namespace VideoKallMCCST.Results
                 case 14:
                     if (state == 0)
                     {//selected
-                        BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST15.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -1010,14 +1013,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                       //  currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST15.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                       // currentStethescope = -2;
-                        //error
+                        BtnST15.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                         // currentStethescope = -2;
+                                                                         //error
                     }
                     else if (state == -1)
                     {
@@ -1029,9 +1032,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST15.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST15.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST15.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -1040,7 +1043,7 @@ namespace VideoKallMCCST.Results
                 case 15:
                     if (state == 0)
                     {//selected
-                        BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
+                        BtnST16.Background = GetColorFromHexa("#EEEEEE");//new SolidColorBrush(Windows.UI.Colors.LightGray);
                         selectedIndex = idx;
                         if (!STState.ContainsKey(idx))
                             STState.Add(idx, 0);
@@ -1059,14 +1062,14 @@ namespace VideoKallMCCST.Results
                     {//completed
                     //    currentStethescope = -2;
                         STState[idx] = 2;
-                        BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                        BtnST16.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                     }
                     else if (state == 3)
                     {
                         STState[idx] = 3;
-                        BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                      //  currentStethescope = -2;
-                        //error
+                        BtnST16.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
+                                                                         //  currentStethescope = -2;
+                                                                         //error
                     }
                     else if (state == -1)
                     {
@@ -1078,9 +1081,9 @@ namespace VideoKallMCCST.Results
                             if (st == 1)
                                 BtnST16.Background = GetColorFromHexa("#FFBF00");
                             else if (st == 2)
-                                BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
+                                BtnST16.Background = GetColorFromHexa("#34CBA8");//new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                             else if (st == 3)
-                                BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                                BtnST16.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
                                 BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.White);
                         }
@@ -1091,6 +1094,19 @@ namespace VideoKallMCCST.Results
             }
         }
 
-      
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnRecord_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

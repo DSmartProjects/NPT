@@ -17,8 +17,8 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid>
-                            <Ellipse Name="stethoscopeItem"  Stroke="Green"   Width="{Binding StlHeight}" Height="{Binding StlHeight}"
-                       StrokeThickness="2" Fill="{TemplateBinding Background}">
+                            <Ellipse Name="stethoscopeItem"  Stroke="#3AA0FF"   Width="{Binding StlHeight}" Height="{Binding StlHeight}"
+                       StrokeThickness="0.5" Fill="{TemplateBinding Background}">
                             </Ellipse>
                             <ContentPresenter HorizontalAlignment="Center"  
                                 VerticalAlignment="Center"/>
@@ -35,9 +35,89 @@
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
         </Style>
-
     </UserControl.Resources>
-    <Grid Background="WhiteSmoke">
+    <Grid BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5"  Background="#F0F8FF" CornerRadius="10,10,10,10" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="350"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Orientation="Vertical" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="140">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock Margin="20,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
+                        <!--<TextBlock x:Name="StStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>-->
+                    </StackPanel>
+                    <TextBlock x:Name="StStatus" Grid.Row="1" TextWrapping="Wrap" Grid.Column="3" FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>
+                    <Button Grid.Row="2" x:Name="BtnStart" Grid.Column="1" Content="Start streaming" Click="BtnStart_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF" />
+                    <Button Grid.Row="2" Margin="20,0,0,0" x:Name="BtnRecord" Width="120"  Grid.Column="3" Content="Record" Click="BtnRecord_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#E96056" Foreground="#FFF" />
+                </Grid>
+            </Grid>
+
+            <StackPanel HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center">
+                <Button   Width="130" Margin="30,0,0,0" x:Name="BtnSave"  Content="Save" Visibility="Visible" Click="BtnSave_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"/>
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Column="2"  Grid.ColumnSpan="2" Height="180" Width="350" Grid.RowSpan="2" x:Name="gridstarray" BorderBrush="#D6ECFF" BorderThickness="0.5,0.5,0.5,0.5"  Background="#D6ECFF" CornerRadius="10,10,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Name="BtnST1" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0" Content="1"  Style="{StaticResource BtnArray}" Click="BtnST1_Click"   ></Button>
+            <Button Name="BtnST2" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" Content="2"  Style="{StaticResource BtnArray}" Click="BtnST2_Click"   ></Button>
+            <Button Name="BtnST3" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="1" Grid.Column="2" Content="3"  Style="{StaticResource BtnArray}" Click="BtnST3_Click"   ></Button>
+            <Button Name="BtnST4" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="1" Grid.Column="3" Content="4"  Style="{StaticResource BtnArray}" Click="BtnST4_Click"   ></Button>
+
+            <Button Name="BtnST5" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="2" Grid.Column="0" Content="5"  Style="{StaticResource BtnArray}" Click="BtnST5_Click"   ></Button>
+            <Button Name="BtnST6" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="2" Grid.Column="1" Content="6"  Style="{StaticResource BtnArray}" Click="BtnST6_Click"   ></Button>
+            <Button Name="BtnST7" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold"  Margin="5,5,5,5" Grid.Row="2" Grid.Column="2" Content="7"  Style="{StaticResource BtnArray}" Click="BtnST7_Click"   ></Button>
+            <Button Name="BtnST8" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="2" Grid.Column="3" Content="8"  Style="{StaticResource BtnArray}" Click="BtnST8_Click"   ></Button>
+
+            <Button Name="BtnST9" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5"  Grid.Row="3" Grid.Column="0" Content="9"  Style="{StaticResource BtnArray}" Click="BtnST9_Click"   ></Button>
+            <Button Name="BtnST10" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="3" Grid.Column="1" Content="10"  Style="{StaticResource BtnArray}" Click="BtnST10_Click"   ></Button>
+            <Button Name="BtnST11" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="3" Grid.Column="2" Content="11"  Style="{StaticResource BtnArray}" Click="BtnST11_Click"   ></Button>
+            <Button Name="BtnST12" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="3" Grid.Column="3" Content="12"  Style="{StaticResource BtnArray}" Click="BtnST12_Click"   ></Button>
+
+            <Button Name="BtnST13" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="4" Grid.Column="0" Content="13"  Style="{StaticResource BtnArray}" Click="BtnST13_Click"   ></Button>
+            <Button Name="BtnST14" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="4" Grid.Column="1" Content="14"  Style="{StaticResource BtnArray}" Click="BtnST14_Click"   ></Button>
+            <Button Name="BtnST15" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="4" Grid.Column="2" Content="15"  Style="{StaticResource BtnArray}" Click="BtnST15_Click"   ></Button>
+            <Button Name="BtnST16" Padding="5,5,5,5" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Margin="5,5,5,5" Grid.Row="4" Grid.Column="3" Content="16"  Style="{StaticResource BtnArray}" Click="BtnST16_Click"   ></Button>
+
+            <Button   Name="BtnDone" Grid.Row="2" Grid.Column="4" Margin="0,15,0,0"  Content="Stop" Click="BtnDone_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#E96056" Foreground="#FFF"></Button>
+            <!--<Button   Name="Btnup" Grid.Row="1" Grid.Column="4" Margin="5" Content="^" BorderThickness="1" BorderBrush="Gray"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Btnup_Click"   ></Button>
+            <Button   Name="Btndown" Grid.Row="2" Grid.Column="4" Margin="5" Content="v" BorderThickness="1" BorderBrush="Gray"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Btndown_Click"   ></Button>-->           
+        </Grid>
+    </Grid>   
+</UserControl>
+
+
+<!--<Grid Background="WhiteSmoke">
         
         <Pivot x:Name="pivotTab" Grid.Column="0" Grid.Row="0" Grid.RowSpan="6" Grid.ColumnSpan="6">
             <PivotItem Header="Seat Back Stethoscope">
@@ -91,5 +171,4 @@
 
         </PivotItem>
         </Pivot>
-        </Grid>
-</UserControl>
+        </Grid>-->
