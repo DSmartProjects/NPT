@@ -37,15 +37,15 @@ namespace VideoKallMCCST.Results
         }
         bool isDermascope = false;
 
-       async void InilializeMicroscope(bool isdermo )
+        async void InilializeMicroscope(bool isdermo)
         {
             isDermascope = isdermo;
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
 
-                //ImageViewer.Source = null;
+                ImageViewer.Source = null;
                 //if (isDermascope)
-                //    TxTHeader.Text = "Dermatoscope";
+                //    TxTHeader.Text = "Dermascope";
                 //else
                 //    TxTHeader.Text = "Otoscope";
 
@@ -53,7 +53,7 @@ namespace VideoKallMCCST.Results
                 BtnTakePic.IsEnabled = true;
             });
 
-              
+
         }
 
         public async void SetImage(String img)
@@ -61,7 +61,7 @@ namespace VideoKallMCCST.Results
             string[] cmd = img.Split('>');
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-               
+
                 switch (cmd[0].ToLower())
                 {
                     case "mrpic":
@@ -71,7 +71,7 @@ namespace VideoKallMCCST.Results
                         BtnSave.IsEnabled = true;
                         break;
                 }
-               
+
             });
         }
         private void Btndone_Click(object sender, RoutedEventArgs e)
@@ -81,7 +81,7 @@ namespace VideoKallMCCST.Results
             else
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
 
-            //ImageViewer.Source = null;
+            ImageViewer.Source = null;
             BtnTakePic.IsEnabled = true;
             MainPage.mainPage.OtoscopeComm?.Invoke();
         }
@@ -90,18 +90,18 @@ namespace VideoKallMCCST.Results
         {
             BtnTakePic.IsEnabled = false;
             MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.TAKEPIC);
-           
+
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             // SetImagefolder();
             // DisplayImage(ImageName);
-            if(!isDermascope)
-            MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.OTOSAVEIMAGE);
+            if (!isDermascope)
+                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.OTOSAVEIMAGE);
             else
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.DERSAVEIMAGE);
-            BtnSave.IsEnabled = false;           
+            BtnSave.IsEnabled = false;
         }
 
 
@@ -109,24 +109,24 @@ namespace VideoKallMCCST.Results
         string strRootFolderPath = @"\\192.168.0.33\";// VideoKall";
         string ImageName = "capturedImage.png";
 
-        private async void SetImagefolder( )
+        private async void SetImagefolder()
         {
             try
             {
-                strRootFolderPath = "\\\\" + MainPage.mainPage.SMCCommChannel.IPAddress + "\\" ;
+                strRootFolderPath = "\\\\" + MainPage.mainPage.SMCCommChannel.IPAddress + "\\";
                 StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(strRootFolderPath + strRootFolder);
-              //  StorageFolder folder = await folderPicker.PickSingleFolderAsync();
+                //  StorageFolder folder = await folderPicker.PickSingleFolderAsync();
                 if (folder != null)
                 {
                     StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
                 }
                 // StorageFolder newFolder;
 
-             MainPage.mainPage.rootImageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
+                MainPage.mainPage.rootImageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
                 strRootFolderPath = MainPage.mainPage.rootImageFolder.Path;
                 //  TxtImageFolder = "";
-                
-                 
+
+
             }
             catch (Exception ex)
             {
@@ -139,7 +139,7 @@ namespace VideoKallMCCST.Results
         {
             try
             {
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(MainPage.mainPage.rootImageFolder.Path );
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(MainPage.mainPage.rootImageFolder.Path);
                 StorageFile storageFile = await folder.GetFileAsync(imageName);
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
@@ -153,8 +153,8 @@ namespace VideoKallMCCST.Results
                             await bitmapImage.SetSourceAsync(fileStream);
                         }
                     }
-                  //  ShowHideMessage(false);
-                   // ImageViewer.Source = bitmapImage;
+                    //  ShowHideMessage(false);
+                    ImageViewer.Source = bitmapImage;
                     BtnTakePic.IsEnabled = true;
                 });
 
