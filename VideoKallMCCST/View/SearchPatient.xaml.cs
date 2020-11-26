@@ -34,6 +34,7 @@ namespace VideoKallMCCST.View
             this.InitializeComponent();
             _patientVM = new PatientViewModel();
             this.DataContext = _patientVM;
+            _patientVM.PMM_URL = MainPage.mainPage.mainpagecontext.PMMConfig.URL;
         }
 
      

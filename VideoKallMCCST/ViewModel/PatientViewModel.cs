@@ -25,7 +25,8 @@ namespace VideoKallMCCST.ViewModel
         //private Visibility _isSelectPatientButtonVisible = Visibility.Collapsed;
         //public Visibility IsSelectPatientButtonVisible { get { return _isSelectPatientButtonVisible; } set { _isSelectPatientButtonVisible = value; OnPropertyChanged("IsSelectPatientButtonVisible"); } }
 
-
+        private string _pmmURL = string.Empty;
+        public string PMM_URL { get { return _pmmURL; } set { _pmmURL = value; OnPropertyChanged("PMM_URL"); } }
 
 
     }
