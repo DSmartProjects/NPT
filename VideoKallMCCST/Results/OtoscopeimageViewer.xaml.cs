@@ -43,7 +43,7 @@ namespace VideoKallMCCST.Results
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
 
-                ImageViewer.Source = null;
+                //ImageViewer.Source = null;
                 //if (isDermascope)
                 //    TxTHeader.Text = "Dermatoscope";
                 //else
@@ -81,7 +81,7 @@ namespace VideoKallMCCST.Results
             else
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
 
-            ImageViewer.Source = null;
+            //ImageViewer.Source = null;
             BtnTakePic.IsEnabled = true;
             MainPage.mainPage.OtoscopeComm?.Invoke();
         }
@@ -101,16 +101,7 @@ namespace VideoKallMCCST.Results
             MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.OTOSAVEIMAGE);
             else
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.DERSAVEIMAGE);
-            BtnSave.IsEnabled = false;
-            ///Done----------------------
-            if (!isDermascope)
-                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
-            else
-                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
-
-            ImageViewer.Source = null;
-            BtnTakePic.IsEnabled = true;
-            MainPage.mainPage.OtoscopeComm?.Invoke();
+            BtnSave.IsEnabled = false;           
         }
 
 
@@ -163,7 +154,7 @@ namespace VideoKallMCCST.Results
                         }
                     }
                   //  ShowHideMessage(false);
-                    ImageViewer.Source = bitmapImage;
+                   // ImageViewer.Source = bitmapImage;
                     BtnTakePic.IsEnabled = true;
                 });
 

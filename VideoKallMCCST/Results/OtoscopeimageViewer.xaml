@@ -11,41 +11,39 @@
     <UserControl.Resources>
     </UserControl.Resources>
     <Grid BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5"  Background="#F0F8FF" CornerRadius="10,10,10,10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="AUTO"/>
+            <ColumnDefinition Width="AUTO"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Orientation="Vertical" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="150"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="140">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="40"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"></ColumnDefinition>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                        <TextBlock Margin="10,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
-                        <TextBlock x:Name="TxtStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="Normal" ></TextBlock>
-                    </StackPanel> 
-                    <Button x:Name="BtnTakePic" Grid.Row="2" Grid.Column="1" Content="Capture" Click="BtnTakePic_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"></Button>
-                    <Button Name="BtnSave" Grid.Row="2" Grid.Column="3"  Content="Save" Click="BtnSave_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"></Button>
-                </Grid>
-            </Grid>            
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Margin="50,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
+            <TextBlock x:Name="TxtStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="Normal" ></TextBlock>
         </StackPanel>
-        <Grid Grid.Column="1" BorderBrush="Black" BorderThickness="1,1,1,1" >
-            <Image Name="ImageViewer"  Stretch="Fill"                    
-                   RenderTransformOrigin="0.5,0.5" Source="..\Assets/settings.png">
-            </Image>
+        <Button x:Name="BtnTakePic" Grid.Row="5" Width="100" Grid.Column="1" Content="Capture" Click="BtnTakePic_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"></Button>
+        <Button Name="BtnSave"  Grid.Row="5" Grid.Column="2" Width="100" Content="Save" Click="BtnSave_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"></Button>
+        <Line  StrokeThickness="0.2" Grid.Row="5" Grid.Column="3" Stroke="#434343" Margin="10,0,0,0" X1="0" X2="0" Y1="120" Y2="13" />
+        <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="3">           
+            <ScrollViewer  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image Name="ImageViewer"  Stretch="Fill"
+                    MaxWidth="{Binding Path=ViewportWidth, ElementName=ScrollViewerMain}"
+                    MaxHeight="{Binding Path=ViewportHeight, ElementName=ScrollViewerMain}"
+                   RenderTransformOrigin="0.5,0.5"
+                   >
+                </Image>
+            </ScrollViewer>
         </Grid>
     </Grid>
 
