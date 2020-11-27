@@ -350,5 +350,8 @@ namespace VideoKallMCCST
         public CommandDelegate ResetGluco;
         public CommandDelegate SaveSTConfig;
         public bool IsStethescopeChest { get; set; } = false;
+        public delegate void REQ_MSG_Visibility(string status);
+        public REQ_MSG_Visibility REQ_MSG_VisibilityCompleted;
+
     }
 }

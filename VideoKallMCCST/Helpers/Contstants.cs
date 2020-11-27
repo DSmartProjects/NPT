@@ -9,5 +9,7 @@ namespace VideoKallSBCApplication.Helpers
         #endregion
 
         public const string MSG_SEARCH_NOT_FOUND = "Search not found";
+        public const string Success = "Success";
+        public const string Failure = "Failure";
     }
 }
