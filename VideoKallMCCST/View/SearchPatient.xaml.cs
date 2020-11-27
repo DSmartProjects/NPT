@@ -97,6 +97,26 @@ namespace VideoKallMCCST.View
             patient.Name= ((VideoKallMCCST.Model.Patient)e.AddedItems[0]).Name;
             patient.DOB = ((VideoKallMCCST.Model.Patient)e.AddedItems[0]).DOB;
         }
-        
+
+        private void BtnAddPatient_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSelect_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.VideoCallVM.PatientDetails = patient;
+            if (patient != null && patient.ID > 0 && !string.IsNullOrEmpty(patient.Name))
+                MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
+            this.Hide();
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            _patientVM.Patients = new ObservableCollection<Patient>();
+            _patientVM.PatientsGridVisibility = Visibility.Collapsed;
+             this.Hide();
+
+        }
     }
 }

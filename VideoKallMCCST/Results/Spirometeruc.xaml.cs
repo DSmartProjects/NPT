@@ -99,7 +99,7 @@ namespace VideoKallMCCST.Results
                 {
                     case "spirofvc":
                         isStarted = true;
-                        TxtStatusspior.Text = "Blowing";
+                        //TxtStatusspior.Text = "Blowing";
                         string[] fvc = cmd[1].Split(',');
                         FlowVolumeData data = new FlowVolumeData();
                         data.Flow = fvc[0];
@@ -111,7 +111,7 @@ namespace VideoKallMCCST.Results
                         {
                           
                             isStarted = true;
-                            TxtStatusspior.Text = "Blowing";
+                           // TxtStatusspior.Text = "Blowing";
                             string[]  vct = cmd[1].Split(',');
                             FlowVolumeData datat1 = new FlowVolumeData();
                             datat1.Volumeflow =  vct[0];
@@ -123,7 +123,7 @@ namespace VideoKallMCCST.Results
                     case "spirofvcvt":
                         {
                             isStarted = true;
-                            TxtStatusspior.Text = "Blowing";
+                           // TxtStatusspior.Text = "Blowing";
                             string[] fvct = cmd[1].Split(',');
                             FlowVolumeData datat1 = new FlowVolumeData();
                             datat1.Volumeflow = fvct[0];
@@ -134,21 +134,21 @@ namespace VideoKallMCCST.Results
 
                         break;
                     case "spirostatussucess":
-                        TxtStatusspior.Text = "Ready for Blow";
+                      //  TxtStatusspior.Text = "Ready for Blow";
                         isStarted = true;
                         MainPage.mainPage.Spirometrystatus?.Invoke(true);
                         break;
                     case "spirostatusfailed":
                         isStarted = false;
-                        TxtStatusspior.Text = "Error: " + cmd[1];
+                      //  TxtStatusspior.Text = "Error: " + cmd[1];
                         MainPage.mainPage.Spirometrystatus?.Invoke(false);
                         break;
                     case "stoppedspirometer":
                         isStarted = false;
-                        TxtStatusspior.Text = "Stopped";
+                      //  TxtStatusspior.Text = "Stopped";
                         break;
                     case "spirofvcresult":
-                        TxtStatusspior.Text = "FVC Test Results.";
+                      //  TxtStatusspior.Text = "FVC Test Results.";
                         {
                             VCResults FVCresult = new VCResults();
 
@@ -185,7 +185,7 @@ namespace VideoKallMCCST.Results
 
                         break;
                     case "spirovcresult":
-                        TxtStatusspior.Text = "VC Test Results."; 
+                      //  TxtStatusspior.Text = "VC Test Results."; 
                         VCResults result = new VCResults();
 
                         string[] header = msg.Split('>')[1].Split('!');
@@ -233,7 +233,7 @@ namespace VideoKallMCCST.Results
                 StartVC.IsEnabled = true;
                 StopVC.IsEnabled = true;
                 isStarted = false;
-                TxtStatusspior.Text = "";
+             //   TxtStatusspior.Text = "";
                 fvcFlowVolumeCollection.Clear();
                 fvctFlowVolumeCollection.Clear();
                 vcFlowVolumeCollection.Clear();

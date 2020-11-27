@@ -53,10 +53,10 @@ namespace VideoKallMCCST.Results
                         case DeviceResponseType.BPCONCHEC:
                             // "BPCONCTED>M:{0}>T:{1}";
                             if (res[1].Split(':')[1].ToLower().Equals("true"))
-                                TxtConnectionstatus.Text = "Connected";
+                                TxtConnectionstatus.Text = " Connected";
                             else
                             {
-                                TxtConnectionstatus.Text = "Not Connected";
+                                TxtConnectionstatus.Text = " Not Connected";
                                 MainPage.mainPage.Thermostatusdelegate?.Invoke(false, 2);
                             }
 
