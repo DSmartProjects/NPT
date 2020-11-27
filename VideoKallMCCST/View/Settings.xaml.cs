@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
+using VideoKallSBCApplication.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -12,6 +13,7 @@ using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -35,7 +37,9 @@ namespace VideoKallMCCST.View
         public Settings()
         {
             this.InitializeComponent();
+            var mainpageContext = MainPage.mainPage.mainpagecontext;
             MainPage.mainPage.SaveSTConfig += SaveConfig;
+            MainPage.mainPage.REQ_MSG_VisibilityCompleted += REQ_MSG_Visibility;
             TxtimageFolder.Text = "\\\\"+ MainPage.mainPage.SMCCommChannel.IPAddress+"\\" + strRootFolder;
             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
             if(MainPage.mainPage.isDataAcquitionappConnected)
@@ -73,6 +77,33 @@ namespace VideoKallMCCST.View
             //CODEC: ""
         }
 
+        private async void REQ_MSG_Visibility(string msg)
+        {
+           
+            if (msg.Equals(Constants.Failure,StringComparison.InvariantCultureIgnoreCase))
+            {
+                MainPage.mainPage.mainpagecontext.REQ_MSG_Visibility = Visibility.Visible;
+                tblRequireMsg.Visibility = Visibility.Visible;
+            }
+            if (msg.Equals(Constants.Success, StringComparison.InvariantCultureIgnoreCase))
+            {
+                MainPage.mainPage.mainpagecontext.REQ_MSG_Visibility = Visibility.Collapsed;
+                tblRequireMsg.Visibility = Visibility.Collapsed;
+                var messageDialog = new MessageDialog("Successfully saved.");
+                messageDialog.Commands.Add(new UICommand(
+                    "Ok",
+                    new UICommandInvokedHandler(this.OkCommandInvokedHandler)));
+                messageDialog.DefaultCommandIndex = 0;
+                messageDialog.CancelCommandIndex = 1;
+                // Show the message dialog
+                await messageDialog.ShowAsync();
+            }
+        }
+
+        private async void OkCommandInvokedHandler(IUICommand command)
+        {
+            MainPage.mainPage.mainpagecontext.ExecuteSaveNavigate();
+        }
         public SolidColorBrush GetColorFromHexa(string hexaColor)
         {
             return new SolidColorBrush(
@@ -264,6 +295,15 @@ namespace VideoKallMCCST.View
         private void TxtPMM_API_URL_TextChanged(object sender, TextChangedEventArgs e)
         {
             MainPage.mainPage.mainpagecontext.PMMConfig.API_URL = txtPMM_API_URL.Text;
+        }        
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            var mainpageContext = MainPage.mainPage.mainpagecontext;
+            mainpageContext.TxtIpAddress = TxtIPaddressCtrl.Text.Trim();
+            mainpageContext.TxtProtNo = TxtPortNoCtrl.Text.Trim();
+            mainpageContext.PMMConfig.URL = txtPMM_URL.Text.Trim();
+            mainpageContext.PMMConfig.API_URL = txtPMM_API_URL.Text.Trim();                        
         }
     }
 
