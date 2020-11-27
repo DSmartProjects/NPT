@@ -97,11 +97,7 @@ namespace VideoKallMCCST.View
             patient.Name= ((VideoKallMCCST.Model.Patient)e.AddedItems[0]).Name;
             patient.DOB = ((VideoKallMCCST.Model.Patient)e.AddedItems[0]).DOB;
         }
-
-        private void BtnAddPatient_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+            
 
         private void BtnSelect_Click(object sender, RoutedEventArgs e)
         {
@@ -116,6 +112,17 @@ namespace VideoKallMCCST.View
             _patientVM.Patients = new ObservableCollection<Patient>();
             _patientVM.PatientsGridVisibility = Visibility.Collapsed;
              this.Hide();
+
+        }
+
+
+        private async void BtnAddPatient_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainPage.mainPage.mainpagecontext.PMMConfig != null && !string.IsNullOrEmpty(MainPage.mainPage.mainpagecontext.PMMConfig.URL))
+            {
+                Uri uri = new Uri(MainPage.mainPage.mainpagecontext.PMMConfig.URL);
+                await Windows.System.Launcher.LaunchUriAsync(uri);
+            }
 
         }
     }

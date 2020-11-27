@@ -58,8 +58,7 @@
             </my:DataGrid>
             <TextBlock  Grid.Row="4"  Grid.Column="0" HorizontalAlignment="Center" Padding="5,5,5,5" FontSize="15"   FontFamily="Open Sans" FontWeight="SemiBold" Foreground="#ED604A" x:Name="tblSearchNotFound" Visibility="{Binding LblSearchNotFoundVisibility,Mode=TwoWay}" Text="{Binding TxtSearchNotFound,Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="8">
-                <!--<Button x:Name="btnAddPatient"  Width="100"  Grid.Column="3" Content="Add Patient" Click="BtnAddPatient_Click" CornerRadius="5,5,5,5" Foreground="#FFF" Background="#26639B" ></Button>-->
-                <HyperlinkButton Foreground="#26639B" Content="Add Patient" Width="100" Grid.Column="3" NavigateUri="http://183.82.119.28/VK-PMM/#/login"/>
+                <Button x:Name="btnAddPatient"  Width="100"  Grid.Column="3" Content="Add Patient" Click="BtnAddPatient_Click" CornerRadius="5,5,5,5" Foreground="#FFF" Background="#26639B" ></Button>                
                 <Button x:Name="btnSelect" Margin="10,0,0,0"  Width="100"  Grid.Column="4" Content="Select"  CornerRadius="5,5,5,5" Foreground="#FFF" Click="BtnSelect_Click" Background="#34CBA8" ></Button>
                 <Button x:Name="btnCancel" Margin="10,0,0,0"  Width="100"  Grid.Column="4" Content="Cancel"  CornerRadius="5,5,5,5" Foreground="#FFF" Background="#ED604A" Click="BtnCancel_Click" ></Button>
             </StackPanel>
