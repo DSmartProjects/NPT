@@ -29,6 +29,7 @@ namespace VideoKallMCCST.Results
         }
         async void UpdateNotification(object sender, CommunicationMsg msg)
         {
+            string status = String.Empty;
             if (msg.Id != DeviceResponseType.PULSEOXIMETERSTATUS)
                 return;
             string []cmd = msg.Msg.ToLower().Split('>') ;
@@ -39,8 +40,14 @@ namespace VideoKallMCCST.Results
                 {
                     case DeviceResponseType.PULSEOXIMETERSTATUS:
                         BtnStreamdata.IsEnabled = true;
-                        TxtSpiroMeterConnectionStatus.Text = msg.Msg.Split('>')[1];
-                        if(cmd.Length>2 && cmd[2].Equals("error"))
+                        status= msg.Msg.Split('>')[1];
+                        if (status == "successfully subscribed")
+                        {
+                            TxtSpiroMeterConnectionStatus.Text = "Successfully Subscribed";
+                        }
+                        else
+                            TxtSpiroMeterConnectionStatus.Text= msg.Msg.Split('>')[1];
+                        if (cmd.Length>2 && cmd[2].Equals("error"))
                         {
                             MainPage.mainPage.Thermostatusdelegate?.Invoke(false, 1);
                         }

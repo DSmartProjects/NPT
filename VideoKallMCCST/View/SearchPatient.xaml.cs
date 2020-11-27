@@ -106,7 +106,7 @@ namespace VideoKallMCCST.View
         private void BtnSelect_Click(object sender, RoutedEventArgs e)
         {
             MainPage.VideoCallVM.PatientDetails = patient;
-            if (patient.ID > 0 && !string.IsNullOrEmpty(patient.Name))
+            if (patient != null && patient.ID > 0 && !string.IsNullOrEmpty(patient.Name))
                 MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
             this.Hide();
         }

@@ -34,8 +34,9 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                         <TextBlock  Margin="50,0,0,0" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Text="Status :" ></TextBlock>
-                        <TextBlock Name="TxtConnectionstatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="Normal" ></TextBlock>
+                        <!--<TextBlock Name="TxtConnectionstatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="Normal" ></TextBlock>-->
                     </StackPanel>
+                    <TextBlock Name="TxtConnectionstatus" Grid.Row="1" Grid.Column="2" FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="Normal" ></TextBlock>
                     <Button x:Name="BtnConnect" Width="120"  Grid.Row="2" Grid.Column="1" Content="Connect"  Click="Connect_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"></Button>
                     <Button   Content="Check Connection" Width="120"   Grid.Row="2" Margin="15,0,0,0" Grid.Column="2" Background="#FFC10D" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#515151" CornerRadius="5,5,5,5" Click="CheckConn_Click"></Button>
                 </Grid>
