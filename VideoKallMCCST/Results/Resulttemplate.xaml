@@ -9,9 +9,35 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5"  Background="#F0F8FF" CornerRadius="10,10,10,10" >
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"> 
-            <Button   Width="130"  x:Name="BtnGetHeight"  Content="Get Height"  Click="BtnGetHeight_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"/>
-        </StackPanel> 
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="TXTHMWM" Text="Test Result" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"></TextBlock>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="100" BorderBrush="Blue" BorderThickness="3"></Border>
+        <Button Grid.Row="10" Grid.Column="1" x:Name="BtnHMWM" Content="Get Weight" Click="BtnHMWM_Click"></Button>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10">
+            <TextBlock  Margin="5" Text="Status: " ></TextBlock>
+            <TextBlock    x:Name="TxtStatus" ></TextBlock>
+        </StackPanel>
+       
+        <StackPanel Margin="5" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal">
+            <RadioButton IsChecked="True"  x:Name="RadPound"  Content="Pound" Checked="RadPound_Checked"></RadioButton>
+            <RadioButton x:Name="RadKG" Content="KG" Checked="RadKG_Checked"></RadioButton>
+            <RadioButton IsChecked="True" x:Name="RadCM" Content="CM" Checked="RadCM_Checked"></RadioButton>
+            <RadioButton   x:Name="RadFt" Content="Inch" Checked="RadFt_Checked"></RadioButton>
+        </StackPanel>
+       
     </Grid>
 </UserControl>

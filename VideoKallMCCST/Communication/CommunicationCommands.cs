@@ -17,17 +17,22 @@ namespace VideoKallMCCST.Communication
     BPRES = 7,
     BPCONCHEC=8,
     BPCONMSG=9
+    }
 
+   public struct PodMapping
+    {
+        public string BPCuffPodID;
+        public string ThermoMeterPodID;
+        public string OximeterPodID;
+        public string GlucomonitorPodID;
+        public string DermascopePodID;
+        public string OtoscopePodID;
     }
    public static class CommunicationCommands
     {
         public static readonly string MCCConnectionStatusCheckCmd = "<MCCS>"; //MCC Connection status
         public static readonly string SBCConnectionResponseCmd = "<SMCR>"; //SMC Connection response
         public static readonly string MCCConnection = "<SMCC>"; //SMC Connection 
-        public static readonly string SMCPODDEPLOY = "<P{0}D>" ; //PULSE Oximeter Pulse Deploymenent
-        public static readonly string SMCPDDEPLOYSTATUS = "<P{0}DG>"; //PULSE Oximeter Pulse Deploymenent
-        public static readonly string SMCRESULT = "<P{0}DR>{1}"; //PULSE Oximeter result
-        public static readonly string SMCUSAGEDONE = "<P{0}DS>";
         public static readonly string SMCPULSEOXIMETERSTART = "<PULSESTART>";
         public static readonly string PUSLEOXIMETERRESULT = "PULSERES>SP:{0}>PR:{1}>DT:{2}";
         public static readonly string PUSLEOXIMETERCONNECTIONMSG = "PULSESTATUS>{0}";
@@ -84,5 +89,14 @@ namespace VideoKallMCCST.Communication
         public static readonly string SpiroFVCResults = "spirofvcresult>{0}>{1}>";
         public static readonly string SBCShutdown = "<sbcshutdown>";
         public static readonly string SBCStart = "<sbcstart>";
+
+        public static readonly string PODCMD = "pod>{0}>{1}>";//pod>1>d
+        public static readonly string SeatBackSTCmd = "stl>{0}>{1}>";//s>11>d
+        public static readonly string SeatBackheightCmd = "seatht>{0}>";//b>11>d
+        public static readonly string SeatReclineCmd = "seatrec>{0}>";
+        public static readonly string HM = "hm>";
+        public static readonly string WM = "hm>";
+        public static readonly string WT = "wt>";
+        public static readonly string CASRES = "casres>{0}>";
     }
 }
