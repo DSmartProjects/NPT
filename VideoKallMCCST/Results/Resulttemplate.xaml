@@ -36,7 +36,7 @@
             <RadioButton IsChecked="True"  x:Name="RadPound"  Content="Pound" Checked="RadPound_Checked"></RadioButton>
             <RadioButton x:Name="RadKG" Content="KG" Checked="RadKG_Checked"></RadioButton>
             <RadioButton IsChecked="True" x:Name="RadCM" Content="CM" Checked="RadCM_Checked"></RadioButton>
-            <RadioButton   x:Name="RadFt" Content="Inch" Checked="RadFt_Checked"></RadioButton>
+            <RadioButton   x:Name="RadFt" Content="Ft" Checked="RadFt_Checked"></RadioButton>
         </StackPanel>
        
     </Grid>

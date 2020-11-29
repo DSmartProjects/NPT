@@ -25,6 +25,18 @@ namespace VideoKallMCCST.Results
         {
             this.InitializeComponent();
             MainPage.mainPage.HM_WMEvents += InitializeUI;
+            MainPage.mainPage.CASResult += CasNotification;
+        }
+
+       async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if(devicecode == 1 && isresultornotificationmsg==1)
+                {
+                    TxtStatus.Text = message;
+                }
+            });
         }
 
         private async void InitializeUI(string message, int code)

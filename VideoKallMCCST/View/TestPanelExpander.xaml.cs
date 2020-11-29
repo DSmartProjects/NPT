@@ -52,10 +52,27 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.MicroscopeStatus += MicroscopeStatus;
 
             MainPage.mainPage.Thermostatusdelegate += UpdateThermoStatus;
-
+            MainPage.mainPage.CASResult += CasNotification;
         }
 
-
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            if (isresultornotificationmsg == 1)
+                return;
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                 switch(devicecode)
+                {
+                    case 1:
+                        
+                        TxtResultHeight.Text = message;
+                        break;
+                    case 2:
+                        TxtResultWeight.Text = message;
+                        break;
+                }
+            });
+        }
         string strRootFolder = "VideoKall";
         string strRootFolderPath = @"\\192.168.0.33\";// VideoKall";
         private async Task SetImagefolder()
@@ -616,7 +633,7 @@ namespace VideoKallMCCST.View
                 return;
 
             btnHeighttoggle = !btnHeighttoggle;
-
+            
             //if (btnHeighttoggle)
             //    //MainPage.mainPage.StatusTxt.Text = "";
 
@@ -642,7 +659,10 @@ namespace VideoKallMCCST.View
             //CtrlHeightoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
             //CtrlHeightoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResulHeightPopup.IsOpen = btnHeighttoggle;
-
+            if(btnHeighttoggle)
+            {
+              MainPage.mainPage.HM_WMEvents?.Invoke("height", 1);
+            }
         }
 
         bool _otoscopeToggle = false;
@@ -920,7 +940,7 @@ namespace VideoKallMCCST.View
         {
             get
             {
-                return MainPage.mainPage.mainpagecontext.IsSMCConnected;
+                return true;// MainPage.mainPage.mainpagecontext.IsSMCConnected;
                 //  && MainPage.mainPage.isDataAcquitionappConnected;
             }
 

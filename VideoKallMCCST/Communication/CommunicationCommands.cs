@@ -95,7 +95,7 @@ namespace VideoKallMCCST.Communication
         public static readonly string SeatBackheightCmd = "seatht>{0}>";//b>11>d
         public static readonly string SeatReclineCmd = "seatrec>{0}>";
         public static readonly string HM = "hm>";
-        public static readonly string WM = "hm>";
+        public static readonly string WM = "wm>";
         public static readonly string WT = "wt>";
         public static readonly string CASRES = "casres>{0}>";
     }

@@ -257,11 +257,20 @@ namespace VideoKallMCCST
                                 {
                                     strMSG = "Weight Measure completed.";
                                     string val = res.Substring(3, res.Length - 4);
-                                    double weight = Int32.Parse(val);
+                                    decimal weight = Int32.Parse(val);
                                     if (WeightMeasureUnit == 0)
-                                        weight = weight * 0.02205;
+                                    {
+                                        weight = weight * (decimal)0.02205;
+                                        strMSG = string.Format("{0:0.##}{1}", Decimal.Round( weight),"lb");
+
+                                    }
                                     else
-                                        weight = weight * 0.01;
+                                    {
+                                        weight = weight * (decimal) 0.01;
+                                        strMSG = string.Format("{0:0.##}{1}", decimal.Round( weight), "kg");
+
+                                    }
+                                    CASResult?.Invoke(strMSG, 2, 0);
                                 }
                                 else if (status.Equals("B") && op.Equals("[WM"))
                                 {
@@ -288,6 +297,7 @@ namespace VideoKallMCCST
                     if (res.Equals("[HM"))
                     {
                         strMSG = "Acknowldgement received(HM).";
+                        MainPage.mainPage.CASResult?.Invoke(strMSG, 1,1);
                     }
                     try
                     {
@@ -298,10 +308,11 @@ namespace VideoKallMCCST
                             if (status.Equals("G") && op.Equals("[HM"))
                             {
                                 strMSG = "Height Measure completed.";
+                                CASResult?.Invoke(strMSG, 1, 1);
                                 string val = res.Substring(3, res.Length - 4);
                                 double height = Int32.Parse(val);
                                 if (HeightMeasureUnit == 0)
-                                    strMSG = height.ToString();
+                                    strMSG = height.ToString()+" cm";
                                 else
                                 {
                                     height = (height / 2.54) * 0.0833333;
@@ -309,6 +320,8 @@ namespace VideoKallMCCST
                                     strMSG = string.Format(ht, height.ToString().Split('.')[0], height.ToString().Split('.')[1].Substring(0,1));
 
                                 }
+
+                                CASResult?.Invoke(strMSG, 1, 0);
                             }
                             else if (status.Equals("B") && op.Equals("[HM"))
                             {
@@ -569,5 +582,7 @@ namespace VideoKallMCCST
         public PodMapping Podmapping { get; set; }
         public int WeightMeasureUnit = 0; // pound;
         public int HeightMeasureUnit = 0; // Cm;
+        public CasNotification CASResult;
+        public delegate void CasNotification(string message, int devicecode , int isresultornotificationmsg);
     }
 }

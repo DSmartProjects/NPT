@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using VideoKallMCCST.Communication;
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace VideoKallMCCST.Results
@@ -26,7 +26,7 @@ namespace VideoKallMCCST.Results
 
         private void BtnGetWeight_Click(object sender, RoutedEventArgs e)
         {
-
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.WM);
         }
     }
 }
