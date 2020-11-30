@@ -402,8 +402,8 @@ namespace VideoKallMCCST.View
                         //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         grdPulse.BorderBrush = GetColorFromHexa("#34CBA8");
                         grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
-                        TxtResultPulseOximeter.Text = res[1].Split(':')[1] + "%";
-                        TxtResultPulseOximeterpulse.Text = res[2].Split(':')[1] + " bpm";
+                        TxtResultPulseOximeter.Text = " " + res[1].Split(':')[1] + "%";
+                        TxtResultPulseOximeterpulse.Text = " "+res[2].Split(':')[1] + "bpm";
                         //TxtResultPulseOximeterpulsedate.Text = res[4];
                         break;
                     case DeviceResponseType.GLUCORESULT:

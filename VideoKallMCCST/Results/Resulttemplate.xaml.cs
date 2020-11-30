@@ -45,7 +45,7 @@ namespace VideoKallMCCST.Results
             {
                 if (code == 0)
                 {
-                    TXTHMWM.Text = "Weight Measure";
+                   // TXTHMWM.Text = "Weight Measure";
                     BtnHMWM.Content = "Get Weight";
                     RadCM.Visibility = Visibility.Collapsed;
                     RadFt.Visibility = Visibility.Collapsed;
@@ -69,7 +69,7 @@ namespace VideoKallMCCST.Results
                 }
                 else
                 {
-                    TXTHMWM.Text = "Height Measure";
+                    //TXTHMWM.Text = "Height Measure";
                     BtnHMWM.Content = "Get Height";
                     RadPound.Visibility = Visibility.Collapsed;
                     RadKG.Visibility = Visibility.Collapsed;
