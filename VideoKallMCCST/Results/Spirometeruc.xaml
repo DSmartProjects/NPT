@@ -28,8 +28,8 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <!--<TextBlock Text="Spirometry" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"></TextBlock>
-        <TextBlock Margin="3,0,0,0" x:Name="TxtStatusspior" Text=" " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"></TextBlock>-->
+        <!--<TextBlock Text="Spirometry" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"></TextBlock>-->
+        <TextBlock Margin="3,0,0,0" x:Name="TxtStatusspior" Text=" " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"></TextBlock>
         <Pivot x:Name="pivotTab" Grid.Column="0" Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="6">
             <PivotItem Header="Instructions" Foreground="#464646"  FontSize="12" FontFamily="Open Sans" FontWeight="SemiBold">
                 <Grid>

@@ -114,8 +114,6 @@ namespace VideoKallMCCST.View
              this.Hide();
 
         }
-
-
         private async void BtnAddPatient_Click(object sender, RoutedEventArgs e)
         {
             if (MainPage.mainPage.mainpagecontext.PMMConfig != null && !string.IsNullOrEmpty(MainPage.mainPage.mainpagecontext.PMMConfig.URL))

@@ -218,6 +218,16 @@ namespace VideoKallMCCST.ViewModel
             if (isMandatoryFieldValuesFilled)
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Success);
+                MainPage.mainPage.mainpagecontext.REQ_MSG_Visibility = Visibility.Collapsed;
+                var messageDialog = new MessageDialog("Successfully saved.");
+                messageDialog.Commands.Add(new UICommand( "OK", new UICommandInvokedHandler(this.CancelCommandInvokedHandler)));
+                  // Set the command that will be invoked by default
+                messageDialog.DefaultCommandIndex = 0;
+                await messageDialog.ShowAsync();
+         
+          
+                ExecuteSaveNavigate();
+               
             }
         }
 

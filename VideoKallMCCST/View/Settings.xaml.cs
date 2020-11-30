@@ -89,20 +89,7 @@ namespace VideoKallMCCST.View
             {
                 MainPage.mainPage.mainpagecontext.REQ_MSG_Visibility = Visibility.Collapsed;
                 tblRequireMsg.Visibility = Visibility.Collapsed;
-                var messageDialog = new MessageDialog("Successfully saved.");
-                messageDialog.Commands.Add(new UICommand(
-                    "Ok",
-                    new UICommandInvokedHandler(this.OkCommandInvokedHandler)));
-                messageDialog.DefaultCommandIndex = 0;
-                messageDialog.CancelCommandIndex = 1;
-                // Show the message dialog
-                await messageDialog.ShowAsync();
             }
-        }
-
-        private async void OkCommandInvokedHandler(IUICommand command)
-        {
-            MainPage.mainPage.mainpagecontext.ExecuteSaveNavigate();
         }
         public SolidColorBrush GetColorFromHexa(string hexaColor)
         {
