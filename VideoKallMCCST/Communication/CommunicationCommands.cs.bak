@@ -37,8 +37,9 @@ namespace VideoKallMCCST.Communication
         public static readonly string THERMORESULT = "THERMORES>R:{0}>M:{1}>S:{2}>DT:{3}";
         public static readonly string THERMORESULTRESSTATUS = "THERMOCON>{0}";
         public static readonly string THERMORESULTCMD = "<THERMOCMD>";
-        public static readonly string THERMORCONNECTIONSTATUS = "THERMOCON>{0}";
-
+        public static readonly string THERMORCONNECTIONSTATUS = "THERMOCON>{0}>";
+        public static readonly string THERMORError = "THERMOERROR>{0}>";
+        public static readonly string THERMOnotpaired = "THERMOnotpaired>{0}>";
 
         public static readonly string BPCMD = "<BPCMD>";
         public static readonly string BPCONCMD = "<BPCONCMD>";
@@ -53,6 +54,7 @@ namespace VideoKallMCCST.Communication
         public static readonly string STOPOTOSCOPE = "<stopoto>";
 
         public static readonly string STARTSTCHEST = "<startstchecst>";
+        public static readonly string STARTSTLUNGS = "<startstlungs>";
         public static readonly string STCHESTRESPONSE = "streadey>{0}";
         public static readonly string STMSG = "stmsg>{0}";
 
@@ -80,5 +82,7 @@ namespace VideoKallMCCST.Communication
         public static readonly string SpiroVCResults = "spirovcresult>{0}>{1}>";
 
         public static readonly string SpiroFVCResults = "spirofvcresult>{0}>{1}>";
+        public static readonly string SBCShutdown = "<sbcshutdown>";
+        public static readonly string SBCStart = "<sbcstart>";
     }
 }
