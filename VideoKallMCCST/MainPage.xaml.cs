@@ -370,22 +370,29 @@ namespace VideoKallMCCST
                     if (status.Equals("D") || status.Equals("R"))
                     {
                         strMSG = "Acknowldgement received.";
+                        CASResult?.Invoke(strMSG, 3, 3);
                     }
                     else if (res.Substring(res.Length - 2).Equals("DG"))
                     {
+                        isSTDeployed = true; 
                         strMSG = "Deploy Completed.";
+                        CASResult?.Invoke(strMSG, 3, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RG"))
-                    {
+                    { 
+                        isSTDeployed = false;
                         strMSG = "Retract Completed.";
+                        CASResult?.Invoke(strMSG, 3, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("DB"))
                     {
                         strMSG = "Deploy Failed.";
+                        CASResult?.Invoke(strMSG, 3, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RB"))
                     {
                         strMSG = "Retract Failed.";
+                        CASResult?.Invoke(strMSG, 3, 1);
                     }
 
                     break;
@@ -503,7 +510,7 @@ namespace VideoKallMCCST
             watchdog.Start();
             CommToDataAcq.MessageReceived += SMCCommChannel_MessageReceived;
             CommToDataAcq.Initialize();
-             CommToDataAcq.Connect();
+                                                                                                             CommToDataAcq.Connect();
         }
 
         public void GettingSMCStatus() {
@@ -583,6 +590,8 @@ namespace VideoKallMCCST
         public int WeightMeasureUnit = 0; // pound;
         public int HeightMeasureUnit = 0; // Cm;
         public CasNotification CASResult;
+        public bool isSTDeployed = false;
+        
         public delegate void CasNotification(string message, int devicecode , int isresultornotificationmsg);
     }
 }
