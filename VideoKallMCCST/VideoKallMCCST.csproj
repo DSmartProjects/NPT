@@ -482,10 +482,34 @@
       <Name>SBCDBModule</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Samples.SimpleCommunication, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Reference Include="Microsoft.Samples.SimpleCommunication">
+      <HintPath>..\MediaExtension\X64\Debug\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Reference Include="Microsoft.Samples.SimpleCommunication">
+      <HintPath>..\MediaExtension\X64\Release\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <Reference Include="Microsoft.Samples.SimpleCommunication">
+      <HintPath>..\MediaExtension\X86\Debug\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86'">
+    <Reference Include="Microsoft.Samples.SimpleCommunication">
+      <HintPath>..\MediaExtension\x86\Release\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <Reference Include="Microsoft.Samples.SimpleCommunication">
+      <HintPath>..\MediaExtension\ARM\Debug\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <Reference Include="Microsoft.Samples.SimpleCommunication">
+      <HintPath>..\MediaExtension\ARM\Release\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
