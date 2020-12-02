@@ -169,9 +169,237 @@ namespace VideoKallMCCST
                 case "<sbcstart":
                     OnSBCStart();
                     break;
+                case "casres":
+                    ProcessCASResponse(msg.Msg);
+                    break;
+            }
+        }
+        string incompletemsg = "";
+        void ProcessCASResponse(string msg)
+        {
+            string st = msg; //ack from daq to mcc
+            if (st.ToLower().Contains(("Cmd sent").ToLower()))
+                return;
+            string  resp = msg.Split('>')[1];
+            if (incompletemsg.Length > 0)
+                resp = incompletemsg + resp;
+
+            string[] responses = resp.Split(']');
+            if (resp.EndsWith(']'))
+            {
+                incompletemsg = ""; 
+                foreach(var rsp in responses)
+                {
+                    if (rsp.Length > 0)
+                        ParseCASResponses(rsp);
+                }
+            }
+            else
+            {
+                incompletemsg = responses[responses.Length - 1];
+                if(responses.Length>1)
+                {
+                    for(int i=0; i< responses.Length-1; i++ )
+                    {
+                        if(responses[i].Length>0)
+                        ParseCASResponses(responses[i]);
+                    }
+                        
+                }
             }
         }
 
+        void ParseCASResponses(string resp)
+        {
+            string res = resp.ToUpper();
+            string strMSG = "";
+            string status = "";
+            switch (res.Substring(0,2))
+            {
+                case "[W":
+                     strMSG = resp;
+                    if(res.Equals("[WM"))
+                    {
+                        strMSG = "Acknowldgement received(WM).";
+                    }
+                    else if(res.Equals("[WT"))
+                    {
+                        strMSG = "Acknowldgement received(WT).";
+                    }
+                    else if (res.Equals("[WTG"))
+                    {
+                        strMSG = "Tear Weight completed.(WT).";
+                    }
+                    else if (res.Equals("[WTB"))
+                    {
+                        strMSG = "Tear Weight failed.(WT).";
+                    }
+                    else
+                    {
+                        try {
+                            if (res.Length > 3)
+                            {
+                                string op = res.Substring(0, 3);
+                                  status = res.Substring(res.Length - 1);
+                                if (status.Equals("G") && op.Equals("[WM"))
+                                {
+                                    strMSG = "Weight Measure completed.";
+                                    string val = res.Substring(3, res.Length - 4);
+                                    decimal weight = Int32.Parse(val);
+                                    if (WeightMeasureUnit == 0)
+                                    {
+                                        weight = weight * (decimal)0.02205;
+                                        strMSG = string.Format("{0:0.##}{1}", Decimal.Round( weight),"lb");
+
+                                    }
+                                    else
+                                    {
+                                        weight = weight * (decimal) 0.01;
+                                        strMSG = string.Format("{0:0.##}{1}", decimal.Round( weight), "kg");
+
+                                    }
+                                    CASResult?.Invoke(strMSG, 2, 0);
+                                }
+                                else if (status.Equals("B") && op.Equals("[WM"))
+                                {
+                                    strMSG = "Weight Measure failed.";
+                                }
+                                else
+                                {
+                                    strMSG = "Un known response: " + res;
+                                }
+
+                            }
+
+
+                        } catch(Exception ex) {
+                            string s = ex.Message; }
+                      
+                    }
+
+                    break;
+                case "[H":
+                    //0.0833333
+                    string ht = "{0}’ {1:0.##}” ";
+                      strMSG = resp;
+                    if (res.Equals("[HM"))
+                    {
+                        strMSG = "Acknowldgement received(HM).";
+                        MainPage.mainPage.CASResult?.Invoke(strMSG, 1,1);
+                    }
+                    try
+                    {
+                        if (res.Length > 3)
+                        {
+                            string op = res.Substring(0, 3);
+                              status = res.Substring(res.Length - 1);
+                            if (status.Equals("G") && op.Equals("[HM"))
+                            {
+                                strMSG = "Height Measure completed.";
+                                CASResult?.Invoke(strMSG, 1, 1);
+                                string val = res.Substring(3, res.Length - 4);
+                                double height = Int32.Parse(val);
+                                if (HeightMeasureUnit == 0)
+                                    strMSG = height.ToString()+" cm";
+                                else
+                                {
+                                    height = (height / 2.54) * 0.0833333;
+
+                                    strMSG = string.Format(ht, height.ToString().Split('.')[0], height.ToString().Split('.')[1].Substring(0,1));
+
+                                }
+
+                                CASResult?.Invoke(strMSG, 1, 0);
+                            }
+                            else if (status.Equals("B") && op.Equals("[HM"))
+                            {
+                                strMSG = "Height Measure failed.";
+                            }
+                            else
+                            {
+                                strMSG = "Un known response: " + res;
+                            }
+
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        string s = ex.Message;
+                    }
+
+                    break;
+                case "[P":
+                    status = res.Substring(res.Length - 1);
+                    if(status.Equals("D") || status.Equals("R"))
+                    {
+                        strMSG = "Acknowldgement received.";
+                    }
+                    else if(res.Substring(res.Length-2).Equals("DG"))
+                    {
+                        strMSG = "Deploy Completed.";
+                    }
+                    else if (res.Substring(res.Length - 2).Equals("RG"))
+                    {
+                        strMSG = "Retract Completed.";
+                    }
+                    else if (res.Substring(res.Length - 2).Equals("DB"))
+                    {
+                        strMSG = "Deploy Failed.";
+                    }
+                    else if (res.Substring(res.Length - 2).Equals("RB"))
+                    {
+                        strMSG = "Retract Failed.";
+                    }
+
+                    break;
+                case "[S":
+                    status = res.Substring(res.Length - 1);
+                    if (status.Equals("D") || status.Equals("R"))
+                    {
+                        strMSG = "Acknowldgement received.";
+                    }
+                    else if (res.Substring(res.Length - 2).Equals("DG"))
+                    {
+                        strMSG = "Deploy Completed.";
+                    }
+                    else if (res.Substring(res.Length - 2).Equals("RG"))
+                    {
+                        strMSG = "Retract Completed.";
+                    }
+                    else if (res.Substring(res.Length - 2).Equals("DB"))
+                    {
+                        strMSG = "Deploy Failed.";
+                    }
+                    else if (res.Substring(res.Length - 2).Equals("RB"))
+                    {
+                        strMSG = "Retract Failed.";
+                    }
+
+                    break;
+                case "[R":
+                    status = res.Substring(res.Length - 1);
+                    if (status.Equals("G") )
+                    {
+                        strMSG = "Reclined. "+ res.Substring(2);
+                    }
+                    if (status.Equals("B"))
+                    {
+                        strMSG = "Reclined failed.";
+                    }
+                    break;
+                case "[B":
+                    if (status.Equals("G"))
+                    {
+                        strMSG = "Seat height Adjusted."+ res.Substring(2); ;
+                    }
+                    if (status.Equals("B"))
+                    {
+                        strMSG = "Seat height Adjustment Failed.";
+                    }
+                    break; 
+            }
+        }
          void OnSBCDisconnection()
         {
             
@@ -337,7 +565,13 @@ namespace VideoKallMCCST
         public CommandDelegate ResetSTLungs;
         public CommandDelegate ResetGluco;
         public CommandDelegate SaveSTConfig;
+        public NotifyStatus HM_WMEvents;
         public bool IsStethescopeChest { get; set; } = false;
+        public PodMapping Podmapping { get; set; }
+        public int WeightMeasureUnit = 0; // pound;
+        public int HeightMeasureUnit = 0; // Cm;
+        public CasNotification CASResult;
+        public delegate void CasNotification(string message, int devicecode , int isresultornotificationmsg);
         public delegate void REQ_MSG_Visibility(string status);
         public REQ_MSG_Visibility REQ_MSG_VisibilityCompleted;
 
