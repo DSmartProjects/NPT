@@ -245,7 +245,16 @@ namespace VideoKallMCCST.View
                 StSettings.CUTOFFFILTER = TxtFilterHeart.Text.Equals("0")? "No filter": TxtFilterHeart.Text.Trim();
                 StSettings.CUTOFFFILTERLUNGS = TxtFilterlungs.Text.Trim();
 
-                string msg = Environment.NewLine+ "IP:" + StSettings.IP.Trim() + Environment.NewLine +
+                //string msg = Environment.NewLine + "IP:" + StSettings.IP.Trim() + Environment.NewLine +
+                //               "PORT" + ":" + StSettings.PORT.Trim() + Environment.NewLine +
+                //               "USERNAME" + ":" + StSettings.USERNAME.Trim() + Environment.NewLine +
+                //               "PASSWORD" + ":" + StSettings.PASSWORD.Trim() + Environment.NewLine +
+                //               "CUTOFF" + ":" + StSettings.CUTOFFFILTER + Environment.NewLine +
+                //               "FILTER-CUTOFF-LUNGS" + ":" + StSettings.CUTOFFFILTERLUNGS + Environment.NewLine +
+                //               "GAIN" + ":" + StSettings.GAIN + Environment.NewLine +
+                //               "CODEC" + ":" + StSettings.CODEC;
+
+                string msg = "IP:" + StSettings.IP.Trim() + Environment.NewLine +
                              "PORT" + ":" + StSettings.PORT.Trim() + Environment.NewLine +
                              "USERNAME" + ":" + StSettings.USERNAME.Trim() + Environment.NewLine +
                              "PASSWORD" + ":" + StSettings.PASSWORD.Trim() + Environment.NewLine +

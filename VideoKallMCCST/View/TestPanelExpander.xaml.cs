@@ -73,6 +73,36 @@ namespace VideoKallMCCST.View
                 }
             });
         }
+
+        void calculateBMI(double height , double weight) {
+
+            double bmiKG;
+            double bmiLB;
+
+            //Weight in kg
+
+            //if (bmiKG == kg)
+            //{
+                bmiKG = weight / (height * height);
+            //}
+
+            //Weight in lb(Pound)
+
+            //if (bmiKG == lb)
+            //{
+                bmiLB = weight * 703 / (height * height);
+            //}
+
+            if (bmiLB < 18.5)
+                TxtResultWeight.Text = "You're underweight.";
+            else if (bmiLB > 18.5 && bmiLB < 23)
+                TxtResultWeight.Text = "You're normal weight.";
+            else if (bmiLB > 23)
+                TxtResultWeight.Text = "You're Overweight.";
+
+        }
+    
+
         string strRootFolder = "VideoKall";
         string strRootFolderPath = @"\\192.168.0.33\";// VideoKall";
         private async Task SetImagefolder()
