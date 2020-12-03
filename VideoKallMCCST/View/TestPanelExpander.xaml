@@ -18,8 +18,8 @@
                     <RowDefinition Height="AUTO"></RowDefinition>
                     <RowDefinition Height="AUTO"></RowDefinition>
                     <RowDefinition Height="AUTO"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -55,7 +55,7 @@
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock x:Name="TxtResultHeight"  FontFamily="Open Sans" FontSize="12" Foreground="#464646" FontWeight="Normal" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Center" ></TextBlock>
-                                    <TextBlock  x:Name="TxtLableHeight"  Margin="20,0,0,0" Text="Height : " Grid.Row="0" FontFamily="Open Sans" FontSize="12" Foreground="#464646" FontWeight="SemiBold" Grid.Column="0"  VerticalAlignment="Center" ></TextBlock>                                   
+                                    <TextBlock  x:Name="TxtLableHeight"  Margin="20,0,0,0" Text="Height : " Grid.Row="0" FontFamily="Open Sans" FontSize="12" Foreground="#464646" FontWeight="SemiBold" Grid.Column="0"  VerticalAlignment="Center" ></TextBlock>
                                 </Grid>
                             </Border>
                         </StackPanel>
@@ -371,13 +371,13 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                <Popup Margin="30,0,0,20" Name="Resultglucopopup"  IsOpen="False"  Grid.Row="2">
+                <Popup Margin="30,20,0,20" Name="Resultglucopopup" MinHeight="200" IsOpen="False"  Grid.Row="5">
 
                     <StackPanel>
                         <uctrl:GlucoMeterResultInstructions x:Name="CtrlglucoResult"  Width="790" Height="200"></uctrl:GlucoMeterResultInstructions>
                     </StackPanel>
                 </Popup>
-                <Popup Margin="30,0,0,20" Name="Resultstethoscopechestpopup"  IsOpen="False" Grid.Row="2">
+                <Popup Margin="30,20,0,20" Name="Resultstethoscopechestpopup" MinHeight="200" IsOpen="False" Grid.Row="5">
 
                     <StackPanel>
                         <uctrl:StethoscopeChestInstructions x:Name="CtrlstethoscopechestResult"  Width="790" Height="200"></uctrl:StethoscopeChestInstructions>
@@ -387,7 +387,7 @@
 
                 <!---->
          <!--ResultResulStethoscopelungPopup-->
-                <Popup Margin="30,0,0,20" Name="ResulStethoscopelungPopup"  IsOpen="False" Grid.Row="2">
+                <Popup Margin="30,20,0,20" Name="ResulStethoscopelungPopup" MinHeight="200" IsOpen="False" Grid.Row="5">
                     <StackPanel>
                         <uctrl:StethoscopeLungs x:Name="StethoscopeLungsResult"  Width="790" Height="200"></uctrl:StethoscopeLungs>
                     </StackPanel>
