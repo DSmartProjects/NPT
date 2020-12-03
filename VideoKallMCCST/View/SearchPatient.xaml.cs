@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Model;
 using VideoKallMCCST.ViewModel;
-using VideoKallSBCApplication.Helpers;
+using VideoKallMCCST.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
