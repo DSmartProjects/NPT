@@ -9,6 +9,7 @@ using VideoKallMCCST.Helpers;
 using VideoKallMCCST.ViewModel;
 using Windows.Media.MediaProperties;
 using Windows.System.Display;
+using Windows.System.Threading;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -24,7 +25,7 @@ namespace VideoKallMCCST.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class VideoCall: Page
+    public sealed partial class VideoCall : Page
     {
         MainPage rootPage = MainPage.mainPage;
         CaptureDevice device = null;
@@ -34,6 +35,8 @@ namespace VideoKallMCCST.View
         bool isMuted = false;
         IncomingConnectionEventArgs incommingCall = null;
         public VideoCallViewModel _videoCallVM = null;
+        static DispatcherTimer timer = null;
+       
         public VideoCall()
         {
             this.InitializeComponent();
@@ -42,6 +45,14 @@ namespace VideoKallMCCST.View
             this.DataContext = _videoCallVM;
             _videoCallVM.DefaultVisibilities();
         }
+
+        private async void TimerCallbackCompleted(object sender, object e)
+        {
+            timer.Stop();
+            IncomingCallRing.Stop();
+            await EndCallAsync();
+        }
+
         public async void CallDevice(CaptureDevice device)
         {
             PreviewVideo.Source = device.CaptureSource;
@@ -51,7 +62,6 @@ namespace VideoKallMCCST.View
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             var cameraFound = await CaptureDevice.CheckForRecordingDeviceAsync();
-
             if (cameraFound)
             {
                 device = new CaptureDevice();
@@ -65,7 +75,7 @@ namespace VideoKallMCCST.View
                 //rootPage.NotifyUser("A machine with a camera and a microphone is required to run this sample.", NotifyType.ErrorMessage);
             }
         }
-        
+
         protected async override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
@@ -89,10 +99,10 @@ namespace VideoKallMCCST.View
         private async Task InitializeAsync(CancellationToken cancel = default(CancellationToken))
         {
             try
-            {               
+            {
                 await device.InitializeAsync();
                 await StartRecordToCustomSink();
-                EndConsult.IsEnabled = false;
+                EndConsult.IsEnabled = true;
                 RemoteVideo.Source = null;
                 // Each client starts out as passive
                 roleIsActive = false;
@@ -118,40 +128,29 @@ namespace VideoKallMCCST.View
 
         async void RemoteVideo_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
-            
             try
             {
-                //if (Interlocked.CompareExchange(ref isTerminator, 1, 0) == 0)
-                //{   
-                    
-                    await EndCallAsync();
-                //}
+                await EndCallAsync();
             }
             catch (Exception)
             {
-                //_videoCallVM.DefaultVisibilities();
             }
         }
 
-        DispatcherTimer timer = new DispatcherTimer();
+
         async void Device_IncomingConnectionArrived(object sender, IncomingConnectionEventArgs e)
         {
-            incommingCall = e;
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
+            incommingCall = e;          
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High, (() =>
             {
+                timer = new DispatcherTimer();
+                timer.Start();
+                timer.Interval = TimeSpan.FromSeconds(Constants.MIN_Media_Duration);            
+                timer.Tick += TimerCallbackCompleted;
                 _videoCallVM.IncomingCallRingVisibility = Visibility.Visible;
                 _videoCallVM.AcceptVisiblity = Visibility.Visible;
                 IncomingCallRing.Play();
-                timer.Interval = TimeSpan.FromSeconds(Constants.MIN_Media_Duration);
-                timer.Start();
-                timer.Tick += async (o, args) =>
-                {
-                    timer.Stop();
-                    IncomingCallRing.Stop();
-                    await EndCallAsync();
-                };
-
-            }));
+            }));           
         }
 
 
@@ -160,24 +159,6 @@ namespace VideoKallMCCST.View
 
             try
             {
-                //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (async () =>
-                //{
-                //    if (((VideoKallMCCST.Communication.CaptureDevice)sender).mediaSink != null)
-                //    {
-                //if (Interlocked.CompareExchange(ref isTerminator, 1, 0) == 0)
-                //{
-                //    _videoCallVM.DefaultVisibilities();
-                //     this.Frame.Navigate(typeof(VideoCall));
-                //}
-                //else
-                //{
-                //    //await PatientEndCallAsync();
-                //    //this.Frame.Navigate(typeof(VideoCall));
-                //}
-                //    }
-
-                //}));
-               // _videoCallVM.DefaultVisibilities();
                 await EndCallAsync();
             }
             catch (Exception)
@@ -204,6 +185,7 @@ namespace VideoKallMCCST.View
             await Dispatcher.RunAsync(CoreDispatcherPriority.High, (() =>
             {
                 _videoCallVM.DefaultVisibilities();
+                IncomingCallRing.Stop();
                 RemoteVideo.Stop();
                 RemoteVideo.Source = null;
                 PreviewVideo.Source = null;
@@ -215,9 +197,9 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage));
             MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
         }
-        private async Task  PatientEndCallAsync()
+        private async Task PatientEndCallAsync()
         {
-            
+            //timer.Tick += TimerCallbackCompleted;       
             await device.CleanUpAsync();
             RemoteVideo.Stop();
             PreviewVideo.Source = null;
@@ -257,7 +239,12 @@ namespace VideoKallMCCST.View
         }
         private async Task AcceptCall()
         {
+            timer.Tick -= TimerCallbackCompleted;
             timer.Stop();
+            timer.Tick += TimerCallbackCompleted;
+            //timer.Tick -= (o, args) =>
+            //{
+            //};
             IncomingCallRing.Stop();
             CallDevice(device);
             _videoCallVM.RemoteVideoVisiblity = Visibility.Visible;
@@ -280,8 +267,8 @@ namespace VideoKallMCCST.View
 
                 if (!((bool)roleIsActive))
                 {
-                    // Passive client
-                    RemoteVideo.Source = new Uri(remoteAddress);
+                // Passive client
+                RemoteVideo.Source = new Uri(remoteAddress);
                 }
                 remoteAddress = remoteAddress.Replace("stsp://", "");
             }));
@@ -404,7 +391,7 @@ namespace VideoKallMCCST.View
             var result = Task.Run(async () => { return await ut.ReadIPaddress(); }).Result;
             SMCCommChannel.IPAddress = MainPage.mainPage.mainpagecontext.TxtIpAddress;// "192.168.0.33";
             SMCCommChannel.PortNo = MainPage.mainPage.mainpagecontext.TxtProtNo;// "9856";
-            //SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;
+                                                                                //SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;
             MainPage.mainPage.mainpagecontext.IsSMCConnected = false;
             SMCCommChannel.Connect();
             SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);

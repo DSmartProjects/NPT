@@ -18,7 +18,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="200"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
@@ -35,8 +35,8 @@
             </Grid>
             <Grid Grid.Row="1" Height="200"   VerticalAlignment="Top" Background="#F2F2F2"  BorderThickness="1">
                 <Image Visibility="{Binding VideoLogoVisiblity  ,Mode=TwoWay}" x:Name="VideoLogo" Stretch="Fill"   Source="..\Assets\video-logo.png"></Image>
-                <MediaElement Visibility="{Binding IncomingCallRingVisibility,Mode=TwoWay}"   x:Name="IncomingCallRing" Height="200"  RenderTransformOrigin="0.5,0.5" Stretch="Fill" AutoPlay="False"  Source="..\Assets\Incoming_Call_Notification.mp4" PosterSource="..\Assets\video-logo.png" />
-                <MediaElement  Visibility="{Binding RemoteVideoVisiblity,Mode=TwoWay}" Stretch="UniformToFill"  Height="200" RenderTransformOrigin="0.5,0.5" x:Name="RemoteVideo"  AudioCategory="Communications"   PosterSource="..\Assets\video-logo.png"></MediaElement>
+                <MediaElement Visibility="{Binding IncomingCallRingVisibility,Mode=TwoWay}"   x:Name="IncomingCallRing" Height="200"  RenderTransformOrigin="0.5,0.5" Stretch="Fill" AutoPlay="False"   Source="..\Assets\Incoming_Call_Notification.mp4" PosterSource="..\Assets\video-logo.png" />
+                <MediaElement  Visibility="{Binding RemoteVideoVisiblity,Mode=TwoWay}" Stretch="Fill"   RenderTransformOrigin="0.5,0.5" x:Name="RemoteVideo"  AudioCategory="Communications"   PosterSource="..\Assets\video-logo.png"></MediaElement>
                 <CaptureElement  Name="PreviewVideo"  Margin="250,0,0,110" RenderTransformOrigin="0.5,0.5" Stretch="Fill"></CaptureElement>
                 <Button Visibility="{Binding AcceptVisiblity,Mode=TwoWay}"  Margin="320,150,0,0"   Background="Transparent" Height="50"   x:Name="Accept" Click="Accept_Click" >
                     <Image  Source="..\Assets\answer.png"></Image>
