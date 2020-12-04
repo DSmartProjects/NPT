@@ -28,10 +28,22 @@ namespace VideoKallMCCST.Results
             //TxtInstruction.Text = @"1. To connect with BP Monitor, Press data transmission button for 2 sec," +
             //    " then press Connect button.";
             // TxtInstruction2.Text=@"2. If connected then don't have to connect again. 3. Result will display around 30 sec after test completed.";
-
+            MainPage.mainPage.CASResult += CasNotification;
         }
 
-        async void UpdateNotification(object sender, CommunicationMsg msg)
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (devicecode == 4 && isresultornotificationmsg == 1)
+                {
+                    TxtConnectionstatus.Text = message;
+                } 
+            });
+        }
+
+
+       async void UpdateNotification(object sender, CommunicationMsg msg)
         {
             if (msg.Id != DeviceResponseType.BPCONCHEC || msg.Id != DeviceResponseType.BPCONMSG)
             {

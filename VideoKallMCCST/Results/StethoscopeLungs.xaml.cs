@@ -23,7 +23,7 @@ namespace VideoKallMCCST.Results
     public sealed partial class StethoscopeLungs : UserControl
     {
         DispatcherTimer casTimer = null;
-        int timeout = 15; //timout 15 sec
+        
         public StethoscopeLungs()
         {
             this.InitializeComponent();
@@ -96,8 +96,7 @@ namespace VideoKallMCCST.Results
         int tmptimpout = 0;
         bool deployRetractoprtstionStarted = false;
         private void CasTimer_Tick(object sender, object e)
-        {
-            
+        { 
             if (MainPage.mainPage.isSTDeployed)
             {
                 tmptimpout = 0;
@@ -110,7 +109,7 @@ namespace VideoKallMCCST.Results
             } 
             
 
-            if(tmptimpout > timeout  )
+            if(tmptimpout > MainPage.mainPage.Podmapping.TimeOutPeriod)
             {
                 MainPage.mainPage.isSTDeployed = false;
                 

@@ -346,22 +346,31 @@ namespace VideoKallMCCST
                     if(status.Equals("D") || status.Equals("R"))
                     {
                         strMSG = "Acknowldgement received.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if(res.Substring(res.Length-2).Equals("DG"))
                     {
                         strMSG = "Deploy Completed.";
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess( true);
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RG"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
                         strMSG = "Retract Completed.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("DB"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
                         strMSG = "Deploy Failed.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RB"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess (false);
                         strMSG = "Retract Failed.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
 
                     break;
@@ -591,7 +600,7 @@ namespace VideoKallMCCST
         public int HeightMeasureUnit = 0; // Cm;
         public CasNotification CASResult;
         public bool isSTDeployed = false;
-        
+        public PodCmdStatus PoddeployretractcmdStatus = new PodCmdStatus();
         public delegate void CasNotification(string message, int devicecode , int isresultornotificationmsg);
     }
 }

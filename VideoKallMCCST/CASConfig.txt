@@ -1,0 +1,9 @@
+BPCuffPodID:1
+OximeterPodID:2
+ThermoMeterPodID:3
+DermascopePodID:4
+OtoscopePodID:5
+SpirometerPodID:6
+GlucomonitorPodID:7
+StethoscopeChestPodID:8
+TimeOutPeriod:9

@@ -28,8 +28,19 @@ namespace VideoKallMCCST.Results
             BtnCMD.IsEnabled = true;
             //TXTInstrction.Text = @"1. Suggest user to Press temperature button on thermometer," +
             //    $"then Press connect button. ";
-
+            MainPage.mainPage.CASResult += CasNotification;
         }
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (devicecode == 4 && isresultornotificationmsg == 1)
+                {
+                    TxtConnectionstatus.Text = message;
+                }
+            });
+        }
+
 
         async void UpdateNotification(object sender, CommunicationMsg msg)
         {
