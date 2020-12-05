@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Results;
@@ -48,11 +49,13 @@ namespace VideoKallMCCST.View
             ShowHideglucodata(false);
             ShowHidebpdata(false);
             ShowTemppdata(false);
+            ShowHideWeightdata(false);
+            ShowHideHeightdata(false);
             MainPage.mainPage.NextPatient += NextPatient;
             MainPage.mainPage.MicroscopeStatus += MicroscopeStatus;
 
             MainPage.mainPage.Thermostatusdelegate += UpdateThermoStatus;
-            MainPage.mainPage.CASResult += CasNotification; 
+            MainPage.mainPage.CASResult += CasNotification;           
         }
 
         async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
@@ -61,18 +64,52 @@ namespace VideoKallMCCST.View
                 return;
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                 switch(devicecode)
+                string height = string.Empty;
+                string weight = string.Empty;
+                 switch (devicecode)
                 {
-                    case 1:
-                        
-                        TxtResultHeight.Text = message;
+                    case 1:                       
+                        ShowHideHeightdata(true);
+                        grdHeight.BorderBrush = GetColorFromHexa("#34CBA8");
+                        grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);                        
+                        TxtResultHeight.Text =""+ message;
+                        string[] res = TxtResultHeight.Text.Split(' ');
+                        height = res[0];
                         break;
                     case 2:
-                        TxtResultWeight.Text = message;
+                        ShowHideWeightdata(true);
+                        grdWeight.BorderBrush = GetColorFromHexa("#34CBA8");
+                        grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                        TxtResultWeight.Text =" "+ message;                       
+                        string[] resW = TxtResultWeight.Text.Split('l');                       
+                        weight = resW[0];
+                        if (Convert.ToDouble(weight) > 0.0 && Convert.ToDouble(Height) > 0.0)
+                        {
+                            BMICalculation("lb", Convert.ToDouble(Height), Convert.ToDouble(weight));
+                        }
                         break;
                 }
             });
         }
+
+        void BMICalculation(string type, double height, double weight)
+        {
+
+            double bmi = 0.0;
+            //Weight in kg
+            if (type == "kg")
+            {
+                bmi = weight / (height * height);              
+                TxtResultBMI.Text = Convert.ToString(Math.Round(bmi, 2));
+            }
+            //Weight in lb(Pounds)
+            if (type == "lb")
+            {
+                bmi = weight * 703 / (height * height);
+                TxtResultBMI.Text = Convert.ToString(Math.Round(bmi, 2));
+            }
+        }
+
         string strRootFolder = "VideoKall";
         string strRootFolderPath = @"\\192.168.0.33\";// VideoKall";
         private async Task SetImagefolder()
@@ -125,6 +162,37 @@ namespace VideoKallMCCST.View
                 TxtResultPulseOximeter.Text = "";
                 TxtResultPulseOximeterpulse.Text = "";
                 //TxtResultPulseOximeterpulsedate.Text = "";
+            }
+
+        }
+
+        void ShowHideHeightdata(bool visible)
+        {
+            if (visible)
+            {
+                TxtLableHeight.Visibility = Visibility.Visible;               
+            }
+            else
+            {
+                TxtLableHeight.Visibility = Visibility.Collapsed;
+                //TxtResultHeight.Text = "";
+            }
+
+        }
+
+        void ShowHideWeightdata(bool visible)
+        {
+            if (visible)
+            {
+                TxtLableWeight.Visibility = Visibility.Visible;
+                TxtLabelBMI.Visibility = Visibility.Visible;              
+            }
+            else
+            {
+                TxtLableWeight.Visibility = Visibility.Collapsed;
+                TxtLabelBMI.Visibility = Visibility.Collapsed;
+                //TxtResultWeight.Text = "";
+                //TxtResultBMI.Text = "";
             }
 
         }
@@ -256,6 +324,8 @@ namespace VideoKallMCCST.View
                 ShowHideglucodata(false);
                 ShowHidebpdata(false);
                 ShowTemppdata(false);
+                ShowHideWeightdata(false);
+                ShowHideHeightdata(false);
 
                 //BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 ////BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
@@ -284,11 +354,11 @@ namespace VideoKallMCCST.View
                 grBp.BorderBrush = GetColorFromHexa("#EEEEEE");
                 grBp.BorderThickness = new Thickness(0, 0, 0, 10);
 
-                TxtResultWeight.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultWeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                grdWeight.BorderBrush = GetColorFromHexa("#EEEEEE");
+                grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
 
-                TxtResultHeight.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultHeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                grdHeight.BorderBrush = GetColorFromHexa("#EEEEEE");
+                grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 TxtResultOtoscope.BorderBrush = GetColorFromHexa("#EEEEEE");
                 TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
@@ -400,8 +470,8 @@ namespace VideoKallMCCST.View
                         //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         grdPulse.BorderBrush = GetColorFromHexa("#34CBA8");
                         grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
-                        TxtResultPulseOximeter.Text = res[1].Split(':')[1] + "%";
-                        TxtResultPulseOximeterpulse.Text = res[2].Split(':')[1] + " bpm";
+                        TxtResultPulseOximeter.Text = " " + res[1].Split(':')[1] + "%";
+                        TxtResultPulseOximeterpulse.Text = " "+res[2].Split(':')[1] + "bpm";
                         //TxtResultPulseOximeterpulsedate.Text = res[4];
                         break;
                     case DeviceResponseType.GLUCORESULT:
@@ -646,9 +716,9 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.TestIsInProgress = btnWeightToggle;
             if (btnWeightToggle)
             {
-                TxtResultWeight.BorderBrush = GetColorFromHexa("#FFC10D");
-                TxtResultWeight.BorderThickness = new Thickness(0, 0, 0, 10);
-            } 
+                grdWeight.BorderBrush = GetColorFromHexa("#FFC10D");
+                grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
+            }
             ResuWeightPopup.IsOpen = btnWeightToggle;
         }
 
@@ -661,14 +731,14 @@ namespace VideoKallMCCST.View
             if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) || (!ConnectionCheck && !btnHeighttoggle))
                 return;
 
-            btnHeighttoggle = !btnHeighttoggle; 
+            btnHeighttoggle = !btnHeighttoggle;
 
             MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
             if (btnHeighttoggle)
             {
-                TxtResultHeight.BorderBrush = GetColorFromHexa("#FFC10D");
-                TxtResultHeight.BorderThickness = new Thickness(0, 0, 0, 10);
-            } 
+                grdHeight.BorderBrush = GetColorFromHexa("#FFC10D");
+                grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
+            }
 
             ResulHeightPopup.IsOpen = btnHeighttoggle;
 

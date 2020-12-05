@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Model;
 using VideoKallMCCST.ViewModel;
-using VideoKallSBCApplication.Helpers;
+using VideoKallMCCST.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -97,16 +97,12 @@ namespace VideoKallMCCST.View
             patient.Name= ((VideoKallMCCST.Model.Patient)e.AddedItems[0]).Name;
             patient.DOB = ((VideoKallMCCST.Model.Patient)e.AddedItems[0]).DOB;
         }
-
-        private void BtnAddPatient_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+            
 
         private void BtnSelect_Click(object sender, RoutedEventArgs e)
         {
             MainPage.VideoCallVM.PatientDetails = patient;
-            if (patient.ID > 0 && !string.IsNullOrEmpty(patient.Name))
+            if (patient != null && patient.ID > 0 && !string.IsNullOrEmpty(patient.Name))
                 MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
             this.Hide();
         }
@@ -116,6 +112,15 @@ namespace VideoKallMCCST.View
             _patientVM.Patients = new ObservableCollection<Patient>();
             _patientVM.PatientsGridVisibility = Visibility.Collapsed;
              this.Hide();
+
+        }
+        private async void BtnAddPatient_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainPage.mainPage.mainpagecontext.PMMConfig != null && !string.IsNullOrEmpty(MainPage.mainPage.mainpagecontext.PMMConfig.URL))
+            {
+                Uri uri = new Uri(MainPage.mainPage.mainpagecontext.PMMConfig.URL);
+                await Windows.System.Launcher.LaunchUriAsync(uri);
+            }
 
         }
     }
