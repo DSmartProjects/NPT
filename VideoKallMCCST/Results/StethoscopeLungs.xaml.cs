@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using VideoKallMCCST.Communication;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -21,45 +22,150 @@ namespace VideoKallMCCST.Results
 {
     public sealed partial class StethoscopeLungs : UserControl
     {
+        DispatcherTimer casTimer = null;
+        int timeout = 15; //timout 15 sec
         public StethoscopeLungs()
         {
             this.InitializeComponent();
             this.DataContext = this;
             MainPage.mainPage.ResetSTLungs += Clearall ; 
             MainPage.mainPage.StethoscopeNotification += UpdateNotification;
+            casTimer = new DispatcherTimer();
+            casTimer.Tick += CasTimer_Tick;
+            casTimer.Interval = new TimeSpan(0, 0, 1);
+            MainPage.mainPage.CASResult += CasNotification;
         }
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (devicecode == 3 && isresultornotificationmsg == 1)
+                {
+                    StStatus.Text = message;
+                    deployRetractoprtstionStarted = false;
+                    BtnStart.IsEnabled = true;
+                }
+                else if (devicecode == 3 && isresultornotificationmsg == 2)
+                {
+                    StStatus.Text = message;
+                    BtnStart.IsEnabled = true;
 
+                }
+                else if (devicecode == 3 && isresultornotificationmsg == 3)
+                {
+                    StStatus.Text = message;
+
+                }
+                else if (devicecode == 3 && isresultornotificationmsg == 4)
+                {
+                    BtnStart.IsEnabled = true;
+
+                }
+            });
+        }
         private void BtnDone_Click(object sender, RoutedEventArgs e)
         {
-            if (  (selectedIndex ==-1 && !isoperationStarted))
-                
+            if ((selectedIndex == -1 && !isoperationStarted))
+
                 return;
 
             StartStopST();
         }
 
-        void DeployST()
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
+            if ((selectedIndex == -1 && !isoperationStarted))
+
+                return;
+
+            StartStopST();
+        }
+        void DeployST(int id)
+        {
+            string strID = string.Format("{0}{1}", (id / 8)+1, (id % 8)+1); //( id+1).ToString().PadLeft(2, '1');
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(String.Format(CommunicationCommands.SeatBackSTCmd, strID, "D"));
 
         }
-        void StartStopST()
+
+        void RetractST(int id)
         {
-            isoperationStarted = !isoperationStarted;
+            string strID = string.Format("{0}{1}", (id / 8) + 1, (id % 8) + 1);
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(String.Format(CommunicationCommands.SeatBackSTCmd, strID, "R"));
+        }
 
-             BtnDone.Content = isoperationStarted ? "Stop" : "Start";
-
-            if (isoperationStarted)
+        int tmptimpout = 0;
+        bool deployRetractoprtstionStarted = false;
+        private void CasTimer_Tick(object sender, object e)
+        {
+            
+            if (MainPage.mainPage.isSTDeployed)
             {
+                tmptimpout = 0;
+                deployRetractoprtstionStarted = false;
+                MainPage.mainPage.isSTDeployed = false;
+                casTimer.Stop();
                 MainPage.mainPage.StethoscopeStartStop.Invoke("startST", 1);
                 SetBtnColor(selectedIndex, 1);
+                CasNotification("", 3, 4);
             } 
+            
+
+            if(tmptimpout > timeout  )
+            {
+                MainPage.mainPage.isSTDeployed = false;
+                
+                tmptimpout = 0;
+                casTimer.Stop();
+                CasNotification("No Response, Timed-out", 3, 2);
+                deployRetractoprtstionStarted = false;
+                if (isoperationStarted)
+                {
+                    isoperationStarted = !isoperationStarted;
+                    BtnStart.Content = isoperationStarted ? "Stop streaming" : "Start streaming";
+                }
+            }
+            else if(!deployRetractoprtstionStarted)
+            {
+                tmptimpout = 0;
+                casTimer.Stop();
+                CasNotification("", 3, 4);
+            }
             else
             {
+                CasNotification("Waiting for resp: " + tmptimpout.ToString() + " sec", 3, 3);
+            }
+            tmptimpout++;
+        }
+
+        void StartStopST()
+        {
+            if (deployRetractoprtstionStarted)
+                return;
+
+            isoperationStarted = !isoperationStarted;
+            BtnStart.IsEnabled = false;
+            //  BtnDone.Content = isoperationStarted ? "Stop" : "Start";
+            BtnStart.Content = isoperationStarted ? "Stop streaming" : "Start streaming";
+            if (isoperationStarted   )
+            {
+                deployRetractoprtstionStarted = true;
+                SetBtnColor(selectedIndex, 1);
+                DeployST(currentStethescope);
+                casTimer.Start(); 
+                //MainPage.mainPage.StethoscopeStartStop.Invoke("startST", 1);
+                //SetBtnColor(selectedIndex, 1);
+            } 
+            else  
+            {
+                MainPage.mainPage.isSTDeployed = false;
+                deployRetractoprtstionStarted = true;
+                RetractST(currentStethescope );
                 MainPage.mainPage.StethoscopeStartStop.Invoke("stopST", 1);
-               // SetBtnColor(currentStethescope, 2);
+                casTimer.Start();
+                // SetBtnColor(currentStethescope, 2);
             }
                 
-        }
+        }        
 
         async void UpdateNotification(string s, int code)
         {
@@ -74,7 +180,6 @@ namespace VideoKallMCCST.Results
             {
                 MainPage.mainPage.isStethoscopeStreaming = true;
                
-                
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     SetBtnColor(currentStethescope, 1);
@@ -118,11 +223,8 @@ namespace VideoKallMCCST.Results
             });
         }
          
-      
-
         public   double StlHeight
         {
-             
             get
             {
                 double ht = gridstarray.RowDefinitions[1].ActualHeight-10;
@@ -135,8 +237,6 @@ namespace VideoKallMCCST.Results
         {
             StStatus.Text = string.Format("Number {0 } {1}",index + 1, msg);
         }
-
-       
 
         private void BtnST1_Click(object sender, RoutedEventArgs e)
         {
@@ -236,10 +336,7 @@ namespace VideoKallMCCST.Results
       
 
         private void Btnup_Click(object sender, RoutedEventArgs e)
-        {
-            
- 
-
+        { 
         }
 
 
@@ -248,12 +345,10 @@ namespace VideoKallMCCST.Results
         }
 
       async  void Clearall()
-        {
-           
-              
-              isoperationStarted = false;
-              selectedIndex = -1;
-              currentStethescope = -1; 
+        { 
+            isoperationStarted = false;
+            selectedIndex = -1;
+            currentStethescope = -1; 
             STState.Clear();
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
@@ -273,8 +368,8 @@ namespace VideoKallMCCST.Results
                 BtnST14.Background = new SolidColorBrush(Windows.UI.Colors.White);
                 BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.White);
                 BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.White);
-                BtnDone.Content = isoperationStarted ? "Stop" : "Start";
-                
+               // BtnDone.Content = isoperationStarted ? "Stop" : "Start";
+                BtnStart.Content = isoperationStarted ? "Stop streaming" : "Start streaming";
                 StStatus.Text = "";
                  
 
@@ -1094,10 +1189,7 @@ namespace VideoKallMCCST.Results
             }
         }
 
-        private void BtnStart_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
         private void BtnRecord_Click(object sender, RoutedEventArgs e)
         {
