@@ -658,19 +658,17 @@ namespace VideoKallMCCST.View
                 casTimer.Stop();
                 MainPage.mainPage.PoddeployretractcmdStatus.Reset();
             }
-
-            MainPage.mainPage.PoddeployretractcmdStatus.PodSelectionOperationStarted();
-
             if (deploy)
             {
+                MainPage.mainPage.PoddeployretractcmdStatus.PodSelectionOperationStarted();
                 //  casTimer main
                 MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.PODCMD, podID, "D"));
                 casTimer.Start();
             }
             else
             {
-                MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.PODCMD, podID, "R"));
-                casTimer.Start();
+               // MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.PODCMD, podID, "R"));
+              //  casTimer.Start();
             }
 
         }
