@@ -1206,9 +1206,11 @@ namespace VideoKallMCCST.View
                             podmap.ReclineStepValue = int.Parse(data[1]);
                             break;
                     }
-                    MainPage.mainPage.Podmapping = podmap;
+                   
                 }
-            } catch(Exception ex) { string s = ex.Message; }
+                MainPage.mainPage.Podmapping = podmap;
+            } catch(Exception ex) {
+                string s = ex.Message; }
 
         }
     }
