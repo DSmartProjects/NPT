@@ -397,10 +397,12 @@ namespace VideoKallMCCST
                     status = res.Substring(res.Length - 1);
                     if (status.Equals("G") )
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
                         strMSG = "Reclined. "+ res.Substring(2);
                     }
                     if (status.Equals("B"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
                         strMSG = "Reclined failed.";
                     }
                     break;
@@ -589,6 +591,7 @@ namespace VideoKallMCCST
         public CasNotification CASResult;
         public bool isSTDeployed = false;
         public PodCmdStatus PoddeployretractcmdStatus = new PodCmdStatus();
+        public BoolDelegate SeatReclineMsg;
         public delegate void CasNotification(string message, int devicecode , int isresultornotificationmsg);
         public delegate void REQ_MSG_Visibility(string status);
         public REQ_MSG_Visibility REQ_MSG_VisibilityCompleted;

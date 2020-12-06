@@ -30,6 +30,7 @@ namespace VideoKallMCCST.Communication
         public string SpirometerPodID;
         public string StethoscopeChestPodID;
         public int TimeOutPeriod;
+        public int ReclineStepValue;
     }
 
     public struct PodCmdStatus

@@ -219,12 +219,12 @@ namespace VideoKallMCCST.View
 
         private void Apchair1_Click(object sender, RoutedEventArgs e)
         {
-
+            MainPage.mainPage.SeatReclineMsg?.Invoke(false);
         }
 
         private void Apchair2_Click(object sender, RoutedEventArgs e)
         {
-
+            MainPage.mainPage.SeatReclineMsg?.Invoke(true);
         }
 
         private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)

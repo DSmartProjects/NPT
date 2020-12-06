@@ -55,7 +55,8 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.MicroscopeStatus += MicroscopeStatus;
 
             MainPage.mainPage.Thermostatusdelegate += UpdateThermoStatus;
-            MainPage.mainPage.CASResult += CasNotification;           
+            MainPage.mainPage.CASResult += CasNotification;
+            MainPage.mainPage.SeatReclineMsg += AdjustSeatReclination;
         }
 
         async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
@@ -643,8 +644,8 @@ namespace VideoKallMCCST.View
             int timeout = MainPage.mainPage.Podmapping.TimeOutPeriod - timeoutCount; 
             RetractInProgressMessageDlg = new ContentDialog
             {
-                Title = "Deployment/Retraction in Progress",
-                Content = String.Format("Please wait {0} sec. Deployment/Retraction is in progress", timeout>0? timeout:0),
+                Title = "Deployment/Recline is in Progress",
+                Content = String.Format("Please wait for {0} sec.", timeout>0? timeout:0),
                 PrimaryButtonText = "OK",
             };
 
@@ -653,7 +654,7 @@ namespace VideoKallMCCST.View
 
         void DeployRetractDevice(bool deploy,string podID)
         {
-            if (casTimer.IsEnabled)
+            if (casTimer.IsEnabled && deploy)
             {
                 casTimer.Stop();
                 MainPage.mainPage.PoddeployretractcmdStatus.Reset();
@@ -665,11 +666,7 @@ namespace VideoKallMCCST.View
                 MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.PODCMD, podID, "D"));
                 casTimer.Start();
             }
-            else
-            {
-               // MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.PODCMD, podID, "R"));
-              //  casTimer.Start();
-            }
+            
 
         }
         private void BtnBP_Click(object sender, RoutedEventArgs e)
@@ -1060,6 +1057,68 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.CASResult += CasNotification;
         }
 
+        async void AdjustSeatReclination(bool recline)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if(recline)
+                {
+                    Recline(); 
+                }
+                else
+                {
+                    Decline();
+                }
+
+            });
+        }
+
+       public void Recline()
+        {
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+            {
+                ShowRetractInProgressMessage();
+                return;
+            }
+            int val = _reclinevalue + MainPage.mainPage.Podmapping.ReclineStepValue;
+            _reclinevalue = (val) > 100 ? 100 : val;
+
+            if (casTimer.IsEnabled)
+            {
+                casTimer.Stop();
+                MainPage.mainPage.PoddeployretractcmdStatus.Reset();
+            }
+            
+             MainPage.mainPage.PoddeployretractcmdStatus.PodSelectionOperationStarted();
+            //  casTimer main
+            string strval = (_reclinevalue.ToString()).PadLeft(2,'0');
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.SeatReclineCmd, strval));
+            casTimer.Start();
+        }
+
+        public void Decline()
+        {
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+            {
+                ShowRetractInProgressMessage();
+                return;
+            }
+
+            int val = _reclinevalue - MainPage.mainPage.Podmapping.ReclineStepValue;
+            _reclinevalue = (val) < 0? 0: val;
+
+            if (casTimer.IsEnabled)
+            {
+                casTimer.Stop();
+                MainPage.mainPage.PoddeployretractcmdStatus.Reset();
+            }
+
+            MainPage.mainPage.PoddeployretractcmdStatus.PodSelectionOperationStarted();
+            //  casTimer main
+            string strval = (_reclinevalue.ToString()).PadLeft(2,'0');
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.SeatReclineCmd, strval));
+            casTimer.Start();
+        }
         private void CasTimer_Tick(object sender, object e)
         {
             MainPage.mainPage.CASResult?.Invoke("Waiting for resp: " + timeoutCount.ToString() + " sec",4,1);
@@ -1083,6 +1142,8 @@ namespace VideoKallMCCST.View
 
             timeoutCount++;
         }
+
+        int _reclinevalue = 0;
         int timeoutCount = 0;
  
         string CasConfigFile = "CASConfig.txt";
@@ -1099,6 +1160,7 @@ namespace VideoKallMCCST.View
                 podmap.GlucomonitorPodID = "7";
                 podmap.StethoscopeChestPodID = "8";
                 podmap.TimeOutPeriod = 10;
+                podmap.ReclineStepValue = 5;
                 MainPage.mainPage.Podmapping = podmap;
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 if (!File.Exists(localFolder.Path + "\\" + CasConfigFile))
@@ -1139,6 +1201,9 @@ namespace VideoKallMCCST.View
                             break;
                         case "TimeOutPeriod":
                             podmap.TimeOutPeriod = int.Parse(data[1]);
+                            break;
+                        case "ReclineStepValue":
+                            podmap.ReclineStepValue = int.Parse(data[1]);
                             break;
                     }
                     MainPage.mainPage.Podmapping = podmap;
