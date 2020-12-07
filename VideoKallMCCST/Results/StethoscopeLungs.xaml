@@ -60,6 +60,14 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="160"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="2" Grid.Column="3"   Orientation="Vertical">
+                        <Button x:Name="UprightChair"   Click="UprightChair_Click" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="5,5,5,5"  Background="Transparent">
+                            <Path Fill="DarkBlue"  Margin="50,0,0,0" Data="M 0 10 L 20 10 L 10 0 Z" />
+                        </Button>
+                        <Button x:Name="LeaningChair"  Click="LeaningChair_Click" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="5,5,5,5"   Background="Transparent">
+                            <Path Fill="DarkBlue" Margin="50,0,0,0" Data="M 0 0 L 10 10 L 20 0 Z"/>
+                        </Button>
+                    </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                         <TextBlock Margin="20,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
                         <!--<TextBlock x:Name="StStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>-->
