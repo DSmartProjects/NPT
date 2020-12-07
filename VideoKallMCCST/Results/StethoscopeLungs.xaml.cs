@@ -1188,7 +1188,14 @@ namespace VideoKallMCCST.Results
             }
         }
 
-       
+        private void UprightChair_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void LeaningChair_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void BtnRecord_Click(object sender, RoutedEventArgs e)
         {

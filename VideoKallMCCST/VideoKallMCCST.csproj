@@ -27,7 +27,7 @@
     <PackageCertificateKeyFile>VideoKallMCCST_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
-    <AppxPackageDir>C:\Users\sandyakumar\Desktop\New Build\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\sandyakumar\Desktop\DSmart Projects\1. NPT &amp; SMC\Client Release\07-12-2020\VideoKall NPT\</AppxPackageDir>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
