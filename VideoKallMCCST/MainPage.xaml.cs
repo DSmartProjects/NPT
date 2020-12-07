@@ -334,22 +334,31 @@ namespace VideoKallMCCST
                     if(status.Equals("D") || status.Equals("R"))
                     {
                         strMSG = "Acknowldgement received.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if(res.Substring(res.Length-2).Equals("DG"))
                     {
                         strMSG = "Deploy Completed.";
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess( true);
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RG"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
                         strMSG = "Retract Completed.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("DB"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
                         strMSG = "Deploy Failed.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RB"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess (false);
                         strMSG = "Retract Failed.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
 
                     break;
@@ -388,10 +397,12 @@ namespace VideoKallMCCST
                     status = res.Substring(res.Length - 1);
                     if (status.Equals("G") )
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
                         strMSG = "Reclined. "+ res.Substring(2);
                     }
                     if (status.Equals("B"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
                         strMSG = "Reclined failed.";
                     }
                     break;
@@ -579,7 +590,8 @@ namespace VideoKallMCCST
         public int HeightMeasureUnit = 0; // Cm;
         public CasNotification CASResult;
         public bool isSTDeployed = false;
-        
+        public PodCmdStatus PoddeployretractcmdStatus = new PodCmdStatus();
+        public BoolDelegate SeatReclineMsg;
         public delegate void CasNotification(string message, int devicecode , int isresultornotificationmsg);
         public delegate void REQ_MSG_Visibility(string status);
         public REQ_MSG_Visibility REQ_MSG_VisibilityCompleted;

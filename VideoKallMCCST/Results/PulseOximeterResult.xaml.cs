@@ -26,7 +26,20 @@ namespace VideoKallMCCST.Results
             this.InitializeComponent();
             MainPage.mainPage.mainpagecontext.NotifyResult += UpdateNotification;
             BtnStreamdata.IsEnabled = true;
+            MainPage.mainPage.CASResult += CasNotification;
         }
+
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (devicecode == 4 && isresultornotificationmsg == 1)
+                {
+                    TxtSpiroMeterConnectionStatus.Text = message;
+                }
+            });
+        }
+
         async void UpdateNotification(object sender, CommunicationMsg msg)
         {
             string status = String.Empty;

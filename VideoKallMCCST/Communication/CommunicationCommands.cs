@@ -27,6 +27,42 @@ namespace VideoKallMCCST.Communication
         public string GlucomonitorPodID;
         public string DermascopePodID;
         public string OtoscopePodID;
+        public string SpirometerPodID;
+        public string StethoscopeChestPodID;
+        public int TimeOutPeriod;
+        public int ReclineStepValue;
+    }
+
+    public struct PodCmdStatus
+    {
+        public bool IsPodDeployandRetractResponseReceived;
+        public bool IsPodDeployedRetractInProgress;
+        public bool isPodDeployOrRetractFailed;
+        public PodCmdStatus(bool initalvalue = false)
+        {
+             IsPodDeployandRetractResponseReceived= initalvalue;
+             IsPodDeployedRetractInProgress= initalvalue;
+             isPodDeployOrRetractFailed= initalvalue;
+    }
+        public void Reset()
+        {
+            IsPodDeployandRetractResponseReceived = false;
+            IsPodDeployedRetractInProgress = false;
+            isPodDeployOrRetractFailed = false;
+        }
+        public void PodSelectionOperationStarted()
+        {
+            IsPodDeployandRetractResponseReceived = false;
+            IsPodDeployedRetractInProgress = true;
+            isPodDeployOrRetractFailed = false;
+        }
+
+        public void PodSelectionOperationResponseiSSuccess(bool status)
+        {
+            IsPodDeployandRetractResponseReceived = true;
+            IsPodDeployedRetractInProgress = false;
+            isPodDeployOrRetractFailed = status;
+        }
     }
    public static class CommunicationCommands
     {
