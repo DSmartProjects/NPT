@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Results;
@@ -48,13 +49,67 @@ namespace VideoKallMCCST.View
             ShowHideglucodata(false);
             ShowHidebpdata(false);
             ShowTemppdata(false);
+            ShowHideWeightdata(false);
+            ShowHideHeightdata(false);
             MainPage.mainPage.NextPatient += NextPatient;
             MainPage.mainPage.MicroscopeStatus += MicroscopeStatus;
 
             MainPage.mainPage.Thermostatusdelegate += UpdateThermoStatus;
-
+            MainPage.mainPage.CASResult += CasNotification;
+            MainPage.mainPage.SeatReclineMsg += AdjustSeatReclination;
         }
 
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            if (isresultornotificationmsg == 1)
+                return;
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                string height = string.Empty;
+                string weight = string.Empty;
+                 switch (devicecode)
+                {
+                    case 1:                       
+                        ShowHideHeightdata(true);
+                        grdHeight.BorderBrush = GetColorFromHexa("#34CBA8");
+                        grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);                        
+                        TxtResultHeight.Text =""+ message;
+                        string[] res = TxtResultHeight.Text.Split(' ');
+                        height = res[0];
+                        break;
+                    case 2:
+                        ShowHideWeightdata(true);
+                        grdWeight.BorderBrush = GetColorFromHexa("#34CBA8");
+                        grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                        TxtResultWeight.Text =" "+ message;                       
+                        string[] resW = TxtResultWeight.Text.Split('l');                       
+                        weight = resW[0];
+                        if (Convert.ToDouble(weight) > 0.0 && Convert.ToDouble(Height) > 0.0)
+                        {
+                            BMICalculation("lb", Convert.ToDouble(Height), Convert.ToDouble(weight));
+                        }
+                        break;
+                }
+            });
+        }
+
+        void BMICalculation(string type, double height, double weight)
+        {
+
+            double bmi = 0.0;
+            //Weight in kg
+            if (type == "kg")
+            {
+                bmi = weight / (height * height);              
+                TxtResultBMI.Text = Convert.ToString(Math.Round(bmi, 2));
+            }
+            //Weight in lb(Pounds)
+            if (type == "lb")
+            {
+                bmi = weight * 703 / (height * height);
+                TxtResultBMI.Text = Convert.ToString(Math.Round(bmi, 2));
+            }
+        }
 
         string strRootFolder = "VideoKall";
         string strRootFolderPath = @"\\192.168.0.33\";// VideoKall";
@@ -89,7 +144,7 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.TestIsInProgress =
                 ResulThermoPopup.IsOpen || ResultPulseOximeterPopup.IsOpen || ResultBPPopup.IsOpen || ResuWeightPopup.IsOpen || ResulHeightPopup.IsOpen
                  || ResulOtoscopePopup.IsOpen || ResulDermascopePopup.IsOpen || Resultglucopopup.IsOpen ||
-                 Resultspiropopup.IsOpen || Resultstethoscopechestpopup.IsOpen;
+                 Resultspiropopup.IsOpen || Resultstethoscopechestpopup.IsOpen || ResulStethoscopelungPopup.IsOpen;
         }
 
         void ShowHidePulseoximeterdata(bool visible)
@@ -108,6 +163,37 @@ namespace VideoKallMCCST.View
                 TxtResultPulseOximeter.Text = "";
                 TxtResultPulseOximeterpulse.Text = "";
                 //TxtResultPulseOximeterpulsedate.Text = "";
+            }
+
+        }
+
+        void ShowHideHeightdata(bool visible)
+        {
+            if (visible)
+            {
+                TxtLableHeight.Visibility = Visibility.Visible;               
+            }
+            else
+            {
+                TxtLableHeight.Visibility = Visibility.Collapsed;
+                //TxtResultHeight.Text = "";
+            }
+
+        }
+
+        void ShowHideWeightdata(bool visible)
+        {
+            if (visible)
+            {
+                TxtLableWeight.Visibility = Visibility.Visible;
+                TxtLabelBMI.Visibility = Visibility.Visible;              
+            }
+            else
+            {
+                TxtLableWeight.Visibility = Visibility.Collapsed;
+                TxtLabelBMI.Visibility = Visibility.Collapsed;
+                //TxtResultWeight.Text = "";
+                //TxtResultBMI.Text = "";
             }
 
         }
@@ -239,6 +325,8 @@ namespace VideoKallMCCST.View
                 ShowHideglucodata(false);
                 ShowHidebpdata(false);
                 ShowTemppdata(false);
+                ShowHideWeightdata(false);
+                ShowHideHeightdata(false);
 
                 //BtnThermoMeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
                 ////BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightGray);
@@ -267,11 +355,11 @@ namespace VideoKallMCCST.View
                 grBp.BorderBrush = GetColorFromHexa("#EEEEEE");
                 grBp.BorderThickness = new Thickness(0, 0, 0, 10);
 
-                TxtResultWeight.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultWeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                grdWeight.BorderBrush = GetColorFromHexa("#EEEEEE");
+                grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
 
-                TxtResultHeight.BorderBrush = GetColorFromHexa("#EEEEEE");
-                TxtResultHeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                grdHeight.BorderBrush = GetColorFromHexa("#EEEEEE");
+                grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
 
                 TxtResultOtoscope.BorderBrush = GetColorFromHexa("#EEEEEE");
                 TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
@@ -368,9 +456,7 @@ namespace VideoKallMCCST.View
             });
 
 
-        }
-
-
+        } 
 
         async void UpdateNotification(object sender, CommunicationMsg msg)
         {
@@ -385,8 +471,8 @@ namespace VideoKallMCCST.View
                         //BtnPulseoximeter.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         grdPulse.BorderBrush = GetColorFromHexa("#34CBA8");
                         grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
-                        TxtResultPulseOximeter.Text = res[1].Split(':')[1] + "%";
-                        TxtResultPulseOximeterpulse.Text = res[2].Split(':')[1] + " bpm";
+                        TxtResultPulseOximeter.Text = " " + res[1].Split(':')[1] + "%";
+                        TxtResultPulseOximeterpulse.Text = " "+res[2].Split(':')[1] + "bpm";
                         //TxtResultPulseOximeterpulsedate.Text = res[4];
                         break;
                     case DeviceResponseType.GLUCORESULT:
@@ -478,6 +564,8 @@ namespace VideoKallMCCST.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            ReadCASSettings();
+            CASTimer();
         }
 
 
@@ -485,29 +573,27 @@ namespace VideoKallMCCST.View
         private void BtnPulseoximeter_Click(object sender, RoutedEventArgs e)
         {
             isTestResultOpened();
-            if ((MainPage.mainPage.TestIsInProgress && !BtnPulseoximeterToggle) || (!ConnectionCheck && !BtnPulseoximeterToggle))
+            if ((MainPage.mainPage.TestIsInProgress && !BtnPulseoximeterToggle) || 
+                (!ConnectionCheck && !BtnPulseoximeterToggle) ||
+                (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+                )
+            {
+                if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+                    ShowRetractInProgressMessage();
                 return;
+            }
+               
 
-            BtnPulseoximeterToggle = !BtnPulseoximeterToggle;
-            //if (BtnPulseoximeterToggle)
-            //MainPage.mainPage.StatusTxt.Text = "";
+            BtnPulseoximeterToggle = !BtnPulseoximeterToggle; 
             MainPage.mainPage.TestIsInProgress = BtnPulseoximeterToggle;
             if (BtnPulseoximeterToggle)
             {
                 //BtnPulseoximeter.Background = GetColorFromHexa("#FFBF00"); //BtnPulseoximeterToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 grdPulse.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
-            }
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-
-            //CtrlPulseoximterResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
-            //CtrlPulseoximterResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
+            } 
             ResultPulseOximeterPopup.IsOpen = BtnPulseoximeterToggle;
-            if (BtnPulseoximeterToggle)
-                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.SMCPODDEPLOY, 1));
-            else
-                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.SMCUSAGEDONE, 1));
+            DeployRetractDevice(BtnPulseoximeterToggle, MainPage.mainPage.Podmapping.OximeterPodID);
         }
         public SolidColorBrush GetColorFromHexa(string hexaColor)
         {
@@ -527,12 +613,18 @@ namespace VideoKallMCCST.View
         {
             isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_thermotoggle) || (!ConnectionCheck && !_thermotoggle))
-                return;
+            if ((MainPage.mainPage.TestIsInProgress && !_thermotoggle) ||
+                (!ConnectionCheck && !_thermotoggle) ||
+                (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+                )
+            {
+                if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+                    ShowRetractInProgressMessage();
 
-            _thermotoggle = !_thermotoggle;
-            //if (_thermotoggle)
-            //MainPage.mainPage.StatusTxt.Text = "";
+                return;
+            }
+
+            _thermotoggle = !_thermotoggle; 
 
             MainPage.mainPage.TestIsInProgress = _thermotoggle;
             if (_thermotoggle)
@@ -540,40 +632,66 @@ namespace VideoKallMCCST.View
                 //BtnThermoMeter.Background = GetColorFromHexa("#FFBF00"); // : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 gridThermo.BorderBrush = GetColorFromHexa("#FFC10D");
                 gridThermo.BorderThickness = new Thickness(0, 0, 0, 10);
-            }
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-
-            //CtrlThermoResult.Height = ht * 1.5;//gridInstrumentPanel.ActualHeight;
-            //CtrlThermoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
+            } 
             ResulThermoPopup.IsOpen = _thermotoggle;
+            DeployRetractDevice(_thermotoggle, MainPage.mainPage.Podmapping.ThermoMeterPodID);
         }
 
         bool _resultBpToggle = false;
+        ContentDialog RetractInProgressMessageDlg = null;
+        void ShowRetractInProgressMessage()
+        {
+            int timeout = MainPage.mainPage.Podmapping.TimeOutPeriod - timeoutCount; 
+            RetractInProgressMessageDlg = new ContentDialog
+            {
+                Title = "Deployment/Recline is in Progress",
+                Content = String.Format("Please wait for {0} sec.", timeout>0? timeout:0),
+                PrimaryButtonText = "OK",
+            };
+
+            var val = RetractInProgressMessageDlg.ShowAsync();
+        }
+
+        void DeployRetractDevice(bool deploy,string podID)
+        {
+            if (casTimer.IsEnabled && deploy)
+            {
+                casTimer.Stop();
+                MainPage.mainPage.PoddeployretractcmdStatus.Reset();
+            }
+            if (deploy)
+            {
+                MainPage.mainPage.PoddeployretractcmdStatus.PodSelectionOperationStarted();
+                //  casTimer main
+                MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.PODCMD, podID, "D"));
+                casTimer.Start();
+            }
+            
+
+        }
         private void BtnBP_Click(object sender, RoutedEventArgs e)
         {
             isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_resultBpToggle) || (!ConnectionCheck && !_resultBpToggle))
+            if ((MainPage.mainPage.TestIsInProgress && !_resultBpToggle) ||
+                (!ConnectionCheck && !_resultBpToggle) ||
+               (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress) )
+            {
+                if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+                    ShowRetractInProgressMessage();
                 return;
+            }
 
-            _resultBpToggle = !_resultBpToggle;
-            // if (_resultBpToggle)
-            //MainPage.mainPage.StatusTxt.Text = "";
-
+            _resultBpToggle = !_resultBpToggle; 
             MainPage.mainPage.TestIsInProgress = _resultBpToggle;
             if (_resultBpToggle)
             {
                 //BtnBP.Background = GetColorFromHexa("#FFBF00");//_resultBpToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 grBp.BorderBrush = GetColorFromHexa("#FFC10D");
                 grBp.BorderThickness = new Thickness(0, 0, 0, 10);
-            }
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-
-            //CtrlBPResultsInstructions.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
-            //CtrlBPResultsInstructions.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
+            } 
             ResultBPPopup.IsOpen = _resultBpToggle;
+            DeployRetractDevice(_resultBpToggle, MainPage.mainPage.Podmapping.BPCuffPodID); 
         }
         public void updateTime()
         {
@@ -588,25 +706,14 @@ namespace VideoKallMCCST.View
             if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
                 return;
 
-            btnWeightToggle = !btnWeightToggle;
-
-            //if (btnWeightToggle)
-            //MainPage.mainPage.StatusTxt.Text = "";
+            btnWeightToggle = !btnWeightToggle; 
 
             MainPage.mainPage.TestIsInProgress = btnWeightToggle;
             if (btnWeightToggle)
             {
-                TxtResultWeight.BorderBrush = GetColorFromHexa("#FFC10D");
-                TxtResultWeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                grdWeight.BorderBrush = GetColorFromHexa("#FFC10D");
+                grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
             }
-            //BtnWeight.Background = GetColorFromHexa("#FFBF00");// btnWeightToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
-
-
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-
-            //CtrlWeightResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
-            //CtrlWeightResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResuWeightPopup.IsOpen = btnWeightToggle;
         }
 
@@ -621,32 +728,19 @@ namespace VideoKallMCCST.View
 
             btnHeighttoggle = !btnHeighttoggle;
 
-            //if (btnHeighttoggle)
-            //    //MainPage.mainPage.StatusTxt.Text = "";
-
-            //MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
-            //if (btnHeighttoggle)
-            //    BtnHeight.Background = GetColorFromHexa("#FFBF00");// btnHeighttoggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-
-            //CtrlHeightoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
-            //CtrlHeightoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
-            //ResulHeightPopup.IsOpen = btnHeighttoggle;
-
             MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
             if (btnHeighttoggle)
             {
-                TxtResultHeight.BorderBrush = GetColorFromHexa("#FFC10D");
-                TxtResultHeight.BorderThickness = new Thickness(0, 0, 0, 10);
-            }// btnHeighttoggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);            
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
+                grdHeight.BorderBrush = GetColorFromHexa("#FFC10D");
+                grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
+            }
 
-            //CtrlHeightoResult.Height = ht * 2;//gridInstrumentPanel.ActualHeight;
-            //CtrlHeightoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             ResulHeightPopup.IsOpen = btnHeighttoggle;
 
+            if(btnHeighttoggle)
+            {
+              MainPage.mainPage.HM_WMEvents?.Invoke("height", 1);
+            }
         }
 
         bool _otoscopeToggle = false;
@@ -654,36 +748,37 @@ namespace VideoKallMCCST.View
         {
             isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !_otoscopeToggle) || (!ConnectionCheck && !_otoscopeToggle))
+            if ((MainPage.mainPage.TestIsInProgress && !_otoscopeToggle) || 
+                (!ConnectionCheck && !_otoscopeToggle) ||
+                (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+                )
+            {
+                if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+                    ShowRetractInProgressMessage();
                 return;
+            }
+                
             try
             {
                 if (MainPage.mainPage.rootImageFolder == null)
-                    await SetImagefolder();
-
-
-                _otoscopeToggle = !_otoscopeToggle;
-                // if (_otoscopeToggle)
-                //MainPage.mainPage.StatusTxt.Text = "";
+                    await SetImagefolder(); 
+                _otoscopeToggle = !_otoscopeToggle; 
                 MainPage.mainPage.TestIsInProgress = _otoscopeToggle;
                 if (_otoscopeToggle)
                 {
                     MainPage.mainPage.DigitalMicroscope?.Invoke(false);
                     MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STARTOTOSCOPE);
                 }
-                // else
-                //   MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
+                    
                 if (_otoscopeToggle)
                 {
                     TxtResultOtoscope.BorderBrush = GetColorFromHexa("#FFC10D");
                     TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
-                }
-                //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-                //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
+                } 
 
-                //CtrlOtoscopeResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-                //CtrlOtoscopeResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
                 ResulOtoscopePopup.IsOpen = _otoscopeToggle;
+
+                DeployRetractDevice(_otoscopeToggle, MainPage.mainPage.Podmapping.OtoscopePodID);
             }
             catch (Exception ex)
             {
@@ -695,38 +790,35 @@ namespace VideoKallMCCST.View
         private async void BtnDermoscope_Click(object sender, RoutedEventArgs e)
         {
             isTestResultOpened();
-            if ((MainPage.mainPage.TestIsInProgress && !_dermascopeToggle) || (!ConnectionCheck && !_dermascopeToggle))
+            if ((MainPage.mainPage.TestIsInProgress && !_dermascopeToggle) || 
+                (!ConnectionCheck && !_dermascopeToggle) ||
+                (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+                )
+            {
+                if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+                    ShowRetractInProgressMessage();
                 return;
-
+            }
             try
             {
                 if (MainPage.mainPage.rootImageFolder == null)
                     await SetImagefolder();
 
                 _dermascopeToggle = !_dermascopeToggle;
-                MainPage.mainPage.TestIsInProgress = _dermascopeToggle;
-                // if (_dermascopeToggle)
-                //MainPage.mainPage.StatusTxt.Text = "";
+                MainPage.mainPage.TestIsInProgress = _dermascopeToggle; 
                 if (_dermascopeToggle)
                 {
                     MainPage.mainPage.DigitalMicroscope?.Invoke(true);
                     MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STARTDERMO);
 
-                }
-                //   else
-                // MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
+                } 
                 if (_dermascopeToggle)
                 {
                     TxtResultDermascope.BorderBrush = GetColorFromHexa("#FFC10D");
                     TxtResultDermascope.BorderThickness = new Thickness(0, 0, 0, 10);
-                }
-                //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-                //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-
-                //CtrlDermascopeResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-                //CtrlDermascopeResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
+                } 
                 ResulDermascopePopup.IsOpen = _dermascopeToggle;
-
+                DeployRetractDevice(_dermascopeToggle, MainPage.mainPage.Podmapping.DermascopePodID);
             }
             catch (Exception ex)
             {
@@ -784,25 +876,7 @@ namespace VideoKallMCCST.View
 
         bool _ekgToggle = false;
         private void BtnEKG_Click(object sender, RoutedEventArgs e)
-        {
-            //isTestResultOpened();
-
-            //if ((MainPage.mainPage.TestIsInProgress && !_ekgToggle) || (!ConnectionCheck && !_ekgToggle))
-            //    return;
-
-
-            //_ekgToggle = !_ekgToggle;
-            //if (_ekgToggle)
-            //    // MainPage.mainPage.StatusTxt.Text = "";
-            //    MainPage.mainPage.TestIsInProgress = _ekgToggle;
-            //if (_ekgToggle)
-            //    BtnEKG.Background = GetColorFromHexa("#FFBF00");  //_ekgToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-
-            //CtrlekgResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-            //CtrlekgResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
-            //ResultEKGpopup.IsOpen = _ekgToggle;
+        { 
         }
 
 
@@ -815,6 +889,12 @@ namespace VideoKallMCCST.View
 
             if (MainPage.mainPage.TestIsInProgress && !_glucoToggle)
                 return;
+
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+            {
+                ShowRetractInProgressMessage();
+                return;
+            }
 
             _glucoToggle = !_glucoToggle;
 
@@ -829,13 +909,9 @@ namespace VideoKallMCCST.View
             {
                 grdGluco.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
-            }
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-
-            //CtrlglucoResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-            //CtrlglucoResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
+            } 
             Resultglucopopup.IsOpen = _glucoToggle;
+            DeployRetractDevice(_glucoToggle, MainPage.mainPage.Podmapping.GlucomonitorPodID);
         }
 
         bool _spirometerToggle = false;
@@ -844,7 +920,11 @@ namespace VideoKallMCCST.View
             isTestResultOpened();
             if ((MainPage.mainPage.TestIsInProgress && !_spirometerToggle) || (!ConnectionCheck && !_spirometerToggle))
                 return;
-
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+            {
+                ShowRetractInProgressMessage();
+                return;
+            }
             _spirometerToggle = !_spirometerToggle;
             //if (_spirometerToggle)
             //MainPage.mainPage.StatusTxt.Text = "";
@@ -864,6 +944,7 @@ namespace VideoKallMCCST.View
             //CtrlspiroResult.Height = ht * 6;//gridInstrumentPanel.ActualHeight;
             //CtrlspiroResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
             Resultspiropopup.IsOpen = _spirometerToggle;
+            DeployRetractDevice(_spirometerToggle, MainPage.mainPage.Podmapping.SpirometerPodID);
         }
 
         private async void SpirometerStatus(bool issuccess)
@@ -893,38 +974,34 @@ namespace VideoKallMCCST.View
 
             if (MainPage.mainPage.TestIsInProgress && !_stethoscopeChest)
                 return;
-
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+            {
+                ShowRetractInProgressMessage();
+                return;
+            }
             _stethoscopeChest = !_stethoscopeChest;
-            MainPage.mainPage.IsStethescopeChest = _stethoscopeChest;
-
-            //if (_stethoscopeChest)
-            //   // MainPage.mainPage.StatusTxt.Text = "";
+            MainPage.mainPage.IsStethescopeChest = _stethoscopeChest; 
             MainPage.mainPage.TestIsInProgress = _stethoscopeChest;
             if (_stethoscopeChest)
             {
                 TxtResultstethoscopechest.BorderBrush = GetColorFromHexa("#FFC10D");
                 TxtResultstethoscopechest.BorderThickness = new Thickness(0, 0, 0, 10);
-            }
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
+            } 
 
-            //CtrlstethoscopechestResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-            //CtrlstethoscopechestResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
             Resultstethoscopechestpopup.IsOpen = _stethoscopeChest;
+
+            DeployRetractDevice(_stethoscopeChest, MainPage.mainPage.Podmapping.StethoscopeChestPodID);
             if (_stethoscopeChest)// && !MainPage.mainPage.isStethoscopeReadystreaming)
             {
                 MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTCHEST));
-            }
-
-            //  ExecuteStethoscopeCommand(true);
-
+            } 
         }
 
         bool ConnectionCheck
         {
             get
             {
-                return MainPage.mainPage.mainpagecontext.IsSMCConnected;
+                return true;// MainPage.mainPage.mainpagecontext.IsSMCConnected;
                 //  && MainPage.mainPage.isDataAcquitionappConnected;
             }
 
@@ -943,26 +1020,15 @@ namespace VideoKallMCCST.View
 
             _stethoscopelungs = !_stethoscopelungs;
             MainPage.mainPage.IsStethescopeChest = false;
-            MainPage.mainPage.ResetSTLungs?.Invoke();
-
-            //if (_stethoscopelungs)
-            // MainPage.mainPage.StatusTxt.Text = "";
+            MainPage.mainPage.ResetSTLungs?.Invoke(); 
             MainPage.mainPage.TestIsInProgress = _stethoscopelungs;
             if (_stethoscopelungs)
             {
                 MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTLUNGS));
                 TbxSeatBackSet.BorderBrush = GetColorFromHexa("#FFC10D");
-                TbxSeatBackSet.BorderThickness = new Thickness(0, 0, 0, 10);
-                // BtnSthethoscopeLungs.Background = GetColorFromHexa("#FFBF00"); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
-            }
-
-            //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
-            //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-            // StethoscopeLungs.StlHeight = ht;
-            //StethoscopeLungsResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
-            //StethoscopeLungsResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
-            ResulStethoscopelungPopup.IsOpen = _stethoscopelungs;
-            //  StethoscopeLungs
+                TbxSeatBackSet.BorderThickness = new Thickness(0, 0, 0, 10); //_stethoscopeChest ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
+            } 
+            ResulStethoscopelungPopup.IsOpen = _stethoscopelungs; 
         }
 
         private void RecordStethocopeStream()
@@ -981,7 +1047,174 @@ namespace VideoKallMCCST.View
         {
 
         }
+
+        DispatcherTimer casTimer = null;
+        void CASTimer()
+        {
+            casTimer = new DispatcherTimer();
+            casTimer.Tick += CasTimer_Tick;
+            casTimer.Interval = new TimeSpan(0, 0, 1);
+            MainPage.mainPage.CASResult += CasNotification;
+        }
+
+        async void AdjustSeatReclination(bool recline)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if(recline)
+                {
+                    Recline(); 
+                }
+                else
+                {
+                    Decline();
+                }
+
+            });
+        }
+
+       public void Recline()
+        {
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+            {
+                ShowRetractInProgressMessage();
+                return;
+            }
+            int val = _reclinevalue + MainPage.mainPage.Podmapping.ReclineStepValue;
+            _reclinevalue = (val) > 100 ? 100 : val;
+
+            if (casTimer.IsEnabled)
+            {
+                casTimer.Stop();
+                MainPage.mainPage.PoddeployretractcmdStatus.Reset();
+            }
+            
+             MainPage.mainPage.PoddeployretractcmdStatus.PodSelectionOperationStarted();
+            //  casTimer main
+            string strval = (_reclinevalue.ToString()).PadLeft(2,'0');
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.SeatReclineCmd, strval));
+            casTimer.Start();
+        }
+
+        public void Decline()
+        {
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+            {
+                ShowRetractInProgressMessage();
+                return;
+            }
+
+            int val = _reclinevalue - MainPage.mainPage.Podmapping.ReclineStepValue;
+            _reclinevalue = (val) < 0? 0: val;
+
+            if (casTimer.IsEnabled)
+            {
+                casTimer.Stop();
+                MainPage.mainPage.PoddeployretractcmdStatus.Reset();
+            }
+
+            MainPage.mainPage.PoddeployretractcmdStatus.PodSelectionOperationStarted();
+            //  casTimer main
+            string strval = (_reclinevalue.ToString()).PadLeft(2,'0');
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.SeatReclineCmd, strval));
+            casTimer.Start();
+        }
+        private void CasTimer_Tick(object sender, object e)
+        {
+            MainPage.mainPage.CASResult?.Invoke("Waiting for resp: " + timeoutCount.ToString() + " sec",4,1);
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployandRetractResponseReceived)
+            {
+                casTimer.Stop();
+               
+                timeoutCount = 0;
+                MainPage.mainPage.PoddeployretractcmdStatus.Reset();
+                return;
+            }
+            
+            if (timeoutCount > MainPage.mainPage.Podmapping.TimeOutPeriod)
+            {
+                casTimer.Stop();
+                timeoutCount = 0;
+               
+                MainPage.mainPage.CASResult?.Invoke( "No Response Received.", 4, 1);
+                MainPage.mainPage.PoddeployretractcmdStatus.Reset();
+            }
+
+            timeoutCount++;
+        }
+
+        int _reclinevalue = 0;
+        int timeoutCount = 0;
+ 
+        string CasConfigFile = "CASConfig.txt";
+        public async void ReadCASSettings()
+        {
+            try {
+                PodMapping podmap = new PodMapping();
+                podmap.BPCuffPodID = "1";
+                podmap.OximeterPodID = "2";
+                podmap.ThermoMeterPodID = "3";
+                podmap.DermascopePodID = "4";
+                podmap.OtoscopePodID = "5";
+                podmap.SpirometerPodID = "6";
+                podmap.GlucomonitorPodID = "7";
+                podmap.StethoscopeChestPodID = "8";
+                podmap.TimeOutPeriod = 10;
+                podmap.ReclineStepValue = 5;
+                MainPage.mainPage.Podmapping = podmap;
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                if (!File.Exists(localFolder.Path + "\\" + CasConfigFile))
+                {
+                    return;
+                }
+
+                Windows.Storage.StorageFile IpAddressFile = await localFolder.GetFileAsync(CasConfigFile);
+                var alltext = await Windows.Storage.FileIO.ReadLinesAsync(IpAddressFile);
+                foreach (var line in alltext)
+                {
+                    string[] data = line.Split(':');
+                    switch (data[0])
+                    {
+                        case "BPCuffPodID":
+                            podmap.BPCuffPodID = data[1];
+                            break;
+                        case "OximeterPodID":
+                            podmap.OximeterPodID = data[1];
+                            break;
+                        case "ThermoMeterPodID":
+                            podmap.ThermoMeterPodID = data[1];
+                            break;
+                        case "DermascopePodID":
+                            podmap.DermascopePodID = data[1];
+                            break;
+                        case "OtoscopePodID":
+                            podmap.OtoscopePodID = data[1];
+                            break;
+                        case "SpirometerPodID":
+                            podmap.SpirometerPodID = data[1];
+                            break;
+                        case "GlucomonitorPodID":
+                            podmap.GlucomonitorPodID = data[1];
+                            break;
+                        case "StethoscopeChestPodID":
+                            podmap.StethoscopeChestPodID = data[1];
+                            break;
+                        case "TimeOutPeriod":
+                            podmap.TimeOutPeriod = int.Parse(data[1]);
+                            break;
+                        case "ReclineStepValue":
+                            podmap.ReclineStepValue = int.Parse(data[1]);
+                            break;
+                    }
+                   
+                }
+                MainPage.mainPage.Podmapping = podmap;
+            } catch(Exception ex) {
+                string s = ex.Message; }
+
+        }
     }
+
 }
 
 

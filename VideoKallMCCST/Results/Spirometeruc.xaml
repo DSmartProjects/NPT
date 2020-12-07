@@ -28,8 +28,8 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <!--<TextBlock Text="Spirometry" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"></TextBlock>
-        <TextBlock Margin="3,0,0,0" x:Name="TxtStatusspior" Text=" " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"></TextBlock>-->
+        <!--<TextBlock Text="Spirometry" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"></TextBlock>-->
+        <TextBlock Margin="3,0,0,0" x:Name="TxtStatusspior" Text=" " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"></TextBlock>
         <Pivot x:Name="pivotTab" Grid.Column="0" Grid.Row="1" Grid.RowSpan="6" Grid.ColumnSpan="6">
             <PivotItem Header="Instructions" Foreground="#464646"  FontSize="12" FontFamily="Open Sans" FontWeight="SemiBold">
                 <Grid>
@@ -73,25 +73,24 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="70"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition Width="90"></ColumnDefinition>
-                        <ColumnDefinition Width="70"></ColumnDefinition>
-
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                     
                     </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="fvcfv" Text="Flow Volume :" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Text="Volume Time :" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" HorizontalAlignment="left"></TextBlock>
+                    <Button  FontFamily="Open Sans"   HorizontalAlignment="Right" Width="70" Background="#34CBA8" Foreground="#FFF" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" x:Name="StartFVC" Content="Start FVC" Grid.Row="4" Grid.Column="3" Click="StartFVC_Click"></Button>
+                    <Button  FontFamily="Open Sans" Margin="20,0,0,0" HorizontalAlignment="left" Width="80" FontSize="12" FontWeight="SemiBold" Background="#E96056" Foreground="#FFF" CornerRadius="5,5,5,5" x:Name="StopFVC" Content="Stop FVC" Grid.Row="4" Grid.Column="4"  Click="StopFVC_Click"></Button>
+                    <Button  FontFamily="Open Sans" Margin="20,0,0,0" Width="80"  FontSize="12" FontWeight="SemiBold" Background="#194F82" Foreground="#FFF" CornerRadius="5,5,5,5" x:Name="BtnDone1" Content="Done" Grid.Row="4" Grid.Column="5" Click="BtnDone_Click"  ></Button>
 
-                      <TextBlock x:Name="fvcfv" Text="Flow Volume" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left"></TextBlock>
-                    <TextBlock Text="Volume Time" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" HorizontalAlignment="left"></TextBlock>
-                    <Button  FontFamily="Open Sans"   HorizontalAlignment="Right" Width="70" Background="#194F82" Foreground="#FFF" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" x:Name="StartFVC" Content="Start FVC" Grid.Row="4" Grid.Column="3" Click="StartFVC_Click"></Button>
-                    <Button  FontFamily="Open Sans" Margin="15,0,0,0" HorizontalAlignment="left" Width="70" FontSize="12" FontWeight="SemiBold" Background="#E96056" Foreground="#FFF" CornerRadius="5,5,5,5" x:Name="StopFVC" Content="Stop FVC" Grid.Row="4" Grid.Column="4"  Click="StopFVC_Click"></Button>
-                    <Button  FontFamily="Open Sans"  Width="70"  FontSize="12" FontWeight="SemiBold" Background="#FFC10D" Foreground="#FFF" CornerRadius="5,5,5,5" x:Name="BtnDone1" Content="Done" Grid.Row="4" Grid.Column="5" Click="BtnDone_Click"  ></Button>
-
-                    <controls:DataGrid  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="Fvcvolflowgrid" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3" >
+                    <controls:DataGrid  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="Fvcvolflowgrid" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3"  BorderBrush="#DBDBDB" BorderThickness="1,1,0,1" >
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn  IsReadOnly="True"  Header="Flow"   Binding="{Binding Flow}" />
                             <controls:DataGridTextColumn IsReadOnly="True"   Header="Volume"  Binding="{Binding Volume}" />
 
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>
-                    <controls:DataGrid  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="Fvcvoltime" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" Grid.RowSpan="3" >
+                    <controls:DataGrid  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="Fvcvoltime" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" Grid.RowSpan="3" BorderBrush="#DBDBDB" BorderThickness="0,1,1,1" >
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn  Header="Volume" IsReadOnly="True"  Binding="{Binding Volumeflow}" />
                             <controls:DataGridTextColumn  Header="Time" IsReadOnly="True" Binding="{Binding Time}" />
@@ -132,9 +131,9 @@
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Temp. in Fahrenheit  : "  FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="4" x:Name="tmpc1" VerticalAlignment="Center" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="3" Text="Temp. in Celsius : " Margin="5" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Parameters" Grid.Row="2" Grid.Column="0" Margin="5,0,0,0" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold"></TextBlock>
+                    <TextBlock Text="Parameters :" Grid.Row="2" Grid.Column="0" Margin="5,0,0,0" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold"></TextBlock>
 
-                    <controls:DataGrid Margin="5" ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="Fvcresults" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="3"   Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="10" >
+                    <controls:DataGrid Margin="5" ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="Fvcresults" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="3"   Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="10" BorderBrush="#DBDBDB" BorderThickness="1,1,1,1" >
                         <controls:DataGrid.Columns>
 
                             <controls:DataGridTextColumn Width="*" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Header="Code" IsReadOnly="True"  Binding="{Binding Code}" />
@@ -160,18 +159,17 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>                       
                     </Grid.ColumnDefinitions>
-                    <Button  FontFamily="Open Sans" FontSize="12" HorizontalAlignment="Right" CornerRadius="5,5,5,5" FontWeight="SemiBold" Background="#194F82" Foreground="#FFF" x:Name="StartVC" Content="Start VC" Grid.Row="4" Grid.Column="2" Click="StartVC_Click"></Button>
+                    <Button  FontFamily="Open Sans" FontSize="12" HorizontalAlignment="Center" CornerRadius="5,5,5,5" FontWeight="SemiBold" Background="#194F82" Foreground="#FFF" x:Name="StartVC" Content="Start VC" Grid.Row="4" Grid.Column="2" Click="StartVC_Click"></Button>
                     <Button  HorizontalAlignment="Center" FontFamily="Open Sans" FontSize="12" CornerRadius="5,5,5,5" FontWeight="SemiBold" x:Name="StopVC" Background="#E96056" Foreground="#FFF" Content="Stop VC" Grid.Row="4" Grid.Column="3" Click="StopVC_Click"></Button>
                     <Button Visibility="Collapsed" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" x:Name="BtnDone" Content="Done" Grid.Row="4" Grid.Column="4" Click="BtnDone_Click"  ></Button>
                     <TextBlock x:Name="vctxt" Text="Volume Time" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" HorizontalAlignment="Left"></TextBlock>
 
-                    <controls:DataGrid Margin="0" Width="200" ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="vcvoltime" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" Grid.RowSpan="2" >
+                    <controls:DataGrid  Width="300" ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="vcvoltime" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderBrush="#DBDBDB" BorderThickness="1,1,1,1" >
                         <controls:DataGrid.Columns>
-                            <controls:DataGridTextColumn IsReadOnly="True"  Header="Volume"   Binding="{Binding Volumeflow}" Width="100" />
-                            <controls:DataGridTextColumn IsReadOnly="True"  Header="Time"  Binding="{Binding Time}" Width="100" />
-
+                            <controls:DataGridTextColumn IsReadOnly="True"  Header="Volume"   Binding="{Binding Volumeflow}" Width="150" />
+                            <controls:DataGridTextColumn IsReadOnly="True"  Header="Time"  Binding="{Binding Time}" Width="150" />
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>
 
@@ -207,8 +205,8 @@
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Temp. in Fahrenheit : " Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold"></TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="4" x:Name="tmpc" VerticalAlignment="Center" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="3" Text="Temp. in Celsius : " Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold"></TextBlock>
-                    <TextBlock Margin="5,5,5,5" Text="Parameters" Grid.Row="2" Grid.Column="0" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold"></TextBlock>
-                    <controls:DataGrid Margin="5" Width="700" ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="vcresults" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="10" >
+                    <TextBlock Margin="5,5,5,5" Text="Parameters :" Grid.Row="2" Grid.Column="0" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold"></TextBlock>
+                    <controls:DataGrid Margin="5" Width="700" ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="vcresults" AutoGenerateColumns="False" x:DefaultBindMode="OneWay" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="10" BorderBrush="#DBDBDB" BorderThickness="1,1,1,1">
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn  Header="Code" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"   Binding="{Binding Code}" Width="100" />
                             <controls:DataGridTextColumn  Header="Name" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"  Binding="{Binding Name}" Width="100"  />

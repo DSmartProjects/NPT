@@ -424,11 +424,7 @@ namespace VideoKallMCCST.View
 
             CtrlPulseoximterResult.Height = ht * 4;//gridInstrumentPanel.ActualHeight;
             CtrlPulseoximterResult.Width = wdth * 2;//gridInstrumentPanel.ActualWidth; ;
-            ResultPulseOximeterPopup.IsOpen = BtnPulseoximeterToggle;
-            if (BtnPulseoximeterToggle)
-                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.SMCPODDEPLOY, 1));
-            else
-                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.SMCUSAGEDONE, 1));
+            ResultPulseOximeterPopup.IsOpen = BtnPulseoximeterToggle; 
         }
         public SolidColorBrush GetColorFromHexa(string hexaColor)
         {

@@ -7,142 +7,125 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid BorderBrush="#DBDBDB" BorderThickness="1,0,0,0" MinHeight="700">
+    <Grid BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="30,0,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" Grid.Column="0" Margin="30,10,10,10">
-                <StackPanel Orientation="Vertical" Padding="10,10,10,10" >
-                    <Button  Command="{Binding BrowserCommand}"  Content="Config Folder" FontFamily="Open Sans" FontWeight="SemiBold" FontSize="12" Foreground="#FFF" CornerRadius="5,5,5,5" Background="#56ACE0"></Button>
-                    <TextBlock  Text="Data Acquisition App status        :" Margin="0,25,5,5" FontFamily="Open Sans" Foreground="#194F82" FontSize="12" FontWeight="SemiBold"></TextBlock>
-                    <Button  Content="Images Folder" x:Name="BtnBrowseFolder" Margin="0,20,0,5" FontFamily="Open Sans" FontWeight="SemiBold" FontSize="12" Foreground="#FFF" CornerRadius="5,5,5,5" Background="#56ACE0" Click="BtnBrowseFolder_Click"></Button>
-                </StackPanel>
-            </Grid>
+            <Button Grid.Row="1" Grid.Column="0" Command="{Binding BrowserCommand}"  Content="Config Folder" FontFamily="Open Sans" FontWeight="SemiBold" FontSize="12" Foreground="#FFF" CornerRadius="5,5,5,5" Background="#56ACE0"></Button>
+            <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"  FontFamily="Open Sans" Margin="0,0,0,0" FontSize="12" FontWeight="SemiBold" Foreground="#26639B" Text="11/19/2020"/>
+
+            <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Data Acquisition App status  :"  Margin="0,0,0,0" FontFamily="Open Sans" Foreground="#194F82" FontSize="12" FontWeight="SemiBold"></TextBlock>
+
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Name="TxtDataAcq" Margin="0,0,0,0" FontWeight="SemiBold"   FontSize="12" Text=" "></TextBlock>
+
+            <Button Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Padding="5,5,5,5" Margin="0,0,0,10" x:Name="BtnConnectdaq" Content="Test Connection" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Foreground="#FFF" Background="#26639B" Click="BtnConnectdaq_Click"></Button>
+
+            <Button VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"  Content="Images Folder" x:Name="BtnBrowseFolder" Margin="0,0,0,0" FontFamily="Open Sans" FontWeight="SemiBold" FontSize="12" Foreground="#FFF" CornerRadius="5,5,5,5" Background="#56ACE0" Click="BtnBrowseFolder_Click"></Button>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"  x:Name="TxtimageFolder" Grid.Row="3" Grid.Column="1" FontWeight="Normal" Foreground="#194F82"  FontSize="12" Padding='5,5,5,5' ></TextBlock>
+            <TextBlock VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82">                  
+                    <Span FontWeight="SemiBold">
+                      <Run FontSize="12" FontFamily="Open Sans">SMC IP Address</Run>
+                      <Run FontSize="15" Foreground="Red">*</Run>
+                      <Run FontFamily="Open Sans">:</Run>
+                    </Span>
+            </TextBlock>
+            <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Grid.Row="4" Grid.Column="1"  x:Name="TxtIPaddressCtrl"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"   Text="{Binding TxtIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+            <TextBlock VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82">                  
+                    <Span FontWeight="SemiBold">
+                      <Run FontFamily="Open Sans">Port Number</Run>
+                      <Run FontSize="15" Foreground="Red">*</Run>
+                      <Run FontFamily="Open Sans">:</Run>
+                    </Span>
+            </TextBlock>
+
+            <TextBox HorizontalAlignment="Left" Width="100" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" x:Name="TxtPortNoCtrl"  Margin="0,0,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"  Text="{Binding TxtProtNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+            <TextBlock VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Temperature  :" Margin="0,0,0,0" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
+
+            <ToggleSwitch Grid.Row="6" Grid.Column="1"   Visibility="Visible" Margin="0,0,0,0"  x:Name="TxtTmpUnitbtn"   IsOn="True" OffContent="C" OnContent="F"   Foreground="#194F82"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" ></ToggleSwitch>
+
+            <TextBlock VerticalAlignment="Center"  Grid.Row="7" Grid.Column="0" Text="Filter Heart  :" FontFamily="Open Sans" Margin="0,0,0,0" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
+            <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
+                <TextBox VerticalAlignment="Center"  x:Name="TxtFilterHeart"  Margin="0,0,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" TextChanged="TxtFilterHeart_TextChanged"></TextBox>
+                <TextBlock VerticalAlignment="Center" Margin="20,0,0,0" Text="Hz" Grid.Row="1" Grid.Column="1"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
+            </StackPanel>
 
 
 
-            <Grid Grid.Row="1" Grid.Column="1" Margin="0,20,10,10">
-                <StackPanel Orientation="Vertical" >
-                    <TextBox  x:Name="TxtIPaddressCtrl" Width="Auto" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"  Grid.Column="2"  Text="{Binding TxtIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <TextBox  x:Name="TxtPortNoCtrl"  Margin="0,10,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" Grid.Column="2" Text="{Binding TxtProtNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <ToggleSwitch   Visibility="Visible" Margin="0,10,0,0"  x:Name="TxtTmpUnitbtn"  Grid.Column="2" IsOn="True" OffContent="C" OnContent="F"   Foreground="#194F82"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" ></ToggleSwitch>
-                    <TextBox x:Name="TxtFilterHeart"  Margin="0,10,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" TextChanged="TxtFilterHeart_TextChanged"></TextBox>
-                    <TextBox x:Name="TxtFilterlungs" Margin="0,10,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" TextChanged="TxtFilterlungs_TextChanged"></TextBox>
-                    <TextBox x:Name="txtPMM_URL" Margin="0,10,0,0" Text="{Binding PMMConfig.URL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtPMM_URL_TextChanged"  CornerRadius="5,5,5,5"></TextBox>
-                    <TextBox x:Name="txtPMM_API_URL" Margin="0,10,0,0" Text="{Binding PMMConfig.API_URL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtPMM_API_URL_TextChanged"  CornerRadius="5,5,5,5"></TextBox>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="0" Margin="30,10,10,10">
-                <StackPanel Orientation="Vertical" Padding="10,10,10,10" >
-                    <TextBlock  Margin="0,5,0,0" Text="SMC IP Address     :" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                    <TextBlock Margin="0,30,0,0"  Text="Port Number         :" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                    <TextBlock Text="Temperature          :" Margin="0,25,0,0" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                    <TextBlock   Text="Filter Heart            :" FontFamily="Open Sans" Margin="0,25,0,0" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                    <TextBlock   Text="Filter Lungs           :" FontFamily="Open Sans"  Margin="0,30,0,0" Grid.Column="2" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                    <TextBlock   Text="PMM URL       :" FontFamily="Open Sans"  Margin="0,30,0,0" Grid.Column="2" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                    <TextBlock   Text="PMM API URL       :" FontFamily="Open Sans"  Margin="0,30,0,0" Grid.Column="2" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                    <Button Margin="0,20,0,0" CornerRadius="5,5,5,5" Width="100" Command="{Binding SaveIPAddress}"  Content="Save" FontSize="12" FontWeight="SemiBold" Foreground="#FFF" Background="#34CBA8"></Button>
-                </StackPanel>
-            </Grid>
-            <Button Grid.Row="0" Grid.Column="2" Padding="5,5,5,5" Margin="0,0,0,10" x:Name="BtnConnectdaq" Content="Test Connection" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Foreground="#FFF" Background="#26639B" Click="BtnConnectdaq_Click"></Button>
-            <Grid Grid.Row="1" Grid.Column="2" Margin="0,150,0,0">
-                <StackPanel Orientation="Vertical" Padding="10,10,10,10" >
-                    <TextBlock Text="Hz" Grid.Row="1" Grid.Column="1"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                    <TextBlock Text="Hz" Grid.Row="1" Margin="0,25,0,0" Grid.Column="1" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
-                </StackPanel>
-            </Grid>
 
-            <Grid Grid.Row="0" Grid.Column="1" Margin="0,30,10,10">
-                <StackPanel Orientation="Vertical" >
-                    <TextBlock   FontFamily="Open Sans" Margin="8,0,0,0" FontSize="12" FontWeight="SemiBold" Foreground="#26639B" Text="11/19/2020"/>
-                    <TextBlock  Name="TxtDataAcq" Margin="8,25,0,0" FontWeight="SemiBold"   FontSize="12" Text=" "></TextBlock>
-                    <TextBlock  x:Name="TxtimageFolder" Margin="0,25,0,0" FontWeight="Normal" Foreground="#194F82"  FontSize="12" Padding='5,5,5,5' ></TextBlock>
-                </StackPanel>
-            </Grid>
+            <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="0"  Text="Filter Lungs  :" FontFamily="Open Sans"  Margin="0,0,0,0"  FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
+
+            <StackPanel VerticalAlignment="Center" Grid.Row="8" Grid.Column="1"  Orientation="Horizontal">
+                <TextBox VerticalAlignment="Center"  x:Name="TxtFilterlungs" Margin="0,0,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" TextChanged="TxtFilterlungs_TextChanged"></TextBox>
+                <TextBlock VerticalAlignment="Center" Text="Hz" Grid.Row="1" Margin="20,0,0,0" Grid.Column="1" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
+
+            </StackPanel>
+
+
+
+            <TextBlock VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" FontFamily="Open Sans"  Margin="0,0,0,0"  FontSize="12" FontWeight="SemiBold" Foreground="#194F82">
+                  <Span FontWeight="SemiBold">
+                      <Run FontFamily="Open Sans">PMM URL</Run>
+                      <Run FontSize="15" Foreground="Red">*</Run>
+                      <Run FontFamily="Open Sans">:</Run>
+                  </Span>
+            </TextBlock>
+
+            <TextBox VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" x:Name="txtPMM_URL" Margin="0,0,0,0" Text="{Binding PMMConfig.URL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtPMM_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" ></TextBox>
+
+
+
+
+            <TextBlock VerticalAlignment="Center" Grid.Row="10" Grid.Column="0"   FontFamily="Open Sans"  Margin="0,0,0,0"  FontSize="12" FontWeight="SemiBold" Foreground="#194F82">
+                  <Span FontWeight="SemiBold">
+                      <Run FontFamily="Open Sans">PMM API URL</Run>
+                      <Run FontSize="15" Foreground="Red">*</Run>
+                      <Run FontFamily="Open Sans">:</Run>
+                  </Span>
+            </TextBlock>
+
+            <TextBox VerticalAlignment="Center" Grid.Row="10" Grid.Column="1"  x:Name="txtPMM_API_URL" Margin="0,0,0,0" Text="{Binding PMMConfig.API_URL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtPMM_API_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"></TextBox>
+
         </Grid>
-    </ScrollViewer>
 
+        <TextBlock Visibility="{Binding REQ_MSG_Visibility,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="30,0,0,0"  VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Left" x:Name="tblRequireMsg">
+             <Span>                  
+                  <Run FontSize="11" Foreground="Red">* All mandatory fields have to be filled. </Run>                  
+             </Span>
+        </TextBlock>
+        <!--<TextBlock Visibility="Collapsed"  Margin="30,0,0,0"  VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Left" x:Name="tblSuccessMsg">
+             <Span>                  
+                  <Run FontSize="11" Foreground="Green">Successfully saved</Run>                  
+             </Span>
+        </TextBlock>-->
 
-
-
-
-
-
-
-
-
-
-    <!--<Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="10-12-2020"></TextBlock>
-        <TextBlock Margin="5" Grid.Row="1" Grid.Column="3" Name="TxtDataAcq" Text=" "></TextBlock>
-        <TextBlock Margin="5" Grid.Row="1" Grid.Column="2"  Text="DataAcquisitionApp status: "></TextBlock>
-        <Button Margin="5" Grid.Row="1" Grid.Column="4"  x:Name="BtnConnectdaq" Content="Test Connection" Click="BtnConnectdaq_Click"></Button>
-        <Button Margin="5" Command="{Binding BrowserCommand}" Grid.Column="0" Grid.Row="1" Content="DB folder"></Button>
-        <TextBlock Margin="5"  Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="2" Text="SMC IP Address"></TextBlock>
-        <TextBox Margin="5"  x:Name="TxtIPaddressCtrl" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Text="{Binding TxtIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <TextBlock Margin="5" Grid.Column="0" Grid.Row="3" Text="Port Number"></TextBlock>
-        <TextBox Margin="5" x:Name="TxtPortNoCtrl"  Grid.Column="1" Grid.Row="3" Text="{Binding TxtProtNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="Temp"></TextBlock>
-            <ToggleSwitch   Visibility="Visible"   x:Name="TxtTmpUnitbtn" Grid.Row="3" Grid.Column="2" IsOn="True" OffContent="C" OnContent="F"   Margin="0,2,0,0"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Toggled="TxtTmpUnitbtn_Toggled" Tapped="TxtTmpUnitbtn_Tapped"></ToggleSwitch>
+        <StackPanel Margin="30,0,0,0" HorizontalAlignment="Left" Grid.Row="2">
+            <Button x:Name="btnSave" Margin="0,0,0,0" CornerRadius="5,5,5,5" Width="100" Command="{Binding SaveIPAddress}" Click="BtnSave_Click"  Content="Save" FontSize="12" FontWeight="SemiBold" Foreground="#FFF" Background="#34CBA8"></Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="2">
-            <Button Margin="5" Content="Browse ImageFolder" x:Name="BtnBrowseFolder" Grid.Row="3" Grid.Column="4" Click="BtnBrowseFolder_Click"></Button>
-            <TextBlock Margin="5" x:Name="TxtimageFolder" TextWrapping="Wrap" Grid.Row="3" Grid.Column="5"></TextBlock>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="2" Grid.Row="4" Grid.Column="0">
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Filter Heart"></TextBlock>
+    </Grid>
 
-            <TextBox x:Name="TxtFilterHeart"  TextChanged="TxtFilterHeart_TextChanged"></TextBox>
-            <TextBlock Text="Hz"></TextBlock>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="2" Grid.Row="4" Grid.Column="1">
-            <TextBlock Grid.Row="4" Grid.Column="1" Text="Filter lungs"></TextBlock>
-            <TextBox x:Name="TxtFilterlungs"  TextChanged="TxtFilterlungs_TextChanged"></TextBox>
-            <TextBlock Text="Hz"></TextBlock>
-        </StackPanel>
-        <Button Margin="5" Command="{Binding SaveIPAddress}" Grid.Column="1" Grid.Row="5" Content="Save"></Button>
 
-        <Button Margin="5" Command="{Binding Done}" Grid.Column="0" Grid.Row="30" Content="Done"></Button>
-    </Grid>-->
 </Page>

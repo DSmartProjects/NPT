@@ -22,7 +22,7 @@ namespace VideoKallMCCST.Results
 {
     public class FlowVolumeData
     {
-     public string Flow { get; set; }
+        public string Flow { get; set; }
         public string Volume { get; set; }
         public string Volumeflow { get; set; }
         public string Time { get; set; }
@@ -55,27 +55,27 @@ namespace VideoKallMCCST.Results
         ObservableCollection<VCResults> VCResultsColl = new ObservableCollection<VCResults>();
         ObservableCollection<VCResults> FVCResultsColl = new ObservableCollection<VCResults>();
         void dummydata()
-         {
-        //    FlowVolumeData data = new FlowVolumeData();
-        //    data.Flow = "0.01";
-        //    data.Volume = "0.22";
-        //    fvcFlowVolumeCollection.Add(data);
-        //    for(int i = 0; i<10 ; i++)
-        //    { 
-        //    data = new FlowVolumeData();
-        //    data.Flow = "0.11";
-        //    data.Volume = "0.12";
-        //        data.Time = "0.323255";
-        //    fvcFlowVolumeCollection.Add(data);
-                
-        //    }
+        {
+            //    FlowVolumeData data = new FlowVolumeData();
+            //    data.Flow = "0.01";
+            //    data.Volume = "0.22";
+            //    fvcFlowVolumeCollection.Add(data);
+            //    for(int i = 0; i<10 ; i++)
+            //    { 
+            //    data = new FlowVolumeData();
+            //    data.Flow = "0.11";
+            //    data.Volume = "0.12";
+            //        data.Time = "0.323255";
+            //    fvcFlowVolumeCollection.Add(data);
+
+            //    }
         }
         public Spirometeruc()
         {
             this.InitializeComponent();
             MainPage.mainPage.SPirotResults += SpiroResults;
             MainPage.mainPage.ResetSpirometr += Reset;
-           
+
             fvcFlowVolumeCollection.Clear();
             fvctFlowVolumeCollection.Clear();
             vcFlowVolumeCollection.Clear();
@@ -90,7 +90,7 @@ namespace VideoKallMCCST.Results
             StopVC.IsEnabled = false;
         }
 
-      async  void SpiroResults(string msg)
+        async  void SpiroResults(string msg)
         {
             string[] cmd = msg.ToLower().Split('>');
             await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
@@ -99,7 +99,7 @@ namespace VideoKallMCCST.Results
                 {
                     case "spirofvc":
                         isStarted = true;
-                        //TxtStatusspior.Text = "Blowing";
+                        TxtStatusspior.Text = "Blowing";
                         string[] fvc = cmd[1].Split(',');
                         FlowVolumeData data = new FlowVolumeData();
                         data.Flow = fvc[0];
@@ -109,13 +109,13 @@ namespace VideoKallMCCST.Results
                         break;
                     case "spirovc":
                         {
-                          
+
                             isStarted = true;
-                           // TxtStatusspior.Text = "Blowing";
-                            string[]  vct = cmd[1].Split(',');
+                            TxtStatusspior.Text = "Blowing";
+                            string[] vct = cmd[1].Split(',');
                             FlowVolumeData datat1 = new FlowVolumeData();
-                            datat1.Volumeflow =  vct[0];
-                            datat1.Time =  vct[1];
+                            datat1.Volumeflow = vct[0];
+                            datat1.Time = vct[1];
                             vcFlowVolumeCollection.Add(datat1);
                             vctxt.Text = string.Format("{0}({1})", vcText, vcFlowVolumeCollection.Count());
                         }
@@ -123,32 +123,32 @@ namespace VideoKallMCCST.Results
                     case "spirofvcvt":
                         {
                             isStarted = true;
-                           // TxtStatusspior.Text = "Blowing";
+                            TxtStatusspior.Text = "Blowing";
                             string[] fvct = cmd[1].Split(',');
                             FlowVolumeData datat1 = new FlowVolumeData();
                             datat1.Volumeflow = fvct[0];
                             datat1.Time = fvct[1];
                             fvctFlowVolumeCollection.Add(datat1);
-                          //  fvcfv.Text = string.Format("{0}({1})", fvText, fvctFlowVolumeCollection.Count());
+                            //  fvcfv.Text = string.Format("{0}({1})", fvText, fvctFlowVolumeCollection.Count());
                         }
 
                         break;
                     case "spirostatussucess":
-                      //  TxtStatusspior.Text = "Ready for Blow";
+                        TxtStatusspior.Text = "Ready for Blow";
                         isStarted = true;
                         MainPage.mainPage.Spirometrystatus?.Invoke(true);
                         break;
                     case "spirostatusfailed":
                         isStarted = false;
-                      //  TxtStatusspior.Text = "Error: " + cmd[1];
+                        TxtStatusspior.Text = "Error: " + cmd[1];
                         MainPage.mainPage.Spirometrystatus?.Invoke(false);
                         break;
                     case "stoppedspirometer":
                         isStarted = false;
-                      //  TxtStatusspior.Text = "Stopped";
+                        TxtStatusspior.Text = "Stopped";
                         break;
                     case "spirofvcresult":
-                      //  TxtStatusspior.Text = "FVC Test Results.";
+                        TxtStatusspior.Text = "FVC Test Results.";
                         {
                             VCResults FVCresult = new VCResults();
 
@@ -172,7 +172,7 @@ namespace VideoKallMCCST.Results
                                 parmresults.ParameterType = paramsdata.Length > 2 ? paramsdata[3] : "";
                                 FVCResultsColl.Add(parmresults);
                             }
-                             
+
 
                             TextCreationTime1.Text = FVCresult.CreationDate;
                             TextBTPS1.Text = FVCresult.Btps;
@@ -185,20 +185,20 @@ namespace VideoKallMCCST.Results
 
                         break;
                     case "spirovcresult":
-                      //  TxtStatusspior.Text = "VC Test Results."; 
+                        TxtStatusspior.Text = "VC Test Results.";
                         VCResults result = new VCResults();
 
                         string[] header = msg.Split('>')[1].Split('!');
 
-                        result.Btps = header.Length>0? header[0]:"";
+                        result.Btps = header.Length > 0 ? header[0] : "";
                         result.CreationDate = header.Length > 2 ? header[1] : "";
                         result.TempCelsius = header.Length > 2 ? header[2] : "";
                         result.TempFahrenheit = header.Length > 2 ? header[3] : "";
-                       // VCResultsColl.Add(result);
+                        // VCResultsColl.Add(result);
                         string[] Parameteres = msg.Split('>')[2].Split('@');
-                        foreach(var parm in Parameteres)
+                        foreach (var parm in Parameteres)
                         {
-                            string []paramsdata = parm.Split('!');
+                            string[] paramsdata = parm.Split('!');
                             VCResults parmresults = new VCResults();
                             parmresults.Code = paramsdata.Length > 0 ? paramsdata[0] : "";
                             parmresults.MeasureUnit = paramsdata.Length > 2 ? paramsdata[1] : "";
@@ -220,11 +220,11 @@ namespace VideoKallMCCST.Results
                         break;
                 }
             });
-              
-            
+
+
         }
 
-      async  void Reset()
+        async void Reset()
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
@@ -233,7 +233,7 @@ namespace VideoKallMCCST.Results
                 StartVC.IsEnabled = true;
                 StopVC.IsEnabled = true;
                 isStarted = false;
-             //   TxtStatusspior.Text = "";
+                TxtStatusspior.Text = "";
                 fvcFlowVolumeCollection.Clear();
                 fvctFlowVolumeCollection.Clear();
                 vcFlowVolumeCollection.Clear();
@@ -259,12 +259,12 @@ namespace VideoKallMCCST.Results
             //   double w = MainPage.mainPage.ActualWidth - (MainPage.mainPage.RightPanelHolder.ActualWidth+350);
             //MainPage.mainPage.ActualWidth - (spgrid.ActualWidth-spfvcgrid.ActualWidth) ;
 
-            //double y = spgrid.ActualSize.Y;
-            //double x = spgrid.ActualSize.X;
+            double y = spgrid.ActualSize.Y;
+            double x = spgrid.ActualSize.X;
             double h = spgrid.ActualHeight;
             double w = spgrid.ActualWidth - 350;
-            
-            //MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.StartSpiroFVC, x.ToString()+":"+ y.ToString()+":"+ h.ToString()+":"+w.ToString()));
+
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.StartSpiroFVC, x.ToString() + ":" + y.ToString() + ":" + h.ToString() + ":" + w.ToString()));
         }
 
         private void StopFVC_Click(object sender, RoutedEventArgs e)
@@ -292,11 +292,11 @@ namespace VideoKallMCCST.Results
             vcFlowVolumeCollection.Clear();
             VCResultsColl.Clear();
 
-            //double y = spgrid.ActualSize.Y;
-            //double x = spgrid.ActualSize.X;
+            double y = spgrid.ActualSize.Y;
+            double x = spgrid.ActualSize.X;
             double h = spgrid.ActualHeight;
             double w = spgrid.ActualWidth - 350;
-            //MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.StartSpiroVC, x.ToString() + ":" + y.ToString() + ":" + h.ToString() + ":" + w.ToString()));
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.StartSpiroVC, x.ToString() + ":" + y.ToString() + ":" + h.ToString() + ":" + w.ToString()));
 
         }
 
@@ -311,8 +311,8 @@ namespace VideoKallMCCST.Results
 
         private void BtnDone_Click(object sender, RoutedEventArgs e)
         {
-            if(!isStarted)
-            MainPage.mainPage.Spirometercallback?.Invoke();
+            if (!isStarted)
+                MainPage.mainPage.Spirometercallback?.Invoke();
         }
     }
 }

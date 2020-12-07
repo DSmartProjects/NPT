@@ -30,13 +30,23 @@ namespace VideoKallMCCST.Results
         public OtoscopeimageViewer()
         {
             this.InitializeComponent();
-
+            
             MainPage.mainPage.ImageDisplay += SetImage;
             MainPage.mainPage.DigitalMicroscope += InilializeMicroscope;
             //  ImageViewer.Source = null;
+            MainPage.mainPage.CASResult += CasNotification;
         }
         bool isDermascope = false;
-
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (devicecode == 4 && isresultornotificationmsg == 1)
+                {
+                    StStatus.Text = message;
+                }
+            });
+        }
         async void InilializeMicroscope(bool isdermo)
         {
             isDermascope = isdermo;

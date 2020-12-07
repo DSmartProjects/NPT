@@ -28,10 +28,21 @@ namespace VideoKallMCCST.Results
             BtnGlucoResult.IsEnabled = true;
             MainPage.mainPage.NextPatient += NextPatient;
             MainPage.mainPage.ResetGluco += NextPatient;
+            MainPage.mainPage.CASResult += CasNotification;
         }
 
-       
-       async void NextPatient()
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (devicecode == 4 && isresultornotificationmsg == 1)
+                {
+                    TxtGlucoTestStatus.Text = message;
+                }
+            });
+        }
+
+        async void NextPatient()
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {

@@ -21,28 +21,31 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="140">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
                         <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
                         <RowDefinition Height="40"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                        <TextBlock Margin="20,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
-                        <TextBlock x:Name="TxtStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>
+                    <StackPanel Grid.Row="1" Margin="0,20,0,0" Grid.Column="1" Orientation="Horizontal">
+                         <TextBlock Margin="20,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
+                        <TextBlock VerticalAlignment="Top"  x:Name="TxtStatus" Width="200"  TextWrapping="Wrap"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>
                     </StackPanel>
-                    <Button Grid.Row="2" x:Name="BtnStart" Grid.Column="1" Content="Start streaming" Click="BtnStart_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF" />
-                    <Button Grid.Row="2" Margin="20,0,0,0" x:Name="BtnRecord" Width="120"  Grid.Column="3" Content="Record" Click="BtnRecord_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#E96056" Foreground="#FFF" />
+                   
+                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                        <Button  x:Name="BtnStart"  Content="Start streaming" Click="BtnStart_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF" />
+                        <Button  Margin="20,0,0,0" x:Name="BtnRecord" Width="120"   Content="Record" Click="BtnRecord_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#E96056" Foreground="#FFF" />
+                    </StackPanel>
+                    
                 </Grid>
             </Grid>
             
             <StackPanel HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center">
-                <Button   Width="130" Margin="30,0,0,0" x:Name="BtnSave"  Content="Save" Visibility="Visible" Click="BtnSave_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"/>
+                <Button   Width="130" x:Name="BtnSave"  Content="Save" Visibility="Visible" Click="BtnSave_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"/>
             </StackPanel>
         </StackPanel>
         <Grid Grid.Column="1"></Grid>

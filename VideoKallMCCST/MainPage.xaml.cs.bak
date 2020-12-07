@@ -14,6 +14,7 @@ using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -38,10 +39,10 @@ namespace VideoKallMCCST
             this.InitializeComponent();
             mainPage = this;
             this.DataContext = mainpagecontext;
-            RightPanelHolder.Navigate(typeof(LoginPage));
+            VideoCallVM = new VideoCallViewModel();
+            RightPanelHolder.Navigate(typeof(VideoCallPage));
             pagePlaceHolder.Navigate(typeof(LogoPage));
             NotifyStatusCallback += UpdateNotification;
-           
         }
 
         public StorageFolder rootImageFolder { get; set; }
@@ -49,7 +50,7 @@ namespace VideoKallMCCST
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                StatusTxt.Text = s;
+                //StatusTxt.Text = s;
             });
         }
 
@@ -94,6 +95,8 @@ namespace VideoKallMCCST
                     mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.THERMORESTULT, msg.Msg));
                     break;
                 case "thermocon":
+                case "thermoerror":
+                case "thermonotpaired":
                     mainpagecontext.NotifyResult?.Invoke(this, new CommunicationMsg(DeviceResponseType.THERMORESTULTSTATUS, msg.Msg.ToLower()));
                     break;
                 case "bpres":
@@ -172,18 +175,37 @@ namespace VideoKallMCCST
                     isDataAcquitionappConnected = true;
                     SPirotResults?.Invoke(msg.Msg);
                     break;
+                case "<sbcshutdown":
+                    OnSBCDisconnection();
+                    break;
+                case "<sbcstart":
+                    OnSBCStart();
+                    break;
             }
         }
 
+         void OnSBCDisconnection()
+        {
+            
+            mainpagecontext.IsSMCConnected = false;
+            isStethoscopeReadystreaming = false;
+        }
+        void OnSBCStart()
+        {
+            mainpagecontext.IsSMCConnected = true;
+            isStethoscopeReadystreaming = false;
+
+
+        }
         public bool isDataAcquitionappConnected { get; set; } = false;
         public bool isStethoscopeStreaming { get; set; } = false;
 
         public bool isStethoscopeReadystreaming { get; set; } = false;
         void UpdateSMCStatus()
         {
-            TxtSMCStatus.Text = mainpagecontext.IsSMCConnected ? "Available" : "Not Available";
+            //TxtSMCStatus.Text = mainpagecontext.IsSMCConnected ? "Available" : "Not Available";
             
-            BorderStatus.Background = mainpagecontext.IsSMCConnected ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen): new SolidColorBrush(Windows.UI.Colors.Red);
+            //BorderStatus.Background = mainpagecontext.IsSMCConnected ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen): new SolidColorBrush(Windows.UI.Colors.Red);
         }
 
         private void Watchdog_Tick(object sender, object e)
@@ -240,6 +262,7 @@ namespace VideoKallMCCST
             Utility ut = new Utility();
 
             var result = Task.Run(async () => { return await ut.ReadIPaddress(); }).Result;
+            var pmm_Config = Task.Run(async () => { return await ut.ReadPMMConfigurationFile(); }).Result;
             SMCCommChannel.IPAddress = mainpagecontext.TxtIpAddress;// "192.168.0.33";
             SMCCommChannel.PortNo = mainpagecontext.TxtProtNo;// "9856";
             SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;
@@ -255,6 +278,28 @@ namespace VideoKallMCCST
              CommToDataAcq.Connect();
         }
 
+        public void GettingSMCStatus() {
+
+            SMCCommChannel = new CommunicationChannel();
+            SMCCommChannel.Initialize();
+
+            Utility ut = new Utility();
+
+            var result = Task.Run(async () => { return await ut.ReadIPaddress(); }).Result;
+            SMCCommChannel.IPAddress = mainpagecontext.TxtIpAddress;// "192.168.0.33";
+            SMCCommChannel.PortNo = mainpagecontext.TxtProtNo;// "9856";
+            SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;
+            mainpagecontext.IsSMCConnected = false;
+            SMCCommChannel.Connect();
+            SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);
+            watchdog = new DispatcherTimer();
+            watchdog.Tick += Watchdog_Tick;
+            watchdog.Interval = new TimeSpan(0, 0, 1);
+            watchdog.Start();
+            CommToDataAcq.MessageReceived += SMCCommChannel_MessageReceived;
+            CommToDataAcq.Initialize();
+            CommToDataAcq.Connect();
+        }
         public DataacquistionappComm CommToDataAcq { get; set; } = new DataacquistionappComm();
 
      public   async void LogExceptions(string exception)
@@ -274,16 +319,18 @@ namespace VideoKallMCCST
             { }
         }
         public bool IsUserLogedin { get; set; }
-
+        public static VideoCallViewModel VideoCallVM = null;
         public static MainPage mainPage;
         public MainPageViewModel mainpagecontext = new MainPageViewModel();
         public delegate void NotifyStatus(string message, int code = 0);
         public delegate void CommandDelegate();
         public delegate void BoolDelegate(bool isDermascope);
+        public delegate void BoolstatusDelegate(bool isDermascope, int devicetypes);
         public BoolDelegate DigitalMicroscope;
         public NotifyStatus NotifyStatusCallback;
         DispatcherTimer watchdog = null;
         public NotifyStatus StethoscopeNotification;
+        public NotifyStatus StethoscopelungsNotification;
         public CommandDelegate StethoscopeRecord;
         public CommandDelegate OtoscopeComm;
         public NotifyStatus StethoscopeStartStop;
@@ -297,7 +344,11 @@ namespace VideoKallMCCST
         public CommandDelegate Spirometercallback;
         public BoolDelegate Spirometrystatus;
         public CommandDelegate ResetSpirometr;
-
+        public BoolstatusDelegate Thermostatusdelegate;
         public BoolDelegate DQConnectionCallback;
+        public CommandDelegate ResetSTLungs;
+        public CommandDelegate ResetGluco;
+        public CommandDelegate SaveSTConfig;
+        public bool IsStethescopeChest { get; set; } = false;
     }
 }
