@@ -16,19 +16,18 @@
             <ColumnDefinition Width="80*"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Orientation="Vertical" >
+        <Grid Grid.Column="0">        
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="300">
+                <Grid Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"></RowDefinition>
-                        <RowDefinition Height="70"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60"></ColumnDefinition>
@@ -36,22 +35,26 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="160"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
                         <TextBlock Margin="20,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
+                        <TextBlock x:Name="StStatus" Margin="10,0,0,0" VerticalAlignment="Center"  TextWrapping="Wrap" Text="sajdghasjdhjkashd"  FontFamily="Open Sans"   Foreground="#464646" Width="150" FontSize="12" FontWeight="SemiBold" ></TextBlock>
                         <!--<TextBlock x:Name="StStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>-->
                     </StackPanel>
-                    <TextBlock x:Name="StStatus" VerticalAlignment="Bottom" Grid.Row="1" TextWrapping="Wrap" Grid.Column="3" FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>
-                    <Button x:Name="BtnTakePic" Width="120" VerticalAlignment="Bottom" Grid.Row="3"  Grid.Column="1" Content="Capture" Click="BtnTakePic_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"></Button>
-                    <Button Name="BtnSave" VerticalAlignment="Bottom" Margin="20,0,0,0" Grid.Row="3" Width="120" Grid.Column="2"  Content="Save" Click="BtnSave_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"></Button>
+                    <StackPanel Grid.Row="3"  Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="BtnTakePic" Width="120"  VerticalAlignment="Center"  Content="Capture" Click="BtnTakePic_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"></Button>
+                        <Button Name="BtnSave" VerticalAlignment="Center" Margin="10,0,0,0"  Width="120"   Content="Save" Click="BtnSave_Click"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"></Button>
+                    </StackPanel>
+                   
+                    
                 </Grid>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top">
+                    <Button x:Name="Btndone"  Width="130" Margin="0,20,0,0" Content="Done" Click="Btndone_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#FFC10D" Foreground="#FFF"></Button>
+                </StackPanel>
             </Grid>
 
 
-
-            <StackPanel HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center">
-                <Button x:Name="Btndone"  Width="130" Margin="0,20,0,0" Content="Done" Click="Btndone_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#FFC10D" Foreground="#FFF"></Button>
-            </StackPanel>
-        </StackPanel>
+          
+        </Grid>
         <Grid Grid.Column="1"  Grid.Row="2"  Height="300"  x:Name="gridstarray" BorderBrush="#D6ECFF" BorderThickness="0.5,0.5,0.5,0.5"  Background="#D6ECFF" CornerRadius="10,10,10,10">
             <ScrollViewer  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Image Name="ImageViewer"  Stretch="Fill"
