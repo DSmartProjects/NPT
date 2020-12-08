@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
- 
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.View;
@@ -17,13 +12,6 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace VideoKallMCCST
@@ -33,18 +21,18 @@ namespace VideoKallMCCST
     /// </summary>
     public sealed partial class MainPage : Page
     {
-       
+    
         public MainPage()
         {
             this.InitializeComponent();
             mainPage = this;
             this.DataContext = mainpagecontext;
             VideoCallVM = new VideoCallViewModel();
-            RightPanelHolder.Navigate(typeof(VideoCallPage));
+            RightPanelHolder.Navigate(typeof(VideoCall));
             pagePlaceHolder.Navigate(typeof(LogoPage));
             NotifyStatusCallback += UpdateNotification;
         }
-
+        
         public StorageFolder rootImageFolder { get; set; }
         async void UpdateNotification(string s, int code)
         {
@@ -346,22 +334,31 @@ namespace VideoKallMCCST
                     if(status.Equals("D") || status.Equals("R"))
                     {
                         strMSG = "Acknowldgement received.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if(res.Substring(res.Length-2).Equals("DG"))
                     {
                         strMSG = "Deploy Completed.";
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess( true);
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RG"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
                         strMSG = "Retract Completed.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("DB"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
                         strMSG = "Deploy Failed.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RB"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess (false);
                         strMSG = "Retract Failed.";
+                        CASResult?.Invoke(strMSG, 4, 1);
                     }
 
                     break;
@@ -400,10 +397,12 @@ namespace VideoKallMCCST
                     status = res.Substring(res.Length - 1);
                     if (status.Equals("G") )
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
                         strMSG = "Reclined. "+ res.Substring(2);
                     }
                     if (status.Equals("B"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
                         strMSG = "Reclined failed.";
                     }
                     break;
@@ -591,7 +590,8 @@ namespace VideoKallMCCST
         public int HeightMeasureUnit = 0; // Cm;
         public CasNotification CASResult;
         public bool isSTDeployed = false;
-        
+        public PodCmdStatus PoddeployretractcmdStatus = new PodCmdStatus();
+        public BoolDelegate SeatReclineMsg;
         public delegate void CasNotification(string message, int devicecode , int isresultornotificationmsg);
         public delegate void REQ_MSG_Visibility(string status);
         public REQ_MSG_Visibility REQ_MSG_VisibilityCompleted;

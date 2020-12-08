@@ -21,12 +21,26 @@ namespace VideoKallMCCST.Results
 {
     public sealed partial class StethoscopeChestInstructions : UserControl
     {
+       
         public StethoscopeChestInstructions()
         {
             this.InitializeComponent();
             MainPage.mainPage.StethoscopeNotification += UpdateNotification;
             //TxtInstruction.Text = @"1. The chest piece should be held in your dominant hand, between the index and middle fingers, just above the knuckle. To prevent interfering noise, curl the thumb under the tube to keep it still";
+            MainPage.mainPage.CASResult += CasNotification;
         }
+
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (devicecode == 4 && isresultornotificationmsg == 1)
+                {
+                    TxtStatus.Text = message;
+                }
+            });
+        }
+
 
         async void UpdateNotification(string s, int code)
         {

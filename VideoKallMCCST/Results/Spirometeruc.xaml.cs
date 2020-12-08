@@ -259,8 +259,10 @@ namespace VideoKallMCCST.Results
             //   double w = MainPage.mainPage.ActualWidth - (MainPage.mainPage.RightPanelHolder.ActualWidth+350);
             //MainPage.mainPage.ActualWidth - (spgrid.ActualWidth-spfvcgrid.ActualWidth) ;
 
-            double y = spgrid.ActualSize.Y;
-            double x = spgrid.ActualSize.X;
+            //double y = spgrid.ActualSize.Y;
+            //double x = spgrid.ActualSize.X;
+            double y = 1000;
+            double x = 1000;
             double h = spgrid.ActualHeight;
             double w = spgrid.ActualWidth - 350;
 
@@ -292,8 +294,8 @@ namespace VideoKallMCCST.Results
             vcFlowVolumeCollection.Clear();
             VCResultsColl.Clear();
 
-            double y = spgrid.ActualSize.Y;
-            double x = spgrid.ActualSize.X;
+            double y = 1000;
+            double x = 1000;
             double h = spgrid.ActualHeight;
             double w = spgrid.ActualWidth - 350;
             MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.StartSpiroVC, x.ToString() + ":" + y.ToString() + ":" + h.ToString() + ":" + w.ToString()));

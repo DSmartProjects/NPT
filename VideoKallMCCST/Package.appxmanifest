@@ -15,10 +15,11 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="VideoKallMCCST.App">
-      <uap:VisualElements DisplayName="." Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="VideoKallMCCST" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+      <uap:VisualElements DisplayName="." Square150x150Logo="Assets\VK_Logo_Assets\Square150x150Logo.png" Square44x44Logo="Assets\VK_Logo_Assets\Square44x44Logo.png" Description="VideoKallMCCST" BackgroundColor="transparent">
+        <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\VK_Logo_Assets\BadgeLogo.png" />
+        <uap:DefaultTile Wide310x150Logo="Assets\VK_Logo_Assets\Wide310x150Logo.png" Square310x310Logo="Assets\VK_Logo_Assets\LargeTile.png" Square71x71Logo="Assets\VK_Logo_Assets\SmallTile.png">
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:SplashScreen Image="Assets\VK_Logo_Assets\SplashScreen.png" BackgroundColor="white" />
       </uap:VisualElements>
     </Application>
   </Applications>

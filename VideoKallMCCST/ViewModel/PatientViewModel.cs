@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VideoKallMCCST.Model;
-using VideoKallSBCApplication.Helpers;
+using VideoKallMCCST.Helpers;
 using Windows.UI.Xaml;
 
 namespace VideoKallMCCST.ViewModel

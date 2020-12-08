@@ -10,7 +10,7 @@ using System.Xml.Linq;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Model;
 using VideoKallMCCST.View;
-using VideoKallSBCApplication.Helpers;
+using VideoKallMCCST.Helpers;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Notifications;

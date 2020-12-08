@@ -1,67 +1,67 @@
-﻿using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using VideoKallMCCST.Communication;
+﻿using Microsoft.Samples.SimpleCommunication;
+using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Samples.SimpleCommunication;
-using Windows.Media.MediaProperties;
-using Windows.UI.Core;
+using System.Timers;
+using VideoKallMCCST.Communication;
+using VideoKallMCCST.Helpers;
 using VideoKallMCCST.ViewModel;
-using Windows.UI.Popups;
+using Windows.Media.MediaProperties;
 using Windows.System.Display;
+using Windows.System.Threading;
+using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Windows.Media.Playback;
-using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Navigation;
+
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace VideoKallMCCST.View
 {
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
     public sealed partial class VideoCall : Page
-    {        
+    {
         MainPage rootPage = MainPage.mainPage;
         CaptureDevice device = null;
         bool? roleIsActive = null;
         int isTerminator = 0;
         bool activated = false;
-        bool isMuted = true;
-
+        bool isMuted = false;
         IncomingConnectionEventArgs incommingCall = null;
-
+        public VideoCallViewModel _videoCallVM = null;
+        static DispatcherTimer timer = null;
+       
         public VideoCall()
         {
             this.InitializeComponent();
             rootPage.EnsureMediaExtensionManager();
-            DefaultVisibilities();
+            _videoCallVM = MainPage.VideoCallVM;
+            this.DataContext = _videoCallVM;
+            _videoCallVM.DefaultVisibilities();
         }
 
-        public void DefaultVisibilities()
+        private async void TimerCallbackCompleted(object sender, object e)
         {
-            RemoteVideo.Visibility = Visibility.Collapsed;
-            IncomingCallRing.Visibility = Visibility.Visible;
-
-            //VideoVisibility.Visibility = Visibility.Collapsed;
-            Mute.Visibility = Visibility.Collapsed;
-            EndConsult.Visibility = Visibility.Collapsed;
-            Accept.Visibility = Visibility.Collapsed;
-            Reject.Visibility = Visibility.Collapsed;
-
+            timer.Stop();
+            IncomingCallRing.Stop();
+            await EndCallAsync();
         }
-        public async void CallDevice()
+
+        public async void CallDevice(CaptureDevice device)
         {
             PreviewVideo.Source = device.CaptureSource;
             await device.CaptureSource.StartPreviewAsync();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             var cameraFound = await CaptureDevice.CheckForRecordingDeviceAsync();
-
             if (cameraFound)
             {
                 device = new CaptureDevice();
@@ -93,21 +93,31 @@ namespace VideoKallMCCST.View
                 device = null;
             }
         }
-
+        const int ERROR_FILE_NOT_FOUND = 2;
+        const int ERROR_ACCESS_DENIED = 5;
+        const int ERROR_NO_APP_ASSOCIATED = 1155;
         private async Task InitializeAsync(CancellationToken cancel = default(CancellationToken))
         {
-            //rootPage.NotifyUser("Initializing..", NotifyType.StatusMessage);
-
             try
             {
                 await device.InitializeAsync();
                 await StartRecordToCustomSink();
-                EndConsult.IsEnabled = false;
+                EndConsult.IsEnabled = true;
                 RemoteVideo.Source = null;
                 // Each client starts out as passive
                 roleIsActive = false;
                 Interlocked.Exchange(ref isTerminator, 0);
-                //rootPage.NotifyUser("Tap 'CallButton.' button to start CallButton.", NotifyType.StatusMessage);
+            }
+
+            catch (Win32Exception e)
+            {
+                if (e.NativeErrorCode == ERROR_FILE_NOT_FOUND ||
+                    e.NativeErrorCode == ERROR_ACCESS_DENIED ||
+                    e.NativeErrorCode == ERROR_NO_APP_ASSOCIATED)
+                {
+                    MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage));
+                    MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+                }
             }
             catch (Exception)
             {
@@ -118,43 +128,45 @@ namespace VideoKallMCCST.View
 
         async void RemoteVideo_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
-            if (Interlocked.CompareExchange(ref isTerminator, 1, 0) == 0)
+            try
             {
                 await EndCallAsync();
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
-                {
-
-                }));
-
+            }
+            catch (Exception)
+            {
             }
         }
 
+
         async void Device_IncomingConnectionArrived(object sender, IncomingConnectionEventArgs e)
         {
-            incommingCall = e;
-
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
+            incommingCall = e;          
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High, (() =>
             {
+                timer = new DispatcherTimer();
+                timer.Start();
+                timer.Interval = TimeSpan.FromSeconds(Constants.MIN_Media_Duration);            
+                timer.Tick += TimerCallbackCompleted;
+                _videoCallVM.IncomingCallRingVisibility = Visibility.Visible;
+                _videoCallVM.AcceptVisiblity = Visibility.Visible;
                 IncomingCallRing.Play();
-                Reject.Visibility = Visibility.Visible;
-                Accept.Visibility = Visibility.Visible;
-            }));
-
+            }));           
         }
 
 
         async void Device_CaptureFailed(object sender, Windows.Media.Capture.MediaCaptureFailedEventArgs e)
         {
 
-            if (Interlocked.CompareExchange(ref isTerminator, 1, 0) == 0)
+            try
             {
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
-                {
-                     EndCallAsync();
-                }));
-               
-              
+                await EndCallAsync();
             }
+            catch (Exception)
+            {
+                //_videoCallVM.DefaultVisibilities();
+                //this.Frame.Navigate(typeof(VideoCall));
+            }
+
         }
 
         private async Task StartRecordToCustomSink()
@@ -163,43 +175,86 @@ namespace VideoKallMCCST.View
             mep.Video.FrameRate.Numerator = 15;
             mep.Video.FrameRate.Denominator = 1;
             mep.Container = null;
-
             await device.StartRecordingAsync(mep);
         }
-
-
-  
         private async Task EndCallAsync()
         {
-           
-            DefaultVisibilities();
+            incommingCall = null;
             await device.CleanUpAsync();
-
-          
-            RemoteVideo.Stop();
-
+            // end the CallButton. session
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High, (() =>
+            {
+                _videoCallVM.DefaultVisibilities();
+                IncomingCallRing.Stop();
+                RemoteVideo.Stop();
+                RemoteVideo.Source = null;
+                PreviewVideo.Source = null;
+                PreviewVideo.Visibility = Visibility.Collapsed;
+            }));
+            //this.Frame.Navigate(typeof(VideoCall));
             // Start waiting for a new CallButton.
             await InitializeAsync();
-
+            MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage));
+            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+        }
+        private async Task PatientEndCallAsync()
+        {
+            //timer.Tick += TimerCallbackCompleted;       
+            await device.CleanUpAsync();
+            RemoteVideo.Stop();
             PreviewVideo.Source = null;
-
+            PreviewVideo.IsTapEnabled = true;
+            PreviewVideo.Visibility = Visibility.Collapsed;
+            RemoteVideo.Visibility = Visibility.Collapsed;
+            VideoLogo.Visibility = Visibility.Visible;
+            // Start waiting for a new CallButton.
+            await InitializeAsync();
+            _videoCallVM.DefaultVisibilities();
+            MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage));
+            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+            // MainPage.mainPage.pagePlaceHolder.Navigate(typeof(VideoCall));
+            //TestPanelExpander.TestPanelExp.Frame.Navigate(typeof(LogoPage));
         }
 
 
+        private void Apchair1_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.mainPage.SeatReclineMsg?.Invoke(false);
+        }
 
+        private void Apchair2_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.mainPage.SeatReclineMsg?.Invoke(true);
+        }
+
+        private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)
+        {
+            SearchPatient searchPatient = new SearchPatient();
+            await searchPatient.ShowAsync();
+            //SearchPatientPOP.IsOpen = true;
+        }
+        private async void Accept_Click(object sender, RoutedEventArgs e)
+        {
+            await AcceptCall();
+        }
         private async Task AcceptCall()
         {
+            timer.Tick -= TimerCallbackCompleted;
+            timer.Stop();
+            timer.Tick += TimerCallbackCompleted;
+            //timer.Tick -= (o, args) =>
+            //{
+            //};
             IncomingCallRing.Stop();
-            CallDevice();
-            RemoteVideo.Visibility = Visibility.Visible;
-            PreviewVideo.Visibility = Visibility.Visible;
-            //VideoVisibility.Visibility = Visibility.Visible;
-            Mute.Visibility = Visibility.Visible;
-            EndConsult.Visibility = Visibility.Visible;
-            Reject.Visibility = Visibility.Collapsed;
-            Accept.Visibility = Visibility.Collapsed;
-            EndConsult.IsEnabled = true;
-
+            CallDevice(device);
+            _videoCallVM.RemoteVideoVisiblity = Visibility.Visible;
+            _videoCallVM.PreviewVideoVisiblity = Visibility.Visible;
+            _videoCallVM.MuteVisiblity = Visibility.Visible;
+            _videoCallVM.EndConsultVisibility = Visibility.Visible;
+            _videoCallVM.AcceptVisiblity = Visibility.Collapsed;
+            _videoCallVM.IsEnableEndConsult = true;
+            TxtSMCStatus.Content = string.Empty;
+            TxtSMCStatus.Content = "In Use";
             if (incommingCall == null)
                 return;
             incommingCall.Accept();
@@ -212,21 +267,15 @@ namespace VideoKallMCCST.View
 
                 if (!((bool)roleIsActive))
                 {
-                    // Passive client
-                   RemoteVideo.Source = new Uri(remoteAddress);
+                // Passive client
+                RemoteVideo.Source = new Uri(remoteAddress);
                 }
                 remoteAddress = remoteAddress.Replace("stsp://", "");
-                return;
             }));
 
         }
 
 
-
-        /// <summary>
-        /// end the video call
-        /// </summary>
-        /// <returns></returns>
         async Task EndVideoCall()
         {
             try
@@ -238,7 +287,8 @@ namespace VideoKallMCCST.View
                 }
             }
             catch (Exception)
-            { }
+            {
+            }
         }
 
         // Create this variable at a global scope.Set it to null.
@@ -270,11 +320,6 @@ namespace VideoKallMCCST.View
             }
         }
 
-        private async void Accept_Click(object sender, RoutedEventArgs e)
-        {
-            await AcceptCall();
-        }
-
         private async void Reject_Click(object sender, RoutedEventArgs e)
         {
             await EndVideoCall();
@@ -285,33 +330,165 @@ namespace VideoKallMCCST.View
             Button b = sender as Button;
             if (b != null && Interlocked.CompareExchange(ref isTerminator, 1, 0) == 0)
             {
-                // end the CallButton. session
+                TxtSMCStatus.Content = string.Empty;
+                TxtSMCStatus.Content = "Not Ready";
                 await EndCallAsync();
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
-                {
-
-                }));
-
             }
 
+
         }
-   
 
         private async void Mute_Click(object sender, RoutedEventArgs e)
         {
-            if (isMuted==false)
-            {
-                RemoteVideo.IsMuted = false;
-                isMuted = true;
-                MuteImg.Source = new BitmapImage(new Uri("ms-appx:///Images/microphone.png"));
-
-            }
-            else if (isMuted==true)
+            if (isMuted == false)
             {
                 RemoteVideo.IsMuted = true;
+                isMuted = true;
+                Mute.Visibility = Visibility.Collapsed;
+                UnMute.Visibility = Visibility.Visible;
+            }
+
+        }
+
+        private async void UnMute_Click(object sender, RoutedEventArgs e)
+        {
+            if (isMuted == true)
+            {
+                RemoteVideo.IsMuted = false;
                 isMuted = false;
-                MuteImg.Source = new BitmapImage(new Uri("ms-appx:///Images/mute.png"));
+                Mute.Visibility = Visibility.Visible;
+                UnMute.Visibility = Visibility.Collapsed;
+            }
+
+        }
+        private async Task CleanupAsync()
+        {
+            try
+            {
+                PreviewVideo.Source = null;
+                PreviewVideo.Visibility = Visibility.Collapsed;
+                await device.CleanUpAsync();
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                PreviewVideo.Visibility = Visibility.Collapsed;
+                PreviewVideo.Source = null;
             }
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            SMCConnecteionStatus();
+
+            SMCCommChannel = new CommunicationChannel();
+            SMCCommChannel.Initialize();
+
+            Utility ut = new Utility();
+
+            var result = Task.Run(async () => { return await ut.ReadIPaddress(); }).Result;
+            SMCCommChannel.IPAddress = MainPage.mainPage.mainpagecontext.TxtIpAddress;// "192.168.0.33";
+            SMCCommChannel.PortNo = MainPage.mainPage.mainpagecontext.TxtProtNo;// "9856";
+                                                                                //SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;
+            MainPage.mainPage.mainpagecontext.IsSMCConnected = false;
+            SMCCommChannel.Connect();
+            SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);
+            watchdog = new DispatcherTimer();
+            watchdog.Tick += Watchdog_Tick;
+            watchdog.Interval = new TimeSpan(0, 0, 1);
+            watchdog.Start();
+            //CommToDataAcq.MessageReceived += SMCCommChannel_MessageReceived;
+            //CommToDataAcq.Initialize();
+            //CommToDataAcq.Connect();
+        }
+
+
+
+        public void SMCConnecteionStatus()
+        {
+            string status = (string)TxtSMCStatus.Content;
+            if (status == "In Use")
+            {
+                TxtSMCStatus.Content = "In Use";
+                ColorChange();
+            }
+            else
+            {
+                TxtSMCStatus.Content = MainPage.mainPage.mainpagecontext.IsSMCConnected ? "Ready" : "Not Ready";
+                ColorChange();
+            }
+        }
+
+        private void Watchdog_Tick(object sender, object e)
+        {
+            watchdog.Stop();
+            if (statuscheckinterval > 1 || MainPage.mainPage.mainpagecontext.IsSMCConnected)
+                SMCConnecteionStatus();
+
+            if (!MainPage.mainPage.mainpagecontext.IsSMCConnected && intervalcount >= 5)
+            {
+                intervalcount = 0;
+                SMCCommChannel.IPAddress = MainPage.mainPage.mainpagecontext.TxtIpAddress;// "192.168.0.33";
+                SMCCommChannel.PortNo = MainPage.mainPage.mainpagecontext.TxtProtNo; // "9856"
+                SMCCommChannel.Connect();
+                SMCCommChannel.SendMessage(CommunicationCommands.MCCConnection);
+            }
+            else if (MainPage.mainPage.mainpagecontext.IsSMCConnected && statuscheckinterval >= 5)
+            {
+                statuscheckinterval = 0;
+                MainPage.mainPage.mainpagecontext.IsSMCConnected = false;
+                SMCCommChannel.SendMessage(CommunicationCommands.MCCConnectionStatusCheckCmd);
+            }
+            else if (!MainPage.mainPage.mainpagecontext.IsSMCConnected && intervalcount % 2 == 0)
+            {
+                SMCCommChannel.SendMessage(CommunicationCommands.MCCConnectionStatusCheckCmd);
+            }
+
+            if (intervalcount > 6)
+                intervalcount = 0;
+            //  if(!isDataAcquitionappConnected && statuscheckinterval>2)
+            //     CommToDataAcq.SendMessageToDataacquistionapp("ConnectionTest");
+
+            intervalcount++;
+
+            statuscheckinterval++;
+            // mainpagecontext.UpdateStatus(mainpagecontext.IsSMCConnected);
+            watchdog.Start();
+        }
+
+        public SolidColorBrush GetColorFromHexa(string hexaColor)
+        {
+            return new SolidColorBrush(
+                Color.FromArgb(
+                    255,
+                    Convert.ToByte(hexaColor.Substring(1, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(3, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(5, 2), 16)
+                )
+            );
+        }
+        public void ColorChange()
+        {
+            if (!MainPage.mainPage.mainpagecontext.IsSMCConnected)
+                TxtSMCStatus.Background = GetColorFromHexa("#ED604A");
+            else
+                TxtSMCStatus.Background = GetColorFromHexa("#34CBA8");
+
+            string status = (string)TxtSMCStatus.Content;
+            if (status == "In Use")
+            {
+                TxtSMCStatus.Background = GetColorFromHexa("#FFC10D");
+            }
+        }
+        public CommunicationChannel SMCCommChannel { get; private set; }
+
+        int intervalcount = 0;
+        int statuscheckinterval = 0;
+
+        DispatcherTimer watchdog = null;
+
+
     }
 }
