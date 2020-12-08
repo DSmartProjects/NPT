@@ -39,8 +39,8 @@
     <Grid BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5"  Background="#F0F8FF" CornerRadius="10,10,10,10" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="80"></ColumnDefinition>
-            <ColumnDefinition Width="350"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical" >
             <Grid>
@@ -59,15 +59,7 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="160"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Row="2" Grid.Column="3"   Orientation="Vertical">
-                        <Button x:Name="UprightChair"   Click="UprightChair_Click" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="5,5,5,5"  Background="Transparent">
-                            <Path Fill="DarkBlue"  Margin="50,0,0,0" Data="M 0 10 L 20 10 L 10 0 Z" />
-                        </Button>
-                        <Button x:Name="LeaningChair"  Click="LeaningChair_Click" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="5,5,5,5"   Background="Transparent">
-                            <Path Fill="DarkBlue" Margin="50,0,0,0" Data="M 0 0 L 10 10 L 20 0 Z"/>
-                        </Button>
-                    </StackPanel>
+                    </Grid.ColumnDefinitions>                   
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                         <TextBlock Margin="20,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
                         <!--<TextBlock x:Name="StStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>-->
@@ -82,7 +74,15 @@
                 <Button   Width="130" Margin="30,0,0,0" x:Name="BtnSave"  Content="Save" Visibility="Visible" Click="BtnSave_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"/>
             </StackPanel>
         </StackPanel>
-        <Grid Grid.Column="2"  Grid.ColumnSpan="2" Height="180" Width="350" Grid.RowSpan="2" x:Name="gridstarray" BorderBrush="#D6ECFF" BorderThickness="0.5,0.5,0.5,0.5"  Background="#D6ECFF" CornerRadius="10,10,10,10">
+        <StackPanel Grid.Column="1"   Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Button x:Name="UprightChair" BorderThickness="0,0,0,0"  Click="UprightChair_Click" CornerRadius="5,5,5,5"  Background="Transparent">
+                <Path Fill="DarkBlue"   Data="M 0 10 L 20 10 L 10 0 Z" />
+            </Button>
+            <Button x:Name="LeaningChair" BorderThickness="0,0,0,0" Click="LeaningChair_Click"  CornerRadius="5,5,5,5"   Background="Transparent">
+                <Path Fill="DarkBlue"  Data="M 0 0 L 10 10 L 20 0 Z"/>
+            </Button>
+        </StackPanel>
+        <Grid Grid.Column="2"  Grid.ColumnSpan="2" Height="180" Width="350" Grid.RowSpan="2" x:Name="gridstarray" BorderBrush="#D6ECFF" BorderThickness="0.5,0.5,0.5,0.5"  Background="#D6ECFF" CornerRadius="10,10,10,10" Margin="20,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
