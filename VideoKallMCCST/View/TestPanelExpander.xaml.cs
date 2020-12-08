@@ -1001,7 +1001,7 @@ namespace VideoKallMCCST.View
         {
             get
             {
-                return true;// MainPage.mainPage.mainpagecontext.IsSMCConnected;
+                return   MainPage.mainPage.mainpagecontext.IsSMCConnected;
                 //  && MainPage.mainPage.isDataAcquitionappConnected;
             }
 
@@ -1121,7 +1121,7 @@ namespace VideoKallMCCST.View
         }
         private void CasTimer_Tick(object sender, object e)
         {
-            MainPage.mainPage.CASResult?.Invoke("Waiting for resp: " + timeoutCount.ToString() + " sec",4,1);
+           
             if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployandRetractResponseReceived)
             {
                 casTimer.Stop();
@@ -1129,6 +1129,10 @@ namespace VideoKallMCCST.View
                 timeoutCount = 0;
                 MainPage.mainPage.PoddeployretractcmdStatus.Reset();
                 return;
+            }
+            else
+            {
+                MainPage.mainPage.CASResult?.Invoke("Waiting for resp: " + timeoutCount.ToString() + " sec", 4, 1);
             }
             
             if (timeoutCount > MainPage.mainPage.Podmapping.TimeOutPeriod)
