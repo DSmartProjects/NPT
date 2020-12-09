@@ -59,7 +59,7 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="160"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>                    
+                    </Grid.ColumnDefinitions>                   
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                         <TextBlock Margin="20,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
                         <!--<TextBlock x:Name="StStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>-->
@@ -68,7 +68,8 @@
                     <Button Grid.Row="2" x:Name="BtnStart" Grid.Column="1" Content="Start streaming" Click="BtnStart_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF" />
                     <Button Grid.Row="2" Margin="20,0,0,0" x:Name="BtnRecord" Width="120"  Grid.Column="3" Content="Record" Click="BtnRecord_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#E96056" Foreground="#FFF" />
                 </Grid>
-            </Grid>           
+            </Grid>
+
             <StackPanel HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center">
                 <Button   Width="130" Margin="30,0,0,0" x:Name="BtnSave"  Content="Save" Visibility="Visible" Click="BtnSave_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#34CBA8" Foreground="#FFF"/>
             </StackPanel>
@@ -81,7 +82,6 @@
                 <Path Fill="DarkBlue"  Data="M 0 0 L 10 10 L 20 0 Z"/>
             </Button>
         </StackPanel>
-
         <Grid Grid.Column="2"  Grid.ColumnSpan="2" Height="180" Width="350" Grid.RowSpan="2" x:Name="gridstarray" BorderBrush="#D6ECFF" BorderThickness="0.5,0.5,0.5,0.5"  Background="#D6ECFF" CornerRadius="10,10,10,10" Margin="20,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"></RowDefinition>

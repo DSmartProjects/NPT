@@ -407,13 +407,18 @@ namespace VideoKallMCCST
                     }
                     break;
                 case "[B":
+                     status = res.Substring(res.Length - 1);
                     if (status.Equals("G"))
                     {
-                        strMSG = "Seat height Adjusted."+ res.Substring(2); ;
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
+                        strMSG = "Seat height Adjusted."+ res.Substring(2);
+                        CASResult?.Invoke(strMSG, 3, 1);
                     }
                     if (status.Equals("B"))
                     {
+                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
                         strMSG = "Seat height Adjustment Failed.";
+                        CASResult?.Invoke(strMSG, 3, 1);
                     }
                     break; 
             }
@@ -592,6 +597,7 @@ namespace VideoKallMCCST
         public bool isSTDeployed = false;
         public PodCmdStatus PoddeployretractcmdStatus = new PodCmdStatus();
         public BoolDelegate SeatReclineMsg;
+        public BoolDelegate SeatHeightAdjust;
         public delegate void CasNotification(string message, int devicecode , int isresultornotificationmsg);
         public delegate void REQ_MSG_Visibility(string status);
         public REQ_MSG_Visibility REQ_MSG_VisibilityCompleted;

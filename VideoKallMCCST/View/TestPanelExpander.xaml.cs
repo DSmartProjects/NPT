@@ -61,6 +61,7 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.Thermostatusdelegate += UpdateThermoStatus;
             MainPage.mainPage.CASResult += CasNotification;
             MainPage.mainPage.SeatReclineMsg += AdjustSeatReclination;
+            MainPage.mainPage.SeatHeightAdjust += SeatBackIntegration;
         }
         private  string RemoveSpecialCharacters(string str)
         {
@@ -1112,6 +1113,67 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.CASResult += CasNotification;
         }
 
+       async void SeatBackIntegration(bool upordown)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (upordown)
+                {
+                    SeatUp();
+                }
+                else
+                {
+                    SeatDown();
+                }
+
+            });
+        }
+
+        void SeatUp()
+        {
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+            {
+                ShowRetractInProgressMessage();
+                return;
+            }
+            int val = _seatUpDownValue + MainPage.mainPage.Podmapping.SeatUpDownStepValue;
+            _seatUpDownValue = (val) > 100 ? 100 : val;
+
+            if (casTimer.IsEnabled)
+            {
+                casTimer.Stop();
+                MainPage.mainPage.PoddeployretractcmdStatus.Reset();
+            }
+
+            MainPage.mainPage.PoddeployretractcmdStatus.PodSelectionOperationStarted();
+            //  casTimer main
+            string strval = (_seatUpDownValue.ToString()).PadLeft(2, '0');
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.SeatBackheightCmd, strval));
+            casTimer.Start();
+        }
+
+        void SeatDown()
+        {
+            if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+            {
+                ShowRetractInProgressMessage();
+                return;
+            }
+            int val = _seatUpDownValue - MainPage.mainPage.Podmapping.SeatUpDownStepValue;
+            _seatUpDownValue = (val) < 0 ? 0 : val;
+
+            if (casTimer.IsEnabled)
+            {
+                casTimer.Stop();
+                MainPage.mainPage.PoddeployretractcmdStatus.Reset();
+            }
+
+            MainPage.mainPage.PoddeployretractcmdStatus.PodSelectionOperationStarted();
+            //  casTimer main
+            string strval = (_seatUpDownValue.ToString()).PadLeft(2, '0');
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.SeatBackheightCmd, strval));
+            casTimer.Start();
+        }
         async void AdjustSeatReclination(bool recline)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -1204,7 +1266,7 @@ namespace VideoKallMCCST.View
 
         int _reclinevalue = 0;
         int timeoutCount = 0;
- 
+        int _seatUpDownValue = 0;
         string CasConfigFile = "CASConfig.txt";
         public async void ReadCASSettings()
         {
@@ -1220,6 +1282,7 @@ namespace VideoKallMCCST.View
                 podmap.StethoscopeChestPodID = "8";
                 podmap.TimeOutPeriod = 10;
                 podmap.ReclineStepValue = 5;
+                podmap.SeatUpDownStepValue = 5;
                 MainPage.mainPage.Podmapping = podmap;
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 if (!File.Exists(localFolder.Path + "\\" + CasConfigFile))
@@ -1263,6 +1326,9 @@ namespace VideoKallMCCST.View
                             break;
                         case "ReclineStepValue":
                             podmap.ReclineStepValue = int.Parse(data[1]);
+                            break;
+                        case "SeatBackHeightStepValue":
+                            podmap.SeatUpDownStepValue = int.Parse(data[1]);
                             break;
                     }
                    
