@@ -59,7 +59,8 @@ namespace VideoKallMCCST.View
             Dfaultsettings.CODEC = ""; 
 
             StSettings.IP = MainPage.mainPage.SMCCommChannel.IPAddress;
-            StSettings.PORT = "8445";
+            //StSettings.PORT = "8445";
+            StSettings.PORT = MainPage.mainPage.SMCCommChannel.PortNo;
             StSettings.USERNAME = "rnk";
             StSettings.PASSWORD = "test";
             StSettings.CUTOFFFILTER = "0";
@@ -256,6 +257,7 @@ namespace VideoKallMCCST.View
                 if(!(string.IsNullOrEmpty(MainPage.mainPage.SMCCommChannel.IPAddress)))
                 {
                     StSettings.IP = MainPage.mainPage.SMCCommChannel.IPAddress;
+                    StSettings.PORT=MainPage.mainPage.SMCCommChannel.PortNo;
                 }
                 string msg = "IP:" + StSettings.IP.Trim() + Environment.NewLine +
                              "PORT" + ":" + StSettings.PORT.Trim() + Environment.NewLine +

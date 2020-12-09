@@ -18,7 +18,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
@@ -33,7 +33,7 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="1" Height="200"   VerticalAlignment="Top" Background="#F2F2F2"  BorderThickness="1">
+            <Grid Grid.Row="1"   VerticalAlignment="Top" Background="#F2F2F2"  BorderThickness="1">
                 <Image Visibility="{Binding VideoLogoVisiblity  ,Mode=TwoWay}" x:Name="VideoLogo" Stretch="Fill"   Source="..\Assets\video-logo.png"></Image>
                 <MediaElement Visibility="{Binding IncomingCallRingVisibility,Mode=TwoWay}"   x:Name="IncomingCallRing" Height="200"  RenderTransformOrigin="0.5,0.5" Stretch="Fill" AutoPlay="False"   Source="..\Assets\Incoming_Call_Notification.mp4" PosterSource="..\Assets\video-logo.png" />
                 <MediaElement  Visibility="{Binding RemoteVideoVisiblity,Mode=TwoWay}" Stretch="Fill"   RenderTransformOrigin="0.5,0.5" x:Name="RemoteVideo"  AudioCategory="Communications"   PosterSource="..\Assets\video-logo.png"></MediaElement>
@@ -58,7 +58,7 @@
                     <RowDefinition Height="50"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -82,9 +82,9 @@
                     <TextBlock  x:Name="tblPatientDob" Text="{Binding PatientDetails.DOB,Converter={StaticResource DateToStringFormatConverter},Mode=TwoWay}" Width="100" VerticalAlignment="Center" FontFamily="Open Sans" Margin="5,0,0,0"  FontSize="12" Foreground="#194F82"/>
                 </StackPanel>
                 <Line Grid.Row="3" StrokeThickness="0.2" Stroke="#434343" Margin="0,0,5,0" X1="0" X2="385" Y1="13" Y2="13" />
-                <StackPanel Grid.Row="4" x:Name="spNotes" VerticalAlignment="Top"  Orientation="Vertical" Margin="0,0,0,0">
+                <StackPanel Grid.Row="4" x:Name="spNotes" VerticalAlignment="Top"  Orientation="Vertical">
                     <TextBlock Text="Clinical Notes :" VerticalAlignment="Top" Margin="0,0,0,0" FontWeight="SemiBold" Foreground="#194F82" FontSize="12"/>
-                    <TextBlock  TextWrapping="WrapWholeWords"  Height="125"  Width="320"  Foreground="Black"/>
+                    <TextBlock  TextWrapping="WrapWholeWords"  Height="200"  Width="320"  Foreground="Black"/>
                 </StackPanel>
             </Grid>
             <Grid Margin="20,0,0,0" Grid.Row="3" VerticalAlignment="Bottom">

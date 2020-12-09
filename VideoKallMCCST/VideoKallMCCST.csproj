@@ -511,11 +511,6 @@
       <Name>SBCDBModule</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64'">
-    <Reference Include="Microsoft.Samples.SimpleCommunication">
-      <HintPath>..\MediaExtension\X64\Release\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86'">
     <Reference Include="Microsoft.Samples.SimpleCommunication">
       <HintPath>..\MediaExtension\X86\Debug\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>

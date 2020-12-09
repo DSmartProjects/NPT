@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
@@ -16,6 +17,7 @@ using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,6 +35,8 @@ namespace VideoKallMCCST.View
     /// </summary>
     public sealed partial class TestPanelExpander : Page
     {
+        string height = string.Empty;
+        string weight = string.Empty;
         public static TestPanelExpander TestPanelExp;
         public TestPanelExpander()
         {
@@ -58,56 +62,89 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.CASResult += CasNotification;
             MainPage.mainPage.SeatReclineMsg += AdjustSeatReclination;
         }
-
+        private  string RemoveSpecialCharacters(string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in str)
+            {
+                if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
+                {                   
+                    sb.Append(c);
+                    sb.Append(".");
+                }
+            }
+            return sb.ToString().TrimEnd('.');
+        }
         async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
         {
             if (isresultornotificationmsg == 1)
                 return;
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                string height = string.Empty;
-                string weight = string.Empty;
-                 switch (devicecode)
+
+                switch (devicecode)
                 {
-                    case 1:                       
+                    case 1:
                         ShowHideHeightdata(true);
                         grdHeight.BorderBrush = GetColorFromHexa("#34CBA8");
-                        grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);                        
-                        TxtResultHeight.Text =""+ message;
-                        string[] res = TxtResultHeight.Text.Split(' ');
-                        height = res[0];
-                        break;
-                    case 2:
-                        ShowHideWeightdata(true);
-                        grdWeight.BorderBrush = GetColorFromHexa("#34CBA8");
-                        grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
-                        TxtResultWeight.Text =" "+ message;                       
-                        string[] resW = TxtResultWeight.Text.Split('l');                       
-                        weight = resW[0];
-                        if (Convert.ToDouble(weight) > 0.0 && Convert.ToDouble(Height) > 0.0)
+                        grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                         TxtResultHeight.Text =message;
+                        if (MainPage.mainPage.HeightMeasureUnit == 1)
                         {
-                            BMICalculation("lb", Convert.ToDouble(Height), Convert.ToDouble(weight));
+                            height = RemoveSpecialCharacters(message);
+                        }
+                        else
+                        {
+                            string[] res = message.Split(' ');
+                            height = res[0];
                         }
                         break;
+                    case 2:
+                        if (!(string.IsNullOrEmpty(height)))
+                        {
+                            ShowHideWeightdata(true);
+                            grdWeight.BorderBrush = GetColorFromHexa("#34CBA8");
+                            grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                            TxtResultWeight.Text =message;
+                            string[] resW = message.Split('l');
+                            weight = resW[0];
+                            if (!(string.IsNullOrEmpty(height)) && !(string.IsNullOrEmpty(weight)) && Convert.ToDouble(weight) > 0.0 && Convert.ToDouble(height) > 0.0)
+                            {
+                                BMICalculation("lb", Convert.ToDouble(height), Convert.ToDouble(weight));
+                            }
+                        }
+                        break;
+
                 }
-            });
+            });           
         }
 
         void BMICalculation(string type, double height, double weight)
         {
-
+            double inches = 0.0;
             double bmi = 0.0;
             //Weight in kg
             if (type == "kg")
             {
                 bmi = weight / (height * height);              
-                TxtResultBMI.Text = Convert.ToString(Math.Round(bmi, 2));
+                TxtResultBMI.Text =" "+Convert.ToString(Math.Round(bmi, 2));
             }
             //Weight in lb(Pounds)
             if (type == "lb")
             {
-                bmi = weight * 703 / (height * height);
-                TxtResultBMI.Text = Convert.ToString(Math.Round(bmi, 2));
+                if (MainPage.mainPage.HeightMeasureUnit == 1)
+                {                   
+                    double cent = 30.48 * height;
+                    inches = cent / 2.54;
+                    bmi = weight * 703 / (inches * inches);
+                }
+                else
+                {
+                    inches = height / 2.54;
+                    bmi = weight * 703 / (inches * inches);
+                }
+               
+                TxtResultBMI.Text =Convert.ToString(Math.Round(bmi, 2));
             }
         }
 
@@ -706,6 +743,21 @@ namespace VideoKallMCCST.View
             if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
                 return;
 
+            if (string.IsNullOrEmpty(height))
+            {
+                ContentDialog noWifiDialog = new ContentDialog()
+                {
+
+                    Content = "Please Measure Height First.",
+                    CloseButtonText = "Ok"
+                };
+                noWifiDialog.ShowAsync();
+                noWifiDialog.Height = 100;
+                noWifiDialog.Width = 200;
+                noWifiDialog.CornerRadius = new CornerRadius(5, 5, 5, 5);
+                noWifiDialog.BorderThickness = new Thickness(1, 1, 1, 1);
+                return;
+            }
             btnWeightToggle = !btnWeightToggle; 
 
             MainPage.mainPage.TestIsInProgress = btnWeightToggle;
@@ -716,6 +768,9 @@ namespace VideoKallMCCST.View
             }
             ResuWeightPopup.IsOpen = btnWeightToggle;
         }
+
+      
+     
 
         bool btnHeighttoggle = false;
         private void BtnHeight_Click(object sender, RoutedEventArgs e)

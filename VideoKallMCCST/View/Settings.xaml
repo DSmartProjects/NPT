@@ -34,7 +34,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Row="1" Grid.Column="0" Command="{Binding BrowserCommand}"  Content="Config Folder" FontFamily="Open Sans" FontWeight="SemiBold" FontSize="12" Foreground="#FFF" CornerRadius="5,5,5,5" Background="#56ACE0"></Button>
-            <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"  FontFamily="Open Sans" Margin="0,0,0,0" FontSize="12" FontWeight="SemiBold" Foreground="#26639B" Text="11/19/2020"/>
+            <TextBlock Grid.Row="1"  Visibility="Collapsed" Grid.Column="1" VerticalAlignment="Center"  FontFamily="Open Sans" Margin="0,0,0,0" FontSize="12" FontWeight="SemiBold" Foreground="#26639B" Text="11/19/2020"/>
 
             <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Data Acquisition App status  :"  Margin="0,0,0,0" FontFamily="Open Sans" Foreground="#194F82" FontSize="12" FontWeight="SemiBold"></TextBlock>
 
@@ -63,11 +63,11 @@
 
             <TextBox HorizontalAlignment="Left" Width="100" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" x:Name="TxtPortNoCtrl"  Margin="0,0,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"  Text="{Binding TxtProtNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-            <TextBlock VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Temperature  :" Margin="0,0,0,0" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
+            <TextBlock VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Temperature     :" Margin="0,0,0,0" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
 
             <ToggleSwitch Grid.Row="6" Grid.Column="1"   Visibility="Visible" Margin="0,0,0,0"  x:Name="TxtTmpUnitbtn"   IsOn="True" OffContent="C" OnContent="F"   Foreground="#194F82"  FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" ></ToggleSwitch>
 
-            <TextBlock VerticalAlignment="Center"  Grid.Row="7" Grid.Column="0" Text="Filter Heart  :" FontFamily="Open Sans" Margin="0,0,0,0" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
+            <TextBlock VerticalAlignment="Center"  Grid.Row="7" Grid.Column="0" Text="Filter Heart      :" FontFamily="Open Sans" Margin="0,0,0,0" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
             <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
                 <TextBox VerticalAlignment="Center"  x:Name="TxtFilterHeart"  Margin="0,0,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" TextChanged="TxtFilterHeart_TextChanged"></TextBox>
                 <TextBlock VerticalAlignment="Center" Margin="20,0,0,0" Text="Hz" Grid.Row="1" Grid.Column="1"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>

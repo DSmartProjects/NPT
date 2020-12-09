@@ -341,5 +341,20 @@ namespace VideoKallMCCST.ViewModel
 
         }
 
+        private ICommand _logOut = null;
+        public ICommand LogoutCommand
+        {
+            get
+            {
+                if (_logOut == null)
+                    _logOut = new RelayCommand(ExecuteLogoutCommand);
+                return _logOut;
+            }
+        }
+        public void ExecuteLogoutCommand()
+        {            
+            MainPage.mainPage.Frame.Navigate(typeof(VideoKallLoginPage));
+        }
+
     }//class
 }
