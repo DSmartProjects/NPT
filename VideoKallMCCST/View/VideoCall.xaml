@@ -18,7 +18,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
@@ -84,7 +84,7 @@
                 <Line Grid.Row="3" StrokeThickness="0.2" Stroke="#434343" Margin="0,0,5,0" X1="0" X2="385" Y1="13" Y2="13" />
                 <StackPanel Grid.Row="4" x:Name="spNotes" VerticalAlignment="Top"  Orientation="Vertical">
                     <TextBlock Text="Clinical Notes :" VerticalAlignment="Top" Margin="0,0,0,0" FontWeight="SemiBold" Foreground="#194F82" FontSize="12"/>
-                    <TextBlock  TextWrapping="WrapWholeWords"  Height="200"  Width="320"  Foreground="Black"/>
+                    <TextBlock  TextWrapping="WrapWholeWords"  Height="160"  Width="320"  Foreground="Black"/>
                 </StackPanel>
             </Grid>
             <Grid Margin="20,0,0,0" Grid.Row="3" VerticalAlignment="Bottom">

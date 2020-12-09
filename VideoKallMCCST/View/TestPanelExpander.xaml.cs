@@ -88,7 +88,7 @@ namespace VideoKallMCCST.View
                         ShowHideHeightdata(true);
                         grdHeight.BorderBrush = GetColorFromHexa("#34CBA8");
                         grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
-                         TxtResultHeight.Text =message;
+                         TxtResultHeight.Text =" "+message;
                         if (MainPage.mainPage.HeightMeasureUnit == 1)
                         {
                             height = RemoveSpecialCharacters(message);
@@ -105,8 +105,8 @@ namespace VideoKallMCCST.View
                             ShowHideWeightdata(true);
                             grdWeight.BorderBrush = GetColorFromHexa("#34CBA8");
                             grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
-                            TxtResultWeight.Text =message;
                             string[] resW = message.Split('l');
+                            TxtResultWeight.Text = " " +resW[0]+" "+"l"+resW[1];                           
                             weight = resW[0];
                             if (!(string.IsNullOrEmpty(height)) && !(string.IsNullOrEmpty(weight)) && Convert.ToDouble(weight) > 0.0 && Convert.ToDouble(height) > 0.0)
                             {
@@ -144,7 +144,7 @@ namespace VideoKallMCCST.View
                     bmi = weight * 703 / (inches * inches);
                 }
                
-                TxtResultBMI.Text =Convert.ToString(Math.Round(bmi, 2));
+                TxtResultBMI.Text =" "+Convert.ToString(Math.Round(bmi, 2));
             }
         }
 
