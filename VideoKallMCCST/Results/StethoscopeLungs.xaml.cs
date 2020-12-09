@@ -444,7 +444,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST1.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST1.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST1.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST1.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -493,7 +494,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST2.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST2.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST2.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST2.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -542,7 +544,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST3.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST3.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                // BtnST3.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST3.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -591,7 +594,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST4.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST4.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                // BtnST4.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST4.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -640,7 +644,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST5.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST5.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                // BtnST5.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST5.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -689,7 +694,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST6.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST6.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST6.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST6.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -738,7 +744,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST7.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST7.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST7.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST7.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -787,7 +794,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST8.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST8.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST8.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST8.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -836,7 +844,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST9.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST9.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST9.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST9.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -885,7 +894,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST10.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST10.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST10.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST10.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -934,7 +944,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST11.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST11.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST11.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST11.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -983,7 +994,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST12.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST12.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST12.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST12.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -1032,7 +1044,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST13.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST13.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                // BtnST13.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST13.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -1081,7 +1094,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST14.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST14.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST14.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST14.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -1130,7 +1144,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST15.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST15.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST15.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
@@ -1179,7 +1194,8 @@ namespace VideoKallMCCST.Results
                             else if (st == 3)
                                 BtnST16.Background = GetColorFromHexa("#E96056");//new SolidColorBrush(Windows.UI.Colors.Red);
                             else if (st == 0)
-                                BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                //BtnST16.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                                BtnST16.Background = GetColorFromHexa("#FFBF00");
                         }
                     }
                     break;
