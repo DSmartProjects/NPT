@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Helpers;
+using VideoKallMCCST.Model;
 using VideoKallMCCST.ViewModel;
 using Windows.Media.MediaProperties;
 using Windows.System.Display;
@@ -130,6 +131,7 @@ namespace VideoKallMCCST.View
         {
             try
             {
+                MainPage.VideoCallVM.PatientDetails = null;
                 await EndCallAsync();
             }
             catch (Exception)
@@ -159,6 +161,7 @@ namespace VideoKallMCCST.View
 
             try
             {
+                MainPage.VideoCallVM.PatientDetails = null;
                 await EndCallAsync();
             }
             catch (Exception)
@@ -185,6 +188,7 @@ namespace VideoKallMCCST.View
             await Dispatcher.RunAsync(CoreDispatcherPriority.High, (() =>
             {
                 _videoCallVM.DefaultVisibilities();
+                MainPage.VideoCallVM.PatientDetails = null;
                 IncomingCallRing.Stop();
                 RemoteVideo.Stop();
                 RemoteVideo.Source = null;
