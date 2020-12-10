@@ -37,7 +37,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
                         <TextBlock Margin="20,0,0,0" Foreground="#464646"   FontSize="12" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
-                        <TextBlock x:Name="StStatus" Margin="10,0,0,0" VerticalAlignment="Center"  TextWrapping="Wrap" Text="sajdghasjdhjkashd"  FontFamily="Open Sans"   Foreground="#464646" Width="150" FontSize="12" FontWeight="SemiBold" ></TextBlock>
+                        <TextBlock x:Name="StStatus" Margin="10,0,0,0" VerticalAlignment="Center"  TextWrapping="Wrap"   FontFamily="Open Sans"   Foreground="#464646" Width="150" FontSize="12" FontWeight="SemiBold" ></TextBlock>
                         <!--<TextBlock x:Name="StStatus"  FontFamily="Open Sans"   Foreground="#464646"  FontSize="12" FontWeight="SemiBold" ></TextBlock>-->
                     </StackPanel>
                     <StackPanel Grid.Row="3"  Grid.Column="1" Orientation="Horizontal">
