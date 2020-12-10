@@ -765,12 +765,12 @@ namespace VideoKallMCCST.View
                 };
                 noWeightDialog.CloseButtonStyle = (Style)this.Resources["PurpleStyle"];
                 var val = noWeightDialog.ShowAsync();
-               // await noWeightDialog.ShowAsync();
+                // await noWeightDialog.ShowAsync();
                 //noWifiDialog.Height = 100;
                 //noWifiDialog.Width = 200;
                 //noWifiDialog.CornerRadius = new CornerRadius(5, 5, 5, 5);
                 //noWifiDialog.BorderThickness = new Thickness(1, 1, 1, 1);
-              //  return;
+                return;
             }
             btnWeightToggle = !btnWeightToggle; 
 
