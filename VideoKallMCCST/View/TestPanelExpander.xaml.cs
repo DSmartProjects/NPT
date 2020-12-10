@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
+using VideoKallMCCST.Helpers;
 using VideoKallMCCST.Results;
 using VideoKallMCCST.Stethoscope;
 using VideoKallMCCST.ViewModel;
@@ -682,11 +683,13 @@ namespace VideoKallMCCST.View
             int timeout = MainPage.mainPage.Podmapping.TimeOutPeriod - timeoutCount; 
             RetractInProgressMessageDlg = new ContentDialog
             {
-                Title = "Deployment/Recline is in Progress",
-                Content = String.Format("Please wait for {0} sec.", timeout>0? timeout:0),
-                PrimaryButtonText = "OK",
+                Title =Constants.Deployment_Recline_Inprogress,
+                Content = String.Format(Constants.Wait_Time, timeout>0? timeout:0),
+                PrimaryButtonText = Constants.OK,
             };
+            RetractInProgressMessageDlg.PrimaryButtonStyle = (Style)this.Resources["PurpleStyle"];
 
+            
             var val = RetractInProgressMessageDlg.ShowAsync();
         }
 
@@ -737,8 +740,9 @@ namespace VideoKallMCCST.View
         }
 
         bool btnWeightToggle = false;
-        private void BtnWeight_Click(object sender, RoutedEventArgs e)
+        private async void BtnWeight_Click(object sender, RoutedEventArgs e)
         {
+            ContentDialog noWeightDialog = null;
             isTestResultOpened();
 
             if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
@@ -746,18 +750,20 @@ namespace VideoKallMCCST.View
 
             if (string.IsNullOrEmpty(height))
             {
-                ContentDialog noWifiDialog = new ContentDialog()
+                noWeightDialog = new ContentDialog()
                 {
 
-                    Content = "Please Measure Height First.",
-                    CloseButtonText = "Ok"
+                    Content = Constants.Measure_Height_First,
+                    CloseButtonText = Constants.OK
                 };
-                noWifiDialog.ShowAsync();
-                noWifiDialog.Height = 100;
-                noWifiDialog.Width = 200;
-                noWifiDialog.CornerRadius = new CornerRadius(5, 5, 5, 5);
-                noWifiDialog.BorderThickness = new Thickness(1, 1, 1, 1);
-                return;
+                noWeightDialog.CloseButtonStyle = (Style)this.Resources["PurpleStyle"];
+                var val = noWeightDialog.ShowAsync();
+               // await noWeightDialog.ShowAsync();
+                //noWifiDialog.Height = 100;
+                //noWifiDialog.Width = 200;
+                //noWifiDialog.CornerRadius = new CornerRadius(5, 5, 5, 5);
+                //noWifiDialog.BorderThickness = new Thickness(1, 1, 1, 1);
+              //  return;
             }
             btnWeightToggle = !btnWeightToggle; 
 

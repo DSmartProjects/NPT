@@ -257,7 +257,7 @@ namespace VideoKallMCCST.View
                 if(!(string.IsNullOrEmpty(MainPage.mainPage.SMCCommChannel.IPAddress)))
                 {
                     StSettings.IP = MainPage.mainPage.SMCCommChannel.IPAddress;
-                    StSettings.PORT=MainPage.mainPage.SMCCommChannel.PortNo;
+                    //StSettings.PORT=MainPage.mainPage.SMCCommChannel.PortNo;
                 }
                 string msg = "IP:" + StSettings.IP.Trim() + Environment.NewLine +
                              "PORT" + ":" + StSettings.PORT.Trim() + Environment.NewLine +
