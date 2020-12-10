@@ -630,6 +630,9 @@ namespace VideoKallMCCST.View
                 //BtnPulseoximeter.Background = GetColorFromHexa("#FFBF00"); //BtnPulseoximeterToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 grdPulse.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
+                TxtResultPulseOximeter.Text = string.Empty;
+                TxtResultPulseOximeterpulse.Text = string.Empty;
+                ShowHidePulseoximeterdata(false);
             } 
             ResultPulseOximeterPopup.IsOpen = BtnPulseoximeterToggle;
             DeployRetractDevice(BtnPulseoximeterToggle, MainPage.mainPage.Podmapping.OximeterPodID);
@@ -671,6 +674,8 @@ namespace VideoKallMCCST.View
                 //BtnThermoMeter.Background = GetColorFromHexa("#FFBF00"); // : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 gridThermo.BorderBrush = GetColorFromHexa("#FFC10D");
                 gridThermo.BorderThickness = new Thickness(0, 0, 0, 10);
+                TxtTemprature.Text = string.Empty;
+                TblTemp.Visibility = Visibility.Collapsed;
             } 
             ResulThermoPopup.IsOpen = _thermotoggle;
             DeployRetractDevice(_thermotoggle, MainPage.mainPage.Podmapping.ThermoMeterPodID);
@@ -730,6 +735,8 @@ namespace VideoKallMCCST.View
                 //BtnBP.Background = GetColorFromHexa("#FFBF00");//_resultBpToggle ? new SolidColorBrush(Windows.UI.Colors.LightSeaGreen) : new SolidColorBrush(Windows.UI.Colors.LightGray);
                 grBp.BorderBrush = GetColorFromHexa("#FFC10D");
                 grBp.BorderThickness = new Thickness(0, 0, 0, 10);
+                ShowHidebpdata(false);
+                TxtSys.Text = string.Empty;
             } 
             ResultBPPopup.IsOpen = _resultBpToggle;
             DeployRetractDevice(_resultBpToggle, MainPage.mainPage.Podmapping.BPCuffPodID); 
@@ -772,6 +779,9 @@ namespace VideoKallMCCST.View
             {
                 grdWeight.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
+                ShowHideWeightdata(false);
+                TxtResultWeight.Text = string.Empty;
+                TxtResultBMI.Text = string.Empty;
             }
             ResuWeightPopup.IsOpen = btnWeightToggle;
         }
@@ -793,6 +803,8 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.TestIsInProgress = btnHeighttoggle;
             if (btnHeighttoggle)
             {
+                TxtLableHeight.Visibility = Visibility.Collapsed;
+                TxtResultHeight.Text = string.Empty;                
                 grdHeight.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
             }
@@ -969,6 +981,8 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.TestIsInProgress = _glucoToggle;
             if (_glucoToggle)
             {
+                ShowHideglucodata(false);
+                TxtResultgluco.Text = string.Empty;
                 grdGluco.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
             } 
