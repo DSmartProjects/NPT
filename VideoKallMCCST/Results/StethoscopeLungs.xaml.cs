@@ -61,6 +61,11 @@ namespace VideoKallMCCST.Results
                     BtnStart.IsEnabled = true;
 
                 }
+                else if (devicecode == 4 && isresultornotificationmsg == 1)
+                {
+                    StStatus.Text = message;
+
+                }
             });
         }
         private void BtnDone_Click(object sender, RoutedEventArgs e)
@@ -74,7 +79,8 @@ namespace VideoKallMCCST.Results
 
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
-            if ((selectedIndex == -1 && !isoperationStarted))
+            if ((selectedIndex == -1 && !isoperationStarted) ||
+               MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
 
                 return;
 
@@ -1190,17 +1196,17 @@ namespace VideoKallMCCST.Results
 
 
         private void UprightChair_Click(object sender, RoutedEventArgs e)
-
         {
-
+            if (deployRetractoprtstionStarted)
+                return;
             MainPage.mainPage.SeatHeightAdjust?.Invoke(true);
 
         }
 
         private void LeaningChair_Click(object sender, RoutedEventArgs e)
-
         {
-
+            if (deployRetractoprtstionStarted)
+                return;
             MainPage.mainPage.SeatHeightAdjust?.Invoke(false);
 
         }
