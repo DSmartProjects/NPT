@@ -259,7 +259,7 @@ namespace VideoKallMCCST.View
                     StSettings.IP = MainPage.mainPage.SMCCommChannel.IPAddress;
                     //StSettings.PORT=MainPage.mainPage.SMCCommChannel.PortNo;
                 }
-                string msg = "IP:" + StSettings.IP.Trim() + Environment.NewLine +
+                string msg =Environment.NewLine+"IP:" + StSettings.IP.Trim() + Environment.NewLine +
                              "PORT" + ":" + StSettings.PORT.Trim() + Environment.NewLine +
                              "USERNAME" + ":" + StSettings.USERNAME.Trim() + Environment.NewLine +
                              "PASSWORD" + ":" + StSettings.PASSWORD.Trim() + Environment.NewLine +
