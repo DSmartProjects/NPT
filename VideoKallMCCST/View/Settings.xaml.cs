@@ -59,8 +59,8 @@ namespace VideoKallMCCST.View
             Dfaultsettings.CODEC = ""; 
 
             StSettings.IP = MainPage.mainPage.SMCCommChannel.IPAddress;
-            //StSettings.PORT = "8445";
-            StSettings.PORT = MainPage.mainPage.SMCCommChannel.PortNo;
+            StSettings.PORT = "8445";
+            //StSettings.PORT = MainPage.mainPage.SMCCommChannel.PortNo;
             StSettings.USERNAME = "rnk";
             StSettings.PASSWORD = "test";
             StSettings.CUTOFFFILTER = "0";
