@@ -116,7 +116,7 @@ namespace VideoKallMCCST.View
                     e.NativeErrorCode == ERROR_ACCESS_DENIED ||
                     e.NativeErrorCode == ERROR_NO_APP_ASSOCIATED)
                 {
-                    MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage));
+                    MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCall));
                     MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
                 }
             }
@@ -183,9 +183,9 @@ namespace VideoKallMCCST.View
         private async Task EndCallAsync()
         {
             incommingCall = null;
-            await device.CleanUpAsync();
+              //await device.CleanUpAsync();
             // end the CallButton. session
-            await Dispatcher.RunAsync(CoreDispatcherPriority.High, (() =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
             {
                 _videoCallVM.DefaultVisibilities();
                 MainPage.VideoCallVM.PatientDetails = null;
@@ -194,11 +194,12 @@ namespace VideoKallMCCST.View
                 RemoteVideo.Source = null;
                 PreviewVideo.Source = null;
                 PreviewVideo.Visibility = Visibility.Collapsed;
+                device.mediaSink.Dispose();
             }));
             //this.Frame.Navigate(typeof(VideoCall));
             // Start waiting for a new CallButton.
             await InitializeAsync();
-            MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage));
+            MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCall));
             MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
         }
         private async Task PatientEndCallAsync()
@@ -214,7 +215,7 @@ namespace VideoKallMCCST.View
             // Start waiting for a new CallButton.
             await InitializeAsync();
             _videoCallVM.DefaultVisibilities();
-            MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCallPage));
+            MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCall));
             MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
             // MainPage.mainPage.pagePlaceHolder.Navigate(typeof(VideoCall));
             //TestPanelExpander.TestPanelExp.Frame.Navigate(typeof(LogoPage));
