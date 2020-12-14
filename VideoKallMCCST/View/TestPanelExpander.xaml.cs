@@ -685,11 +685,17 @@ namespace VideoKallMCCST.View
         ContentDialog RetractInProgressMessageDlg = null;
         void ShowRetractInProgressMessage()
         {
-            int timeout = MainPage.mainPage.Podmapping.TimeOutPeriod - timeoutCount; 
+            int timeout = MainPage.mainPage.Podmapping.TimeOutPeriod - timeoutCount;
+            //RetractInProgressMessageDlg = new ContentDialog
+            //{
+            //    Title =Constants.Deployment_Recline_Inprogress,
+            //    Content = String.Format(Constants.Wait_Time, timeout>0? timeout:0),
+            //    PrimaryButtonText = Constants.OK,
+            //};
             RetractInProgressMessageDlg = new ContentDialog
             {
-                Title =Constants.Deployment_Recline_Inprogress,
-                Content = String.Format(Constants.Wait_Time, timeout>0? timeout:0),
+                Content = String.Format(Constants.Wait_Time, timeout > 0 ? timeout : 0),
+                ContentTemplate = (DataTemplate)this.Resources["ContentTemplateStyle"],               
                 PrimaryButtonText = Constants.OK,
             };
             RetractInProgressMessageDlg.PrimaryButtonStyle = (Style)this.Resources["PurpleStyle"];
@@ -759,11 +765,11 @@ namespace VideoKallMCCST.View
             {
                 noWeightDialog = new ContentDialog()
                 {
-
                     Content = Constants.Measure_Height_First,
-                    CloseButtonText = Constants.OK
+                    ContentTemplate = (DataTemplate)this.Resources["ContentTemplateStyle"],
+                    PrimaryButtonText = Constants.OK,
                 };
-                noWeightDialog.CloseButtonStyle = (Style)this.Resources["PurpleStyle"];
+                noWeightDialog.PrimaryButtonStyle = (Style)this.Resources["PurpleStyle"];
                 var val = noWeightDialog.ShowAsync();
                 // await noWeightDialog.ShowAsync();
                 //noWifiDialog.Height = 100;

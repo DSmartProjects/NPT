@@ -17,6 +17,11 @@
             <Setter Property="CornerRadius" Value="5,5,5,5"/>
             <Setter Property="Width" Value="100"/>
         </Style>
+        <DataTemplate x:Key="ContentTemplateStyle">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left">
+                <TextBlock  FontFamily="Open Sans" FontStyle="Normal" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" FontSize="18" Text="{Binding}" />
+            </StackPanel> 
+        </DataTemplate>
     </Page.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid x:Name="gridInstrumentPanel"  BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">

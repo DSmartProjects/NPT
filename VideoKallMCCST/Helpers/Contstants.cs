@@ -17,7 +17,7 @@ namespace VideoKallMCCST.Helpers
 
         public const string Deployment_Recline_Inprogress = @"Seat back movement in progress";
         public const string Wait_Time = @"Please wait for {0} sec.";
-        public const string Measure_Height_First = @"Please Measure Height First.";
+        public const string Measure_Height_First = @"Please measure height first.";
 
 
     }
