@@ -99,9 +99,17 @@ namespace VideoKallMCCST.Results
         private void BtnHMWM_Click(object sender, RoutedEventArgs e)
         {
             if (BtnHMWM.Content.ToString().ToLower().Contains("height"))
+            {
                 MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.HM);
-            else               
-            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.WM);
+                MainPage.mainPage.Heightstatus = true;
+                MainPage.mainPage.HeightWeightdelegate?.Invoke(true);
+            }
+            else
+            {
+                MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.WM);
+                MainPage.mainPage.Weightstatus = true;
+                MainPage.mainPage.HeightWeightdelegate?.Invoke(true);
+            }
         }
 
         private void RadPound_Checked(object sender, RoutedEventArgs e)
