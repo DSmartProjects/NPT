@@ -65,7 +65,7 @@
                         </StackPanel>
 
                         <StackPanel x:Name="spLogout" Orientation="Vertical" Margin="0,5,0,5">
-                            <Button CornerRadius="2" Height="40" x:Name="btnlogout" Background="Transparent" ToolTipService.ToolTip="Log Out">
+                        <Button CornerRadius="2" Height="40" x:Name="btnlogout" Background="Transparent" ToolTipService.ToolTip="Log Out" Command="{Binding LogoutCommand,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                 <Image x:Name="Logout" Source="..\Assets/logout.png"/>
                             </Button>
                         </StackPanel>
