@@ -63,10 +63,11 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.CASResult += CasNotification;
             MainPage.mainPage.SeatReclineMsg += AdjustSeatReclination;
             MainPage.mainPage.SeatHeightAdjust += SeatBackIntegration;
-            MainPage.mainPage.HeightWeightdelegate += HeightWeightdelegate;
+            MainPage.mainPage.Heightdelegate += Heightdelegate;
+            MainPage.mainPage.Weightdelegate += Weightdelegate;
 
         }
-        async void HeightWeightdelegate(bool status)
+        async void Heightdelegate(bool status)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
@@ -76,14 +77,23 @@ namespace VideoKallMCCST.View
                     grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
                     MainPage.mainPage.Heightstatus = false;
                     TxtResultHeight.Text = String.Empty;
+                    TxtLableHeight.Visibility = Visibility.Collapsed;
                 }
-                else if (MainPage.mainPage.Weightstatus)
+            });
+        }
+        async void Weightdelegate(bool status)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (MainPage.mainPage.Weightstatus)
                 {
-                    grdWeight.BorderBrush = GetColorFromHexa("#E9605");
+                    grdWeight.BorderBrush = GetColorFromHexa("#E96056");
                     grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
                     MainPage.mainPage.Weightstatus = false;
                     TxtResultWeight.Text = string.Empty;
                     TxtResultBMI.Text = string.Empty;
+                    TxtLableWeight.Visibility = Visibility.Collapsed;
+                    TxtLabelBMI.Visibility = Visibility.Collapsed;
 
                 }
             });

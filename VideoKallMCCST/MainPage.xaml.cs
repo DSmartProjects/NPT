@@ -603,7 +603,8 @@ namespace VideoKallMCCST
         public REQ_MSG_Visibility REQ_MSG_VisibilityCompleted;
         public bool Heightstatus { get; set; } = false;
         public bool Weightstatus { get; set; } = false;
-        public BoolDelegate HeightWeightdelegate;
+        public BoolDelegate Heightdelegate;
+        public BoolDelegate Weightdelegate;
 
     }
 }

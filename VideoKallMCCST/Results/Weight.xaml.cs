@@ -26,7 +26,9 @@ namespace VideoKallMCCST.Results
 
         private void BtnGetWeight_Click(object sender, RoutedEventArgs e)
         {
-            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.WM);
+            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.WM);           
+            MainPage.mainPage.Weightstatus = true;
+            MainPage.mainPage.Weightdelegate?.Invoke(true);
         }
     }
 }
