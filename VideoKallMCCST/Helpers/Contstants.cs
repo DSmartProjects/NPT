@@ -19,6 +19,19 @@ namespace VideoKallMCCST.Helpers
         public const string Wait_Time = @"Please wait for {0} sec.";
         public const string Measure_Height_First = @"Please measure height first.";
 
+        #region device name
+        public const string Height ="Height";
+        public const string Weight ="Weight";
+        public const string BP_CUFF = "Blood Pressure";
+        public const string PulseOximeter = "Pulse Oximeter";
+        public const string Thermometer = "Thermometer";
+        public const string Dermatoscope = "Dermatoscope";
+        public const string Otoscope = "Otoscope";
+        public const string Spirometer = "Spirometer";
+        public const string GlucoseMonitor= "Glucose Monitor";
+        public const string ChestStethoscope = "Chest Stethoscope";
+        public const string SeatBackStethoscope = "Seat Back Stethoscope";
+        #endregion device name
 
     }
 }

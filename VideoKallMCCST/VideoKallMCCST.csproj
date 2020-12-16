@@ -141,6 +141,7 @@
     <Compile Include="DBModule\DBOperation.cs" />
     <Compile Include="Helpers\Contstants.cs" />
     <Compile Include="Helpers\DateFormatConverter.cs" />
+    <Compile Include="Helpers\Toast.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\PMMConfiguration.cs" />
     <Compile Include="Results\BPResultsInstruction.xaml.cs">
