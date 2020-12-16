@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.System;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -48,39 +49,39 @@ namespace VideoKallMCCST.View
 
         private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)
         {
-            _patientVM.LblSearchNotFoundVisibility = Visibility.Collapsed;
-            httpClient = new HttpClientManager();
-            string name = txtPatientName.Text.Trim();
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                _patientVM.Patients = null;
+            //_patientVM.LblSearchNotFoundVisibility = Visibility.Collapsed;
+            //httpClient = new HttpClientManager();
+            //string name = txtPatientName.Text.Trim();
+            //if (!string.IsNullOrWhiteSpace(name))
+            //{
+            //    _patientVM.Patients = null;
 
-                var patients = await httpClient.PatientsAsync(name);
-                if (patients!=null&&patients.Count>0)
-                {
+            //    var patients = await httpClient.PatientsAsync(name);
+            //    if (patients!=null&&patients.Count>0)
+            //    {
 
-                    _patientVM.Patients = new ObservableCollection<Patient>(patients);
-                }             
-            }
-            else
-            {
-                PatientsGrid.Visibility = Visibility.Collapsed;
-                _patientVM.PatientsGridVisibility = Visibility.Collapsed;
-                _patientVM.LblSearchNotFoundVisibility = Visibility.Visible;
-            }
-           
-            if (_patientVM.Patients!=null&&_patientVM.Patients.Count>0&& !string.IsNullOrWhiteSpace(name))
-            {
-                PatientsGrid.Visibility = Visibility.Visible;
-                _patientVM.PatientsGridVisibility = Visibility.Visible;
-            }
-            else
-            {
-                PatientsGrid.Visibility = Visibility.Collapsed;
-                _patientVM.PatientsGridVisibility = Visibility.Collapsed;
-                _patientVM.LblSearchNotFoundVisibility = Visibility.Visible;               
-            }
-                
+            //        _patientVM.Patients = new ObservableCollection<Patient>(patients);
+            //    }             
+            //}
+            //else
+            //{
+            //    PatientsGrid.Visibility = Visibility.Collapsed;
+            //    _patientVM.PatientsGridVisibility = Visibility.Collapsed;
+            //    _patientVM.LblSearchNotFoundVisibility = Visibility.Visible;
+            //}
+
+            //if (_patientVM.Patients!=null&&_patientVM.Patients.Count>0&& !string.IsNullOrWhiteSpace(name))
+            //{
+            //    PatientsGrid.Visibility = Visibility.Visible;
+            //    _patientVM.PatientsGridVisibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    PatientsGrid.Visibility = Visibility.Collapsed;
+            //    _patientVM.PatientsGridVisibility = Visibility.Collapsed;
+            //    _patientVM.LblSearchNotFoundVisibility = Visibility.Visible;               
+            //}
+            BtnSearchPatient();
 
         }
 
@@ -121,6 +122,53 @@ namespace VideoKallMCCST.View
                 Uri uri = new Uri(MainPage.mainPage.mainpagecontext.PMMConfig.URL);
                 await Windows.System.Launcher.LaunchUriAsync(uri);
             }
+
+        }
+
+        private void TxtPatientName_PreviewKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                BtnSearchPatient();
+            }
+
+        }
+
+        private async void BtnSearchPatient()
+        {
+            _patientVM.LblSearchNotFoundVisibility = Visibility.Collapsed;
+            httpClient = new HttpClientManager();
+            string name = txtPatientName.Text.Trim();
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                _patientVM.Patients = null;
+
+                var patients = await httpClient.PatientsAsync(name);
+                if (patients != null && patients.Count > 0)
+                {
+
+                    _patientVM.Patients = new ObservableCollection<Patient>(patients);
+                }
+            }
+            else
+            {
+                PatientsGrid.Visibility = Visibility.Collapsed;
+                _patientVM.PatientsGridVisibility = Visibility.Collapsed;
+                _patientVM.LblSearchNotFoundVisibility = Visibility.Visible;
+            }
+
+            if (_patientVM.Patients != null && _patientVM.Patients.Count > 0 && !string.IsNullOrWhiteSpace(name))
+            {
+                PatientsGrid.Visibility = Visibility.Visible;
+                _patientVM.PatientsGridVisibility = Visibility.Visible;
+            }
+            else
+            {
+                PatientsGrid.Visibility = Visibility.Collapsed;
+                _patientVM.PatientsGridVisibility = Visibility.Collapsed;
+                _patientVM.LblSearchNotFoundVisibility = Visibility.Visible;
+            }
+
 
         }
     }
