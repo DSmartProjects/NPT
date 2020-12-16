@@ -75,12 +75,15 @@ namespace VideoKallMCCST.View
                     grdHeight.BorderBrush = GetColorFromHexa("#E96056");
                     grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
                     MainPage.mainPage.Heightstatus = false;
+                    TxtResultHeight.Text = String.Empty;
                 }
                 else if (MainPage.mainPage.Weightstatus)
                 {
                     grdWeight.BorderBrush = GetColorFromHexa("#E9605");
                     grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
                     MainPage.mainPage.Weightstatus = false;
+                    TxtResultWeight.Text = string.Empty;
+                    TxtResultBMI.Text = string.Empty;
 
                 }
             });

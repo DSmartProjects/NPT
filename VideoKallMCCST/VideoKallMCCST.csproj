@@ -234,8 +234,15 @@
     <Content Include="Assets\Application.png" />
     <Content Include="Assets\bp.png" />
     <Content Include="Assets\CallRinger.gif" />
+    <Content Include="Assets\chair1.png" />
+    <Content Include="Assets\chair-down.png" />
+    <Content Include="Assets\chair-up.png" />
+    <Content Include="Assets\chair.png" />
+    <Content Include="Assets\chairheight-small.png" />
     <Content Include="Assets\connecting.gif" />
     <Content Include="Assets\Darmoscope.png" />
+    <Content Include="Assets\down1.png" />
+    <Content Include="Assets\down.png" />
     <Content Include="Assets\EKG.png" />
     <Content Include="Assets\end-call.png" />
     <Content Include="Assets\glucosemeter.png" />
@@ -270,6 +277,8 @@
     <Content Include="Assets\stethoscoplungs.png" />
     <Content Include="Assets\Thermometer.png" />
     <Content Include="Assets\unmute.png" />
+    <Content Include="Assets\up1.png" />
+    <Content Include="Assets\up.png" />
     <Content Include="Assets\Upstraight_trans.png" />
     <Content Include="Assets\Upstraight.png" />
     <Content Include="Assets\video-logo.png" />
