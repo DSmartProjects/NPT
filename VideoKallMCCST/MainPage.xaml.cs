@@ -596,6 +596,9 @@ namespace VideoKallMCCST
         public delegate void CasNotification(string message, int devicecode , int isresultornotificationmsg);
         public delegate void REQ_MSG_Visibility(string status);
         public REQ_MSG_Visibility REQ_MSG_VisibilityCompleted;
+        public bool Heightstatus { get; set; } = false;
+        public bool Weightstatus { get; set; } = false;
+        public BoolDelegate HeightWeightdelegate;
 
     }
 }
