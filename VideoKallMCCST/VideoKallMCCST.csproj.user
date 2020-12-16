@@ -19,6 +19,7 @@
     <MediumTileSource>C:\Rama\GIT\DSmartProjects\SourceCode\NPT-UAT\VideoKallMCCST\Assets\VKLogo.png</MediumTileSource>
     <WideTileSource>C:\Rama\GIT\DSmartProjects\SourceCode\NPT-UAT\VideoKallMCCST\Assets\VK_Splash.png</WideTileSource>
     <LargeTileSource>C:\Rama\GIT\DSmartProjects\SourceCode\NPT-UAT\VideoKallMCCST\Assets\VKLogo.png</LargeTileSource>
+    <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <UseSimulator>false</UseSimulator>

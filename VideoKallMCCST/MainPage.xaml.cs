@@ -3,13 +3,8 @@ using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.View;
 using VideoKallMCCST.ViewModel;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Imaging;
 using Windows.Storage;
-using Windows.Storage.Streams;
 using Windows.UI.Core;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -30,9 +25,9 @@ namespace VideoKallMCCST
             VideoCallVM = new VideoCallViewModel();
             RightPanelHolder.Navigate(typeof(VideoCall));
             pagePlaceHolder.Navigate(typeof(LogoPage));
-            NotifyStatusCallback += UpdateNotification;
+            NotifyStatusCallback += UpdateNotification;          
         }
-        
+      
         public StorageFolder rootImageFolder { get; set; }
         async void UpdateNotification(string s, int code)
         {
