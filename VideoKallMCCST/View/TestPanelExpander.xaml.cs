@@ -63,30 +63,6 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.CASResult += CasNotification;
             MainPage.mainPage.SeatReclineMsg += AdjustSeatReclination;
             MainPage.mainPage.SeatHeightAdjust += SeatBackIntegration;
-            MainPage.mainPage.HeightWeightdelegate += HeightWeightdelegate;
-
-        }
-        async void HeightWeightdelegate(bool status)
-        {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                if (MainPage.mainPage.Heightstatus)
-                {
-                    grdHeight.BorderBrush = GetColorFromHexa("#E96056");
-                    grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
-                    MainPage.mainPage.Heightstatus = false;
-                    TxtResultHeight.Text = String.Empty;
-                }
-                else if (MainPage.mainPage.Weightstatus)
-                {
-                    grdWeight.BorderBrush = GetColorFromHexa("#E9605");
-                    grdWeight.BorderThickness = new Thickness(0, 0, 0, 10);
-                    MainPage.mainPage.Weightstatus = false;
-                    TxtResultWeight.Text = string.Empty;
-                    TxtResultBMI.Text = string.Empty;
-
-                }
-            });
         }
         private  string RemoveSpecialCharacters(string str)
         {
@@ -642,7 +618,7 @@ namespace VideoKallMCCST.View
                 )
             {
                 if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
-                    ShowRetractInProgressMessage();
+                    ShowRetractInProgressMessage(Constants.PulseOximeter);
                 return;
             }
                
@@ -685,8 +661,7 @@ namespace VideoKallMCCST.View
                 )
             {
                 if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
-                    ShowRetractInProgressMessage();
-
+                    ShowRetractInProgressMessage(Constants.Thermometer);
                 return;
             }
 
@@ -705,9 +680,52 @@ namespace VideoKallMCCST.View
             DeployRetractDevice(_thermotoggle, MainPage.mainPage.Podmapping.ThermoMeterPodID);
         }
 
+
+        private string SelectDeviceTitle(string device) {
+
+            string deviceTitle= string.Empty;
+            if (device.Equals(Constants.BP_CUFF))
+            {
+                deviceTitle = Constants.BP_CUFF;
+            }
+            else if (device.Equals(Constants.PulseOximeter))
+            {
+                deviceTitle = Constants.PulseOximeter;
+            }
+            else if (device.Equals(Constants.Thermometer))
+            {
+                deviceTitle = Constants.Thermometer;
+            }
+            else if (device.Equals(Constants.Dermatoscope))
+            {
+                deviceTitle = Constants.Dermatoscope;
+            }
+            else if (device.Equals(Constants.Otoscope))
+            {
+                deviceTitle = Constants.Otoscope;
+            }
+            else if (device.Equals(Constants.Spirometer))
+            {
+                deviceTitle = Constants.Spirometer;
+            }
+            else if (device.Equals(Constants.GlucoseMonitor))
+            {
+                deviceTitle = Constants.GlucoseMonitor;
+            }
+            else if (device.Equals(Constants.ChestStethoscope))
+            {
+                deviceTitle = Constants.Deployment_Recline_Inprogress;
+            }
+            else if (device.Equals(Constants.SeatBackStethoscope))
+            {
+                deviceTitle = Constants.Deployment_Recline_Inprogress;
+            }
+            return deviceTitle;
+        }
+
         bool _resultBpToggle = false;
-        ContentDialog RetractInProgressMessageDlg = null;
-        void ShowRetractInProgressMessage()
+        //ContentDialog RetractInProgressMessageDlg = null;
+        void ShowRetractInProgressMessage(string deviceName)
         {
             int timeout = MainPage.mainPage.Podmapping.TimeOutPeriod - timeoutCount;
             //RetractInProgressMessageDlg = new ContentDialog
@@ -716,16 +734,17 @@ namespace VideoKallMCCST.View
             //    Content = String.Format(Constants.Wait_Time, timeout>0? timeout:0),
             //    PrimaryButtonText = Constants.OK,
             //};
-            RetractInProgressMessageDlg = new ContentDialog
-            {
-                Content = String.Format(Constants.Wait_Time, timeout > 0 ? timeout : 0),
-                ContentTemplate = (DataTemplate)this.Resources["ContentTemplateStyle"],               
-                PrimaryButtonText = Constants.OK,
-            };
-            RetractInProgressMessageDlg.PrimaryButtonStyle = (Style)this.Resources["PurpleStyle"];
+            //RetractInProgressMessageDlg = new ContentDialog
+            //{
+            //    Content = String.Format(Constants.Wait_Time, timeout > 0 ? timeout : 0),
+            //    ContentTemplate = (DataTemplate)this.Resources["ContentTemplateStyle"],               
+            //    PrimaryButtonText = Constants.OK,
+            //};
+            //RetractInProgressMessageDlg.PrimaryButtonStyle = (Style)this.Resources["PurpleStyle"];
 
             
-            var val = RetractInProgressMessageDlg.ShowAsync();
+            //var val = RetractInProgressMessageDlg.ShowAsync();
+            Toast.ShowToast(SelectDeviceTitle(deviceName), String.Format(Constants.Wait_Time, timeout > 0 ? timeout : 0),timeout);
         }
 
         void DeployRetractDevice(bool deploy,string podID)
@@ -754,7 +773,7 @@ namespace VideoKallMCCST.View
                (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress) )
             {
                 if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
-                    ShowRetractInProgressMessage();
+                    ShowRetractInProgressMessage(Constants.BP_CUFF);
                 return;
             }
 
@@ -779,7 +798,7 @@ namespace VideoKallMCCST.View
         bool btnWeightToggle = false;
         private async void BtnWeight_Click(object sender, RoutedEventArgs e)
         {
-            ContentDialog noWeightDialog = null;
+            //ContentDialog noWeightDialog = null;
             isTestResultOpened();
 
             if ((MainPage.mainPage.TestIsInProgress && !btnWeightToggle) || (!ConnectionCheck && !btnWeightToggle))
@@ -787,19 +806,20 @@ namespace VideoKallMCCST.View
 
             if (string.IsNullOrEmpty(height))
             {
-                noWeightDialog = new ContentDialog()
-                {
-                    Content = Constants.Measure_Height_First,
-                    ContentTemplate = (DataTemplate)this.Resources["ContentTemplateStyle"],
-                    PrimaryButtonText = Constants.OK,
-                };
-                noWeightDialog.PrimaryButtonStyle = (Style)this.Resources["PurpleStyle"];
-                var val = noWeightDialog.ShowAsync();
+                //noWeightDialog = new ContentDialog()
+                //{
+                //    Content = Constants.Measure_Height_First,
+                //    ContentTemplate = (DataTemplate)this.Resources["ContentTemplateStyle"],
+                //    PrimaryButtonText = Constants.OK,
+                //};
+                //noWeightDialog.PrimaryButtonStyle = (Style)this.Resources["PurpleStyle"];
+                //var val = noWeightDialog.ShowAsync();
                 // await noWeightDialog.ShowAsync();
                 //noWifiDialog.Height = 100;
                 //noWifiDialog.Width = 200;
                 //noWifiDialog.CornerRadius = new CornerRadius(5, 5, 5, 5);
                 //noWifiDialog.BorderThickness = new Thickness(1, 1, 1, 1);
+                Toast.ShowToast("", Constants.Measure_Height_First);
                 return;
             }
             btnWeightToggle = !btnWeightToggle; 
@@ -858,7 +878,7 @@ namespace VideoKallMCCST.View
                 )
             {
                 if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
-                    ShowRetractInProgressMessage();
+                    ShowRetractInProgressMessage(Constants.Otoscope);
                 return;
             }
                 
@@ -900,7 +920,7 @@ namespace VideoKallMCCST.View
                 )
             {
                 if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
-                    ShowRetractInProgressMessage();
+                    ShowRetractInProgressMessage(Constants.Dermatoscope);
                 return;
             }
             try
@@ -996,7 +1016,7 @@ namespace VideoKallMCCST.View
 
             if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
             {
-                ShowRetractInProgressMessage();
+                ShowRetractInProgressMessage(Constants.GlucoseMonitor);
                 return;
             }
 
@@ -1028,7 +1048,7 @@ namespace VideoKallMCCST.View
                 return;
             if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
             {
-                ShowRetractInProgressMessage();
+                ShowRetractInProgressMessage(Constants.Spirometer);
                 return;
             }
             _spirometerToggle = !_spirometerToggle;
@@ -1082,7 +1102,7 @@ namespace VideoKallMCCST.View
                 return;
             if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
             {
-                ShowRetractInProgressMessage();
+                ShowRetractInProgressMessage(Constants.ChestStethoscope);
                 return;
             }
             _stethoscopeChest = !_stethoscopeChest;
@@ -1183,7 +1203,7 @@ namespace VideoKallMCCST.View
         {
             if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
             {
-                ShowRetractInProgressMessage();
+                ShowRetractInProgressMessage(Constants.SeatBackStethoscope);
                 return;
             }
             int val = _seatUpDownValue + MainPage.mainPage.Podmapping.SeatUpDownStepValue;
@@ -1206,7 +1226,7 @@ namespace VideoKallMCCST.View
         {
             if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
             {
-                ShowRetractInProgressMessage();
+                ShowRetractInProgressMessage(Constants.SeatBackStethoscope);
                 return;
             }
             int val = _seatUpDownValue - MainPage.mainPage.Podmapping.SeatUpDownStepValue;
@@ -1244,7 +1264,7 @@ namespace VideoKallMCCST.View
         {
             if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
             {
-                ShowRetractInProgressMessage();
+                ShowRetractInProgressMessage(Constants.Deployment_Recline_Inprogress);
                 return;
             }
             int val = _reclinevalue + MainPage.mainPage.Podmapping.ReclineStepValue;
@@ -1267,10 +1287,9 @@ namespace VideoKallMCCST.View
         {
             if (MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
             {
-                ShowRetractInProgressMessage();
+                ShowRetractInProgressMessage(Constants.Deployment_Recline_Inprogress);
                 return;
             }
-
             int val = _reclinevalue - MainPage.mainPage.Podmapping.ReclineStepValue;
             _reclinevalue = (val) < 0? 0: val;
 

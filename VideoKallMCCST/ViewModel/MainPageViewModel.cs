@@ -143,26 +143,82 @@ namespace VideoKallMCCST.ViewModel
         }
         async void ExecuteSaveIPAddress()
         {
-            // Create the message dialog and set its content
-            var messageDialog = new MessageDialog("Do you want to save the details");
+            //// Create the message dialog and set its content
+            //var messageDialog = new MessageDialog("Do you want to save the details");
 
-            // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
-            messageDialog.Commands.Add(new UICommand(
-                "Proceed",
-                new UICommandInvokedHandler(this.ProceedCommandInvokedHandler)));
-            messageDialog.Commands.Add(new UICommand(
-                "Cancel",
-                new UICommandInvokedHandler(this.CancelCommandInvokedHandler)));
+            //// Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
+            //messageDialog.Commands.Add(new UICommand(
+            //    "Proceed",
+            //    new UICommandInvokedHandler(this.ProceedCommandInvokedHandler)));
+            //messageDialog.Commands.Add(new UICommand(
+            //    "Cancel",
+            //    new UICommandInvokedHandler(this.CancelCommandInvokedHandler)));
 
-            // Set the command that will be invoked by default
-            messageDialog.DefaultCommandIndex = 0;
+            //// Set the command that will be invoked by default
+            //messageDialog.DefaultCommandIndex = 0;
 
-            // Set the command to be invoked when escape is pressed
-            messageDialog.CancelCommandIndex = 1;
+            //// Set the command to be invoked when escape is pressed
+            //messageDialog.CancelCommandIndex = 1;
 
-            // Show the message dialog
-            await messageDialog.ShowAsync();
-           
+            //// Show the message dialog
+            //await messageDialog.ShowAsync();
+            REQ_MSG_Visibility = Visibility.Collapsed;
+            var isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
+                                   && !string.IsNullOrEmpty(TxtProtNo)
+                                   && !string.IsNullOrEmpty(PMMConfig.URL)
+                                   && !string.IsNullOrEmpty(PMMConfig.API_URL));
+            if (!isMandatoryFieldValuesFilled)
+            {
+                MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Failure);
+                return;
+            }
+
+
+
+            if (string.IsNullOrEmpty(TxtIpAddress) || string.IsNullOrEmpty(TxtProtNo))
+                return;
+
+            MainPage.mainPage.SMCCommChannel.IPAddress = TxtIpAddress.Trim();
+            MainPage.mainPage.SMCCommChannel.PortNo = TxtProtNo.Trim();
+            MainPage.mainPage.mainpagecontext.ThermometerUnitF = MainPage.mainPage.mainpagecontext.ThermometerTempUnitF;
+
+            try
+            {
+                string msg = "IP" + ":" + TxtIpAddress.Trim() + Environment.NewLine +
+                   "PORT:" + TxtProtNo.Trim() + Environment.NewLine +
+                   "TEMP:" + (MainPage.mainPage.mainpagecontext.ThermometerUnitF ? "1" : "0");
+                // msg = Environment.NewLine + msg + Environment.NewLine;
+                string filename = "SMCIPAddress.txt";
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                Windows.Storage.StorageFile pinfofile = await localFolder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
+                //  await Windows.Storage.FileIO.AppendTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                await Windows.Storage.FileIO.WriteTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            }
+            catch (Exception)
+            {
+            }
+
+            MainPage.mainPage.SaveSTConfig?.Invoke();
+            Write_PMM_ConfigFile();
+
+            isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
+                                          && !string.IsNullOrEmpty(TxtProtNo)
+                                          && !string.IsNullOrEmpty(PMMConfig.URL)
+                                          && !string.IsNullOrEmpty(PMMConfig.API_URL));
+            if (isMandatoryFieldValuesFilled)
+            {
+                MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Success);
+                MainPage.mainPage.mainpagecontext.REQ_MSG_Visibility = Visibility.Collapsed;
+                Toast.ShowToast("", "Successfully saved.");
+                //var messageDialog = new MessageDialog("Successfully saved.");
+                //messageDialog.Commands.Add(new UICommand("OK", new UICommandInvokedHandler(this.CancelCommandInvokedHandler)));
+                //// Set the command that will be invoked by default
+                //messageDialog.DefaultCommandIndex = 0;
+                //await messageDialog.ShowAsync();
+                ExecuteSaveNavigate();
+
+            }
+
         }
 
         private void CancelCommandInvokedHandler(IUICommand command)
@@ -219,32 +275,21 @@ namespace VideoKallMCCST.ViewModel
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Success);
                 MainPage.mainPage.mainpagecontext.REQ_MSG_Visibility = Visibility.Collapsed;
-                var messageDialog = new MessageDialog("Successfully saved.");
-                messageDialog.Commands.Add(new UICommand( "OK", new UICommandInvokedHandler(this.CancelCommandInvokedHandler)));
-                  // Set the command that will be invoked by default
-                messageDialog.DefaultCommandIndex = 0;
-                await messageDialog.ShowAsync();
-         
-          
+                Toast.ShowToast("","Successfully saved.");
+                //var messageDialog = new MessageDialog("Successfully saved.");
+                //messageDialog.Commands.Add(new UICommand("OK", new UICommandInvokedHandler(this.CancelCommandInvokedHandler)));
+                //// Set the command that will be invoked by default
+                //messageDialog.DefaultCommandIndex = 0;
+                //await messageDialog.ShowAsync();
                 ExecuteSaveNavigate();
                
             }
         }
 
-        private void ShowToastNotification(string title, string stringContent)
-        {
-            ToastNotifier ToastNotifier = ToastNotificationManager.CreateToastNotifier();
-            Windows.Data.Xml.Dom.XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
-            Windows.Data.Xml.Dom.XmlNodeList toastNodeList = toastXml.GetElementsByTagName("text");
-            toastNodeList.Item(0).AppendChild(toastXml.CreateTextNode(title));
-            toastNodeList.Item(1).AppendChild(toastXml.CreateTextNode(stringContent));
-            Windows.Data.Xml.Dom.IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
-            Windows.Data.Xml.Dom.XmlElement audio = toastXml.CreateElement("audio");
-            audio.SetAttribute("src", "ms-winsoundevent:Notification.SMS");
-            ToastNotification toast = new ToastNotification(toastXml);
-            toast.ExpirationTime = DateTime.Now.AddSeconds(4);
-            ToastNotifier.Show(toast);
-        }
+
+     
+
+
         async void Write_PMM_ConfigFile()
         {
             try
@@ -260,27 +305,7 @@ namespace VideoKallMCCST.ViewModel
 
             }
         }
-        public static Windows.Data.Xml.Dom.XmlDocument CreateToast()
-        {
-            var xDoc = new XDocument(
-               new XElement("toast",
-               new XElement("visual",
-               new XElement("binding", new XAttribute("template", "ToastGeneric"),
-               new XElement("text", "C# Corner"),
-               new XElement("text", "Are you sure want to save?")
-            )
-            ),// actions    
-            new XElement("actions",
-            new XElement("action", new XAttribute("activationType", "background"),
-            new XAttribute("content", "Ok"), new XAttribute("arguments", "yes"))
-            )
-            )
-            );
-
-            var xmlDoc = new Windows.Data.Xml.Dom.XmlDocument();
-            xmlDoc.LoadXml(xDoc.ToString());
-            return xmlDoc;
-        }
+       
 
         public async void ExecuteBrowserCommand()
         {
