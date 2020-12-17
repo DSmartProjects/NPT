@@ -31,7 +31,7 @@
             <Button Grid.Row="2" Content="Get Weight and BMI" HorizontalAlignment="Center" VerticalAlignment="Center" Width="130"  x:Name="BtnGetWeight"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"  Click="BtnGetWeight_Click"></Button>
         </Grid>-->
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button   Width="130"  x:Name="BtnGetWeight"  Content="Get Weight"  Click="BtnGetWeight_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"/>
+            <Button   Width="130"  x:Name="BtnGetWeight"  Content="Get Weight and BMI"  Click="BtnGetWeight_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"/>
         </StackPanel>
     </Grid>
 

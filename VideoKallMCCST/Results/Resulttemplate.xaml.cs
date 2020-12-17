@@ -46,7 +46,7 @@ namespace VideoKallMCCST.Results
                 if (code == 0)
                 {
                    // TXTHMWM.Text = "Weight Measure";
-                    BtnHMWM.Content = "Get Weight";
+                    BtnHMWM.Content = "Get Weight and BMI";
                     RadCM.Visibility = Visibility.Collapsed;
                     RadFt.Visibility = Visibility.Collapsed;
                     RadPound.Visibility = Visibility.Visible;
@@ -102,13 +102,13 @@ namespace VideoKallMCCST.Results
             {
                 MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.HM);
                 MainPage.mainPage.Heightstatus = true;
-                MainPage.mainPage.HeightWeightdelegate?.Invoke(true);
+                MainPage.mainPage.Heightdelegate?.Invoke(true);
             }
             else
             {
                 MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.WM);
                 MainPage.mainPage.Weightstatus = true;
-                MainPage.mainPage.HeightWeightdelegate?.Invoke(true);
+                MainPage.mainPage.Weightdelegate?.Invoke(true);
             }
         }
 
