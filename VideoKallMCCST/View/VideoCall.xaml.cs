@@ -241,6 +241,7 @@ namespace VideoKallMCCST.View
         private async void Accept_Click(object sender, RoutedEventArgs e)
         {
             await AcceptCall();
+            btnSearchPatient.IsEnabled = true;
         }
         private async Task AcceptCall()
         {
@@ -386,6 +387,7 @@ namespace VideoKallMCCST.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            btnSearchPatient.IsEnabled = false;
             SMCConnecteionStatus();
 
             SMCCommChannel = new CommunicationChannel();
