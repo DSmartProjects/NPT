@@ -83,7 +83,40 @@ namespace VideoKallMCCST.Communication
                 mediaCapture = new MediaCapture();
                 mediaCapture.Failed += mediaCapture_Failed;
 
-                await mediaCapture.InitializeAsync();
+                DeviceInformationCollection cameraDevice = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
+                DeviceInformationCollection coll = await DeviceInformation.FindAllAsync(DeviceClass.AudioCapture);
+
+                //cameraDevice
+                string cameraID = string.Empty;
+                for (int i = 0; i < cameraDevice.Count(); i++)
+                {
+                    DeviceInformation dinfo = cameraDevice[i];
+                    string name = dinfo.Name;
+                    string id = dinfo.Id;
+                    string type = dinfo.Kind.ToString();
+                    cameraID = id;
+                    if (dinfo.EnclosureLocation.Panel == Panel.Front)
+                    {
+                        break;
+                    }
+                }
+                string micID = string.Empty;
+                for (int i = 0; i < coll.Count(); i++)
+                {
+                    DeviceInformation dinfo = coll[i];
+                    string name = dinfo.Name;
+                    string id = dinfo.Id;
+                    string type = dinfo.Kind.ToString();
+                    if (name.Contains("Microphone Array"))
+                    {
+                        micID = dinfo.Id;
+                        string msg = name;
+                        break;
+                    } 
+                }
+                //VideoDeviceId
+                var settings = new MediaCaptureInitializationSettings { AudioDeviceId = micID, VideoDeviceId = cameraID };
+                await mediaCapture.InitializeAsync(settings);
             }
             catch (Exception e)
             {
