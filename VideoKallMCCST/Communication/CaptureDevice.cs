@@ -95,7 +95,7 @@ namespace VideoKallMCCST.Communication
                     string id = dinfo.Id;
                     string type = dinfo.Kind.ToString();
                     cameraID = id;
-                    if (dinfo.EnclosureLocation.Panel == Panel.Front)
+                    if (dinfo.EnclosureLocation?.Panel == Panel.Front)
                     {
                         break;
                     }
@@ -257,10 +257,18 @@ namespace VideoKallMCCST.Communication
         public static async Task<bool> CheckForRecordingDeviceAsync()
         {
             var cameraFound = false;
-            var devices = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
-            if (devices.Count > 0)
+            DeviceInformationCollection devices= await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);  
+            if (devices != null && devices.Count > 0)
             {
-                cameraFound = true;
+                for (int i = 0; i < devices.Count; i++)
+                {
+                    DeviceInformation dinfo = devices[i];
+                    EnclosureLocation panel = dinfo.EnclosureLocation;
+                    if (panel?.Panel == Panel.Front)
+                    {
+                        cameraFound= true;
+                    }
+                }               
             }
             return cameraFound;
         }
