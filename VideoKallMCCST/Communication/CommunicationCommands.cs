@@ -36,34 +36,66 @@ namespace VideoKallMCCST.Communication
 
     public struct PodCmdStatus
     {
-        public bool IsPodDeployandRetractResponseReceived;
-        public bool IsPodDeployedRetractInProgress;
-        public bool isPodDeployOrRetractFailed;
+        public bool IsPodDeployResponseReceived { get; set; } 
+        public bool IsPodDeployInProgress { get; set; } 
+        public bool isPodDeployOrRetractFailed { get; set; } 
+        private bool _isPodRetracted;
         public PodCmdStatus(bool initalvalue = false)
         {
-             IsPodDeployandRetractResponseReceived= initalvalue;
-             IsPodDeployedRetractInProgress= initalvalue;
-             isPodDeployOrRetractFailed= initalvalue;
-    }
+            IsPodDeployResponseReceived = initalvalue;
+            IsPodDeployInProgress = initalvalue;
+            isPodDeployOrRetractFailed = initalvalue;
+            _isPodRetracted = false;
+        }
+
+        public bool isPodRetracted()
+        {
+            if ((IsPodDeployResponseReceived && !isPodDeployOrRetractFailed) && 
+                !_isPodRetracted)
+                return false;
+
+            return true;
+        }
+
+        public bool IsPodDeployed()
+        {
+            if ((IsPodDeployResponseReceived && !isPodDeployOrRetractFailed)||
+                (!IsPodDeployResponseReceived && !isPodDeployOrRetractFailed))
+                return false;
+            return true;
+        }
         public void Reset()
         {
-            IsPodDeployandRetractResponseReceived = false;
-            IsPodDeployedRetractInProgress = false;
+            IsPodDeployResponseReceived = false;
+            IsPodDeployInProgress = false;
             isPodDeployOrRetractFailed = false;
+            _isPodRetracted = false;
         }
         public void PodSelectionOperationStarted()
         {
-            IsPodDeployandRetractResponseReceived = false;
-            IsPodDeployedRetractInProgress = true;
+            IsPodDeployResponseReceived = false;
+            IsPodDeployInProgress = true;
             isPodDeployOrRetractFailed = false;
+            _isPodRetracted = false;
         }
 
-        public void PodSelectionOperationResponseiSSuccess(bool status)
+        public void PodDeploymentResponseReceived(bool issuccess)
         {
-            IsPodDeployandRetractResponseReceived = true;
-            IsPodDeployedRetractInProgress = false;
-            isPodDeployOrRetractFailed = status;
+            IsPodDeployResponseReceived = true;
+            IsPodDeployInProgress = false;
+            isPodDeployOrRetractFailed = !issuccess;
+            _isPodRetracted = false;
         }
+
+        public void PodRetractionResponseReceived(bool success)
+        {
+            IsPodDeployResponseReceived = false;
+            IsPodDeployInProgress = false;
+            isPodDeployOrRetractFailed = !success;
+            _isPodRetracted = true;
+        }
+         
+
     }
    public static class CommunicationCommands
     {

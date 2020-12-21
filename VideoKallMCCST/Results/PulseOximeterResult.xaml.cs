@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using VideoKallMCCST.Communication;
+using VideoKallMCCST.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -71,6 +72,11 @@ namespace VideoKallMCCST.Results
         }
         private void BtnStreamdata_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                TxtSpiroMeterConnectionStatus.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
             MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.SMCPULSEOXIMETERSTART);
             BtnStreamdata.IsEnabled = false;
         }

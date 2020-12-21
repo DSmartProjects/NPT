@@ -80,7 +80,7 @@ namespace VideoKallMCCST.Results
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
             if ((selectedIndex == -1 && !isoperationStarted) ||
-               MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployedRetractInProgress)
+               MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployInProgress)
 
                 return;
 

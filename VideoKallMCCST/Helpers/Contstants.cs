@@ -18,6 +18,8 @@ namespace VideoKallMCCST.Helpers
         public const string Deployment_Recline_Inprogress = @"Seat back movement in progress";
         public const string Wait_Time = @"Please wait for {0} sec.";
         public const string Measure_Height_First = @"Please Measure Height First.";
+        public const string MsgDevicenotDeployed = "Device is not deployed yet. Please redeploy or wait until device deployed.";
+        public const string MsgPodNotRetracted = "Device is not retracted yet. Please ask user to put the device in the Pod. Do you want to continue? ";
 
 
     }
