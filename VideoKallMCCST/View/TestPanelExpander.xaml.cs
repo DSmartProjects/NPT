@@ -1398,37 +1398,37 @@ namespace VideoKallMCCST.View
                     switch (data[0])
                     {
                         case "BPCuffPodID":
-                            podmap.BPCuffPodID = data[1];
+                            podmap.BPCuffPodID = data[1].Trim();
                             break;
                         case "OximeterPodID":
-                            podmap.OximeterPodID = data[1];
+                            podmap.OximeterPodID = data[1].Trim();
                             break;
                         case "ThermoMeterPodID":
-                            podmap.ThermoMeterPodID = data[1];
+                            podmap.ThermoMeterPodID = data[1].Trim();
                             break;
                         case "DermascopePodID":
-                            podmap.DermascopePodID = data[1];
+                            podmap.DermascopePodID = data[1].Trim();
                             break;
                         case "OtoscopePodID":
-                            podmap.OtoscopePodID = data[1];
+                            podmap.OtoscopePodID = data[1].Trim();
                             break;
                         case "SpirometerPodID":
-                            podmap.SpirometerPodID = data[1];
+                            podmap.SpirometerPodID = data[1].Trim();
                             break;
                         case "GlucomonitorPodID":
-                            podmap.GlucomonitorPodID = data[1];
+                            podmap.GlucomonitorPodID = data[1].Trim();
                             break;
                         case "StethoscopeChestPodID":
-                            podmap.StethoscopeChestPodID = data[1];
+                            podmap.StethoscopeChestPodID = data[1].Trim();
                             break;
                         case "TimeOutPeriod":
-                            podmap.TimeOutPeriod = int.Parse(data[1]);
+                            podmap.TimeOutPeriod = int.Parse(data[1].Trim());
                             break;
                         case "ReclineStepValue":
-                            podmap.ReclineStepValue = int.Parse(data[1]);
+                            podmap.ReclineStepValue = int.Parse(data[1].Trim());
                             break;
                         case "SeatBackHeightStepValue":
-                            podmap.SeatUpDownStepValue = int.Parse(data[1]);
+                            podmap.SeatUpDownStepValue = int.Parse(data[1].Trim());
                             break;
                     }
                    
