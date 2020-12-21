@@ -59,7 +59,7 @@ namespace VideoKallMCCST.Communication
 
         public bool IsPodDeployed()
         {
-            if ((IsPodDeployResponseReceived && !isPodDeployOrRetractFailed)||
+            if ((IsPodDeployResponseReceived && isPodDeployOrRetractFailed)||
                 (!IsPodDeployResponseReceived && !isPodDeployOrRetractFailed))
                 return false;
             return true;
