@@ -216,18 +216,22 @@ namespace VideoKallMCCST
                     if(res.Equals("[WM"))
                     {
                         strMSG = "Acknowldgement received(WM).";
+                        CASResult?.Invoke(strMSG, 2, 1);
                     }
                     else if(res.Equals("[WT"))
                     {
                         strMSG = "Acknowldgement received(WT).";
+                        CASResult?.Invoke(strMSG, 2, 1);
                     }
                     else if (res.Equals("[WTG"))
                     {
                         strMSG = "Tear Weight completed.(WT).";
+                        CASResult?.Invoke(strMSG, 2, 1);
                     }
                     else if (res.Equals("[WTB"))
                     {
                         strMSG = "Tear Weight failed.(WT).";
+                        CASResult?.Invoke(strMSG, 2, 1);
                     }
                     else
                     {
@@ -239,6 +243,7 @@ namespace VideoKallMCCST
                                 if (status.Equals("G") && op.Equals("[WM"))
                                 {
                                     strMSG = "Weight Measure completed.";
+                                    CASResult?.Invoke(strMSG, 2, 1);
                                     string val = res.Substring(3, res.Length - 4);
                                     decimal weight = Int32.Parse(val);
                                     if (WeightMeasureUnit == 0)
@@ -258,15 +263,14 @@ namespace VideoKallMCCST
                                 else if (status.Equals("B") && op.Equals("[WM"))
                                 {
                                     strMSG = "Weight Measure failed.";
+                                    CASResult?.Invoke(strMSG, 2, 1);
                                 }
                                 else
                                 {
                                     strMSG = "Un known response: " + res;
-                                }
-
-                            }
-
-
+                                    CASResult?.Invoke(strMSG, 2, 1);
+                                } 
+                            } 
                         } catch(Exception ex) {
                             string s = ex.Message; }
                       
@@ -281,6 +285,7 @@ namespace VideoKallMCCST
                     {
                         strMSG = "Acknowldgement received(HM).";
                         MainPage.mainPage.CASResult?.Invoke(strMSG, 1,1);
+                        return;
                     }
                     try
                     {
@@ -309,10 +314,12 @@ namespace VideoKallMCCST
                             else if (status.Equals("B") && op.Equals("[HM"))
                             {
                                 strMSG = "Height Measure failed.";
+                                CASResult?.Invoke(strMSG, 1, 1);
                             }
                             else
                             {
                                 strMSG = "Un known response: " + res;
+                                CASResult?.Invoke(strMSG, 1, 1);
                             }
 
                         }
@@ -334,24 +341,24 @@ namespace VideoKallMCCST
                     else if(res.Substring(res.Length-2).Equals("DG"))
                     {
                         strMSG = "Deploy Completed.";
-                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess( true);
+                        PoddeployretractcmdStatus.PodDeploymentResponseReceived( true);
                         CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RG"))
                     {
-                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
-                        strMSG = "Retract Completed.";
+                        PoddeployretractcmdStatus.PodRetractionResponseReceived(true);
+                        strMSG = "Retraction Completed.";
                         CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("DB"))
                     {
-                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
+                        PoddeployretractcmdStatus.PodDeploymentResponseReceived(false);
                         strMSG = "Deploy Failed.";
                         CASResult?.Invoke(strMSG, 4, 1);
                     }
                     else if (res.Substring(res.Length - 2).Equals("RB"))
                     {
-                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess (false);
+                        PoddeployretractcmdStatus.PodRetractionResponseReceived(false);
                         strMSG = "Retract Failed.";
                         CASResult?.Invoke(strMSG, 4, 1);
                     }
@@ -392,12 +399,12 @@ namespace VideoKallMCCST
                     status = res.Substring(res.Length - 1);
                     if (status.Equals("G") )
                     {
-                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
+                        PoddeployretractcmdStatus.PodDeploymentResponseReceived(true);
                         strMSG = "Reclined. "+ res.Substring(2);
                     }
                     if (status.Equals("B"))
                     {
-                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
+                        PoddeployretractcmdStatus.PodDeploymentResponseReceived(false);
                         strMSG = "Reclined failed.";
                     }
                     break;
@@ -405,19 +412,21 @@ namespace VideoKallMCCST
                      status = res.Substring(res.Length - 1);
                     if (status.Equals("G"))
                     {
-                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(true);
+                        PoddeployretractcmdStatus.PodDeploymentResponseReceived(true);
                         strMSG = "Seat height Adjusted."+ res.Substring(2);
                         CASResult?.Invoke(strMSG, 3, 1);
                     }
                     if (status.Equals("B"))
                     {
-                        PoddeployretractcmdStatus.PodSelectionOperationResponseiSSuccess(false);
+                        PoddeployretractcmdStatus.PodDeploymentResponseReceived(false);
                         strMSG = "Seat height Adjustment Failed.";
                         CASResult?.Invoke(strMSG, 3, 1);
                     }
                     break; 
             }
         }
+
+        
          void OnSBCDisconnection()
         {
             

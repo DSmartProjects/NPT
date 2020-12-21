@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using VideoKallMCCST.Communication;
+using VideoKallMCCST.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -86,6 +87,7 @@ namespace VideoKallMCCST.Results
         }
         private void Btndone_Click(object sender, RoutedEventArgs e)
         {
+            
             if (!isDermascope)
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
             else
@@ -98,6 +100,12 @@ namespace VideoKallMCCST.Results
 
         private void BtnTakePic_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                StStatus.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
+
             BtnTakePic.IsEnabled = false;
             MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.TAKEPIC);
 
@@ -105,6 +113,11 @@ namespace VideoKallMCCST.Results
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                StStatus.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
             // SetImagefolder();
             // DisplayImage(ImageName);
             if (!isDermascope)

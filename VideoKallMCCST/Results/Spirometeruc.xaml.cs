@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using VideoKallMCCST.Communication;
+using VideoKallMCCST.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -88,8 +89,19 @@ namespace VideoKallMCCST.Results
             vcresults.ItemsSource = VCResultsColl;
             StopFVC.IsEnabled = false;
             StopVC.IsEnabled = false;
+            MainPage.mainPage.CASResult += CasNotification;
         }
 
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (devicecode == 4 && isresultornotificationmsg == 1)
+                {
+                    TxtStatusspior.Text = message;
+                }
+            });
+        }
         async  void SpiroResults(string msg)
         {
             string[] cmd = msg.ToLower().Split('>');
@@ -247,6 +259,11 @@ namespace VideoKallMCCST.Results
 
         private void StartFVC_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                TxtStatusspior.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
             fvcFlowVolumeCollection.Clear();
             fvctFlowVolumeCollection.Clear();
             StartFVC.IsEnabled = false;
@@ -271,6 +288,11 @@ namespace VideoKallMCCST.Results
 
         private void StopFVC_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                TxtStatusspior.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
             StartFVC.IsEnabled = true;
             StartVC.IsEnabled = true;
             isStarted = false;
@@ -282,11 +304,11 @@ namespace VideoKallMCCST.Results
 
         private void StartVC_Click(object sender, RoutedEventArgs e)
         {
-            //  fvcFlowVolumeCollection.Clear();
-            //  fvctFlowVolumeCollection.Clear();
-            //double top = MainPage.mainPage.ActualHeight - MainPage.mainPage.gridleftpanel.ActualHeight;
-            //double w = MainPage.mainPage.ActualWidth - (MainPage.mainPage.RightPanelHolder.ActualWidth + 350);
-
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                TxtStatusspior.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
             StartFVC.IsEnabled = false;
             StartVC.IsEnabled = false;
             StopVC.IsEnabled = true;
@@ -304,6 +326,11 @@ namespace VideoKallMCCST.Results
 
         private void StopVC_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                TxtStatusspior.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
             StartFVC.IsEnabled = true;
             StartVC.IsEnabled = true;
             StopVC.IsEnabled = false;

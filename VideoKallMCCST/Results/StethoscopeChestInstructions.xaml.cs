@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using VideoKallMCCST.Communication;
+using VideoKallMCCST.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -95,6 +96,12 @@ namespace VideoKallMCCST.Results
         bool recordToggle = false;
         private void BtnRecord_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                TxtStatus.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
+
             if (!MainPage.mainPage.isStethoscopeStreaming)
                 return;
 
@@ -106,7 +113,11 @@ namespace VideoKallMCCST.Results
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                TxtStatus.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
 
         }
 
@@ -115,6 +126,11 @@ namespace VideoKallMCCST.Results
 
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                TxtStatus.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
             if (recordToggle)
                 return;
 

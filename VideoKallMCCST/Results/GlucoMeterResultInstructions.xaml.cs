@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using VideoKallMCCST.Communication;
+using VideoKallMCCST.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -74,6 +75,11 @@ namespace VideoKallMCCST.Results
 
         private void BtnGlucoResult_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
+            {
+                TxtGlucoTestStatus.Text = Constants.MsgDevicenotDeployed;
+                return;
+            }
             MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.GLUCORESULTCMD);
             BtnGlucoResult.IsEnabled = false;
         }

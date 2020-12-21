@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using VideoKallMCCST.Communication;
+using Windows.UI.Core;
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace VideoKallMCCST.Results
@@ -22,6 +23,18 @@ namespace VideoKallMCCST.Results
         public Weight()
         {
             this.InitializeComponent();
+            MainPage.mainPage.CASResult += CasNotification;
+        }
+
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (devicecode == 2 && isresultornotificationmsg == 1)
+                {
+                    TxtStatus.Text = message;
+                }
+            });
         }
 
         private void BtnGetWeight_Click(object sender, RoutedEventArgs e)

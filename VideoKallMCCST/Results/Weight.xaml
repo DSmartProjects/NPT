@@ -9,29 +9,10 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     <Grid BorderBrush="#D0D0D0" BorderThickness="0.5,0.5,0.5,0.5"  Background="#F0F8FF" CornerRadius="10,10,10,10" >
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="150"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="150">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"></RowDefinition>
-                <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <TextBlock  Foreground="#464646"   FontSize="12" Visibility="Collapsed" FontWeight="SemiBold" Text="Status :" FontFamily="Open Sans"></TextBlock>
-                <TextBlock x:Name="TxtStatus"  Foreground="#464646" Visibility="Collapsed" FontFamily="Open Sans"  FontSize="12" FontWeight="SemiBold" VerticalAlignment="Stretch"></TextBlock>
-            </StackPanel>
-            <Button Grid.Row="2" Content="Get Weight and BMI" HorizontalAlignment="Center" VerticalAlignment="Center" Width="130"  x:Name="BtnGetWeight"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"  Click="BtnGetWeight_Click"></Button>
-        </Grid>-->
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button   Width="130"  x:Name="BtnGetWeight"  Content="Get Weight and BMI"  Click="BtnGetWeight_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"/>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <TextBlock Margin="0,0,0,5" x:Name="TxtStatus" ></TextBlock>
+            <Button   Width="130"  x:Name="BtnGetWeight"  Content="Get Weight"  Click="BtnGetWeight_Click" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" CornerRadius="5,5,5,5" Background="#194F82" Foreground="#FFF"/>
         </StackPanel>
     </Grid>
 
