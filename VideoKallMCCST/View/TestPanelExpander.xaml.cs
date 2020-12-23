@@ -562,8 +562,8 @@ namespace VideoKallMCCST.View
                             GlucoseMonitorTestResult glucoTestResult = new GlucoseMonitorTestResult();
                             glucoTestResult.Value = Convert.ToDouble(glucoResult);
                             glucoTestResult.Patient = null;
-                            glucoTestResult.PatientId = 16042;
-                            //glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                            //glucoTestResult.PatientId = 16042;
+                            glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                             MainPage.mainPage.mainpagecontext.GlucoResult = glucoTestResult;
                             await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.GlucoResult);
                         }
