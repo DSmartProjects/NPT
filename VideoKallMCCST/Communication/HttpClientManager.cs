@@ -16,30 +16,29 @@ namespace VideoKallMCCST.Communication
     public class HttpClientManager
     {
         HttpResponseMessage response = null;
-        string baseAPIUrl =string.Empty;
+        string basePMM_APIUrl =string.Empty;
+        string base_APIUrl = string.Empty;
 
         public HttpClientManager(){
-
             if (MainPage.mainPage.mainpagecontext.PMMConfig != null)
             {
                 var pmm_config = MainPage.mainPage.mainpagecontext.PMMConfig;
-                baseAPIUrl = !string.IsNullOrWhiteSpace(pmm_config.API_URL) ? pmm_config.API_URL : string.Empty;
+                basePMM_APIUrl = !string.IsNullOrWhiteSpace(pmm_config.API_URL) ? pmm_config.API_URL : string.Empty;
             }
             else
             {
                 Utility ut = new Utility();
                 var pmm_Config = Task.Run(async () => { return await ut.ReadPMMConfigurationFile(); }).Result;
-            }
-            
+            }           
         }
 
         public async Task<List<Patient>> PatientsAsync(string user)
         {
             List<Patient> patients =  new List<Patient>();
             var uri = string.Empty;
-            if (!string.IsNullOrEmpty(baseAPIUrl))
+            if (!string.IsNullOrEmpty(basePMM_APIUrl))
             {
-                uri = baseAPIUrl + "/v1/patient/searchpatients?name=" + user;
+                uri = basePMM_APIUrl + "/v1/patient/searchpatients?name=" + user;
             }
             else
                 return patients;
@@ -93,5 +92,72 @@ namespace VideoKallMCCST.Communication
                 }
             }
         }
+
+        public async Task<GlucoseMonitorTestResult> POST(GlucoseMonitorTestResult glucoTest)
+        {
+            //glucoTest.PatientId = 10001;
+            //glucoTest.Mode = "GLUCO Mode";
+            //glucoTest.Value = 0.067;
+
+            GlucoseMonitorTestResult glucoResult = null;
+            //List<Patient> patients = new List<Patient>();
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+
+            string json = JsonConvert.SerializeObject(glucoTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(basePMM_APIUrl))
+            {
+                uri = "https://172.16.10.104:44355/GlucoseMonitorTestResultsController/GetGlucoseMonitorTestResults";
+            }
+            else
+                return glucoTest;
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+         
+            using (var client = new HttpClient())
+            {
+                //client.BaseAddress = new Uri(uri);
+                //client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //client.DefaultRequestHeaders.Accept.Add(glucoResult);
+            
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri,data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                }
+                catch (Exception ex)
+                {
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return glucoTest;
+                }
+
+                var resultObjects = AllChildren(JObject.Parse(httpResponseBody))
+                .First(c => c.Type == JTokenType.Array && c.Path.Contains("data"))
+                .Children<JObject>();
+               
+                foreach (JObject item in resultObjects)
+                {
+                    glucoResult = new GlucoseMonitorTestResult
+                    {
+                        PatientId = Convert.ToInt32(item["PatientId"].ToString()),
+                        Mode = Convert.ToString(item["Value"].ToString()),
+                        Value = Convert.ToDouble(item["Value"].ToString())
+                    };
+                   // patients.Add(glucoResult);
+                }
+            }
+            return glucoResult;
+        }
+
     }
 }
