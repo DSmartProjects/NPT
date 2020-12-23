@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Helpers;
 using Windows.Foundation;
@@ -85,9 +86,14 @@ namespace VideoKallMCCST.Results
 
             });
         }
-        private void Btndone_Click(object sender, RoutedEventArgs e)
+        private async void Btndone_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.isPodRetracted())
+            {
+                if (!await ShowPodnotRetractedMessage())
+                    return;
+            }
+
             if (!isDermascope)
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
             else
@@ -205,5 +211,24 @@ namespace VideoKallMCCST.Results
         {
 
         }
+
+        ContentDialog PodIsnotRetractedMsgdlg = null;
+        async Task<bool> ShowPodnotRetractedMessage()
+        {
+            PodIsnotRetractedMsgdlg = new ContentDialog
+            {
+                Title = "Device is not retracted.",
+                Content = Constants.MsgPodNotRetracted,
+                PrimaryButtonText = "Yes",
+                SecondaryButtonText = "No"
+            };
+            //PodIsnotRetractedMsgdlg.PrimaryButtonStyle = (Style)this.Resources["PurpleStyle"];
+            var val = await PodIsnotRetractedMsgdlg.ShowAsync();
+            if (val == ContentDialogResult.Primary)
+                return true;
+            else
+                return false;
+        }
+
     }
 }
