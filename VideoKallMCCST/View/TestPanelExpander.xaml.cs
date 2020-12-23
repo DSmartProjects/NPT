@@ -875,7 +875,7 @@ namespace VideoKallMCCST.View
                 return;
             }
 
-            if (!MainPage.mainPage.PoddeployretractcmdStatus.isPodRetracted())
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.isPodRetracted() && sender != null)
             {
                 //pod not retracted yet
                 if (!await ShowPodnotRetractedMessage())
@@ -924,7 +924,7 @@ namespace VideoKallMCCST.View
                 return;
             }
 
-            if (!MainPage.mainPage.PoddeployretractcmdStatus.isPodRetracted())
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.isPodRetracted() && sender != null)
             {
                 //pod not retracted yet
                 if (!await ShowPodnotRetractedMessage())
@@ -1067,7 +1067,7 @@ namespace VideoKallMCCST.View
                 return;
             }
 
-            if (!MainPage.mainPage.PoddeployretractcmdStatus.isPodRetracted())
+            if (!MainPage.mainPage.PoddeployretractcmdStatus.isPodRetracted() && sender != null)
             {
                 //pod not retracted yet
                 if (!await ShowPodnotRetractedMessage())
