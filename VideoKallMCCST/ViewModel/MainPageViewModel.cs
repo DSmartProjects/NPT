@@ -23,6 +23,13 @@ namespace VideoKallMCCST.ViewModel
     public class MainPageViewModel : INotifyPropertyChanged
     {
 
+        #region
+
+        private GlucoseMonitorTestResult _glucoResult = null;
+        public GlucoseMonitorTestResult GlucoResult { get { return _glucoResult; } set { _glucoResult = value; OnPropertyChanged("GlucoResult"); }}
+
+        #endregion
+
         public event PropertyChangedEventHandler PropertyChanged;
         public EventHandler<CommunicationMsg> NotifyResult;
         private void OnPropertyChanged(string propertyName)

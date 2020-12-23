@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using VideoKallMCCST.Helpers;
 using VideoKallMCCST.Model;
 
 namespace VideoKallMCCST.Communication
@@ -17,7 +18,7 @@ namespace VideoKallMCCST.Communication
     {
         HttpResponseMessage response = null;
         string basePMM_APIUrl =string.Empty;
-        string base_APIUrl = string.Empty;
+        string base_APIUrl = "https://localhost:44355/api";
 
         public HttpClientManager(){
             if (MainPage.mainPage.mainpagecontext.PMMConfig != null)
@@ -93,29 +94,22 @@ namespace VideoKallMCCST.Communication
             }
         }
 
-        public async Task<GlucoseMonitorTestResult> POST(GlucoseMonitorTestResult glucoTest)
+        public async Task<bool> POST(GlucoseMonitorTestResult glucoTest)
         {
-            //glucoTest.PatientId = 10001;
-            //glucoTest.Mode = "GLUCO Mode";
-            //glucoTest.Value = 0.067;
-
-            GlucoseMonitorTestResult glucoResult = null;
-            //List<Patient> patients = new List<Patient>();
+          
             var uri = string.Empty;
             //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
-
 
             string json = JsonConvert.SerializeObject(glucoTest);
 
             //Needed to setup the body of the request
-            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
-            if (!string.IsNullOrEmpty(basePMM_APIUrl))
+           StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
             {
-                uri = "https://172.16.10.104:44355/GlucoseMonitorTestResultsController/GetGlucoseMonitorTestResults";
+                uri = base_APIUrl + "/GlucoseMonitorTestResults";
             }
             else
-                return glucoTest;
-
+                return false;
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Post,
@@ -124,39 +118,22 @@ namespace VideoKallMCCST.Communication
          
             using (var client = new HttpClient())
             {
-                //client.BaseAddress = new Uri(uri);
-                //client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //client.DefaultRequestHeaders.Accept.Add(glucoResult);
-            
+               
                 string httpResponseBody = "";
                 try
                 {
-                    HttpResponseMessage response = await client.PostAsync(uri,data);
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
                     httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully saved.");
                 }
                 catch (Exception ex)
                 {
+                    Toast.ShowToast("","Failed");
                     httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
-                    return glucoTest;
-                }
-
-                var resultObjects = AllChildren(JObject.Parse(httpResponseBody))
-                .First(c => c.Type == JTokenType.Array && c.Path.Contains("data"))
-                .Children<JObject>();
-               
-                foreach (JObject item in resultObjects)
-                {
-                    glucoResult = new GlucoseMonitorTestResult
-                    {
-                        PatientId = Convert.ToInt32(item["PatientId"].ToString()),
-                        Mode = Convert.ToString(item["Value"].ToString()),
-                        Value = Convert.ToDouble(item["Value"].ToString())
-                    };
-                   // patients.Add(glucoResult);
+                    return false;
                 }
             }
-            return glucoResult;
+            return true;
         }
 
     }

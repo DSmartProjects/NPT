@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Helpers;
+using VideoKallMCCST.Model;
 using VideoKallMCCST.Results;
 using VideoKallMCCST.Stethoscope;
 using VideoKallMCCST.ViewModel;
@@ -533,7 +534,7 @@ namespace VideoKallMCCST.View
 
         async void UpdateNotification(object sender, CommunicationMsg msg)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 string[] res = msg.Msg.Split('>');
                 switch (msg.Id)
@@ -554,7 +555,19 @@ namespace VideoKallMCCST.View
                         grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
                         //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         //"GLUCMDRES>V:{0}>U:{1}>T:{2}>M:{3}>D:{4}>T:{5}";
-                        TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1];
+                        var glucoResult= res[1].Split(':')[1];
+                        TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1]; ;
+                        if (!string.IsNullOrEmpty(glucoResult))
+                        {
+                            GlucoseMonitorTestResult glucoTestResult = new GlucoseMonitorTestResult();
+                            glucoTestResult.Value = Convert.ToDouble(glucoResult);
+                            glucoTestResult.Patient = null;
+                            glucoTestResult.PatientId = 16042;
+                            //glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                            MainPage.mainPage.mainpagecontext.GlucoResult = glucoTestResult;
+                            await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.GlucoResult);
+                        }
+                        
                         //TxtTestType.Text = res[3].Split(':')[1];
                         //TxtResultglucoTestMode.Text = res[4].Split(':')[1];
                         //TxtDate.Text = res[5].Split(':')[1];
