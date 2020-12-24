@@ -24,9 +24,38 @@ namespace VideoKallMCCST.ViewModel
     {
 
         #region
+        private HeightTestResult _heightResult = null;
+        public HeightTestResult heightResult { get { return _heightResult; } set { _heightResult = value; OnPropertyChanged("heightResult"); } }
+
+        private WeightTestResult _weightResult = null;
+        public WeightTestResult WeightResult { get { return _weightResult; } set { _weightResult = value; OnPropertyChanged("weightResult"); } }
+
+        private BloodPressureTestResult _bpResult = null;
+        public BloodPressureTestResult BpResult { get { return _bpResult; } set { _bpResult = value; OnPropertyChanged("BpResult"); } }
+
+        private PulseOximeterTestResult _pulseResult = null;
+        public PulseOximeterTestResult PulseResult { get { return _pulseResult; } set { _pulseResult = value; OnPropertyChanged("PulseResult"); } }
+
+        private ThermometerTestResult _thermoResult = null;
+        public ThermometerTestResult ThermoResult { get { return _thermoResult; } set { _thermoResult = value; OnPropertyChanged("ThermoResult"); } }
+
+        private DermatoscopeTestResult _dermoResult = null;
+        public DermatoscopeTestResult  DermoResult { get { return _dermoResult; } set { _dermoResult = value; OnPropertyChanged("DermoResult"); } }
+
+        private OtoscopeTestResult _otoResult = null;
+        public OtoscopeTestResult OtoResult { get { return _otoResult; } set { _otoResult = value; OnPropertyChanged("OtoResult"); } }
+
+        private SpirometerTestResult _spiroResult = null;
+        public SpirometerTestResult SpiroResult { get { return _spiroResult; } set { _spiroResult = value; OnPropertyChanged("SpiroResult"); } }
 
         private GlucoseMonitorTestResult _glucoResult = null;
         public GlucoseMonitorTestResult GlucoResult { get { return _glucoResult; } set { _glucoResult = value; OnPropertyChanged("GlucoResult"); }}
+
+        private ChestStethoscopeTestResult _chestResult = null;
+        public ChestStethoscopeTestResult ChestResult { get { return _chestResult; } set { _chestResult = value; OnPropertyChanged("ChestResult"); } }
+
+        private SeatBackStethoscopeTestResult _seatResult = null;
+        public SeatBackStethoscopeTestResult SeatResult { get { return _seatResult; } set { _seatResult = value; OnPropertyChanged("SeatResult"); } }
 
         #endregion
 

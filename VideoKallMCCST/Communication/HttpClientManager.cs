@@ -94,16 +94,354 @@ namespace VideoKallMCCST.Communication
             }
         }
 
+        #region DevicesAPI     
+
+
+        public async Task<bool> POST(HeightTestResult heightTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(heightTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/HeightTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public async Task<bool> POST(WeightTestResult weightTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(weightTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/WeightTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public async Task<bool> POST(BloodPressureTestResult bpTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(bpTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/BloodPressureTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public async Task<bool> POST(PulseOximeterTestResult pulseTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(pulseTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/PulseOximeterTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public async Task<bool> POST(ThermometerTestResult tempTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(tempTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/ThermometerTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+        public async Task<bool> POST(DermatoscopeTestResult dermoTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(dermoTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/DermatoscopeTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public async Task<bool> POST(OtoscopeTestResult otoTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(otoTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/OtoscopeTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public async Task<bool> POST(SpirometerTestResult spiroTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(spiroTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/SpirometerTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public async Task<bool> POST(GlucoseMonitorTestResult glucoTest)
         {
-          
+
             var uri = string.Empty;
             //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
 
             string json = JsonConvert.SerializeObject(glucoTest);
 
             //Needed to setup the body of the request
-           StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
             if (!string.IsNullOrEmpty(base_APIUrl))
             {
                 uri = base_APIUrl + "/GlucoseMonitorTestResults";
@@ -115,26 +453,112 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-         
+
             using (var client = new HttpClient())
             {
-               
+
                 string httpResponseBody = "";
                 try
                 {
                     HttpResponseMessage response = await client.PostAsync(uri, data);
                     httpResponseBody = await response.Content.ReadAsStringAsync();
-                    Toast.ShowToast("", "Successfully saved.");
+                    Toast.ShowToast("", "Successfully Saved.");
                 }
                 catch (Exception ex)
                 {
-                    Toast.ShowToast("","Failed");
+                    Toast.ShowToast("", "Failed");
                     httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
                     return false;
                 }
             }
             return true;
         }
+
+        public async Task<bool> POST(ChestStethoscopeTestResult chestTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(chestTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/ChestStethoscopeTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public async Task<bool> POST(SeatBackStethoscopeTestResult seatTest)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(seatTest);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/SeatBackStethoscopeTestResults";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        #endregion
 
     }
 }

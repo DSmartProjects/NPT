@@ -39,6 +39,8 @@ namespace VideoKallMCCST.View
     {
         string height = string.Empty;
         string weight = string.Empty;
+        string dia = string.Empty;
+        string sys = string.Empty;
         public static TestPanelExpander TestPanelExp;
         public TestPanelExpander()
         {
@@ -556,10 +558,12 @@ namespace VideoKallMCCST.View
                         //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         //"GLUCMDRES>V:{0}>U:{1}>T:{2}>M:{3}>D:{4}>T:{5}";
                         var glucoResult= res[1].Split(':')[1];
+                        string mode = res[4].Split(':')[1];
                         TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1]; ;
                         if (!string.IsNullOrEmpty(glucoResult))
                         {
                             GlucoseMonitorTestResult glucoTestResult = new GlucoseMonitorTestResult();
+                            glucoTestResult.Mode = mode;
                             glucoTestResult.Value = Convert.ToDouble(glucoResult);
                             glucoTestResult.Patient = null;
                             //glucoTestResult.PatientId = 16042;
@@ -616,7 +620,8 @@ namespace VideoKallMCCST.View
                         //BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         // "BPRES>D:{0}>S:{1}>P:{2}>DT:{3}>T:{4}";
                         TxtSys.Text = res[2].Split(':')[1] + "/" + res[1].Split(':')[1] + " mmHg";
-
+                        dia= res[1].Split(':')[1];
+                        sys = res[2].Split(':')[1];
                         //TxtDia.Text = res[1].Split(':')[1];
                         //TxtPulse.Text = res[3].Split(':')[1];
                         //  TxttestTime.Text = res[4].Split(':')[1] + " " + res[5];
@@ -687,6 +692,19 @@ namespace VideoKallMCCST.View
                 TxtResultPulseOximeterpulse.Text = string.Empty;
                 ShowHidePulseoximeterdata(false);
             }
+            if (BtnPulseoximeterToggle == false && TxtResultPulseOximeter.Text != null && TxtResultPulseOximeterpulse.Text != null)
+            {
+
+                PulseOximeterTestResult pulseTestResult = new PulseOximeterTestResult();
+                pulseTestResult.SpO2 = Convert.ToInt32(TxtResultPulseOximeter.Text);
+                pulseTestResult.HeartRate = Convert.ToInt32(TxtResultPulseOximeterpulse.Text);
+                pulseTestResult.Patient = null;
+                //glucoTestResult.PatientId = 16042;
+                pulseTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                MainPage.mainPage.mainpagecontext.PulseResult = pulseTestResult;
+                await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.PulseResult);
+
+            }
             ResultPulseOximeterPopup.IsOpen = BtnPulseoximeterToggle;
             DeployRetractDevice(BtnPulseoximeterToggle, MainPage.mainPage.Podmapping.OximeterPodID);
         }
@@ -737,6 +755,18 @@ namespace VideoKallMCCST.View
                 TxtTemprature.Text = string.Empty;
                 TblTemp.Visibility = Visibility.Collapsed;
             }
+            if (_thermotoggle == false && !(string.IsNullOrEmpty(TxtTemprature.Text)))
+            {
+                ThermometerTestResult thermoResult = new ThermometerTestResult();
+                thermoResult.Value = TxtTemprature.Text;               
+                thermoResult.Patient = null;
+                //glucoTestResult.PatientId = 16042;
+                thermoResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                MainPage.mainPage.mainpagecontext.ThermoResult = thermoResult;
+                await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ThermoResult);
+
+            }
+
             ResulThermoPopup.IsOpen = _thermotoggle;
             DeployRetractDevice(_thermotoggle, MainPage.mainPage.Podmapping.ThermoMeterPodID);
         }
@@ -878,6 +908,21 @@ namespace VideoKallMCCST.View
                 ShowHidebpdata(false);
                 TxtSys.Text = string.Empty;
             }
+            if (_resultBpToggle == false && TxtSys.Text != null)
+            {
+                var bpResult = TxtSys.Text;
+                if (!string.IsNullOrEmpty(bpResult))
+                {
+                    BloodPressureTestResult bpTestResult = new BloodPressureTestResult();
+                    bpTestResult.Cystolic = Convert.ToInt32(sys);
+                    bpTestResult.Diastolic = Convert.ToDouble(dia);
+                    bpTestResult.Patient = null;
+                    //glucoTestResult.PatientId = 16042;
+                    bpTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    MainPage.mainPage.mainpagecontext.BpResult = bpTestResult;
+                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.BpResult);
+                }
+            }
             ResultBPPopup.IsOpen = _resultBpToggle;
             DeployRetractDevice(_resultBpToggle, MainPage.mainPage.Podmapping.BPCuffPodID);
         }
@@ -913,6 +958,20 @@ namespace VideoKallMCCST.View
                 Toast.ShowToast("", Constants.Measure_Height_First);
                 return;
             }
+            if (btnWeightToggle == false && TxtResultWeight.Text != null)
+            {
+                var weightResult = TxtResultWeight.Text;
+                if (!string.IsNullOrEmpty(weightResult))
+                {
+                    WeightTestResult weightTestResult = new WeightTestResult();
+                    weightTestResult.Weight = Convert.ToDouble(weightResult);
+                    weightTestResult.Patient = null;
+                    //glucoTestResult.PatientId = 16042;
+                    weightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    MainPage.mainPage.mainpagecontext.WeightResult = weightTestResult;
+                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.WeightResult);
+                }
+            }
             btnWeightToggle = !btnWeightToggle;
 
             MainPage.mainPage.TestIsInProgress = btnWeightToggle;
@@ -931,14 +990,14 @@ namespace VideoKallMCCST.View
 
 
         bool btnHeighttoggle = false;
-        private void BtnHeight_Click(object sender, RoutedEventArgs e)
+        private async void BtnHeight_Click(object sender, RoutedEventArgs e)
         {
 
-            isTestResultOpened();
+            //isTestResultOpened();
 
-            if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) ||
-                (!ConnectionCheck && !btnHeighttoggle))
-                return;
+            //if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) ||
+            //    (!ConnectionCheck && !btnHeighttoggle))
+            //    return;
 
             btnHeighttoggle = !btnHeighttoggle;
 
@@ -949,6 +1008,20 @@ namespace VideoKallMCCST.View
                 TxtResultHeight.Text = string.Empty;
                 grdHeight.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
+            }
+            if(btnHeighttoggle==false && TxtResultHeight.Text!=null)
+            {
+                var HeightResult = TxtResultHeight.Text;              
+                if (!string.IsNullOrEmpty(HeightResult))
+                {
+                    HeightTestResult heightTestResult = new HeightTestResult();
+                    heightTestResult.Height = HeightResult;
+                    heightTestResult.Patient = null;
+                    heightTestResult.PatientId = 16042;
+                    //heightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    MainPage.mainPage.mainpagecontext.heightResult = heightTestResult;
+                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.heightResult);
+                }
             }
 
             ResulHeightPopup.IsOpen = btnHeighttoggle;
