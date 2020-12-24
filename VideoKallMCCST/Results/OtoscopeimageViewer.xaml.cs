@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Helpers;
+using VideoKallMCCST.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -117,7 +118,7 @@ namespace VideoKallMCCST.Results
 
         }
 
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        private  async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
             {
@@ -126,11 +127,36 @@ namespace VideoKallMCCST.Results
             }
             // SetImagefolder();
             // DisplayImage(ImageName);
+
+
             if (!isDermascope)
+            {              
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.OTOSAVEIMAGE);
+                OtoscopeTestResult otoscope = new OtoscopeTestResult();
+                otoscope.ChairId = 123456;
+                otoscope.CreatedBy = 1;
+                otoscope.CreatedDate = DateTime.Now;
+                otoscope.PatientId = 16042;
+                //otoscope.Image =ImageViewer.Source;
+                //otoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                MainPage.mainPage.mainpagecontext.OtoResult = otoscope;
+                await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.OtoResult);
+            }
             else
+            {
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.DERSAVEIMAGE);
-            BtnSave.IsEnabled = false;
+                DermatoscopeTestResult Dermoscope = new DermatoscopeTestResult();
+                Dermoscope.ChairId = 123456;
+                Dermoscope.CreatedBy = 1;
+                Dermoscope.CreatedDate = DateTime.Now;
+                Dermoscope.PatientId = 16042;
+                //otoscope.Image =ImageViewer.Source;
+                //Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                MainPage.mainPage.mainpagecontext.DermoResult = Dermoscope;
+                await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
+            }
+        
+            BtnSave.IsEnabled = false;           
         }
 
 
@@ -163,12 +189,15 @@ namespace VideoKallMCCST.Results
             }
         }
 
+        
+
 
         async void DisplayImage(string imageName)
         {
             try
             {
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(MainPage.mainPage.rootImageFolder.Path);
+                //StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(MainPage.mainPage.rootImageFolder.Path);
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync("\\172.16.10.104\\Users\\lakshmi.paruchuri\\Pictures\\VideoKall");
                 StorageFile storageFile = await folder.GetFileAsync(imageName);
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {

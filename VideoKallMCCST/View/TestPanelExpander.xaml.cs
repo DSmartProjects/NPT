@@ -41,6 +41,11 @@ namespace VideoKallMCCST.View
         string weight = string.Empty;
         string dia = string.Empty;
         string sys = string.Empty;
+        string glucoResult = string.Empty;
+        string mode = string.Empty;
+        string pulseoxispo2 = string.Empty;
+        string pulseoxipulse = string.Empty;
+        string tmpMode = string.Empty;
         public static TestPanelExpander TestPanelExp;
         public TestPanelExpander()
         {
@@ -548,7 +553,9 @@ namespace VideoKallMCCST.View
                         grdPulse.BorderBrush = GetColorFromHexa("#34CBA8");
                         grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
                         TxtResultPulseOximeter.Text = " " + res[1].Split(':')[1] + "%";
+                        pulseoxispo2 = res[1].Split(':')[1];
                         TxtResultPulseOximeterpulse.Text = " " + res[2].Split(':')[1] + "bpm";
+                        pulseoxipulse = res[2].Split(':')[1];
                         //TxtResultPulseOximeterpulsedate.Text = res[4];
                         break;
                     case DeviceResponseType.GLUCORESULT:
@@ -557,20 +564,9 @@ namespace VideoKallMCCST.View
                         grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
                         //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         //"GLUCMDRES>V:{0}>U:{1}>T:{2}>M:{3}>D:{4}>T:{5}";
-                        var glucoResult= res[1].Split(':')[1];
-                        string mode = res[4].Split(':')[1];
-                        TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1]; ;
-                        if (!string.IsNullOrEmpty(glucoResult))
-                        {
-                            GlucoseMonitorTestResult glucoTestResult = new GlucoseMonitorTestResult();
-                            glucoTestResult.Mode = mode;
-                            glucoTestResult.Value = Convert.ToDouble(glucoResult);
-                            glucoTestResult.Patient = null;
-                            //glucoTestResult.PatientId = 16042;
-                            glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
-                            MainPage.mainPage.mainpagecontext.GlucoResult = glucoTestResult;
-                            await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.GlucoResult);
-                        }
+                         glucoResult= res[1].Split(':')[1];
+                         mode = res[4].Split(':')[1];
+                        TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1]; ;                       
                         
                         //TxtTestType.Text = res[3].Split(':')[1];
                         //TxtResultglucoTestMode.Text = res[4].Split(':')[1];
@@ -605,6 +601,7 @@ namespace VideoKallMCCST.View
                                 TxtTemprature.Text = "Error: Lo";
 
                             TblTemp.Visibility = Visibility.Visible;
+                            tmpMode = res[2].Split(':')[1];
                             //TxtMode.Text = res[2].Split(':')[1];
                             //    "THERMORES>R:{0}>M:{1}>S:{2}>{3}";
                             // TxtDateTime.Text = res[4];
@@ -696,11 +693,14 @@ namespace VideoKallMCCST.View
             {
 
                 PulseOximeterTestResult pulseTestResult = new PulseOximeterTestResult();
-                pulseTestResult.SpO2 = Convert.ToInt32(TxtResultPulseOximeter.Text);
-                pulseTestResult.HeartRate = Convert.ToInt32(TxtResultPulseOximeterpulse.Text);
+                pulseTestResult.SpO2 = Convert.ToInt32(pulseoxispo2);
+                pulseTestResult.HeartRate = Convert.ToInt32(pulseoxipulse);
                 pulseTestResult.Patient = null;
-                //glucoTestResult.PatientId = 16042;
-                pulseTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                 pulseTestResult.PatientId = 16042;
+                pulseTestResult.ChairId = 123456;
+                pulseTestResult.CreatedBy = 1;
+                pulseTestResult.CreatedDate = DateTime.Now;
+                //pulseTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                 MainPage.mainPage.mainpagecontext.PulseResult = pulseTestResult;
                 await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.PulseResult);
 
@@ -760,8 +760,12 @@ namespace VideoKallMCCST.View
                 ThermometerTestResult thermoResult = new ThermometerTestResult();
                 thermoResult.Value = TxtTemprature.Text;               
                 thermoResult.Patient = null;
-                //glucoTestResult.PatientId = 16042;
-                thermoResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                 thermoResult.PatientId = 16042;
+                thermoResult.ChairId = 123456;
+                thermoResult.Mode = tmpMode;
+                thermoResult.CreatedDate = DateTime.Now;
+                thermoResult.CreatedBy = 1;
+               // thermoResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                 MainPage.mainPage.mainpagecontext.ThermoResult = thermoResult;
                 await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ThermoResult);
 
@@ -917,8 +921,11 @@ namespace VideoKallMCCST.View
                     bpTestResult.Cystolic = Convert.ToInt32(sys);
                     bpTestResult.Diastolic = Convert.ToDouble(dia);
                     bpTestResult.Patient = null;
-                    //glucoTestResult.PatientId = 16042;
-                    bpTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    bpTestResult.ChairId = 123456;
+                     bpTestResult.PatientId = 16042;
+                    bpTestResult.CreatedDate = DateTime.Now;
+                    bpTestResult.CreatedBy = 1;
+                    //bpTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.BpResult = bpTestResult;
                     await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.BpResult);
                 }
@@ -957,21 +964,7 @@ namespace VideoKallMCCST.View
                 //noWifiDialog.BorderThickness = new Thickness(1, 1, 1, 1);
                 Toast.ShowToast("", Constants.Measure_Height_First);
                 return;
-            }
-            if (btnWeightToggle == false && TxtResultWeight.Text != null)
-            {
-                var weightResult = TxtResultWeight.Text;
-                if (!string.IsNullOrEmpty(weightResult))
-                {
-                    WeightTestResult weightTestResult = new WeightTestResult();
-                    weightTestResult.Weight = Convert.ToDouble(weightResult);
-                    weightTestResult.Patient = null;
-                    //glucoTestResult.PatientId = 16042;
-                    weightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
-                    MainPage.mainPage.mainpagecontext.WeightResult = weightTestResult;
-                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.WeightResult);
-                }
-            }
+            }            
             btnWeightToggle = !btnWeightToggle;
 
             MainPage.mainPage.TestIsInProgress = btnWeightToggle;
@@ -983,6 +976,24 @@ namespace VideoKallMCCST.View
                 TxtResultWeight.Text = string.Empty;
                 TxtResultBMI.Text = string.Empty;
             }
+
+            if (btnWeightToggle == false && TxtResultWeight.Text != null)
+            {
+                var weightResult = TxtResultWeight.Text;
+                if (!string.IsNullOrEmpty(weightResult))
+                {
+                    WeightTestResult weightTestResult = new WeightTestResult();
+                    weightTestResult.Weight = Convert.ToDouble(weight);
+                    weightTestResult.Patient = null;
+                    weightTestResult.PatientId = 16042;
+                    weightTestResult.ChairId = 123456;
+                    weightTestResult.CreatedBy = 1;
+                    weightTestResult.CreatedDate = DateTime.Now;
+                    // weightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    MainPage.mainPage.mainpagecontext.WeightResult = weightTestResult;
+                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.WeightResult);
+                }
+            }
             ResuWeightPopup.IsOpen = btnWeightToggle;
         }
 
@@ -993,11 +1004,11 @@ namespace VideoKallMCCST.View
         private async void BtnHeight_Click(object sender, RoutedEventArgs e)
         {
 
-            //isTestResultOpened();
+            isTestResultOpened();
 
-            //if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) ||
-            //    (!ConnectionCheck && !btnHeighttoggle))
-            //    return;
+            if ((MainPage.mainPage.TestIsInProgress && !btnHeighttoggle) ||
+                (!ConnectionCheck && !btnHeighttoggle))
+                return;
 
             btnHeighttoggle = !btnHeighttoggle;
 
@@ -1018,6 +1029,9 @@ namespace VideoKallMCCST.View
                     heightTestResult.Height = HeightResult;
                     heightTestResult.Patient = null;
                     heightTestResult.PatientId = 16042;
+                    heightTestResult.ChairId = 123456;
+                    heightTestResult.CreatedBy = 1;
+                    heightTestResult.CreatedDate = DateTime.Now;
                     //heightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.heightResult = heightTestResult;
                     await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.heightResult);
@@ -1070,8 +1084,9 @@ namespace VideoKallMCCST.View
                 {
                     TxtResultOtoscope.BorderBrush = GetColorFromHexa("#FFC10D");
                     TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
-                }
-
+                }               
+                   
+                
                 ResulOtoscopePopup.IsOpen = _otoscopeToggle;
 
                 DeployRetractDevice(_otoscopeToggle, MainPage.mainPage.Podmapping.OtoscopePodID);
@@ -1221,6 +1236,20 @@ namespace VideoKallMCCST.View
                 TxtResultgluco.Text = string.Empty;
                 grdGluco.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
+            }
+            if (_glucoToggle == false && TxtResultgluco.Text != null && (!string.IsNullOrEmpty(glucoResult)))
+            {
+                GlucoseMonitorTestResult glucoTestResult = new GlucoseMonitorTestResult();
+                glucoTestResult.Mode = mode;
+                glucoTestResult.Value = Convert.ToDouble(glucoResult);
+                glucoTestResult.Patient = null;
+                glucoTestResult.PatientId = 16042;
+                glucoTestResult.ChairId = 123456;
+                glucoTestResult.CreatedDate = DateTime.Now;
+                glucoTestResult.CreatedBy = 1;
+                //glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                MainPage.mainPage.mainpagecontext.GlucoResult = glucoTestResult;
+                await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.GlucoResult);
             }
             Resultglucopopup.IsOpen = _glucoToggle;
             DeployRetractDevice(_glucoToggle, MainPage.mainPage.Podmapping.GlucomonitorPodID);
