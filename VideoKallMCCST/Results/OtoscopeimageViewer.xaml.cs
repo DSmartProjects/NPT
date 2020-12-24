@@ -196,8 +196,7 @@ namespace VideoKallMCCST.Results
         {
             try
             {
-                //StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(MainPage.mainPage.rootImageFolder.Path);
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync("\\172.16.10.104\\Users\\lakshmi.paruchuri\\Pictures\\VideoKall");
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(MainPage.mainPage.rootImageFolder.Path);
                 StorageFile storageFile = await folder.GetFileAsync(imageName);
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
