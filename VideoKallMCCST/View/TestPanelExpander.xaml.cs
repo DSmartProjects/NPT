@@ -1352,6 +1352,24 @@ namespace VideoKallMCCST.View
             if (_stethoscopeChest)// && !MainPage.mainPage.isStethoscopeReadystreaming)
             {
                 MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTCHEST));
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                //string subFolder = @"\VideoKall\StethescopeRX\Patients";
+                var record_file = localFolder.Path + @"\record.wav";
+                if (File.Exists(record_file))
+                {
+                   
+                    ChestStethoscopeTestResult chestStethoscopeResult = new ChestStethoscopeTestResult();
+                    chestStethoscopeResult.Patient = null;
+                    chestStethoscopeResult.PatientId = 16042;
+                    chestStethoscopeResult.ChairId = 123456;
+                    chestStethoscopeResult.CreatedDate = DateTime.Now;
+                    chestStethoscopeResult.CreatedBy = 1;
+                    chestStethoscopeResult.PatientId = MainPage.VideoCallVM.PatientDetails!=null&& MainPage.VideoCallVM.PatientDetails.ID>0? MainPage.VideoCallVM.PatientDetails.ID:0;
+                    MainPage.mainPage.mainpagecontext.ChestResult = chestStethoscopeResult;
+                    chestStethoscopeResult.Recording_Path = record_file;
+                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ChestResult);
+                }
+
             }
         }
 

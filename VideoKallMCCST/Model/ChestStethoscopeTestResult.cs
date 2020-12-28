@@ -75,6 +75,19 @@ namespace VideoKallMCCST.Model
                 OnPropertyChanged("Recording");
             }
         }
+        private string _recording_Path;
+        public string Recording_Path
+        {
+            get
+            {
+                return _recording_Path;
+            }
+            set
+            {
+                _recording_Path = value;
+                OnPropertyChanged("Recording_Path");
+            }
+        }        
         private int? _createdBy;
         public int? CreatedBy
         {
