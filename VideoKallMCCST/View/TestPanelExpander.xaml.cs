@@ -56,6 +56,7 @@ namespace VideoKallMCCST.View
         BitmapImage bitmapImage = new BitmapImage();
         WriteableBitmap bitMap = null;
         byte[] buffer = null;
+        OtoscopeimageViewer oto = new OtoscopeimageViewer();
         public TestPanelExpander()
         {
             this.InitializeComponent();
@@ -574,7 +575,7 @@ namespace VideoKallMCCST.View
                         //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         //"GLUCMDRES>V:{0}>U:{1}>T:{2}>M:{3}>D:{4}>T:{5}";
                          glucoResult= res[1].Split(':')[1];
-                         mode = res[4].Split(':')[1];
+                         mode = res[3].Split(':')[3];
                         TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1]; ;                       
                         
                         //TxtTestType.Text = res[3].Split(':')[1];
@@ -610,7 +611,7 @@ namespace VideoKallMCCST.View
                                 TxtTemprature.Text = "Error: Lo";
 
                             TblTemp.Visibility = Visibility.Visible;
-                            tmpMode = res[2].Split(':')[1]+ "THERMORES>R:{0}>M:{1}>S:{2}>{3}";
+                            tmpMode = res[2].Split(':')[1];
                             //TxtMode.Text = res[2].Split(':')[1];
                             //    "THERMORES>R:{0}>M:{1}>S:{2}>{3}";
                             // TxtDateTime.Text = res[4];
@@ -705,11 +706,11 @@ namespace VideoKallMCCST.View
                 pulseTestResult.SpO2 = Convert.ToInt32(pulseoxispo2);
                 pulseTestResult.HeartRate = Convert.ToInt32(pulseoxipulse);
                 pulseTestResult.Patient = null;
-                 pulseTestResult.PatientId = 16042;
+                //pulseTestResult.PatientId = 16042;
                 pulseTestResult.ChairId = 123456;
                 pulseTestResult.CreatedBy = 1;
                 pulseTestResult.CreatedDate = DateTime.Now;
-                //pulseTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                pulseTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                 MainPage.mainPage.mainpagecontext.PulseResult = pulseTestResult;
                 await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.PulseResult);
 
@@ -769,12 +770,12 @@ namespace VideoKallMCCST.View
                 ThermometerTestResult thermoResult = new ThermometerTestResult();
                 thermoResult.Value = TxtTemprature.Text;               
                 thermoResult.Patient = null;
-                 thermoResult.PatientId = 16042;
+                //thermoResult.PatientId = 16042;
                 thermoResult.ChairId = 123456;
                 thermoResult.Mode = tmpMode;
                 thermoResult.CreatedDate = DateTime.Now;
                 thermoResult.CreatedBy = 1;
-               // thermoResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                thermoResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                 MainPage.mainPage.mainpagecontext.ThermoResult = thermoResult;
                 await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ThermoResult);
 
@@ -931,10 +932,10 @@ namespace VideoKallMCCST.View
                     bpTestResult.Diastolic = Convert.ToDouble(dia);
                     bpTestResult.Patient = null;
                     bpTestResult.ChairId = 123456;
-                     bpTestResult.PatientId = 16042;
+                    //bpTestResult.PatientId = 16042;
                     bpTestResult.CreatedDate = DateTime.Now;
                     bpTestResult.CreatedBy = 1;
-                    //bpTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    bpTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.BpResult = bpTestResult;
                     await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.BpResult);
                 }
@@ -994,11 +995,11 @@ namespace VideoKallMCCST.View
                     WeightTestResult weightTestResult = new WeightTestResult();
                     weightTestResult.Weight = Convert.ToDouble(weight);
                     weightTestResult.Patient = null;
-                    weightTestResult.PatientId = 16042;
+                    //weightTestResult.PatientId = 16042;
                     weightTestResult.ChairId = 123456;
                     weightTestResult.CreatedBy = 1;
                     weightTestResult.CreatedDate = DateTime.Now;
-                    // weightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    weightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.WeightResult = weightTestResult;
                     await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.WeightResult);
                 }
@@ -1037,11 +1038,11 @@ namespace VideoKallMCCST.View
                     HeightTestResult heightTestResult = new HeightTestResult();
                     heightTestResult.Height = HeightResult;
                     heightTestResult.Patient = null;
-                    heightTestResult.PatientId = 16042;
+                    //heightTestResult.PatientId = 16042;
                     heightTestResult.ChairId = 123456;
                     heightTestResult.CreatedBy = 1;
                     heightTestResult.CreatedDate = DateTime.Now;
-                    //heightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    heightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.heightResult = heightTestResult;
                     await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.heightResult);
                 }
@@ -1097,14 +1098,14 @@ namespace VideoKallMCCST.View
 
                 if (_otoscopeToggle == false)
                 {
-                    DisplayImage(ImageName);
+                   // DisplayImage(oto.ImageName);
                     OtoscopeTestResult otoscope = new OtoscopeTestResult();
                     otoscope.ChairId = 123456;
                     otoscope.CreatedBy = 1;
                     otoscope.CreatedDate = DateTime.Now;
-                    otoscope.PatientId = 16042;
-                    otoscope.Image = buffer;
-                    //otoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    //otoscope.PatientId = 16042;
+                    otoscope.Image = oto.buffer;
+                    otoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.OtoResult = otoscope;
                     await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.OtoResult);
                 }
@@ -1161,14 +1162,14 @@ namespace VideoKallMCCST.View
                 }
                 if (_dermascopeToggle == false)
                 {
-                    DisplayImage(ImageName);
+                   // DisplayImage(oto.ImageName);
                     DermatoscopeTestResult Dermoscope = new DermatoscopeTestResult();
                     Dermoscope.ChairId = 123456;
                     Dermoscope.CreatedBy = 1;
                     Dermoscope.CreatedDate = DateTime.Now;
-                    Dermoscope.PatientId = 16042;
-                    Dermoscope.Image = buffer;
-                    //Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    //Dermoscope.PatientId = 16042;
+                    Dermoscope.Image = oto.buffer;
+                    Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.DermoResult = Dermoscope;
                     await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
                 }
@@ -1279,11 +1280,11 @@ namespace VideoKallMCCST.View
                 glucoTestResult.Mode = mode;
                 glucoTestResult.Value = Convert.ToDouble(glucoResult);
                 glucoTestResult.Patient = null;
-                glucoTestResult.PatientId = 16042;
+                //glucoTestResult.PatientId = 16042;
                 glucoTestResult.ChairId = 123456;
                 glucoTestResult.CreatedDate = DateTime.Now;
                 glucoTestResult.CreatedBy = 1;
-                //glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                 MainPage.mainPage.mainpagecontext.GlucoResult = glucoTestResult;
                 await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.GlucoResult);
             }
@@ -1326,47 +1327,63 @@ namespace VideoKallMCCST.View
 
             //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
-            if (_spirometerToggle == false && spirometeruc.FVCResultsColl != null)
+            int iterationFVC = 0;
+            if (_spirometerToggle == false && spirometeruc.FVCResultsColl != null && spirometeruc.FVCResultsColl.Count>0)
             {
                 foreach (var parm in spirometeruc.FVCResultsColl)
                 {
-                    SpirometerTestResult spiroResult = new SpirometerTestResult();
+                    iterationFVC++;
+                    if (iterationFVC < spirometeruc.FVCResultsColl.Count)
+                    {
+                        if ((!string.IsNullOrEmpty(parm.MeasureUnit)) && (!string.IsNullOrEmpty(parm.MeasuredValue)))
+                        {
+                            SpirometerTestResult spiroResult = new SpirometerTestResult();
+                            spiroResult.MeasuredUnit = parm.MeasureUnit;
+                            spiroResult.MeasuredValue = Convert.ToDouble(parm.MeasuredValue);
+                            spiroResult.ParameterType = parm.ParameterType;
+                            spiroResult.Code = parm.Code;
+                            spiroResult.TestType = "FVC";
+                            spiroResult.Name = parm.Name;
+                            spiroResult.Patient = null;
+                            spiroResult.ChairId = 123456;
+                            spiroResult.CreatedDate = DateTime.Now;
+                            spiroResult.CreatedBy = 1;
+                            spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                            MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
+                            await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
+                        }
 
-                    spiroResult.MeasuredUnit = parm.MeasureUnit;
-                    spiroResult.MeasuredValue = Convert.ToDouble(parm.MeasuredValue);
-                    spiroResult.Name = parm.Name;
-                    spiroResult.Patient = null;
-                    spiroResult.PatientId = 16042;
-                    spiroResult.ChairId = 123456;
-                    spiroResult.CreatedDate = DateTime.Now;
-                    spiroResult.CreatedBy = 1;
-                    //spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
-                    MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
-                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
-
+                    }
                 }
             }
-
-            if (_spirometerToggle == false && spirometeruc.VCResultsColl != null)
+            int iterationVC = 0;
+            if (_spirometerToggle == false && spirometeruc.VCResultsColl != null && spirometeruc.VCResultsColl.Count > 0)
             {
                 foreach (var parm in spirometeruc.VCResultsColl)
                 {
-                    SpirometerTestResult spiroResult = new SpirometerTestResult();
-
-                    spiroResult.MeasuredUnit = parm.MeasureUnit;
-                    spiroResult.MeasuredValue = Convert.ToDouble(parm.MeasuredValue);
-                    spiroResult.Name = parm.Name;
-                    spiroResult.Patient = null;
-                    spiroResult.PatientId = 16042;
-                    spiroResult.ChairId = 123456;
-                    spiroResult.CreatedDate = DateTime.Now;
-                    spiroResult.CreatedBy = 1;
-                    //spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
-                    MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
-                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
-
+                    iterationVC++;
+                    if (iterationVC < spirometeruc.FVCResultsColl.Count)
+                    {
+                        if ((!string.IsNullOrEmpty(parm.MeasureUnit)) && (!string.IsNullOrEmpty(parm.MeasuredValue)))
+                        {
+                            SpirometerTestResult spiroResult = new SpirometerTestResult();
+                            spiroResult.MeasuredUnit = parm.MeasureUnit;
+                            spiroResult.MeasuredValue = Convert.ToDouble(parm.MeasuredValue);
+                            spiroResult.Name = parm.Name;
+                            spiroResult.Patient = null;
+                            spiroResult.ChairId = 123456;
+                            spiroResult.TestType = "VC";
+                            spiroResult.Code = parm.Code;
+                            spiroResult.ParameterType = parm.ParameterType;
+                            spiroResult.CreatedDate = DateTime.Now;
+                            spiroResult.CreatedBy = 1;
+                            spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                            MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
+                            await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
+                        }
+                    }
                 }
-                Toast.ShowToast("", "Successfully Saved.");
+                //Toast.ShowToast("", "Successfully Saved.");
             }
 
             //CtrlspiroResult.Height = ht * 6;//gridInstrumentPanel.ActualHeight;
@@ -1722,7 +1739,6 @@ namespace VideoKallMCCST.View
             }
 
         }
-        string ImageName = "capturedImage.png";
         async void DisplayImage(string imageName)
         {
             try
@@ -1738,12 +1754,12 @@ namespace VideoKallMCCST.View
                         // Ensure the stream is disposed once the image is loaded
                         using (IRandomAccessStream fileStream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read))
                         {
-                            bitMap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
+                           // bitMap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
                             await bitmapImage.SetSourceAsync(fileStream);
                             Convertion(fileStream);
                         }
                     }
-                    ImageToByeArray(bitMap);
+                    //ImageToByeArray(bitMap);
 
                 });
             }
@@ -1766,10 +1782,12 @@ namespace VideoKallMCCST.View
 
         async Task<byte[]> Convertion(IRandomAccessStream s)
         {
-            var dr = new DataReader(s.GetInputStreamAt(0));
-            buffer = new byte[s.Size];
-            await dr.LoadAsync((uint)s.Size);
-            dr.ReadBytes(buffer);
+            using (var dr = new DataReader(s.GetInputStreamAt(0)))
+            {
+                buffer = new byte[s.Size];
+                await dr.LoadAsync((uint)s.Size);
+                dr.ReadBytes(buffer);
+            }
             return buffer;
         }
     }

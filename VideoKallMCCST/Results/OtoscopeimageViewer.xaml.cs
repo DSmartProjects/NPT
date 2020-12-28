@@ -33,7 +33,7 @@ namespace VideoKallMCCST.Results
     {
         BitmapImage bitmapImage = new BitmapImage();
         WriteableBitmap bitMap = null;
-        byte[] buffer = null;
+      public  byte[] buffer = null;
         public OtoscopeimageViewer()
         {
             this.InitializeComponent();
@@ -122,7 +122,7 @@ namespace VideoKallMCCST.Results
 
         }
 
-        private  async void BtnSave_Click(object sender, RoutedEventArgs e)
+        private  void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
             {
@@ -147,7 +147,7 @@ namespace VideoKallMCCST.Results
 
         string strRootFolder = "VideoKall";
         string strRootFolderPath = @"\\192.168.0.33\";// VideoKall";
-        string ImageName = "capturedImage.png";
+       public string ImageName = "capturedImage.png";
 
         private async void SetImagefolder()
         {
@@ -192,14 +192,14 @@ namespace VideoKallMCCST.Results
                         // Ensure the stream is disposed once the image is loaded
                         using (IRandomAccessStream fileStream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read))
                         {
-                            bitMap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
+                            //bitMap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
                             await bitmapImage.SetSourceAsync(fileStream);
                             Convert(fileStream);
                         }
                     }
                     //  ShowHideMessage(false);
                     ImageViewer.Source = bitmapImage;
-                    ImageToByeArray(bitMap);
+                    //ImageToByeArray(bitMap);
                   
                     BtnTakePic.IsEnabled = true;
                                      
