@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -17,6 +17,8 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -26,6 +28,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -47,6 +50,12 @@ namespace VideoKallMCCST.View
         string pulseoxipulse = string.Empty;
         string tmpMode = string.Empty;
         public static TestPanelExpander TestPanelExp;
+        FlowVolumeData flowVolume = new FlowVolumeData();
+        VCResults vcResults = new VCResults();
+        Spirometeruc spirometeruc = new Spirometeruc();
+        BitmapImage bitmapImage = new BitmapImage();
+        WriteableBitmap bitMap = null;
+        byte[] buffer = null;
         public TestPanelExpander()
         {
             this.InitializeComponent();
@@ -601,7 +610,7 @@ namespace VideoKallMCCST.View
                                 TxtTemprature.Text = "Error: Lo";
 
                             TblTemp.Visibility = Visibility.Visible;
-                            tmpMode = res[2].Split(':')[1];
+                            tmpMode = res[2].Split(':')[1]+ "THERMORES>R:{0}>M:{1}>S:{2}>{3}";
                             //TxtMode.Text = res[2].Split(':')[1];
                             //    "THERMORES>R:{0}>M:{1}>S:{2}>{3}";
                             // TxtDateTime.Text = res[4];
@@ -1084,9 +1093,23 @@ namespace VideoKallMCCST.View
                 {
                     TxtResultOtoscope.BorderBrush = GetColorFromHexa("#FFC10D");
                     TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
-                }               
-                   
-                
+                }
+
+                if (_otoscopeToggle == false)
+                {
+                    DisplayImage(ImageName);
+                    OtoscopeTestResult otoscope = new OtoscopeTestResult();
+                    otoscope.ChairId = 123456;
+                    otoscope.CreatedBy = 1;
+                    otoscope.CreatedDate = DateTime.Now;
+                    otoscope.PatientId = 16042;
+                    otoscope.Image = buffer;
+                    //otoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    MainPage.mainPage.mainpagecontext.OtoResult = otoscope;
+                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.OtoResult);
+                }
+
+
                 ResulOtoscopePopup.IsOpen = _otoscopeToggle;
 
                 DeployRetractDevice(_otoscopeToggle, MainPage.mainPage.Podmapping.OtoscopePodID);
@@ -1135,6 +1158,19 @@ namespace VideoKallMCCST.View
                 {
                     TxtResultDermascope.BorderBrush = GetColorFromHexa("#FFC10D");
                     TxtResultDermascope.BorderThickness = new Thickness(0, 0, 0, 10);
+                }
+                if (_dermascopeToggle == false)
+                {
+                    DisplayImage(ImageName);
+                    DermatoscopeTestResult Dermoscope = new DermatoscopeTestResult();
+                    Dermoscope.ChairId = 123456;
+                    Dermoscope.CreatedBy = 1;
+                    Dermoscope.CreatedDate = DateTime.Now;
+                    Dermoscope.PatientId = 16042;
+                    Dermoscope.Image = buffer;
+                    //Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    MainPage.mainPage.mainpagecontext.DermoResult = Dermoscope;
+                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
                 }
                 ResulDermascopePopup.IsOpen = _dermascopeToggle;
                 DeployRetractDevice(_dermascopeToggle, MainPage.mainPage.Podmapping.DermascopePodID);
@@ -1290,9 +1326,52 @@ namespace VideoKallMCCST.View
 
             //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
+            if (_spirometerToggle == false && spirometeruc.FVCResultsColl != null)
+            {
+                foreach (var parm in spirometeruc.FVCResultsColl)
+                {
+                    SpirometerTestResult spiroResult = new SpirometerTestResult();
+
+                    spiroResult.MeasuredUnit = parm.MeasureUnit;
+                    spiroResult.MeasuredValue = Convert.ToDouble(parm.MeasuredValue);
+                    spiroResult.Name = parm.Name;
+                    spiroResult.Patient = null;
+                    spiroResult.PatientId = 16042;
+                    spiroResult.ChairId = 123456;
+                    spiroResult.CreatedDate = DateTime.Now;
+                    spiroResult.CreatedBy = 1;
+                    //spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
+                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
+
+                }
+            }
+
+            if (_spirometerToggle == false && spirometeruc.VCResultsColl != null)
+            {
+                foreach (var parm in spirometeruc.VCResultsColl)
+                {
+                    SpirometerTestResult spiroResult = new SpirometerTestResult();
+
+                    spiroResult.MeasuredUnit = parm.MeasureUnit;
+                    spiroResult.MeasuredValue = Convert.ToDouble(parm.MeasuredValue);
+                    spiroResult.Name = parm.Name;
+                    spiroResult.Patient = null;
+                    spiroResult.PatientId = 16042;
+                    spiroResult.ChairId = 123456;
+                    spiroResult.CreatedDate = DateTime.Now;
+                    spiroResult.CreatedBy = 1;
+                    //spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
+                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
+
+                }
+                Toast.ShowToast("", "Successfully Saved.");
+            }
 
             //CtrlspiroResult.Height = ht * 6;//gridInstrumentPanel.ActualHeight;
             //CtrlspiroResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
+
             Resultspiropopup.IsOpen = _spirometerToggle;
             DeployRetractDevice(_spirometerToggle, MainPage.mainPage.Podmapping.SpirometerPodID);
         }
@@ -1642,6 +1721,56 @@ namespace VideoKallMCCST.View
                 string s = ex.Message;
             }
 
+        }
+        string ImageName = "capturedImage.png";
+        async void DisplayImage(string imageName)
+        {
+            try
+            {
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(MainPage.mainPage.rootImageFolder.Path);
+                StorageFile storageFile = await folder.GetFileAsync(imageName);
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    // Set the image source to the selected bitmap
+
+                    if (storageFile != null)
+                    {
+                        // Ensure the stream is disposed once the image is loaded
+                        using (IRandomAccessStream fileStream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read))
+                        {
+                            bitMap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
+                            await bitmapImage.SetSourceAsync(fileStream);
+                            Convertion(fileStream);
+                        }
+                    }
+                    ImageToByeArray(bitMap);
+
+                });
+            }
+            catch (Exception ex)
+            {
+                MainPage.mainPage.LogExceptions(ex.Message);
+            }
+        }
+
+        private byte[] ImageToByeArray(WriteableBitmap bitMap)
+        {
+            using (Stream stream = bitMap.PixelBuffer.AsStream())
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                buffer = memoryStream.ToArray();
+            }
+            return buffer;
+        }
+
+        async Task<byte[]> Convertion(IRandomAccessStream s)
+        {
+            var dr = new DataReader(s.GetInputStreamAt(0));
+            buffer = new byte[s.Size];
+            await dr.LoadAsync((uint)s.Size);
+            dr.ReadBytes(buffer);
+            return buffer;
         }
     }
 

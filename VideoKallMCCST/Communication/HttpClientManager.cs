@@ -411,24 +411,6 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-
-            using (var client = new HttpClient())
-            {
-
-                string httpResponseBody = "";
-                try
-                {
-                    HttpResponseMessage response = await client.PostAsync(uri, data);
-                    httpResponseBody = await response.Content.ReadAsStringAsync();
-                    Toast.ShowToast("", "Successfully Saved.");
-                }
-                catch (Exception ex)
-                {
-                    Toast.ShowToast("", "Failed");
-                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
-                    return false;
-                }
-            }
             return true;
         }
 
