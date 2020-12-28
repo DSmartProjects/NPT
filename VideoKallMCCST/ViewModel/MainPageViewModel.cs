@@ -413,8 +413,15 @@ namespace VideoKallMCCST.ViewModel
             }
         }
         public void ExecuteLogoutCommand()
-        {            
-            MainPage.mainPage.Frame.Navigate(typeof(VideoKallLoginPage));
+        {
+            //MainPage.mainPage.Frame.Navigate(typeof(VideoKallLoginPage));
+            Frame rootFrame = Window.Current.Content as Frame;
+            Window.Current.Content = rootFrame;
+            MainPage.mainPage.IsUserLogedin = false;
+            rootFrame.BackStack.Clear();
+            rootFrame.Navigate(typeof(VideoKallLoginPage));
+          
+
         }
 
     }//class

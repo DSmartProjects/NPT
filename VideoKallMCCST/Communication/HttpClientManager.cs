@@ -411,7 +411,6 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-
             using (var client = new HttpClient())
             {
 
@@ -420,11 +419,11 @@ namespace VideoKallMCCST.Communication
                 {
                     HttpResponseMessage response = await client.PostAsync(uri, data);
                     httpResponseBody = await response.Content.ReadAsStringAsync();
-                    Toast.ShowToast("", "Successfully Saved.");
+                    //Toast.ShowToast("", "Successfully Saved.");
                 }
                 catch (Exception ex)
                 {
-                    Toast.ShowToast("", "Failed");
+                    //Toast.ShowToast("", "Failed");
                     httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
                     return false;
                 }
