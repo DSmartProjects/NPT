@@ -611,6 +611,7 @@ namespace VideoKallMCCST
         public bool Weightstatus { get; set; } = false;
         public BoolDelegate Heightdelegate;
         public BoolDelegate Weightdelegate;
+        public BoolDelegate VideoCallReset;
 
     }
 }

@@ -415,13 +415,12 @@ namespace VideoKallMCCST.ViewModel
         public void ExecuteLogoutCommand()
         {
             //MainPage.mainPage.Frame.Navigate(typeof(VideoKallLoginPage));
+            MainPage.mainPage.VideoCallReset?.Invoke(true);
             Frame rootFrame = Window.Current.Content as Frame;
             Window.Current.Content = rootFrame;
             MainPage.mainPage.IsUserLogedin = false;
-            rootFrame.BackStack.Clear();
+            rootFrame.BackStack.Clear();           
             rootFrame.Navigate(typeof(VideoKallLoginPage));
-          
-
         }
 
     }//class
