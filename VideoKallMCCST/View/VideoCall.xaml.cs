@@ -45,12 +45,21 @@ namespace VideoKallMCCST.View
         {
             this.InitializeComponent();
             rootPage.EnsureMediaExtensionManager();
+            MainPage.mainPage.VideoCallReset += VideoCallReset;
             _videoCallVM = MainPage.VideoCallVM;
             this.DataContext = _videoCallVM;
             _videoCallVM.DefaultVisibilities();
              SetChairPosition();
         }
 
+        private  void VideoCallReset(bool isCameFromLogout)
+        {
+            MainPage.VideoCallVM.PatientDetails = null;
+            if (device!=null && device.mediaSink!=null)
+            {
+                device.mediaSink.Dispose();
+            }
+        }
         private async void TimerCallbackCompleted(object sender, object e)
         {
             timer.Stop();
@@ -78,7 +87,7 @@ namespace VideoKallMCCST.View
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
-        {
+        {        
             var cameraFound = await CaptureDevice.CheckForRecordingDeviceAsync();
             if (cameraFound)
             {
