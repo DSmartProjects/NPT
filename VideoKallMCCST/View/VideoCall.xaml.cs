@@ -53,8 +53,7 @@ namespace VideoKallMCCST.View
         }
 
         private  void VideoCallReset(bool isCameFromLogout)
-        {
-            MainPage.VideoCallVM.PatientDetails = null;
+        {           
             if (device!=null && device.mediaSink!=null)
             {
                 device.mediaSink.Dispose();
@@ -69,15 +68,9 @@ namespace VideoKallMCCST.View
 
         public void SetChairPosition()
         {
-            //if (isChairrecline)
-            //{
-                //UprightChair.IsEnabled = true;
-                //LeaningChair.IsEnabled = false;
-                UprightChair.BorderBrush = GetColorFromHexa("#0183DD");
+            UprightChair.BorderBrush = GetColorFromHexa("#0183DD");
             LeaningChair.Opacity = 0.50;
             recline.Opacity = 0.50;
-            // LeaningChair.Background= new SolidColorBrush(Windows.UI.Colors.White);
-            //}
         }
 
         public async void CallDevice(CaptureDevice device)
@@ -281,7 +274,7 @@ namespace VideoKallMCCST.View
         private async void Accept_Click(object sender, RoutedEventArgs e)
         {
             await AcceptCall();
-            //btnSearchPatient.IsEnabled = true;
+            btnSearchPatient.IsEnabled = true;
         }
         private async Task AcceptCall()
         {
@@ -427,7 +420,7 @@ namespace VideoKallMCCST.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-           // btnSearchPatient.IsEnabled = false;
+            btnSearchPatient.IsEnabled = false;
             SMCConnecteionStatus();
 
             SMCCommChannel = new CommunicationChannel();
