@@ -17,6 +17,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -34,6 +35,8 @@ namespace VideoKallMCCST.View
         int isTerminator = 0;
         bool activated = false;
         bool isMuted = false;
+        bool isChairrecline = true;
+        bool ischairIncline = false;
         IncomingConnectionEventArgs incommingCall = null;
         public VideoCallViewModel _videoCallVM = null;
         static DispatcherTimer timer = null;
@@ -45,6 +48,7 @@ namespace VideoKallMCCST.View
             _videoCallVM = MainPage.VideoCallVM;
             this.DataContext = _videoCallVM;
             _videoCallVM.DefaultVisibilities();
+             SetChairPosition();
         }
 
         private async void TimerCallbackCompleted(object sender, object e)
@@ -52,6 +56,19 @@ namespace VideoKallMCCST.View
             timer.Stop();
             IncomingCallRing.Stop();
             await EndCallAsync();
+        }
+
+        public void SetChairPosition()
+        {
+            //if (isChairrecline)
+            //{
+                //UprightChair.IsEnabled = true;
+                //LeaningChair.IsEnabled = false;
+                UprightChair.BorderBrush = GetColorFromHexa("#0183DD");
+            LeaningChair.Opacity = 0.50;
+            recline.Opacity = 0.50;
+            // LeaningChair.Background= new SolidColorBrush(Windows.UI.Colors.White);
+            //}
         }
 
         public async void CallDevice(CaptureDevice device)
@@ -224,12 +241,26 @@ namespace VideoKallMCCST.View
 
         private void Apchair1_Click(object sender, RoutedEventArgs e)
         {
+            UprightChair.BorderBrush = GetColorFromHexa("#0183DD");
+            LeaningChair.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);           
+            LeaningChair.Opacity = 0.50;
+            recline.Opacity = 0.50;
+            UprightChair.Opacity = 1.0;
+            UprightChair.Opacity = 1.0;
             MainPage.mainPage.SeatReclineMsg?.Invoke(false);
+            isChairrecline = false;
         }
-
         private void Apchair2_Click(object sender, RoutedEventArgs e)
         {
+            LeaningChair.Opacity = 1.0;
+            recline.Opacity = 1.0;
+            UprightChair.Opacity = 0.50;
+            UprightChair.Opacity = 0.50;
+            LeaningChair.BorderBrush = GetColorFromHexa("#0183DD");
+            UprightChair.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
+            UprightChair.Foreground = new SolidColorBrush(Windows.UI.Colors.White);           
             MainPage.mainPage.SeatReclineMsg?.Invoke(true);
+            isChairrecline = true;
         }
 
         private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)
@@ -241,7 +272,7 @@ namespace VideoKallMCCST.View
         private async void Accept_Click(object sender, RoutedEventArgs e)
         {
             await AcceptCall();
-            btnSearchPatient.IsEnabled = true;
+            //btnSearchPatient.IsEnabled = true;
         }
         private async Task AcceptCall()
         {
@@ -387,7 +418,7 @@ namespace VideoKallMCCST.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            btnSearchPatient.IsEnabled = false;
+           // btnSearchPatient.IsEnabled = false;
             SMCConnecteionStatus();
 
             SMCCommChannel = new CommunicationChannel();

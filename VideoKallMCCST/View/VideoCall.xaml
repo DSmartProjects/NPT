@@ -11,7 +11,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
 
     <Page.Resources>
-        <conv:DateFormatConverter x:Name="DateToStringFormatConverter"/>
+        <conv:DateFormatConverter x:Name="DateToStringFormatConverter"/>       
     </Page.Resources>
 
     <Grid BorderBrush="#DBDBDB"  BorderThickness="1,0,0,0">
@@ -23,13 +23,13 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid x:Name="grChair" Padding="10,0,0,0" Height="100"  VerticalAlignment="Top" Grid.Row="0" >
-                <StackPanel x:Name="spButton" Margin="5,10,10,10" Orientation="Horizontal" Padding="5,0,5,0">
-                    <TextBlock Text="Chair Position :"  TextAlignment="Center" FontSize="12"  FontWeight="SemiBold" Margin="0,10,0,42" Foreground="#194F82" FontFamily="Open Sans"/>
-                    <Button x:Name="UprightChair" Click="Apchair1_Click"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="60" Margin="5,0,0,47" Background="Transparent">
-                        <Image Source="..\Assets/Upstraight.png"   Margin="16,0,0,0"   />
+                <StackPanel x:Name="spButton" Margin="5,5,10,10" Orientation="Horizontal" Padding="5,0,5,0">
+                    <TextBlock Text="Chair Position :"  TextAlignment="Center" FontSize="12"  FontWeight="SemiBold" Margin="0,10,0,42"  Foreground="#194F82" FontFamily="Open Sans"/>
+                    <Button x:Name="UprightChair" Click="Apchair1_Click"  Margin="5, 0, 5, 0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Height="40" Width="60" Background="White" BorderThickness="0,0,0,2" >
+                        <Image x:Name="upStraight" Source="..\Assets/Upstraight.png"   Margin="8,1,8,-1"   />
                     </Button>
-                    <Button x:Name="LeaningChair"  Click="Apchair2_Click"  Height="40" Width="80" Margin="0,0,0,47" Background="Transparent">
-                        <Image Source="..\Assets/recline.png" />
+                    <Button x:Name="LeaningChair"  Click="Apchair2_Click"  Height="40" Width="60" Background="White" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0,0,0,2" >
+                        <Image x:Name="recline"  Source="..\Assets/recline.png" HorizontalAlignment="Stretch" Margin="0,1,0,-1" VerticalAlignment="Stretch" />
                     </Button>
                 </StackPanel>
             </Grid>
