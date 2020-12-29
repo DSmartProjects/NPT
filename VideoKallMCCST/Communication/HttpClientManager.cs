@@ -16,21 +16,75 @@ namespace VideoKallMCCST.Communication
 {
     public class HttpClientManager
     {
-        HttpResponseMessage response = null;
-        string basePMM_APIUrl =string.Empty;
-        string base_APIUrl = "https://localhost:44355/api";
+        string basePMM_APIUrl=string.Empty;
+        string base_APIUrl = "http://localhost:5000/api";
 
-        public HttpClientManager(){
-            if (MainPage.mainPage.mainpagecontext.PMMConfig != null)
+        public HttpClientManager()
+        {
+            if (MainPage.mainPage!=null&& MainPage.mainPage.mainpagecontext!=null&& MainPage.mainPage.mainpagecontext.PMMConfig != null)
             {
                 var pmm_config = MainPage.mainPage.mainpagecontext.PMMConfig;
                 basePMM_APIUrl = !string.IsNullOrWhiteSpace(pmm_config.API_URL) ? pmm_config.API_URL : string.Empty;
-            }
+            }            
             else
             {
                 Utility ut = new Utility();
                 var pmm_Config = Task.Run(async () => { return await ut.ReadPMMConfigurationFile(); }).Result;
-            }           
+                basePMM_APIUrl = "http://183.82.119.28:5003/api";
+            }
+        }
+        public async Task<bool> Authenticate(string userName, string pwd)
+        {
+            bool isSuccess = false;
+            var uri = string.Empty;
+            var userInfo = new { UserName = userName, Password = pwd };
+            string json = JsonConvert.SerializeObject(userInfo);
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = basePMM_APIUrl + "/v1/auth/login";
+            }
+            else
+                return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    var myDetails = JsonConvert.DeserializeObject<Result<Token>>(httpResponseBody);
+                    if (myDetails.status!=null&&myDetails.status.Equals(Constants.StatusCode_Success,StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        VideoKallLoginPage.LoginPage._loginVM.Token = myDetails.data.token;
+                        isSuccess = true;
+                        Toast.ShowToast("",Constants.Login_Success_MSG);
+                    }
+                    else
+                    {
+                        isSuccess = false;
+                        if (MainPage.mainPage != null)
+                        {
+                            return isSuccess;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", Constants.InValid_UNAME_PWD);
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return isSuccess;
+                }     
+            }
+            return isSuccess;
         }
 
         public async Task<List<Patient>> PatientsAsync(string user)
@@ -43,7 +97,7 @@ namespace VideoKallMCCST.Communication
             }
             else
                 return patients;
-           
+
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
@@ -53,11 +107,11 @@ namespace VideoKallMCCST.Communication
             {
                 client.BaseAddress = new Uri(uri);
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));              
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 string httpResponseBody = "";
                 try
                 {
-                    HttpResponseMessage response = await client.SendAsync(request);                   
+                    HttpResponseMessage response = await client.SendAsync(request);
                     httpResponseBody = await response.Content.ReadAsStringAsync();
                 }
                 catch (Exception ex)
@@ -65,18 +119,22 @@ namespace VideoKallMCCST.Communication
                     httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
                     return patients;
                 }
-    
+
                 var resultObjects = AllChildren(JObject.Parse(httpResponseBody))
                 .First(c => c.Type == JTokenType.Array && c.Path.Contains("data"))
                 .Children<JObject>();
-                Patient patient = null;              
+                Patient patient = null;
                 foreach (JObject data in resultObjects)
                 {
-                    patient = new Patient { ID = Convert.ToInt32(data["Patient_ID"].ToString()), Name = string.Concat(data["Patient_FirstName"].ToString(),!string.IsNullOrWhiteSpace(data["Patient_MiddleName"].ToString())?" ":"",
-                           data["Patient_MiddleName"].ToString()," ",
-                         data["Patient_LastName"].ToString()), DOB =Convert.ToDateTime(data["DOB"].ToString())
+                    patient = new Patient
+                    {
+                        ID = Convert.ToInt32(data["Patient_ID"].ToString()),
+                        Name = string.Concat(data["Patient_FirstName"].ToString(), !string.IsNullOrWhiteSpace(data["Patient_MiddleName"].ToString()) ? " " : "",
+                           data["Patient_MiddleName"].ToString(), " ",
+                         data["Patient_LastName"].ToString()),
+                        DOB = Convert.ToDateTime(data["DOB"].ToString())
                     };
-                    patients.Add(patient); 
+                    patients.Add(patient);
                 }
             }
             return patients;
@@ -118,6 +176,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
 
             using (var client = new HttpClient())
             {
@@ -160,7 +220,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
             using (var client = new HttpClient())
             {
 
@@ -203,6 +264,9 @@ namespace VideoKallMCCST.Communication
                 RequestUri = new Uri(uri),
             };
 
+            if(VideoKallLoginPage.LoginPage!=null&& VideoKallLoginPage.LoginPage._loginVM!=null&& !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))            
+                 request.Headers.Add("Authorization",VideoKallLoginPage.LoginPage._loginVM.Token);
+
             using (var client = new HttpClient())
             {
 
@@ -244,7 +308,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
             using (var client = new HttpClient())
             {
 
@@ -286,7 +351,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
             using (var client = new HttpClient())
             {
 
@@ -327,6 +393,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
 
             using (var client = new HttpClient())
             {
@@ -369,7 +437,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
             using (var client = new HttpClient())
             {
 
@@ -411,6 +480,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
             using (var client = new HttpClient())
             {
 
@@ -452,7 +523,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
             using (var client = new HttpClient())
             {
 
@@ -495,6 +567,9 @@ namespace VideoKallMCCST.Communication
                 RequestUri = new Uri(uri),
             };
 
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
+
             using (var client = new HttpClient())
             {
 
@@ -536,7 +611,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
             using (var client = new HttpClient())
             {
 

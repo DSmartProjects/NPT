@@ -29,7 +29,7 @@ namespace VideoKallMCCST
     /// </summary>
     public sealed partial class VideoKallLoginPage : Page
     {
-        private LoginPageViewModel _loginVM = null;
+        internal LoginPageViewModel _loginVM = null;
         public static VideoKallLoginPage LoginPage;
         public VideoKallLoginPage()
         {

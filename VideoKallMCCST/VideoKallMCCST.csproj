@@ -151,9 +151,11 @@
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\PMMConfiguration.cs" />
     <Compile Include="Model\PulseOximeterTestResult.cs" />
+    <Compile Include="Model\Result.cs" />
     <Compile Include="Model\SeatBackStethoscopeTestResult.cs" />
     <Compile Include="Model\SpirometerTestResult.cs" />
     <Compile Include="Model\ThermometerTestResult.cs" />
+    <Compile Include="Model\Token.cs" />
     <Compile Include="Model\WeightTestResult.cs" />
     <Compile Include="Results\BPResultsInstruction.xaml.cs">
       <DependentUpon>BPResultsInstruction.xaml</DependentUpon>

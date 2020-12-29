@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using VideoKallMCCST.Communication;
+using VideoKallMCCST.Helpers;
 using VideoKallMCCST.View;
 using Windows.UI.Xaml;
 
@@ -29,7 +31,7 @@ namespace VideoKallMCCST.ViewModel
             } 
         }
 
-        string _userid="admin";
+        string _userid=string.Empty;
         public string Userid { 
             get{ return _userid; }
             set { 
@@ -38,7 +40,9 @@ namespace VideoKallMCCST.ViewModel
             }
         }
 
-        string _password="admin";
+        private string _token = string.Empty;
+        public string Token { get { return _token; } set { _token = value; OnPropertyChanged("Token"); } }
+        string _password=string.Empty;
         public string PasswordTxt {
             get {return _password; }
             set { _password = value;
@@ -59,9 +63,19 @@ namespace VideoKallMCCST.ViewModel
         public string LoginErrorMessage { get; set; }
         public string LoginErrorMessage2 { get; set; }
  
-        public void ExecuteSubmitCommand( )
+        public async void ExecuteSubmitCommand( )
         {
-            VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
+            HttpClientManager httpClient = new HttpClientManager();
+            var isLogin= await httpClient.Authenticate(Userid,PasswordTxt);
+            httpClient = null;
+            if (isLogin)
+            {
+                VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
+            }
+            else {
+                Toast.ShowToast("",Constants.InValid_UNAME_PWD);
+                return;
+            }          
             //SBCDB dbmodule = new SBCDB();
             //User loggedinUser =  dbmodule.GetLoggedinUser(Userid.Trim().ToLower());
             //if (loggedinUser == null)
