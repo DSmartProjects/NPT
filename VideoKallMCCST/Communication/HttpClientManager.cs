@@ -17,7 +17,8 @@ namespace VideoKallMCCST.Communication
     public class HttpClientManager
     {
         string basePMM_APIUrl=string.Empty;
-        string base_APIUrl = "http://localhost:5000/api";
+        //string base_APIUrl = "http://localhost:5000/api";
+        string base_APIUrl = "http://172.16.10.218/api";
 
         public HttpClientManager()
         {
