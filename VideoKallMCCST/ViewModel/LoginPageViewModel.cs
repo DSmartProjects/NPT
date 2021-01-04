@@ -18,6 +18,7 @@ namespace VideoKallMCCST.ViewModel
 {
     class LoginPageViewModel : INotifyPropertyChanged
     {
+        Utility utility = null;       
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
@@ -35,7 +36,7 @@ namespace VideoKallMCCST.ViewModel
         private PMMConfiguration _pmmConfig = null;
         public PMMConfiguration PMMConfig { get { return _pmmConfig; } set { _pmmConfig = value; OnPropertyChanged("PMMConfig"); } }
 
-        string _userid = "admin";
+        string _userid = string.Empty;
         public string Userid { 
             get{ return _userid; }
             set { 
@@ -46,7 +47,7 @@ namespace VideoKallMCCST.ViewModel
 
         private string _token = string.Empty;
         public string Token { get { return _token; } set { _token = value; OnPropertyChanged("Token"); } }
-        string _password=Constants.Admin_PWD;
+        string _password=string.Empty;
         public string PasswordTxt {
             get {return _password; }
             set { _password = value;
@@ -67,29 +68,31 @@ namespace VideoKallMCCST.ViewModel
         public string LoginErrorMessage { get; set; }
         public string LoginErrorMessage2 { get; set; }
         HttpClientManager _httpClient = null;
+        PMMConfiguration _configuration = null;
 
 
         public async void ExecuteSubmitCommand( )
         {
+            utility = new Utility();
+            var pmm_Config = Task.Run(async () => { return await utility.ReadPMMConfigurationFile(); }).Result;
+            _httpClient = VideoKallLoginPage.LoginPage.HttpClient;
+            _configuration= VideoKallLoginPage.LoginPage._loginVM.PMMConfig;
             bool isLogin = false;
             bool isAdmin = !string.IsNullOrEmpty(Userid) && !string.IsNullOrEmpty(Constants.Admin_PWD) && Userid.Equals(Constants.Admin_UNAME, StringComparison.InvariantCultureIgnoreCase) && PasswordTxt.Equals(Constants.Admin_PWD, StringComparison.InvariantCultureIgnoreCase) ? true : false;
 
-            _httpClient = VideoKallLoginPage.LoginPage.HttpClient; 
-            if (_httpClient.basePMM_APIUrl!=null&& _httpClient.base_APIUrl!=null)
+            //_httpClient = VideoKallLoginPage.LoginPage.HttpClient; 
+            if (!string.IsNullOrEmpty(_configuration.API_URL)&&!string.IsNullOrEmpty(_configuration.TestResultAPI_URL)&&isAdmin==false)
             {
                 _httpClient.basePMM_APIUrl = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.API_URL;
                 _httpClient.base_APIUrl = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.TestResultAPI_URL;
                  isLogin= await _httpClient.Authenticate(Userid, PasswordTxt);
-            }
-
-           
+            }           
             if (isAdmin)
             {
                 VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
             }
             else if (isLogin)
-            {              
-             
+            { 
                 VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
             }
             else
