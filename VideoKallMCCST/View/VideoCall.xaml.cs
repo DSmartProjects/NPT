@@ -420,7 +420,7 @@ namespace VideoKallMCCST.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-           // btnSearchPatient.IsEnabled = false;
+            btnSearchPatient.IsEnabled = false;
             SMCConnecteionStatus();
 
             SMCCommChannel = new CommunicationChannel();
