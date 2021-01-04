@@ -581,7 +581,7 @@ namespace VideoKallMCCST.View
                         //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         //"GLUCMDRES>V:{0}>U:{1}>T:{2}>M:{3}>D:{4}>T:{5}";
                          glucoResult= res[1].Split(':')[1];
-                         mode = res[3].Split(':')[3];
+                         mode = res[3].Split(':')[1];
                         TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1]; ;                       
                         
                         //TxtTestType.Text = res[3].Split(':')[1];
