@@ -49,6 +49,8 @@ namespace VideoKallMCCST.View
         string pulseoxispo2 = string.Empty;
         string pulseoxipulse = string.Empty;
         string tmpMode = string.Empty;
+        HttpClientManager _httpClient = null;
+        PMMConfiguration _configuration = null;
         public static TestPanelExpander TestPanelExp;
         FlowVolumeData flowVolume = new FlowVolumeData();
         VCResults vcResults = new VCResults();
@@ -83,6 +85,10 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.SeatHeightAdjust += SeatBackIntegration;
             MainPage.mainPage.Heightdelegate += Heightdelegate;
             MainPage.mainPage.Weightdelegate += Weightdelegate;
+            _httpClient = VideoKallLoginPage.LoginPage.HttpClient;
+            _configuration = VideoKallLoginPage.LoginPage._loginVM.PMMConfig;
+            _httpClient.basePMM_APIUrl = _configuration?.API_URL;
+            _httpClient.base_APIUrl = _configuration?.TestResultAPI_URL;
 
         }
         async void Heightdelegate(bool status)
@@ -712,7 +718,7 @@ namespace VideoKallMCCST.View
                 pulseTestResult.CreatedDate = DateTime.Now;
                 pulseTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                 MainPage.mainPage.mainpagecontext.PulseResult = pulseTestResult;
-                await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.PulseResult);
+                await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.PulseResult);
 
             }
             ResultPulseOximeterPopup.IsOpen = BtnPulseoximeterToggle;
@@ -777,7 +783,7 @@ namespace VideoKallMCCST.View
                 thermoResult.CreatedBy = 1;
                 thermoResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                 MainPage.mainPage.mainpagecontext.ThermoResult = thermoResult;
-                await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ThermoResult);
+                await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ThermoResult);
 
             }
 
@@ -937,7 +943,7 @@ namespace VideoKallMCCST.View
                     bpTestResult.CreatedBy = 1;
                     bpTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.BpResult = bpTestResult;
-                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.BpResult);
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.BpResult);
                 }
             }
             ResultBPPopup.IsOpen = _resultBpToggle;
@@ -1001,7 +1007,7 @@ namespace VideoKallMCCST.View
                     weightTestResult.CreatedDate = DateTime.Now;
                     weightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.WeightResult = weightTestResult;
-                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.WeightResult);
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.WeightResult);
                 }
             }
             ResuWeightPopup.IsOpen = btnWeightToggle;
@@ -1044,7 +1050,7 @@ namespace VideoKallMCCST.View
                     heightTestResult.CreatedDate = DateTime.Now;
                     heightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.heightResult = heightTestResult;
-                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.heightResult);
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.heightResult);
                 }
             }
 
@@ -1107,7 +1113,7 @@ namespace VideoKallMCCST.View
                     otoscope.Image = oto.buffer;
                     otoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.OtoResult = otoscope;
-                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.OtoResult);
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.OtoResult);
                 }
 
 
@@ -1171,7 +1177,7 @@ namespace VideoKallMCCST.View
                     Dermoscope.Image = oto.buffer;
                     Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                     MainPage.mainPage.mainpagecontext.DermoResult = Dermoscope;
-                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
                 }
                 ResulDermascopePopup.IsOpen = _dermascopeToggle;
                 DeployRetractDevice(_dermascopeToggle, MainPage.mainPage.Podmapping.DermascopePodID);
@@ -1286,7 +1292,7 @@ namespace VideoKallMCCST.View
                 glucoTestResult.CreatedBy = 1;
                 glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                 MainPage.mainPage.mainpagecontext.GlucoResult = glucoTestResult;
-                await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.GlucoResult);
+                await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.GlucoResult);
             }
             Resultglucopopup.IsOpen = _glucoToggle;
             DeployRetractDevice(_glucoToggle, MainPage.mainPage.Podmapping.GlucomonitorPodID);
@@ -1350,7 +1356,7 @@ namespace VideoKallMCCST.View
                             spiroResult.CreatedBy = 1;
                             spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                             MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
-                            await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
+                            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
                         }
 
                     }
@@ -1379,7 +1385,7 @@ namespace VideoKallMCCST.View
                             spiroResult.CreatedBy = 1;
                             spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
                             MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
-                            await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
+                            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
                         }
                     }
                 }
@@ -1463,7 +1469,7 @@ namespace VideoKallMCCST.View
                     chestStethoscopeResult.PatientId = MainPage.VideoCallVM.PatientDetails!=null&& MainPage.VideoCallVM.PatientDetails.ID>0? MainPage.VideoCallVM.PatientDetails.ID:0;
                     MainPage.mainPage.mainpagecontext.ChestResult = chestStethoscopeResult;
                     chestStethoscopeResult.Recording_Path = record_file;
-                    await MainPage.mainPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ChestResult);
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ChestResult);
                 }
 
             }

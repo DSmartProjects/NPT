@@ -29,13 +29,18 @@ namespace VideoKallMCCST.View
     {
         private PatientViewModel _patientVM = null;
         private Patient patient = null;
-        HttpClientManager httpClient = null;
+        HttpClientManager _httpClient = null;
+        PMMConfiguration _configuration = null;
         public SearchPatient()
         {
             this.InitializeComponent();
             _patientVM = new PatientViewModel();
             this.DataContext = _patientVM;
-            _patientVM.PMM_URL = MainPage.mainPage.mainpagecontext.PMMConfig.URL;
+            _httpClient = VideoKallLoginPage.LoginPage.HttpClient;
+            _configuration = VideoKallLoginPage.LoginPage._loginVM.PMMConfig;
+            _httpClient.basePMM_APIUrl = _configuration?.API_URL;
+            _httpClient.base_APIUrl = _configuration?.TestResultAPI_URL;
+            _patientVM.PMM_URL = _configuration?.URL;
         }
 
      
@@ -117,9 +122,9 @@ namespace VideoKallMCCST.View
         }
         private async void BtnAddPatient_Click(object sender, RoutedEventArgs e)
         {
-            if (MainPage.mainPage.mainpagecontext.PMMConfig != null && !string.IsNullOrEmpty(MainPage.mainPage.mainpagecontext.PMMConfig.URL))
+            if (VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.PMMConfig.URL))
             {
-                Uri uri = new Uri(MainPage.mainPage.mainpagecontext.PMMConfig.URL);
+                Uri uri = new Uri(VideoKallLoginPage.LoginPage._loginVM.PMMConfig.URL);
                 await Windows.System.Launcher.LaunchUriAsync(uri);
             }
 
@@ -137,13 +142,12 @@ namespace VideoKallMCCST.View
         private async void BtnSearchPatient()
         {
             _patientVM.LblSearchNotFoundVisibility = Visibility.Collapsed;
-            httpClient = new HttpClientManager();
             string name = txtPatientName.Text.Trim();
             if (!string.IsNullOrWhiteSpace(name))
             {
                 _patientVM.Patients = null;
 
-                var patients = await httpClient.PatientsAsync(name);
+                var patients = await _httpClient.PatientsAsync(name);
                 if (patients != null && patients.Count > 0)
                 {
 

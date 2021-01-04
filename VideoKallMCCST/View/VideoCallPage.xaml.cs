@@ -347,6 +347,7 @@ namespace VideoKallMCCST.View
             Utility ut = new Utility();
 
             var result = Task.Run(async () => { return await ut.ReadIPaddress(); }).Result;
+            var readPMMConfig = Task.Run(async () => { return await ut.ReadPMMConfigurationFile(); }).Result;
             SMCCommChannel.IPAddress = MainPage.mainPage.mainpagecontext.TxtIpAddress;// "192.168.0.33";
             SMCCommChannel.PortNo = MainPage.mainPage.mainpagecontext.TxtProtNo;// "9856";
             //SMCCommChannel.MessageReceived += SMCCommChannel_MessageReceived;

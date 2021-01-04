@@ -16,21 +16,23 @@ namespace VideoKallMCCST.Communication
 {
     public class HttpClientManager
     {
-        string basePMM_APIUrl=string.Empty;
-        string base_APIUrl = "http://localhost:5000/api";
+       public string basePMM_APIUrl=string.Empty;
+       public string base_APIUrl =string.Empty;
 
         public HttpClientManager()
         {
-            if (MainPage.mainPage!=null&& MainPage.mainPage.mainpagecontext!=null&& MainPage.mainPage.mainpagecontext.PMMConfig != null)
+            if (VideoKallLoginPage.LoginPage!=null&& VideoKallLoginPage.LoginPage._loginVM!=null && VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null)
             {
-                var pmm_config = MainPage.mainPage.mainpagecontext.PMMConfig;
-                basePMM_APIUrl = !string.IsNullOrWhiteSpace(pmm_config.API_URL) ? pmm_config.API_URL : string.Empty;
+                var pmm_config = VideoKallLoginPage.LoginPage._loginVM.PMMConfig;
+                basePMM_APIUrl = !string.IsNullOrEmpty(pmm_config.API_URL) ? pmm_config.API_URL : string.Empty;
+                base_APIUrl = !string.IsNullOrEmpty(pmm_config.TestResultAPI_URL) ? pmm_config.TestResultAPI_URL : string.Empty;
             }            
             else
             {
                 Utility ut = new Utility();
                 var pmm_Config = Task.Run(async () => { return await ut.ReadPMMConfigurationFile(); }).Result;
-                basePMM_APIUrl = "http://183.82.119.28:5003/api";
+                //basePMM_APIUrl = "http://183.82.119.28:5003/api";
+                //base_APIUrl = "https://localhost:44355/api";
             }
         }
         public async Task<bool> Authenticate(string userName, string pwd)
@@ -41,7 +43,7 @@ namespace VideoKallMCCST.Communication
             string json = JsonConvert.SerializeObject(userInfo);
             //Needed to setup the body of the request
             StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
-            if (!string.IsNullOrEmpty(base_APIUrl))
+            if (!string.IsNullOrEmpty(basePMM_APIUrl))
             {
                 uri = basePMM_APIUrl + "/v1/auth/login";
             }

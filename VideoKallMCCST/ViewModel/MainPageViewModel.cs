@@ -179,6 +179,7 @@ namespace VideoKallMCCST.ViewModel
         }
         async void ExecuteSaveIPAddress()
         {
+            PMMConfig = VideoKallLoginPage.LoginPage._loginVM.PMMConfig;
             //// Create the message dialog and set its content
             //var messageDialog = new MessageDialog("Do you want to save the details");
 
@@ -201,8 +202,9 @@ namespace VideoKallMCCST.ViewModel
             REQ_MSG_Visibility = Visibility.Collapsed;
             var isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
                                    && !string.IsNullOrEmpty(TxtProtNo)
-                                   && !string.IsNullOrEmpty(PMMConfig.URL)
-                                   && !string.IsNullOrEmpty(PMMConfig.API_URL));
+                                   && !string.IsNullOrEmpty(PMMConfig?.URL)
+                                   && !string.IsNullOrEmpty(PMMConfig?.API_URL)
+                                   && !string.IsNullOrEmpty(PMMConfig?.TestResultAPI_URL));
             if (!isMandatoryFieldValuesFilled)
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Failure);
@@ -239,8 +241,9 @@ namespace VideoKallMCCST.ViewModel
 
             isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
                                           && !string.IsNullOrEmpty(TxtProtNo)
-                                          && !string.IsNullOrEmpty(PMMConfig.URL)
-                                          && !string.IsNullOrEmpty(PMMConfig.API_URL));
+                                          && !string.IsNullOrEmpty(PMMConfig?.URL)
+                                          && !string.IsNullOrEmpty(PMMConfig?.API_URL)
+                                          && !string.IsNullOrEmpty(PMMConfig?.TestResultAPI_URL));
             if (isMandatoryFieldValuesFilled)
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Success);
@@ -267,8 +270,9 @@ namespace VideoKallMCCST.ViewModel
             REQ_MSG_Visibility = Visibility.Collapsed;
             var isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
                                    && !string.IsNullOrEmpty(TxtProtNo)
-                                   && !string.IsNullOrEmpty(PMMConfig.URL)
-                                   && !string.IsNullOrEmpty(PMMConfig.API_URL));
+                                   && !string.IsNullOrEmpty(PMMConfig?.URL)
+                                   && !string.IsNullOrEmpty(PMMConfig?.API_URL)
+                                   && !string.IsNullOrEmpty(PMMConfig?.TestResultAPI_URL));
             if (!isMandatoryFieldValuesFilled)
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Failure);
@@ -305,8 +309,9 @@ namespace VideoKallMCCST.ViewModel
 
             isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
                                           && !string.IsNullOrEmpty(TxtProtNo)
-                                          && !string.IsNullOrEmpty(PMMConfig.URL)
-                                          && !string.IsNullOrEmpty(PMMConfig.API_URL));
+                                          && !string.IsNullOrEmpty(PMMConfig?.URL)
+                                          && !string.IsNullOrEmpty(PMMConfig?.API_URL)
+                                          && !string.IsNullOrEmpty(PMMConfig?.TestResultAPI_URL));
             if (isMandatoryFieldValuesFilled)
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Success);
@@ -331,7 +336,7 @@ namespace VideoKallMCCST.ViewModel
             try
             {
                 string pmm_Config_FileName = "PMM_Config.txt";
-                string msg = "URL :" + " " + PMMConfig.URL + Environment.NewLine + "API_URL :" + " " + PMMConfig.API_URL;
+                string msg = "URL :" + " " + PMMConfig.URL + Environment.NewLine + "API_URL :" + " " + PMMConfig.API_URL + Environment.NewLine + "TestResult_API_URL :" + " " + PMMConfig.TestResultAPI_URL;
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 Windows.Storage.StorageFile pinfofile = await localFolder.CreateFileAsync(pmm_Config_FileName, CreationCollisionOption.OpenIfExists);
                 await Windows.Storage.FileIO.WriteTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);

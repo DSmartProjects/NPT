@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Helpers;
+using VideoKallMCCST.Model;
 using VideoKallMCCST.View;
 using Windows.UI.Xaml;
 
@@ -31,7 +32,10 @@ namespace VideoKallMCCST.ViewModel
             } 
         }
 
-        string _userid=string.Empty;
+        private PMMConfiguration _pmmConfig = null;
+        public PMMConfiguration PMMConfig { get { return _pmmConfig; } set { _pmmConfig = value; OnPropertyChanged("PMMConfig"); } }
+
+        string _userid = "admin";
         public string Userid { 
             get{ return _userid; }
             set { 
@@ -42,7 +46,7 @@ namespace VideoKallMCCST.ViewModel
 
         private string _token = string.Empty;
         public string Token { get { return _token; } set { _token = value; OnPropertyChanged("Token"); } }
-        string _password=string.Empty;
+        string _password=Constants.Admin_PWD;
         public string PasswordTxt {
             get {return _password; }
             set { _password = value;
@@ -62,20 +66,38 @@ namespace VideoKallMCCST.ViewModel
         public bool LoginFailedMsg3Visible {get; set;}
         public string LoginErrorMessage { get; set; }
         public string LoginErrorMessage2 { get; set; }
- 
+        HttpClientManager _httpClient = null;
+
+
         public async void ExecuteSubmitCommand( )
         {
-            HttpClientManager httpClient = new HttpClientManager();
-            var isLogin= await httpClient.Authenticate(Userid,PasswordTxt);
-            httpClient = null;
-            if (isLogin)
+            bool isLogin = false;
+            bool isAdmin = !string.IsNullOrEmpty(Userid) && !string.IsNullOrEmpty(Constants.Admin_PWD) && Userid.Equals(Constants.Admin_UNAME, StringComparison.InvariantCultureIgnoreCase) && PasswordTxt.Equals(Constants.Admin_PWD, StringComparison.InvariantCultureIgnoreCase) ? true : false;
+
+            _httpClient = VideoKallLoginPage.LoginPage.HttpClient; 
+            if (_httpClient.basePMM_APIUrl!=null&& _httpClient.base_APIUrl!=null)
+            {
+                _httpClient.basePMM_APIUrl = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.API_URL;
+                _httpClient.base_APIUrl = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.TestResultAPI_URL;
+                 isLogin= await _httpClient.Authenticate(Userid, PasswordTxt);
+            }
+
+           
+            if (isAdmin)
             {
                 VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
             }
-            else {
-                Toast.ShowToast("",Constants.InValid_UNAME_PWD);
+            else if (isLogin)
+            {              
+             
+                VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
+            }
+            else
+            {
+                Toast.ShowToast("", Constants.InValid_UNAME_PWD);
                 return;
-            }          
+            }
+
             //SBCDB dbmodule = new SBCDB();
             //User loggedinUser =  dbmodule.GetLoggedinUser(Userid.Trim().ToLower());
             //if (loggedinUser == null)
@@ -83,7 +105,7 @@ namespace VideoKallMCCST.ViewModel
             //    LoginFailedMsg1Visible = true;
             //    LoginFailedMsg2Visible = true;
             //    LoginFailedMsg3Visible = true;
-               
+
             //    LoginErrorMessage = "User name: " + Userid + " not found.";
             //    LoginErrorMessage2 = "Please enter valid user id or contact admin.";
             //    OnPropertyChanged("LoginFailedMsg1Visible");
@@ -119,7 +141,7 @@ namespace VideoKallMCCST.ViewModel
             //    OnPropertyChanged("LoginErrorMessage2");
             //    MainPage.mainPage.IsUserLogedin = false;
             //}
-            
+
         }
         VideoCallPage videoCall = null;
        // TestPanelPageViewModel testPanel = null;

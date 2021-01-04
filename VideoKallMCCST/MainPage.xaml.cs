@@ -23,7 +23,7 @@ namespace VideoKallMCCST
             mainPage = this;
             this.DataContext = mainpagecontext;
             VideoCallVM = new VideoCallViewModel();
-            HttpClient = new HttpClientManager();
+           // HttpClient = new HttpClientManager();
             RightPanelHolder.Navigate(typeof(VideoCall));
             pagePlaceHolder.Navigate(typeof(LogoPage));
             NotifyStatusCallback += UpdateNotification;          
@@ -564,7 +564,7 @@ namespace VideoKallMCCST
         }
         public bool IsUserLogedin { get; set; }
         public static VideoCallViewModel VideoCallVM = null;
-        public  HttpClientManager HttpClient = null;
+      // public  HttpClientManager HttpClient = null;
         public static MainPage mainPage;
         public MainPageViewModel mainpagecontext = new MainPageViewModel();
         public delegate void NotifyStatus(string message, int code = 0);

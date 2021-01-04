@@ -10,12 +10,13 @@
     <Grid BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="30,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -94,7 +95,7 @@
                   </Span>
             </TextBlock>
 
-            <TextBox VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" x:Name="txtPMM_URL" Margin="0,0,0,0" Text="{Binding PMMConfig.URL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtPMM_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" ></TextBox>
+            <TextBox VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" x:Name="txtPMM_URL" Margin="0,0,0,0"  TextChanged="TxtPMM_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" ></TextBox>
 
 
 
@@ -107,7 +108,18 @@
                   </Span>
             </TextBlock>
 
-            <TextBox VerticalAlignment="Center" Grid.Row="10" Grid.Column="1"  x:Name="txtPMM_API_URL" Margin="0,0,0,0" Text="{Binding PMMConfig.API_URL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtPMM_API_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"></TextBox>
+            <TextBox VerticalAlignment="Center" Grid.Row="10" Grid.Column="1"  x:Name="txtPMM_API_URL" Margin="0,0,0,0"  TextChanged="TxtPMM_API_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"></TextBox>
+
+            <TextBlock VerticalAlignment="Center" Grid.Row="11" Grid.Column="0"   FontFamily="Open Sans"  Margin="0,0,0,0"  FontSize="12" FontWeight="SemiBold" Foreground="#194F82">
+                  <Span FontWeight="SemiBold">
+                      <Run FontFamily="Open Sans">Test Result API URL</Run>
+                      <Run FontSize="15" Foreground="Red">*</Run>
+                      <Run FontFamily="Open Sans">:</Run>
+                  </Span>
+            </TextBlock>
+
+            <TextBox VerticalAlignment="Center" Grid.Row="11" Grid.Column="1"  x:Name="txtTestResult_API_URL" Margin="0,0,0,0"  TextChanged="TxtTestResult_API_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"></TextBox>
+
 
         </Grid>
 
