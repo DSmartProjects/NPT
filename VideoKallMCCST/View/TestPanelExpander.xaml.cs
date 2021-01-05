@@ -1454,24 +1454,27 @@ namespace VideoKallMCCST.View
             DeployRetractDevice(_stethoscopeChest, MainPage.mainPage.Podmapping.StethoscopeChestPodID);
             if (_stethoscopeChest)// && !MainPage.mainPage.isStethoscopeReadystreaming)
             {
-                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTCHEST));
-                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                //string subFolder = @"\VideoKall\StethescopeRX\Patients";
-                var record_file = localFolder.Path + @"\record.wav";
-                if (File.Exists(record_file))
-                {
-                   
-                    ChestStethoscopeTestResult chestStethoscopeResult = new ChestStethoscopeTestResult();
-                    chestStethoscopeResult.Patient = null;                  
-                    chestStethoscopeResult.ChairId = 123456;
-                    chestStethoscopeResult.CreatedDate = DateTime.Now;
-                    chestStethoscopeResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
-                    chestStethoscopeResult.PatientId = MainPage.VideoCallVM.PatientDetails!=null&& MainPage.VideoCallVM.PatientDetails.ID>0? MainPage.VideoCallVM.PatientDetails.ID:0;
-                    MainPage.mainPage.mainpagecontext.ChestResult = chestStethoscopeResult;
-                    chestStethoscopeResult.Recording_Path = sethChest.targetPath;
-                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ChestResult);
-                }
+                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTCHEST));               
 
+            }
+            if (_stethoscopeChest == false)
+            {
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                ////string subFolder = @"\VideoKall\StethescopeRX\Patients";
+                 var record_file = localFolder.Path + "\\Sethescope";
+                //if (File.Exists(record_file))
+                //{
+
+                ChestStethoscopeTestResult chestStethoscopeResult = new ChestStethoscopeTestResult();
+                chestStethoscopeResult.Patient = null;
+                chestStethoscopeResult.ChairId = 123456;
+                chestStethoscopeResult.CreatedDate = DateTime.Now;
+                chestStethoscopeResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                chestStethoscopeResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                MainPage.mainPage.mainpagecontext.ChestResult = chestStethoscopeResult;
+                chestStethoscopeResult.Recording_Path = record_file;
+                await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ChestResult);
+                //}
             }
         }
 
