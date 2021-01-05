@@ -113,6 +113,15 @@ namespace VideoKallMCCST.Results
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            string fileName = @"record.wav";
+            string fileRename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName;
+            string sourcePath = MainPage.mainPage.mainpagecontext.appFolder.Path;
+            string targetPath = sourcePath+"\\Sethescope" + "\\" + MainPage.VideoCallVM.PatientDetails.ID+"\\Chest Sethescope";
+            string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
+            string destFile = System.IO.Path.Combine(targetPath, fileRename);
+            if (!System.IO.Directory.Exists(targetPath))
+                System.IO.Directory.CreateDirectory(targetPath);
+            System.IO.File.Move(sourceFile, destFile);
             if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
             {
                 TxtStatus.Text = Constants.MsgDevicenotDeployed;
