@@ -18,7 +18,20 @@ namespace VideoKallMCCST.ViewModel
 {
     class LoginPageViewModel : INotifyPropertyChanged
     {
-        Utility utility = null;       
+        Utility utility = null;
+        private int _touserId = 0;
+        public int TokUserId
+        {
+            get
+            {
+                return _touserId;
+            }
+            set
+            {
+                _touserId = value;
+                OnPropertyChanged("ToUserId");
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
@@ -89,6 +102,7 @@ namespace VideoKallMCCST.ViewModel
             }           
             if (isAdmin)
             {
+                TokUserId = Constants.Admin_ID;
                 VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
             }
             else if (isLogin)

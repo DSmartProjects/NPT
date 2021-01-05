@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using SBCDBModule.DB;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -18,6 +19,7 @@ namespace VideoKallMCCST.Communication
     {
        public string basePMM_APIUrl=string.Empty;
        public string base_APIUrl =string.Empty;
+        public int userId = 0;
 
         public HttpClientManager()
         {
@@ -64,9 +66,16 @@ namespace VideoKallMCCST.Communication
                     HttpResponseMessage response = await client.PostAsync(uri, data);
                     httpResponseBody = await response.Content.ReadAsStringAsync();
                     var myDetails = JsonConvert.DeserializeObject<Result<Token>>(httpResponseBody);
+                    string[] mydetailsSplit = myDetails.data.token.Split(' ');
                     if (myDetails.status!=null&&myDetails.status.Equals(Constants.StatusCode_Success,StringComparison.InvariantCultureIgnoreCase))
                     {
+                        var stream = mydetailsSplit[1];
+                        var handler = new JwtSecurityTokenHandler();
+                        var jsonToken = handler.ReadToken(stream);
+                        var tokenS = handler.ReadToken(stream) as JwtSecurityToken;
+                        var id = tokenS.Claims.First(claim => claim.Type == "user_id").Value;
                         VideoKallLoginPage.LoginPage._loginVM.Token = myDetails.data.token;
+                        VideoKallLoginPage.LoginPage._loginVM.TokUserId = Convert.ToInt32(id);
                         isSuccess = true;
                         Toast.ShowToast("",Constants.Login_Success_MSG);
                     }
