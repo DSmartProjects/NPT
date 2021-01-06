@@ -280,10 +280,13 @@ namespace VideoKallMCCST.View
         {
             Utility ut = new Utility();
             var pmm_Config = Task.Run(async () => { return await ut.ReadPMMConfigurationFile();}).Result;
-            txtPMM_URL.Text= VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.URL;
-            txtPMM_API_URL.Text = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.API_URL;
-            txtTestResult_API_URL.Text= VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.TestResultAPI_URL;
-            ReadSTConfigFile();
+            if (VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null)
+            {
+                txtPMM_URL.Text = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.URL;
+                txtPMM_API_URL.Text = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.API_URL;
+                txtTestResult_API_URL.Text = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.TestResultAPI_URL;
+                ReadSTConfigFile();
+            }
         }
 
         private void SaveConfig()
@@ -293,12 +296,14 @@ namespace VideoKallMCCST.View
              
         private void TxtPMM_URL_TextChanged(object sender, TextChangedEventArgs e)
         {
-            VideoKallLoginPage.LoginPage._loginVM.PMMConfig.URL = txtPMM_URL.Text;
+            if (VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null)
+                VideoKallLoginPage.LoginPage._loginVM.PMMConfig.URL = txtPMM_URL.Text;
         }
 
         private void TxtPMM_API_URL_TextChanged(object sender, TextChangedEventArgs e)
         {
-            VideoKallLoginPage.LoginPage._loginVM.PMMConfig.API_URL = txtPMM_API_URL.Text;
+            if (VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null)
+                VideoKallLoginPage.LoginPage._loginVM.PMMConfig.API_URL = txtPMM_API_URL.Text;
         }        
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -315,7 +320,8 @@ namespace VideoKallMCCST.View
 
         private void TxtTestResult_API_URL_TextChanged(object sender, TextChangedEventArgs e)
         {
-            VideoKallLoginPage.LoginPage._loginVM.PMMConfig.TestResultAPI_URL = txtTestResult_API_URL.Text;
+            if (VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null)
+                VideoKallLoginPage.LoginPage._loginVM.PMMConfig.TestResultAPI_URL = txtTestResult_API_URL.Text;
         }
     }
 

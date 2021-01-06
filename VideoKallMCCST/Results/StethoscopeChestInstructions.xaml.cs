@@ -7,6 +7,8 @@ using VideoKallMCCST.Communication;
 using VideoKallMCCST.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.AccessCache;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -111,17 +113,22 @@ namespace VideoKallMCCST.Results
             BtnRecord.Content = recordToggle ? "Stop Recording" : "Record";
         }
 
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            MainPage.mainPage.rootImageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
             string fileName = @"record.wav";
             string fileRename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName;
             string sourcePath = MainPage.mainPage.mainpagecontext.appFolder.Path;
-             targetPath = sourcePath+"\\Sethescope" + "\\" + MainPage.VideoCallVM.PatientDetails.ID+"\\Chest Sethescope";
-            string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
-            string destFile = System.IO.Path.Combine(targetPath, fileRename);
-            if (!System.IO.Directory.Exists(targetPath))
-                System.IO.Directory.CreateDirectory(targetPath);
-            System.IO.File.Move(sourceFile, destFile);
+            if (MainPage.mainPage.rootImageFolder != null && MainPage.mainPage.rootImageFolder.Path != null)
+            {
+                targetPath = MainPage.mainPage.rootImageFolder.Path + "\\Sethescope" + "\\" + MainPage.VideoCallVM.PatientDetails.ID + "\\Chest Sethescope";
+                MainPage.mainPage.targetpath = targetPath;
+                string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
+                string destFile = System.IO.Path.Combine(targetPath, fileRename);
+                if (!System.IO.Directory.Exists(targetPath))
+                    System.IO.Directory.CreateDirectory(targetPath);
+                System.IO.File.Move(sourceFile, destFile);
+            }
             if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
             {
                 TxtStatus.Text = Constants.MsgDevicenotDeployed;

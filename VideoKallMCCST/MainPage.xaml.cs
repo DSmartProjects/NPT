@@ -30,6 +30,7 @@ namespace VideoKallMCCST
         }
       
         public StorageFolder rootImageFolder { get; set; }
+        public string targetpath { get; set;}
         async void UpdateNotification(string s, int code)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>

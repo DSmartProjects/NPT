@@ -1461,7 +1461,7 @@ namespace VideoKallMCCST.View
             {
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 ////string subFolder = @"\VideoKall\StethescopeRX\Patients";
-                 var record_file = localFolder.Path + "\\Sethescope";
+                 var record_file = MainPage.mainPage.rootImageFolder.Path + "\\Sethescope" + "\\" + MainPage.VideoCallVM.PatientDetails.ID + "\\Chest Sethescope"; 
                 //if (File.Exists(record_file))
                 //{
 
@@ -1472,7 +1472,7 @@ namespace VideoKallMCCST.View
                 chestStethoscopeResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
                 chestStethoscopeResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                 MainPage.mainPage.mainpagecontext.ChestResult = chestStethoscopeResult;
-                chestStethoscopeResult.Recording_Path = record_file;
+                chestStethoscopeResult.Recording_Path = MainPage.mainPage.targetpath;
                 await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ChestResult);
                 //}
             }

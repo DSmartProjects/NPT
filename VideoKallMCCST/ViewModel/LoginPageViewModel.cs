@@ -94,7 +94,7 @@ namespace VideoKallMCCST.ViewModel
             bool isAdmin = !string.IsNullOrEmpty(Userid) && !string.IsNullOrEmpty(Constants.Admin_PWD) && Userid.Equals(Constants.Admin_UNAME, StringComparison.InvariantCultureIgnoreCase) && PasswordTxt.Equals(Constants.Admin_PWD, StringComparison.InvariantCultureIgnoreCase) ? true : false;
 
             //_httpClient = VideoKallLoginPage.LoginPage.HttpClient; 
-            if (!string.IsNullOrEmpty(_configuration.API_URL)&&!string.IsNullOrEmpty(_configuration.TestResultAPI_URL)&&isAdmin==false)
+            if (!string.IsNullOrEmpty(_configuration?.API_URL)&&!string.IsNullOrEmpty(_configuration?.TestResultAPI_URL)&&isAdmin==false)
             {
                 _httpClient.basePMM_APIUrl = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.API_URL;
                 _httpClient.base_APIUrl = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.TestResultAPI_URL;
