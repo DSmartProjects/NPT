@@ -115,19 +115,26 @@ namespace VideoKallMCCST.Results
 
         private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            MainPage.mainPage.rootImageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
-            string fileName = @"record.wav";
-            string fileRename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName;
-            string sourcePath = MainPage.mainPage.mainpagecontext.appFolder.Path;
-            if (MainPage.mainPage.rootImageFolder != null && MainPage.mainPage.rootImageFolder.Path != null)
+            try
             {
-                targetPath = MainPage.mainPage.rootImageFolder.Path + "\\Sethescope" + "\\" + MainPage.VideoCallVM.PatientDetails.ID + "\\Chest Sethescope";
-                MainPage.mainPage.targetpath = targetPath;
-                string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
-                string destFile = System.IO.Path.Combine(targetPath, fileRename);
-                if (!System.IO.Directory.Exists(targetPath))
-                    System.IO.Directory.CreateDirectory(targetPath);
-                System.IO.File.Move(sourceFile, destFile);
+                MainPage.mainPage.rootImageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
+                string fileName = @"record.wav";
+                string fileRename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName;
+                string sourcePath = MainPage.mainPage.mainpagecontext.appFolder.Path;
+                if (MainPage.mainPage.rootImageFolder != null && MainPage.mainPage.rootImageFolder.Path != null)
+                {
+                    targetPath = MainPage.mainPage.rootImageFolder.Path + "\\Sethescope" + "\\" + MainPage.VideoCallVM.PatientDetails.ID + "\\Chest Sethescope";
+                    MainPage.mainPage.targetpath = targetPath;
+                    string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
+                    string destFile = System.IO.Path.Combine(targetPath, fileRename);
+                    if (!System.IO.Directory.Exists(targetPath))
+                        System.IO.Directory.CreateDirectory(targetPath);
+                    System.IO.File.Move(sourceFile, destFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
             }
             if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
             {
