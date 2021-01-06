@@ -5,8 +5,11 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace VideoKallMCCST
@@ -60,6 +63,15 @@ namespace VideoKallMCCST
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
+                    ApplicationViewTitleBar titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;  
+                    titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
+                    titleBar.ButtonForegroundColor = Windows.UI.Colors.WhiteSmoke;
+                    titleBar.ButtonHoverBackgroundColor = Windows.UI.Colors.Transparent;
+                    titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.WhiteSmoke;
+                    titleBar.ButtonInactiveBackgroundColor = Windows.UI.Colors.Transparent;
+                    titleBar.ButtonInactiveForegroundColor = Windows.UI.Colors.Transparent;
+                    titleBar.ButtonPressedBackgroundColor = Windows.UI.Colors.Transparent;
+                    titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.WhiteSmoke;
                     rootFrame.Navigate(typeof(VideoKallLoginPage), e.Arguments);
                 }
                 // Ensure the current window is active
@@ -89,6 +101,18 @@ namespace VideoKallMCCST
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        public SolidColorBrush GetColorFromHexa(string hexaColor)
+        {
+            return new SolidColorBrush(
+                Color.FromArgb(
+                    255,
+                    Convert.ToByte(hexaColor.Substring(1, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(3, 2), 16),
+                    Convert.ToByte(hexaColor.Substring(5, 2), 16)
+                )
+            );
         }
     }
 }

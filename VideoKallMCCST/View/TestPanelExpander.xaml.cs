@@ -59,6 +59,7 @@ namespace VideoKallMCCST.View
         WriteableBitmap bitMap = null;
         byte[] buffer = null;
         OtoscopeimageViewer oto = new OtoscopeimageViewer();
+        StethoscopeChestInstructions sethChest = new StethoscopeChestInstructions();
         public TestPanelExpander()
         {
             this.InitializeComponent();
@@ -714,9 +715,9 @@ namespace VideoKallMCCST.View
                 pulseTestResult.Patient = null;
                 //pulseTestResult.PatientId = 16042;
                 pulseTestResult.ChairId = 123456;
-                pulseTestResult.CreatedBy = 1;
+                pulseTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
                 pulseTestResult.CreatedDate = DateTime.Now;
-                pulseTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                pulseTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                 MainPage.mainPage.mainpagecontext.PulseResult = pulseTestResult;
                 await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.PulseResult);
 
@@ -780,8 +781,8 @@ namespace VideoKallMCCST.View
                 thermoResult.ChairId = 123456;
                 thermoResult.Mode = tmpMode;
                 thermoResult.CreatedDate = DateTime.Now;
-                thermoResult.CreatedBy = 1;
-                thermoResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                thermoResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                thermoResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                 MainPage.mainPage.mainpagecontext.ThermoResult = thermoResult;
                 await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ThermoResult);
 
@@ -940,8 +941,8 @@ namespace VideoKallMCCST.View
                     bpTestResult.ChairId = 123456;
                     //bpTestResult.PatientId = 16042;
                     bpTestResult.CreatedDate = DateTime.Now;
-                    bpTestResult.CreatedBy = 1;
-                    bpTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    bpTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                    bpTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                     MainPage.mainPage.mainpagecontext.BpResult = bpTestResult;
                     await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.BpResult);
                 }
@@ -1003,9 +1004,9 @@ namespace VideoKallMCCST.View
                     weightTestResult.Patient = null;
                     //weightTestResult.PatientId = 16042;
                     weightTestResult.ChairId = 123456;
-                    weightTestResult.CreatedBy = 1;
+                    weightTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
                     weightTestResult.CreatedDate = DateTime.Now;
-                    weightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    weightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                     MainPage.mainPage.mainpagecontext.WeightResult = weightTestResult;
                     await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.WeightResult);
                 }
@@ -1046,9 +1047,9 @@ namespace VideoKallMCCST.View
                     heightTestResult.Patient = null;
                     //heightTestResult.PatientId = 16042;
                     heightTestResult.ChairId = 123456;
-                    heightTestResult.CreatedBy = 1;
+                    heightTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
                     heightTestResult.CreatedDate = DateTime.Now;
-                    heightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    heightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                     MainPage.mainPage.mainpagecontext.heightResult = heightTestResult;
                     await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.heightResult);
                 }
@@ -1107,11 +1108,11 @@ namespace VideoKallMCCST.View
                    // DisplayImage(oto.ImageName);
                     OtoscopeTestResult otoscope = new OtoscopeTestResult();
                     otoscope.ChairId = 123456;
-                    otoscope.CreatedBy = 1;
+                    otoscope.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
                     otoscope.CreatedDate = DateTime.Now;
                     //otoscope.PatientId = 16042;
                     otoscope.Image = oto.buffer;
-                    otoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    otoscope.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                     MainPage.mainPage.mainpagecontext.OtoResult = otoscope;
                     await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.OtoResult);
                 }
@@ -1171,11 +1172,11 @@ namespace VideoKallMCCST.View
                    // DisplayImage(oto.ImageName);
                     DermatoscopeTestResult Dermoscope = new DermatoscopeTestResult();
                     Dermoscope.ChairId = 123456;
-                    Dermoscope.CreatedBy = 1;
+                    Dermoscope.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
                     Dermoscope.CreatedDate = DateTime.Now;
                     //Dermoscope.PatientId = 16042;
                     Dermoscope.Image = oto.buffer;
-                    Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                    Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                     MainPage.mainPage.mainpagecontext.DermoResult = Dermoscope;
                     await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
                 }
@@ -1289,8 +1290,8 @@ namespace VideoKallMCCST.View
                 //glucoTestResult.PatientId = 16042;
                 glucoTestResult.ChairId = 123456;
                 glucoTestResult.CreatedDate = DateTime.Now;
-                glucoTestResult.CreatedBy = 1;
-                glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                glucoTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0; ;
                 MainPage.mainPage.mainpagecontext.GlucoResult = glucoTestResult;
                 await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.GlucoResult);
             }
@@ -1353,8 +1354,8 @@ namespace VideoKallMCCST.View
                             spiroResult.Patient = null;
                             spiroResult.ChairId = 123456;
                             spiroResult.CreatedDate = DateTime.Now;
-                            spiroResult.CreatedBy = 1;
-                            spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                            spiroResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                            spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                             MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
                             await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
                         }
@@ -1382,8 +1383,8 @@ namespace VideoKallMCCST.View
                             spiroResult.Code = parm.Code;
                             spiroResult.ParameterType = parm.ParameterType;
                             spiroResult.CreatedDate = DateTime.Now;
-                            spiroResult.CreatedBy = 1;
-                            spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails.ID;
+                            spiroResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                            spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                             MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
                             await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
                         }
@@ -1453,25 +1454,27 @@ namespace VideoKallMCCST.View
             DeployRetractDevice(_stethoscopeChest, MainPage.mainPage.Podmapping.StethoscopeChestPodID);
             if (_stethoscopeChest)// && !MainPage.mainPage.isStethoscopeReadystreaming)
             {
-                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTCHEST));
-                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                //string subFolder = @"\VideoKall\StethescopeRX\Patients";
-                var record_file = localFolder.Path + @"\record.wav";
-                if (File.Exists(record_file))
-                {
-                   
-                    ChestStethoscopeTestResult chestStethoscopeResult = new ChestStethoscopeTestResult();
-                    chestStethoscopeResult.Patient = null;
-                    chestStethoscopeResult.PatientId = 16042;
-                    chestStethoscopeResult.ChairId = 123456;
-                    chestStethoscopeResult.CreatedDate = DateTime.Now;
-                    chestStethoscopeResult.CreatedBy = 1;
-                    chestStethoscopeResult.PatientId = MainPage.VideoCallVM.PatientDetails!=null&& MainPage.VideoCallVM.PatientDetails.ID>0? MainPage.VideoCallVM.PatientDetails.ID:0;
-                    MainPage.mainPage.mainpagecontext.ChestResult = chestStethoscopeResult;
-                    chestStethoscopeResult.Recording_Path = record_file;
-                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ChestResult);
-                }
+                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTCHEST));               
 
+            }
+            if (_stethoscopeChest == false)
+            {
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                ////string subFolder = @"\VideoKall\StethescopeRX\Patients";
+                 var record_file = localFolder.Path + "\\Sethescope";
+                //if (File.Exists(record_file))
+                //{
+
+                ChestStethoscopeTestResult chestStethoscopeResult = new ChestStethoscopeTestResult();
+                chestStethoscopeResult.Patient = null;
+                chestStethoscopeResult.ChairId = 123456;
+                chestStethoscopeResult.CreatedDate = DateTime.Now;
+                chestStethoscopeResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                chestStethoscopeResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                MainPage.mainPage.mainpagecontext.ChestResult = chestStethoscopeResult;
+                chestStethoscopeResult.Recording_Path = record_file;
+                await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ChestResult);
+                //}
             }
         }
 

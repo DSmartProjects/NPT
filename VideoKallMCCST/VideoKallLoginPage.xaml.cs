@@ -36,8 +36,8 @@ namespace VideoKallMCCST
         public VideoKallLoginPage()
         {
             LoginPage = this;
-            HttpClient = new HttpClientManager();
             _loginVM = new LoginPageViewModel();
+            HttpClient = new HttpClientManager();       
             this.InitializeComponent();
             this.DataContext = _loginVM;
         }

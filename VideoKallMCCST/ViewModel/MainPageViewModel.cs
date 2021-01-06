@@ -58,7 +58,7 @@ namespace VideoKallMCCST.ViewModel
         public SeatBackStethoscopeTestResult SeatResult { get { return _seatResult; } set { _seatResult = value; OnPropertyChanged("SeatResult"); } }
 
         #endregion
-
+        public StorageFolder appFolder= Windows.Storage.ApplicationData.Current.LocalFolder;       
         public event PropertyChangedEventHandler PropertyChanged;
         public EventHandler<CommunicationMsg> NotifyResult;
         private void OnPropertyChanged(string propertyName)
@@ -350,7 +350,7 @@ namespace VideoKallMCCST.ViewModel
 
         public async void ExecuteBrowserCommand()
         {
-            StorageFolder appFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+             appFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             await Launcher.LaunchFolderAsync(appFolder);
         }
         ///
