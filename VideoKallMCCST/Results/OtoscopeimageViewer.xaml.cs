@@ -134,11 +134,13 @@ namespace VideoKallMCCST.Results
 
             if (!isDermascope)
             {              
-                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.OTOSAVEIMAGE);               
+                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.OTOSAVEIMAGE);
+                Toast.ShowToast("", "Successfully Saved");
             }
             else
             {
-                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.DERSAVEIMAGE);               
+                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.DERSAVEIMAGE);
+                Toast.ShowToast("", "Successfully Saved");
             }
         
             BtnSave.IsEnabled = false;           

@@ -23,7 +23,7 @@ namespace VideoKallMCCST.Helpers
         public const string InValid_UNAME_PWD = @"Please provide valid username and password";
         public const string StatusCode_Success ="200";
         public const string Login_Success_MSG = "Login Successfull";
-        public const string Admin_UNAME = "Nurse";
+        public const string Admin_UNAME = "Admin";
         public const string Admin_PWD = "ClinicStop@2021";
         public const int Admin_ID =1;
 

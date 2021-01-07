@@ -65,13 +65,13 @@ namespace VideoKallMCCST
                     // parameter
                     ApplicationViewTitleBar titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;  
                     titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
-                    titleBar.ButtonForegroundColor = Windows.UI.Colors.WhiteSmoke;
+                    titleBar.ButtonForegroundColor = Windows.UI.Colors.White;
                     titleBar.ButtonHoverBackgroundColor = Windows.UI.Colors.Transparent;
-                    titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.WhiteSmoke;
+                    titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
                     titleBar.ButtonInactiveBackgroundColor = Windows.UI.Colors.Transparent;
                     titleBar.ButtonInactiveForegroundColor = Windows.UI.Colors.Transparent;
                     titleBar.ButtonPressedBackgroundColor = Windows.UI.Colors.Transparent;
-                    titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.WhiteSmoke;
+                    titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.White;
                     rootFrame.Navigate(typeof(VideoKallLoginPage), e.Arguments);
                 }
                 // Ensure the current window is active

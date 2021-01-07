@@ -706,9 +706,8 @@ namespace VideoKallMCCST.View
                 TxtResultPulseOximeterpulse.Text = string.Empty;
                 ShowHidePulseoximeterdata(false);
             }
-            if (BtnPulseoximeterToggle == false && TxtResultPulseOximeter.Text != null && TxtResultPulseOximeterpulse.Text != null)
+            if (BtnPulseoximeterToggle == false && !(string.IsNullOrEmpty(TxtResultPulseOximeter.Text)) && !(string.IsNullOrEmpty(TxtResultPulseOximeterpulse.Text)))
             {
-
                 PulseOximeterTestResult pulseTestResult = new PulseOximeterTestResult();
                 pulseTestResult.SpO2 = Convert.ToInt32(pulseoxispo2);
                 pulseTestResult.HeartRate = Convert.ToInt32(pulseoxipulse);
@@ -1103,7 +1102,7 @@ namespace VideoKallMCCST.View
                     TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
                 }
 
-                if (_otoscopeToggle == false)
+                if (_otoscopeToggle == false && oto.buffer!= null)
                 {
                    // DisplayImage(oto.ImageName);
                     OtoscopeTestResult otoscope = new OtoscopeTestResult();
@@ -1167,7 +1166,7 @@ namespace VideoKallMCCST.View
                     TxtResultDermascope.BorderBrush = GetColorFromHexa("#FFC10D");
                     TxtResultDermascope.BorderThickness = new Thickness(0, 0, 0, 10);
                 }
-                if (_dermascopeToggle == false)
+                if (_dermascopeToggle == false && oto.buffer!=null)
                 {
                    // DisplayImage(oto.ImageName);
                     DermatoscopeTestResult Dermoscope = new DermatoscopeTestResult();

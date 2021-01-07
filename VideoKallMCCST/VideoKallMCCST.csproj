@@ -27,7 +27,7 @@
     <PackageCertificateKeyFile>VideoKallMCCST_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
-    <AppxPackageDir>C:\Users\sandyakumar\Desktop\DSmart Projects\1. NPT &amp; SMC\Client Release\07-12-2020\VideoKall NPT\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\sandyakumar\Desktop\DSmart Projects\1. NPT &amp; SMC\3. Release\Dev Release\06-01-2021\VideoKall NPT\</AppxPackageDir>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
@@ -537,19 +537,12 @@
       <Name>SBCDBModule</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM'">
-    <Reference Include="Microsoft.Samples.SimpleCommunication">
-      <HintPath>..\MediaExtension\ARM\Debug\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM'">
-    <Reference Include="Microsoft.Samples.SimpleCommunication">
-      <HintPath>..\MediaExtension\ARM\Release\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Samples.SimpleCommunication">
       <HintPath>..\..\..\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Samples.SimpleCommunication">
+      <HintPath>..\..\..\..\Users\sandyakumar\Desktop\DSmart Projects\1. NPT &amp; SMC\9. Team\Rama\VideoCallSDK\VideoCallSDK\X86\Debug\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
