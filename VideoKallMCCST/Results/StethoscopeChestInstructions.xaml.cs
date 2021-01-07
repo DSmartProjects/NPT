@@ -124,24 +124,25 @@ namespace VideoKallMCCST.Results
                 if (MainPage.mainPage.rootImageFolder != null && MainPage.mainPage.rootImageFolder.Path != null)
                 {
                     targetPath = MainPage.mainPage.rootImageFolder.Path + "\\Sethescope" + "\\" + MainPage.VideoCallVM.PatientDetails.ID + "\\Chest Sethescope";
-                    MainPage.mainPage.targetpath = targetPath;
+                    MainPage.mainPage.targetpath = targetPath+ "\\" + fileRename;
                     string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
                     string destFile = System.IO.Path.Combine(targetPath, fileRename);
-                    if (!System.IO.Directory.Exists(targetPath))
-                        System.IO.Directory.CreateDirectory(targetPath);
+                    if (!Directory.Exists(targetPath))
+                        Directory.CreateDirectory(targetPath);
                     System.IO.File.Move(sourceFile, destFile);
                     Toast.ShowToast("", "File Moved Successfully to Destination Folder");
                 }
-            }
-            catch (Exception ex)
-            {
-                string s = ex.Message;
-                Toast.ShowToast("","Failed to Move the File");
-            }
+           
             if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
             {
                 TxtStatus.Text = Constants.MsgDevicenotDeployed;
                 return;
+            }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+                Toast.ShowToast("", "Failed to Move the File");
             }
 
         }
