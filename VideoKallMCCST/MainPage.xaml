@@ -82,7 +82,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="*"/>                
             </Grid.ColumnDefinitions>
-            <TextBlock  x:Name="AdminBlock" Grid.Column="2" Padding="5,5,5,5" FontWeight="SemiBold"  Foreground="#5B5B5B" FontSize="15" FontFamily="Open Sans" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+            <TextBlock  x:Name="AdminBlock" Grid.Column="2" Padding="5,5,5,5" FontWeight="SemiBold"  Foreground="#5B5B5B" FontSize="20" FontFamily="Open Sans" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"  />
         </Grid>
 
         <Grid Grid.Row="3"  Grid.ColumnSpan="3" Padding="10,3" Background="#F9F9F9"  BorderBrush="#ECECEC" BorderThickness="1"  Margin="0,1,0,0">

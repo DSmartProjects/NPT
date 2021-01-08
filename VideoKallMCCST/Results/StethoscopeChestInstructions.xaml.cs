@@ -117,23 +117,46 @@ namespace VideoKallMCCST.Results
         {
             try
             {
+                //string fileName = @"record.wav";
+                //string fileRename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName;
+                //targetPath = "\\" + MainPage.VideoCallVM.PatientDetails.ID + "\\Chest Sethescope";
+                //MainPage.mainPage.targetpath = targetPath + "\\" + fileRename;
+                //var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                //StorageFile audioFile = await localFolder.GetFileAsync(fileName);
+                //StorageFolder strRootFolderPath = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
+                //StorageFolder assetsFolder = await strRootFolderPath.CreateFolderAsync("Sethescope", CreationCollisionOption.FailIfExists);
+                //await audioFile.MoveAsync(assetsFolder, fileRename);
+                //Toast.ShowToast("", "File Moved Successfully to Destination Folder");
+
                 string fileName = @"record.wav";
-                string fileRename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName;
+                string fileRename = MainPage.VideoCallVM.PatientDetails.ID +"_"+DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName; ;
                 targetPath = "\\" + MainPage.VideoCallVM.PatientDetails.ID + "\\Chest Sethescope";
                 MainPage.mainPage.targetpath = targetPath + "\\" + fileRename;
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 StorageFile audioFile = await localFolder.GetFileAsync(fileName);
                 StorageFolder strRootFolderPath = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
-                //string sethescopeFolder = strRootFolderPath.Path +@"\Sethescope";
-                //StorageFolder sethescopeFolder = await StorageFolder.GetFolderFromPathAsync("Sethescope");
+                if (strRootFolderPath.Path != null && strRootFolderPath != null)
+                {
+                    StorageFolder assetsFolder = null; ;
+                    var file = await strRootFolderPath.TryGetItemAsync("Sethescope");
+                    if (file == null)
+                    {
+                        assetsFolder = await strRootFolderPath.CreateFolderAsync("Sethescope", CreationCollisionOption.FailIfExists);
+                    }
+                    else
+                    {
+                        assetsFolder = await strRootFolderPath.GetFolderAsync("Sethescope");
+                       
+                    }
 
+                    await audioFile.MoveAsync(assetsFolder, fileRename);
+                    MainPage.mainPage.targetpath = strRootFolderPath.Path + "\\Sethescope"+"\\" + fileRename;
+                    Toast.ShowToast("", "File Moved Successfully to Destination Folder");
+                }
+                else {
+                    Toast.ShowToast("", "Please set your SMC destination folder.");
+                }
 
-
-                //StorageFolder assetsFolder = await StorageFolder.GetFolderFromPathAsync(sethescopeFolder); 
-                StorageFolder assetsFolder = await strRootFolderPath.CreateFolderAsync("Sethescope", CreationCollisionOption.FailIfExists);
-                //StorageFolder storagefolder = await StorageFolder.GetFolderFromPathAsync(targetPath);
-                await audioFile.MoveAsync(assetsFolder, fileRename);
-                Toast.ShowToast("", "File Moved Successfully to Destination Folder");
                 if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
                 {
                     TxtStatus.Text = Constants.MsgDevicenotDeployed;
