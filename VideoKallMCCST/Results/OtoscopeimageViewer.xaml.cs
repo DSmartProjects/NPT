@@ -100,9 +100,60 @@ namespace VideoKallMCCST.Results
             }
 
             if (!isDermascope)
+            {
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
+            }
             else
+            {
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
+            }
+
+            //if (!isDermascope){
+            //    MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
+
+            //    try
+            //    {
+            //        if (buffer != null)
+            //        {
+            //            // DisplayImage(oto.ImageName);
+            //            OtoscopeTestResult otoscope = new OtoscopeTestResult();
+            //            otoscope.ChairId = 123456;
+            //            otoscope.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+            //            otoscope.CreatedDate = DateTime.Now;
+            //            //otoscope.PatientId = 16042;
+            //            otoscope.Image = buffer;
+            //            otoscope.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+            //            MainPage.mainPage.mainpagecontext.OtoResult = otoscope;
+            //            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.OtoResult);
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        string s = ex.Message;
+            //    }
+            //}
+            //else {
+            //    MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
+            //    try
+            //    {
+            //        if (buffer != null)
+            //        {
+            //            DermatoscopeTestResult Dermoscope = new DermatoscopeTestResult();
+            //            Dermoscope.ChairId = 123456;
+            //            Dermoscope.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+            //            Dermoscope.CreatedDate = DateTime.Now;
+            //            Dermoscope.Image = buffer;
+            //            Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+            //            MainPage.mainPage.mainpagecontext.DermoResult = Dermoscope;
+            //            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        string s = ex.Message;
+            //    }
+            //}
+                
 
             ImageViewer.Source = null;
             BtnTakePic.IsEnabled = true;
