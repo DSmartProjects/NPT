@@ -22,6 +22,14 @@ namespace VideoKallMCCST
             this.InitializeComponent();
             mainPage = this;
             this.DataContext = mainpagecontext;
+            if (VideoKallLoginPage.LoginPage._loginVM.IsAdmin==false)
+            {
+                spSettings.Visibility = Visibility.Collapsed;
+            }
+            else if (VideoKallLoginPage.LoginPage._loginVM.IsAdmin)
+            {
+                spSettings.Visibility = Visibility.Visible;
+            }
             VideoCallVM = new VideoCallViewModel();
            // HttpClient = new HttpClientManager();
             RightPanelHolder.Navigate(typeof(VideoCall));

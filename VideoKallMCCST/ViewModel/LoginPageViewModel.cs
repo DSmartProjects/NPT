@@ -32,6 +32,19 @@ namespace VideoKallMCCST.ViewModel
                 OnPropertyChanged("ToUserId");
             }
         }
+        private bool _isAdmin = false;
+        public bool IsAdmin
+        {
+            get
+            {
+                return _isAdmin;
+            }
+            set
+            {
+                _isAdmin = value;
+                OnPropertyChanged("IsAdmin");
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
@@ -91,16 +104,16 @@ namespace VideoKallMCCST.ViewModel
             _httpClient = VideoKallLoginPage.LoginPage.HttpClient;
             _configuration= VideoKallLoginPage.LoginPage._loginVM.PMMConfig;
             bool isLogin = false;
-            bool isAdmin = !string.IsNullOrEmpty(Userid) && !string.IsNullOrEmpty(Constants.Admin_PWD) && Userid.Equals(Constants.Admin_UNAME, StringComparison.InvariantCultureIgnoreCase) && PasswordTxt.Equals(Constants.Admin_PWD, StringComparison.InvariantCultureIgnoreCase) ? true : false;
+            IsAdmin = !string.IsNullOrEmpty(Userid) && !string.IsNullOrEmpty(Constants.Admin_PWD) && Userid.Equals(Constants.Admin_UNAME, StringComparison.InvariantCultureIgnoreCase) && PasswordTxt.Equals(Constants.Admin_PWD, StringComparison.InvariantCultureIgnoreCase) ? true : false;
 
             //_httpClient = VideoKallLoginPage.LoginPage.HttpClient; 
-            if (!string.IsNullOrEmpty(_configuration?.API_URL)&&!string.IsNullOrEmpty(_configuration?.TestResultAPI_URL)&&isAdmin==false)
+            if (!string.IsNullOrEmpty(_configuration?.API_URL)&&!string.IsNullOrEmpty(_configuration?.TestResultAPI_URL)&& IsAdmin == false)
             {
                 _httpClient.basePMM_APIUrl = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.API_URL;
                 _httpClient.base_APIUrl = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.TestResultAPI_URL;
                  isLogin= await _httpClient.Authenticate(Userid, PasswordTxt);
             }           
-            if (isAdmin)
+            if (IsAdmin)
             {
                 TokUserId = Constants.Admin_ID;
                 VideoKallLoginPage.LoginPage.Frame.Navigate(typeof(MainPage));
