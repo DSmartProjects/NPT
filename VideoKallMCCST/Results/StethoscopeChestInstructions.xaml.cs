@@ -117,27 +117,28 @@ namespace VideoKallMCCST.Results
         {
             try
             {
-                MainPage.mainPage.rootImageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
                 string fileName = @"record.wav";
                 string fileRename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName;
-                string sourcePath = MainPage.mainPage.mainpagecontext.appFolder.Path;
-                if (MainPage.mainPage.rootImageFolder != null && MainPage.mainPage.rootImageFolder.Path != null)
+                targetPath = "\\" + MainPage.VideoCallVM.PatientDetails.ID + "\\Chest Sethescope";
+                MainPage.mainPage.targetpath = targetPath + "\\" + fileRename;
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                StorageFile audioFile = await localFolder.GetFileAsync(fileName);
+                StorageFolder strRootFolderPath = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
+                //string sethescopeFolder = strRootFolderPath.Path +@"\Sethescope";
+                //StorageFolder sethescopeFolder = await StorageFolder.GetFolderFromPathAsync("Sethescope");
+
+
+
+                //StorageFolder assetsFolder = await StorageFolder.GetFolderFromPathAsync(sethescopeFolder); 
+                StorageFolder assetsFolder = await strRootFolderPath.CreateFolderAsync("Sethescope", CreationCollisionOption.FailIfExists);
+                //StorageFolder storagefolder = await StorageFolder.GetFolderFromPathAsync(targetPath);
+                await audioFile.MoveAsync(assetsFolder, fileRename);
+                Toast.ShowToast("", "File Moved Successfully to Destination Folder");
+                if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
                 {
-                    targetPath = MainPage.mainPage.rootImageFolder.Path + "\\Sethescope" + "\\" + MainPage.VideoCallVM.PatientDetails.ID + "\\Chest Sethescope";
-                    MainPage.mainPage.targetpath = targetPath+ "\\" + fileRename;
-                    string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
-                    string destFile = System.IO.Path.Combine(targetPath, fileRename);
-                    if (!Directory.Exists(targetPath))
-                        Directory.CreateDirectory(targetPath);
-                    System.IO.File.Move(sourceFile, destFile);
-                    Toast.ShowToast("", "File Moved Successfully to Destination Folder");
+                    TxtStatus.Text = Constants.MsgDevicenotDeployed;
+                    return;
                 }
-           
-            if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
-            {
-                TxtStatus.Text = Constants.MsgDevicenotDeployed;
-                return;
-            }
             }
             catch (Exception ex)
             {
