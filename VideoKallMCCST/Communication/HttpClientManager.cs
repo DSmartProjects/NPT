@@ -64,11 +64,11 @@ namespace VideoKallMCCST.Communication
                 try
                 {
                     HttpResponseMessage response = await client.PostAsync(uri, data);
-                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    httpResponseBody = await response.Content.ReadAsStringAsync();                 
                     var myDetails = JsonConvert.DeserializeObject<Result<Token>>(httpResponseBody);
-                    string[] mydetailsSplit = myDetails.data.token.Split(' ');
-                    if (myDetails.status!=null&&myDetails.status.Equals(Constants.StatusCode_Success,StringComparison.InvariantCultureIgnoreCase))
+                    if (myDetails.status!=null&&myDetails.data!=null&&myDetails.status.Equals(Constants.StatusCode_Success,StringComparison.InvariantCultureIgnoreCase))
                     {
+                        string[] mydetailsSplit = myDetails.data.token.Split(' ');
                         var stream = mydetailsSplit[1];
                         var handler = new JwtSecurityTokenHandler();
                         var jsonToken = handler.ReadToken(stream);
@@ -90,7 +90,7 @@ namespace VideoKallMCCST.Communication
                 }
                 catch (Exception ex)
                 {
-                    Toast.ShowToast("", Constants.InValid_UNAME_PWD);
+                   // Toast.ShowToast("", Constants.InValid_UNAME_PWD);
                     httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
                     return isSuccess;
                 }     
