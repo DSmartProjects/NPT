@@ -25,10 +25,12 @@ namespace VideoKallMCCST
             if (VideoKallLoginPage.LoginPage._loginVM.IsAdmin==false)
             {
                 spSettings.Visibility = Visibility.Collapsed;
+                AdminBlock.Text = "Nurse";
             }
             else if (VideoKallLoginPage.LoginPage._loginVM.IsAdmin)
             {
                 spSettings.Visibility = Visibility.Visible;
+                AdminBlock.Text = "Admin";
             }
             VideoCallVM = new VideoCallViewModel();
            // HttpClient = new HttpClientManager();
