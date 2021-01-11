@@ -190,16 +190,20 @@ namespace VideoKallMCCST.Results
             startstoptoggle    = !startstoptoggle;
             BtnStart.Content = startstoptoggle ? "Stop streaming" : "Start streaming";
             if (startstoptoggle)
-            { 
-                    MainPage.mainPage.StethoscopeStartStop.Invoke("startST", 1); 
-               
+            {
+                MainPage.mainPage.StethoscopeStartStop.Invoke("startST", 1);
+
             }
             else
             {
                 MainPage.mainPage.StethoscopeStartStop.Invoke("stopST", 1);
                 BtnStart.Content = startstoptoggle ? "Stop streaming" : "Start streaming";
 
-               // MainPage.mainPage.isStethoscopeStreaming = false;
+                // MainPage.mainPage.isStethoscopeStreaming = false;
+                if (BtnStart.Content == "Start streaming")
+                {
+                    BtnSave.IsEnabled = true;
+                }
             }
         } 
 
