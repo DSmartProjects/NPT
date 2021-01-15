@@ -11,7 +11,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
 
     <Page.Resources>
-        <conv:DateFormatConverter x:Name="DateToStringFormatConverter"/>       
+        <conv:DateFormatConverter x:Name="DateToStringFormatConverter"/>
     </Page.Resources>
 
     <Grid BorderBrush="#DBDBDB"  BorderThickness="1,0,0,0">
@@ -84,7 +84,9 @@
                 <Line Grid.Row="3" StrokeThickness="0.2" Stroke="#434343" Margin="0,0,5,0" X1="0" X2="385" Y1="13" Y2="13" />
                 <StackPanel Grid.Row="4" x:Name="spNotes" VerticalAlignment="Top"  Orientation="Vertical">
                     <TextBlock Text="Clinical Notes :" VerticalAlignment="Top" Margin="0,0,0,0" FontWeight="SemiBold" Foreground="#194F82" FontSize="12"/>
-                    <TextBlock  TextWrapping="WrapWholeWords"  Height="160"  Width="320"  Foreground="Black"/>
+                    <!--<TextBlock  TextWrapping="WrapWholeWords"  Height="160"  Width="320"  Foreground="Black"/>-->
+                    <TextBox x:Name="WrapWholeWords" Height="160"  Width="380" PlaceholderText="Notes" AcceptsReturn="True" TextWrapping="Wrap" Margin="5, 10, 5, 20"/>
+                    <Button x:Name="btnSaveClinicalNotes" Click="BtnSaveClinicalNotes_Click" Content="Save" Height="20" Margin="5,0,305,0" FontSize="10" BorderThickness="0,0,0,0" FontFamily="Open Sans" CornerRadius="10"   FontWeight="SemiBold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FFF" Background="#26639B"  />
                 </StackPanel>
             </Grid>
             <Grid Margin="20,0,0,0" Grid.Row="3" VerticalAlignment="Bottom">

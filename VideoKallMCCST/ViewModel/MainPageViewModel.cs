@@ -57,6 +57,9 @@ namespace VideoKallMCCST.ViewModel
         private SeatBackStethoscopeTestResult _seatResult = null;
         public SeatBackStethoscopeTestResult SeatResult { get { return _seatResult; } set { _seatResult = value; OnPropertyChanged("SeatResult"); } }
 
+        private ClinicalNote _clinicalNote = null;
+        public ClinicalNote ClinicalNote { get { return _clinicalNote; } set { _clinicalNote = value; OnPropertyChanged("ClinicalNote"); } }
+
         #endregion
         public StorageFolder appFolder= Windows.Storage.ApplicationData.Current.LocalFolder;       
         public event PropertyChangedEventHandler PropertyChanged;

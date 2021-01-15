@@ -187,8 +187,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
-                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
+            //if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+            //    request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
 
             using (var client = new HttpClient())
             {
@@ -617,6 +617,51 @@ namespace VideoKallMCCST.Communication
             }
             else
                 return false;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(uri),
+            };
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
+            using (var client = new HttpClient())
+            {
+
+                string httpResponseBody = "";
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(uri, data);
+                    httpResponseBody = await response.Content.ReadAsStringAsync();
+                    Toast.ShowToast("", "Successfully Saved.");
+                }
+                catch (Exception ex)
+                {
+                    Toast.ShowToast("", "Failed");
+                    httpResponseBody = "Error: " + ex.HResult.ToString("X") + " Message: " + ex.Message;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public async Task<bool> POST(ClinicalNote clinicalNote)
+        {
+
+            var uri = string.Empty;
+            //Converting the object to a json string. NOTE: Make sure the object doesn't contain circular references.
+
+            string json = JsonConvert.SerializeObject(clinicalNote);
+
+            //Needed to setup the body of the request
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+            //if (!string.IsNullOrEmpty(base_APIUrl))
+            //{
+            //    uri = base_APIUrl + "/ClinicalNotes";
+            //}
+            //else
+            //    return false;
+
+            uri = "https://localhost:44355/api" + "/ClinicalNotes";
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Post,

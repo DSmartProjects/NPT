@@ -27,7 +27,7 @@
     <PackageCertificateKeyFile>VideoKallMCCST_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
-    <AppxPackageDir>C:\Users\sandyakumar\Desktop\DSmart Projects\1. NPT &amp; SMC\3. Release\Dev Release\06-01-2021\VideoKall NPT\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\sandyakumar\Desktop\NPTNewBuild\</AppxPackageDir>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
@@ -144,6 +144,7 @@
     <Compile Include="Helpers\Toast.cs" />
     <Compile Include="Model\BloodPressureTestResult.cs" />
     <Compile Include="Model\ChestStethoscopeTestResult.cs" />
+    <Compile Include="Model\ClinicalNote.cs" />
     <Compile Include="Model\DermatoscopeTestResult.cs" />
     <Compile Include="Model\GlucoseMonitorTestResult.cs" />
     <Compile Include="Model\HeightTestResult.cs" />
@@ -538,10 +539,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Samples.SimpleCommunication">
-      <HintPath>..\..\..\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Samples.SimpleCommunication">
+    <Reference Include="Microsoft.Samples.SimpleCommunication, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Users\sandyakumar\Desktop\DSmart Projects\1. NPT &amp; SMC\9. Team\Rama\VideoCallSDK\VideoCallSDK\X86\Debug\Microsoft.Samples.SimpleCommunication\Microsoft.Samples.SimpleCommunication.winmd</HintPath>
     </Reference>
   </ItemGroup>

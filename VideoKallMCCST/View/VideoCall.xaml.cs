@@ -285,9 +285,12 @@ namespace VideoKallMCCST.View
 
         private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)
         {
-            SearchPatient searchPatient = new SearchPatient();
-            await searchPatient.ShowAsync();
+            //SearchPatient searchPatient = new SearchPatient();
+            //await searchPatient.ShowAsync();
             //SearchPatientPOP.IsOpen = true;
+
+            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
+
         }
         private async void Accept_Click(object sender, RoutedEventArgs e)
         {
@@ -438,7 +441,7 @@ namespace VideoKallMCCST.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            btnSearchPatient.IsEnabled = false;
+            //btnSearchPatient.IsEnabled = false;
             SMCConnecteionStatus();
 
             SMCCommChannel = new CommunicationChannel();
@@ -540,6 +543,22 @@ namespace VideoKallMCCST.View
                 TxtSMCStatus.Background = GetColorFromHexa("#FFC10D");
             }
         }
+
+        private async void BtnSaveClinicalNotes_Click(object sender, RoutedEventArgs e)
+        {
+            ClinicalNote clinicalNote = new ClinicalNote();
+            clinicalNote.Patient = null;
+            clinicalNote.ChairId = 123456;
+            clinicalNote.Notes = WrapWholeWords.Text;
+            clinicalNote.CreatedDate = DateTime.Now;
+            clinicalNote.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+            clinicalNote.PatientId = 31051;
+            //clinicalNote.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+            MainPage.mainPage.mainpagecontext.ClinicalNote = clinicalNote;
+            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ClinicalNote);
+        }
+
+
         public CommunicationChannel SMCCommChannel { get; private set; }
 
         int intervalcount = 0;
