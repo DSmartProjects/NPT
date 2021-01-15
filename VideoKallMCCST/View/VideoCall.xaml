@@ -85,7 +85,7 @@
                 <StackPanel Grid.Row="4" x:Name="spNotes" VerticalAlignment="Top"  Orientation="Vertical">
                     <TextBlock Text="Clinical Notes :" VerticalAlignment="Top" Margin="0,0,0,0" FontWeight="SemiBold" Foreground="#194F82" FontSize="12"/>
                     <!--<TextBlock  TextWrapping="WrapWholeWords"  Height="160"  Width="320"  Foreground="Black"/>-->
-                    <TextBox x:Name="WrapWholeWords" Height="160"  Width="380" PlaceholderText="Notes" AcceptsReturn="True" TextWrapping="Wrap" Margin="5, 10, 5, 20"/>
+                    <TextBox x:Name="WrapWholeWords" Height="120" PlaceholderText="Notes" AcceptsReturn="True" TextWrapping="Wrap" Margin="5, 10, 5, 20"/> <!--Height="160"  Width="380"-->
                     <Button x:Name="btnSaveClinicalNotes" Click="BtnSaveClinicalNotes_Click" Content="Save" Height="20" Margin="5,0,305,0" FontSize="10" BorderThickness="0,0,0,0" FontFamily="Open Sans" CornerRadius="10"   FontWeight="SemiBold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FFF" Background="#26639B"  />
                 </StackPanel>
             </Grid>

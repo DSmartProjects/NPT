@@ -287,6 +287,7 @@ namespace VideoKallMCCST.View
         {
             SearchPatient searchPatient = new SearchPatient();
             await searchPatient.ShowAsync();
+            btnSaveClinicalNotes.IsEnabled = true;
             //SearchPatientPOP.IsOpen = true;
 
             //MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
@@ -442,6 +443,8 @@ namespace VideoKallMCCST.View
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             btnSearchPatient.IsEnabled = false;
+            btnSaveClinicalNotes.IsEnabled = false;
+
             SMCConnecteionStatus();
 
             SMCCommChannel = new CommunicationChannel();
