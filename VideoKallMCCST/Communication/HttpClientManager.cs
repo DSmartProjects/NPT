@@ -187,8 +187,8 @@ namespace VideoKallMCCST.Communication
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(uri),
             };
-            //if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
-            //    request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
+            if (VideoKallLoginPage.LoginPage != null && VideoKallLoginPage.LoginPage._loginVM != null && !string.IsNullOrEmpty(VideoKallLoginPage.LoginPage._loginVM.Token))
+                request.Headers.Add("Authorization", VideoKallLoginPage.LoginPage._loginVM.Token);
 
             using (var client = new HttpClient())
             {
@@ -654,14 +654,14 @@ namespace VideoKallMCCST.Communication
 
             //Needed to setup the body of the request
             StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
-            //if (!string.IsNullOrEmpty(base_APIUrl))
-            //{
-            //    uri = base_APIUrl + "/ClinicalNotes";
-            //}
-            //else
-            //    return false;
+            if (!string.IsNullOrEmpty(base_APIUrl))
+            {
+                uri = base_APIUrl + "/ClinicalNotes";
+            }
+            else
+                return false;
 
-            uri = "https://localhost:44355/api" + "/ClinicalNotes";
+            //uri = "https://localhost:44355/api" + "/ClinicalNotes";
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Post,

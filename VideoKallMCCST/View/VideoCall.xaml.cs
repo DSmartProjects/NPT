@@ -285,11 +285,11 @@ namespace VideoKallMCCST.View
 
         private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)
         {
-            //SearchPatient searchPatient = new SearchPatient();
-            //await searchPatient.ShowAsync();
+            SearchPatient searchPatient = new SearchPatient();
+            await searchPatient.ShowAsync();
             //SearchPatientPOP.IsOpen = true;
 
-            MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
+            //MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
 
         }
         private async void Accept_Click(object sender, RoutedEventArgs e)
@@ -441,7 +441,7 @@ namespace VideoKallMCCST.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //btnSearchPatient.IsEnabled = false;
+            btnSearchPatient.IsEnabled = false;
             SMCConnecteionStatus();
 
             SMCCommChannel = new CommunicationChannel();
@@ -552,8 +552,8 @@ namespace VideoKallMCCST.View
             clinicalNote.Notes = WrapWholeWords.Text;
             clinicalNote.CreatedDate = DateTime.Now;
             clinicalNote.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
-            clinicalNote.PatientId = 31051;
-            //clinicalNote.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+            //clinicalNote.PatientId = 31051;
+            clinicalNote.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
             MainPage.mainPage.mainpagecontext.ClinicalNote = clinicalNote;
             await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ClinicalNote);
         }
