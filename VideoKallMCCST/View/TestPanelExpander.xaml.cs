@@ -637,9 +637,9 @@ namespace VideoKallMCCST.View
 
                         //BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         // "BPRES>D:{0}>S:{1}>P:{2}>DT:{3}>T:{4}";
-                        TxtSys.Text = res[2].Split(':')[1] + "/" + res[1].Split(':')[1] + " mmHg";
-                        dia= res[1].Split(':')[1];
-                        sys = res[2].Split(':')[1];
+                        TxtSys.Text = res[2]?.Split(':')[1] + "/" + res[1]?.Split(':')[1] + " mmHg";
+                        dia= res[1]?.Split(':')[1];
+                        sys = res[2]?.Split(':')[1];
                         //TxtDia.Text = res[1].Split(':')[1];
                         //TxtPulse.Text = res[3].Split(':')[1];
                         //  TxttestTime.Text = res[4].Split(':')[1] + " " + res[5];
