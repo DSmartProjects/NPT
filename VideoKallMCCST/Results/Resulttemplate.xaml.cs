@@ -27,8 +27,7 @@ namespace VideoKallMCCST.Results
             MainPage.mainPage.HM_WMEvents += InitializeUI;
             MainPage.mainPage.CASResult += CasNotification;
         }
-
-       async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
+        async void CasNotification(string message, int devicecode, int isresultornotificationmsg)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
@@ -82,7 +81,8 @@ namespace VideoKallMCCST.Results
                         RadKG.IsChecked = null;
                         RadCM.IsChecked = true;
                         RadFt.IsChecked = null;
-                       
+                        TxtStatus.Text = string.Empty;
+                        MainPage.mainPage.Heightdelegate?.Invoke(false);
                     }
                     else
                     {

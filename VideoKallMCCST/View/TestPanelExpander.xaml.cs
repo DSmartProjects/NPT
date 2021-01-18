@@ -104,6 +104,10 @@ namespace VideoKallMCCST.View
                     TxtResultHeight.Text = String.Empty;
                     TxtLableHeight.Visibility = Visibility.Collapsed;
                 }
+                if (status.Equals(false))
+                {
+                    height = string.Empty;
+                }
             });
         }
         async void Weightdelegate(bool status)
@@ -1051,6 +1055,7 @@ namespace VideoKallMCCST.View
                     heightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                     MainPage.mainPage.mainpagecontext.heightResult = heightTestResult;
                     await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.heightResult);
+              
                 }
             }
 
