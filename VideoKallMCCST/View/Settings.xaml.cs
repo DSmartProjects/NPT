@@ -42,10 +42,17 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.REQ_MSG_VisibilityCompleted += REQ_MSG_Visibility;
             TxtimageFolder.Text = "\\\\"+ MainPage.mainPage.SMCCommChannel.IPAddress+"\\" + strRootFolder;
             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
-            if(MainPage.mainPage.isDataAcquitionappConnected)
-                TxtDataAcq.Foreground= GetColorFromHexa("#34CBA8");
+            if (MainPage.mainPage.isDataAcquitionappConnected)
+            {
+                TxtDataAcq.Foreground = GetColorFromHexa("#34CBA8");
+                BtnConnectdaq.IsEnabled = false;
+            }
             else
+            {
                 TxtDataAcq.Foreground = GetColorFromHexa("#ED604A");
+                BtnConnectdaq.IsEnabled = true;
+            }
+
 
             MainPage.mainPage.DQConnectionCallback += UpdateConnectionStatus;
             TxtTmpUnitbtn.IsOn = MainPage.mainPage.mainpagecontext.ThermometerUnitF;
