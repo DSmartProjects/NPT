@@ -90,7 +90,7 @@ namespace VideoKallMCCST.View
             _configuration = VideoKallLoginPage.LoginPage._loginVM.PMMConfig;
             _httpClient.basePMM_APIUrl = _configuration?.API_URL;
             _httpClient.base_APIUrl = _configuration?.TestResultAPI_URL;
-
+            MainPage.mainPage.mainpagecontext.BindSharedFolderPath();
         }
         async void Heightdelegate(bool status)
         {

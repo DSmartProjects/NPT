@@ -17,6 +17,8 @@ using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.Storage.AccessCache;
+using Windows.Storage.Pickers;
 
 namespace VideoKallMCCST.ViewModel
 {
@@ -429,6 +431,28 @@ namespace VideoKallMCCST.ViewModel
             MainPage.mainPage.IsUserLogedin = false;
             rootFrame.BackStack.Clear();           
             rootFrame.Navigate(typeof(VideoKallLoginPage));
+        }
+        
+        string strRootFolder = "VideoKall";
+        string strRootFolderPath = "";
+        public async void BindSharedFolderPath()
+        {
+            try
+            {
+                FolderPicker folderPicker = new FolderPicker();
+                folderPicker.FileTypeFilter.Add(".png");
+
+                if (string.IsNullOrEmpty(strRootFolderPath))
+                    folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+                
+                MainPage.mainPage.rootImageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
+                strRootFolderPath = MainPage.mainPage.rootImageFolder.Path;
+
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
         }
 
     }//class
