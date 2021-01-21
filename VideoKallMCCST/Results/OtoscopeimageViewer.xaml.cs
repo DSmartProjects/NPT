@@ -186,12 +186,15 @@ namespace VideoKallMCCST.Results
             if (!isDermascope)
             {              
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.OTOSAVEIMAGE);
-                Toast.ShowToast("", "Successfully Saved");
+                //Toast.ShowToast("", "Successfully Saved");
+                Toast.ShowToast("", "Image Moved Successfully to Destination Folder");
+                
             }
             else
             {
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.DERSAVEIMAGE);
-                Toast.ShowToast("", "Successfully Saved");
+                //Toast.ShowToast("", "Successfully Saved");
+                Toast.ShowToast("", "Image Moved Successfully to Destination Folder");
             }
         
             BtnSave.IsEnabled = false;           

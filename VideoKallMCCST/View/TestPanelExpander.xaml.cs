@@ -1125,6 +1125,7 @@ namespace VideoKallMCCST.View
                 ResulOtoscopePopup.IsOpen = _otoscopeToggle;
 
                 DeployRetractDevice(_otoscopeToggle, MainPage.mainPage.Podmapping.OtoscopePodID);
+                oto.buffer = null;
             }
             catch (Exception ex)
             {
@@ -1183,9 +1184,11 @@ namespace VideoKallMCCST.View
                     Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
                     MainPage.mainPage.mainpagecontext.DermoResult = Dermoscope;
                     await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
+                    
                 }
                 ResulDermascopePopup.IsOpen = _dermascopeToggle;
                 DeployRetractDevice(_dermascopeToggle, MainPage.mainPage.Podmapping.DermascopePodID);
+                oto.buffer = null;
             }
             catch (Exception ex)
             {
