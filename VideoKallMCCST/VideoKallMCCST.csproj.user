@@ -10,7 +10,7 @@
     <AppxPackageIsForStore>False</AppxPackageIsForStore>
     <AppxShowAllApps>False</AppxShowAllApps>
     <AppxBuildConfigurationSelection>x86</AppxBuildConfigurationSelection>
-    <PackageOptionalProjectsInIdeBuilds>True</PackageOptionalProjectsInIdeBuilds>
+    <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
     <UapAppxPackageBuildMode>SideloadOnly</UapAppxPackageBuildMode>
     <SplashScreenSource>C:\Rama\GIT\DSmartProjects\SourceCode\NPT-UAT\VideoKallMCCST\Assets\VK_Splash.png</SplashScreenSource>
     <BadgeLogoSource>C:\Rama\GIT\DSmartProjects\SourceCode\NPT-UAT\VideoKallMCCST\Assets\VKLogo.png</BadgeLogoSource>
@@ -19,7 +19,7 @@
     <MediumTileSource>C:\Rama\GIT\DSmartProjects\SourceCode\NPT-UAT\VideoKallMCCST\Assets\VKLogo.png</MediumTileSource>
     <WideTileSource>C:\Rama\GIT\DSmartProjects\SourceCode\NPT-UAT\VideoKallMCCST\Assets\VK_Splash.png</WideTileSource>
     <LargeTileSource>C:\Rama\GIT\DSmartProjects\SourceCode\NPT-UAT\VideoKallMCCST\Assets\VKLogo.png</LargeTileSource>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <UseSimulator>false</UseSimulator>

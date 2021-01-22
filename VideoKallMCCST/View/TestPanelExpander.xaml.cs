@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Helpers;
+using VideoKallMCCST.Model;
 using VideoKallMCCST.Results;
 using VideoKallMCCST.Stethoscope;
 using VideoKallMCCST.ViewModel;
@@ -16,6 +17,8 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -25,6 +28,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -38,7 +42,24 @@ namespace VideoKallMCCST.View
     {
         string height = string.Empty;
         string weight = string.Empty;
+        string dia = string.Empty;
+        string sys = string.Empty;
+        string glucoResult = string.Empty;
+        string mode = string.Empty;
+        string pulseoxispo2 = string.Empty;
+        string pulseoxipulse = string.Empty;
+        string tmpMode = string.Empty;
+        HttpClientManager _httpClient = null;
+        PMMConfiguration _configuration = null;
         public static TestPanelExpander TestPanelExp;
+        FlowVolumeData flowVolume = new FlowVolumeData();
+        VCResults vcResults = new VCResults();
+        Spirometeruc spirometeruc = new Spirometeruc();
+        BitmapImage bitmapImage = new BitmapImage();
+        WriteableBitmap bitMap = null;
+        byte[] buffer = null;
+        OtoscopeimageViewer oto = new OtoscopeimageViewer();
+        StethoscopeChestInstructions sethChest = new StethoscopeChestInstructions();
         public TestPanelExpander()
         {
             this.InitializeComponent();
@@ -65,6 +86,10 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.SeatHeightAdjust += SeatBackIntegration;
             MainPage.mainPage.Heightdelegate += Heightdelegate;
             MainPage.mainPage.Weightdelegate += Weightdelegate;
+            _httpClient = VideoKallLoginPage.LoginPage.HttpClient;
+            _configuration = VideoKallLoginPage.LoginPage._loginVM.PMMConfig;
+            _httpClient.basePMM_APIUrl = _configuration?.API_URL;
+            _httpClient.base_APIUrl = _configuration?.TestResultAPI_URL;
 
         }
         async void Heightdelegate(bool status)
@@ -78,6 +103,10 @@ namespace VideoKallMCCST.View
                     MainPage.mainPage.Heightstatus = false;
                     TxtResultHeight.Text = String.Empty;
                     TxtLableHeight.Visibility = Visibility.Collapsed;
+                }
+                if (status.Equals(false))
+                {
+                    height = string.Empty;
                 }
             });
         }
@@ -533,7 +562,7 @@ namespace VideoKallMCCST.View
 
         async void UpdateNotification(object sender, CommunicationMsg msg)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 string[] res = msg.Msg.Split('>');
                 switch (msg.Id)
@@ -545,7 +574,9 @@ namespace VideoKallMCCST.View
                         grdPulse.BorderBrush = GetColorFromHexa("#34CBA8");
                         grdPulse.BorderThickness = new Thickness(0, 0, 0, 10);
                         TxtResultPulseOximeter.Text = " " + res[1].Split(':')[1] + "%";
+                        pulseoxispo2 = res[1].Split(':')[1];
                         TxtResultPulseOximeterpulse.Text = " " + res[2].Split(':')[1] + "bpm";
+                        pulseoxipulse = res[2].Split(':')[1];
                         //TxtResultPulseOximeterpulsedate.Text = res[4];
                         break;
                     case DeviceResponseType.GLUCORESULT:
@@ -554,7 +585,10 @@ namespace VideoKallMCCST.View
                         grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
                         //BtnGlucometer.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         //"GLUCMDRES>V:{0}>U:{1}>T:{2}>M:{3}>D:{4}>T:{5}";
-                        TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1];
+                         glucoResult= res[1].Split(':')[1];
+                         mode = res[3].Split(':')[1];
+                        TxtResultgluco.Text = res[1].Split(':')[1] + " " + res[2].Split(':')[1]; ;                       
+                        
                         //TxtTestType.Text = res[3].Split(':')[1];
                         //TxtResultglucoTestMode.Text = res[4].Split(':')[1];
                         //TxtDate.Text = res[5].Split(':')[1];
@@ -588,6 +622,7 @@ namespace VideoKallMCCST.View
                                 TxtTemprature.Text = "Error: Lo";
 
                             TblTemp.Visibility = Visibility.Visible;
+                            tmpMode = res[2].Split(':')[1];
                             //TxtMode.Text = res[2].Split(':')[1];
                             //    "THERMORES>R:{0}>M:{1}>S:{2}>{3}";
                             // TxtDateTime.Text = res[4];
@@ -602,8 +637,9 @@ namespace VideoKallMCCST.View
 
                         //BtnBP.Background = new SolidColorBrush(Windows.UI.Colors.LightSeaGreen);
                         // "BPRES>D:{0}>S:{1}>P:{2}>DT:{3}>T:{4}";
-                        TxtSys.Text = res[2].Split(':')[1] + "/" + res[1].Split(':')[1] + " mmHg";
-
+                        TxtSys.Text = res[2]?.Split(':')[1] + "/" + res[1]?.Split(':')[1] + " mmHg";
+                        dia= res[1]?.Split(':')[1];
+                        sys = res[2]?.Split(':')[1];
                         //TxtDia.Text = res[1].Split(':')[1];
                         //TxtPulse.Text = res[3].Split(':')[1];
                         //  TxttestTime.Text = res[4].Split(':')[1] + " " + res[5];
@@ -674,6 +710,21 @@ namespace VideoKallMCCST.View
                 TxtResultPulseOximeterpulse.Text = string.Empty;
                 ShowHidePulseoximeterdata(false);
             }
+            if (BtnPulseoximeterToggle == false && !(string.IsNullOrEmpty(TxtResultPulseOximeter.Text)) && !(string.IsNullOrEmpty(TxtResultPulseOximeterpulse.Text)))
+            {
+                PulseOximeterTestResult pulseTestResult = new PulseOximeterTestResult();
+                pulseTestResult.SpO2 = Convert.ToInt32(pulseoxispo2);
+                pulseTestResult.HeartRate = Convert.ToInt32(pulseoxipulse);
+                pulseTestResult.Patient = null;
+                //pulseTestResult.PatientId = 16042;
+                pulseTestResult.ChairId = 123456;
+                pulseTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                pulseTestResult.CreatedDate = DateTime.Now;
+                pulseTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                MainPage.mainPage.mainpagecontext.PulseResult = pulseTestResult;
+                await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.PulseResult);
+
+            }
             ResultPulseOximeterPopup.IsOpen = BtnPulseoximeterToggle;
             DeployRetractDevice(BtnPulseoximeterToggle, MainPage.mainPage.Podmapping.OximeterPodID);
         }
@@ -724,6 +775,22 @@ namespace VideoKallMCCST.View
                 TxtTemprature.Text = string.Empty;
                 TblTemp.Visibility = Visibility.Collapsed;
             }
+            if (_thermotoggle == false && !(string.IsNullOrEmpty(TxtTemprature.Text)))
+            {
+                ThermometerTestResult thermoResult = new ThermometerTestResult();
+                thermoResult.Value = TxtTemprature.Text;               
+                thermoResult.Patient = null;
+                //thermoResult.PatientId = 16042;
+                thermoResult.ChairId = 123456;
+                thermoResult.Mode = tmpMode;
+                thermoResult.CreatedDate = DateTime.Now;
+                thermoResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                thermoResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                MainPage.mainPage.mainpagecontext.ThermoResult = thermoResult;
+                await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ThermoResult);
+
+            }
+
             ResulThermoPopup.IsOpen = _thermotoggle;
             DeployRetractDevice(_thermotoggle, MainPage.mainPage.Podmapping.ThermoMeterPodID);
         }
@@ -865,6 +932,24 @@ namespace VideoKallMCCST.View
                 ShowHidebpdata(false);
                 TxtSys.Text = string.Empty;
             }
+            if (_resultBpToggle == false && TxtSys.Text != null)
+            {
+                var bpResult = TxtSys.Text;
+                if (!string.IsNullOrEmpty(bpResult))
+                {
+                    BloodPressureTestResult bpTestResult = new BloodPressureTestResult();
+                    bpTestResult.Cystolic = Convert.ToInt32(sys);
+                    bpTestResult.Diastolic = Convert.ToDouble(dia);
+                    bpTestResult.Patient = null;
+                    bpTestResult.ChairId = 123456;
+                    //bpTestResult.PatientId = 16042;
+                    bpTestResult.CreatedDate = DateTime.Now;
+                    bpTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                    bpTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                    MainPage.mainPage.mainpagecontext.BpResult = bpTestResult;
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.BpResult);
+                }
+            }
             ResultBPPopup.IsOpen = _resultBpToggle;
             DeployRetractDevice(_resultBpToggle, MainPage.mainPage.Podmapping.BPCuffPodID);
         }
@@ -899,7 +984,7 @@ namespace VideoKallMCCST.View
                 //noWifiDialog.BorderThickness = new Thickness(1, 1, 1, 1);
                 Toast.ShowToast("", Constants.Measure_Height_First);
                 return;
-            }
+            }            
             btnWeightToggle = !btnWeightToggle;
 
             MainPage.mainPage.TestIsInProgress = btnWeightToggle;
@@ -911,6 +996,24 @@ namespace VideoKallMCCST.View
                 TxtResultWeight.Text = string.Empty;
                 TxtResultBMI.Text = string.Empty;
             }
+
+            if (btnWeightToggle == false && TxtResultWeight.Text != null)
+            {
+                var weightResult = TxtResultWeight.Text;
+                if (!string.IsNullOrEmpty(weightResult))
+                {
+                    WeightTestResult weightTestResult = new WeightTestResult();
+                    weightTestResult.Weight = Convert.ToDouble(weight);
+                    weightTestResult.Patient = null;
+                    //weightTestResult.PatientId = 16042;
+                    weightTestResult.ChairId = 123456;
+                    weightTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                    weightTestResult.CreatedDate = DateTime.Now;
+                    weightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                    MainPage.mainPage.mainpagecontext.WeightResult = weightTestResult;
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.WeightResult);
+                }
+            }
             ResuWeightPopup.IsOpen = btnWeightToggle;
         }
 
@@ -918,7 +1021,7 @@ namespace VideoKallMCCST.View
 
 
         bool btnHeighttoggle = false;
-        private void BtnHeight_Click(object sender, RoutedEventArgs e)
+        private async void BtnHeight_Click(object sender, RoutedEventArgs e)
         {
 
             isTestResultOpened();
@@ -936,6 +1039,24 @@ namespace VideoKallMCCST.View
                 TxtResultHeight.Text = string.Empty;
                 grdHeight.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdHeight.BorderThickness = new Thickness(0, 0, 0, 10);
+            }
+            if(btnHeighttoggle==false && TxtResultHeight.Text!=null)
+            {
+                var HeightResult = TxtResultHeight.Text;              
+                if (!string.IsNullOrEmpty(HeightResult))
+                {
+                    HeightTestResult heightTestResult = new HeightTestResult();
+                    heightTestResult.Height = HeightResult;
+                    heightTestResult.Patient = null;
+                    //heightTestResult.PatientId = 16042;
+                    heightTestResult.ChairId = 123456;
+                    heightTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                    heightTestResult.CreatedDate = DateTime.Now;
+                    heightTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                    MainPage.mainPage.mainpagecontext.heightResult = heightTestResult;
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.heightResult);
+              
+                }
             }
 
             ResulHeightPopup.IsOpen = btnHeighttoggle;
@@ -986,9 +1107,25 @@ namespace VideoKallMCCST.View
                     TxtResultOtoscope.BorderThickness = new Thickness(0, 0, 0, 10);
                 }
 
+                if (_otoscopeToggle == false && oto.buffer!= null)
+                {
+                   // DisplayImage(oto.ImageName);
+                    OtoscopeTestResult otoscope = new OtoscopeTestResult();
+                    otoscope.ChairId = 123456;
+                    otoscope.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                    otoscope.CreatedDate = DateTime.Now;
+                    //otoscope.PatientId = 16042;
+                    otoscope.Image = oto.buffer;
+                    otoscope.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                    MainPage.mainPage.mainpagecontext.OtoResult = otoscope;
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.OtoResult);
+                }
+
+
                 ResulOtoscopePopup.IsOpen = _otoscopeToggle;
 
                 DeployRetractDevice(_otoscopeToggle, MainPage.mainPage.Podmapping.OtoscopePodID);
+                oto.buffer = null;
             }
             catch (Exception ex)
             {
@@ -1035,8 +1172,23 @@ namespace VideoKallMCCST.View
                     TxtResultDermascope.BorderBrush = GetColorFromHexa("#FFC10D");
                     TxtResultDermascope.BorderThickness = new Thickness(0, 0, 0, 10);
                 }
+                if (_dermascopeToggle == false && oto.buffer!=null)
+                {
+                   // DisplayImage(oto.ImageName);
+                    DermatoscopeTestResult Dermoscope = new DermatoscopeTestResult();
+                    Dermoscope.ChairId = 123456;
+                    Dermoscope.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                    Dermoscope.CreatedDate = DateTime.Now;
+                    //Dermoscope.PatientId = 16042;
+                    Dermoscope.Image = oto.buffer;
+                    Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                    MainPage.mainPage.mainpagecontext.DermoResult = Dermoscope;
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
+                    
+                }
                 ResulDermascopePopup.IsOpen = _dermascopeToggle;
                 DeployRetractDevice(_dermascopeToggle, MainPage.mainPage.Podmapping.DermascopePodID);
+                oto.buffer = null;
             }
             catch (Exception ex)
             {
@@ -1136,6 +1288,20 @@ namespace VideoKallMCCST.View
                 grdGluco.BorderBrush = GetColorFromHexa("#FFC10D");
                 grdGluco.BorderThickness = new Thickness(0, 0, 0, 10);
             }
+            if (_glucoToggle == false && TxtResultgluco.Text != null && (!string.IsNullOrEmpty(glucoResult)))
+            {
+                GlucoseMonitorTestResult glucoTestResult = new GlucoseMonitorTestResult();
+                glucoTestResult.Mode = mode;
+                glucoTestResult.Value = Convert.ToDouble(glucoResult);
+                glucoTestResult.Patient = null;
+                //glucoTestResult.PatientId = 16042;
+                glucoTestResult.ChairId = 123456;
+                glucoTestResult.CreatedDate = DateTime.Now;
+                glucoTestResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                glucoTestResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0; ;
+                MainPage.mainPage.mainpagecontext.GlucoResult = glucoTestResult;
+                await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.GlucoResult);
+            }
             Resultglucopopup.IsOpen = _glucoToggle;
             DeployRetractDevice(_glucoToggle, MainPage.mainPage.Podmapping.GlucomonitorPodID);
         }
@@ -1175,9 +1341,68 @@ namespace VideoKallMCCST.View
 
             //double wdth = gridInstrumentPanel.ColumnDefinitions[0].ActualWidth;
             //double ht = gridInstrumentPanel.RowDefinitions[0].ActualHeight;
+            int iterationFVC = 0;
+            if (_spirometerToggle == false && spirometeruc.FVCResultsColl != null && spirometeruc.FVCResultsColl.Count>0)
+            {
+                foreach (var parm in spirometeruc.FVCResultsColl)
+                {
+                    iterationFVC++;
+                    if (iterationFVC < spirometeruc.FVCResultsColl.Count)
+                    {
+                        if ((!string.IsNullOrEmpty(parm.MeasureUnit)) && (!string.IsNullOrEmpty(parm.MeasuredValue)))
+                        {
+                            SpirometerTestResult spiroResult = new SpirometerTestResult();
+                            spiroResult.MeasuredUnit = parm.MeasureUnit;
+                            spiroResult.MeasuredValue = Convert.ToDouble(parm.MeasuredValue);
+                            spiroResult.ParameterType = parm.ParameterType;
+                            spiroResult.Code = parm.Code;
+                            spiroResult.TestType = "FVC";
+                            spiroResult.Name = parm.Name;
+                            spiroResult.Patient = null;
+                            spiroResult.ChairId = 123456;
+                            spiroResult.CreatedDate = DateTime.Now;
+                            spiroResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                            spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                            MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
+                            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
+                        }
+
+                    }
+                }
+            }
+            int iterationVC = 0;
+            if (_spirometerToggle == false && spirometeruc.VCResultsColl != null && spirometeruc.VCResultsColl.Count > 0)
+            {
+                foreach (var parm in spirometeruc.VCResultsColl)
+                {
+                    iterationVC++;
+                    if (iterationVC < spirometeruc.FVCResultsColl.Count)
+                    {
+                        if ((!string.IsNullOrEmpty(parm.MeasureUnit)) && (!string.IsNullOrEmpty(parm.MeasuredValue)))
+                        {
+                            SpirometerTestResult spiroResult = new SpirometerTestResult();
+                            spiroResult.MeasuredUnit = parm.MeasureUnit;
+                            spiroResult.MeasuredValue = Convert.ToDouble(parm.MeasuredValue);
+                            spiroResult.Name = parm.Name;
+                            spiroResult.Patient = null;
+                            spiroResult.ChairId = 123456;
+                            spiroResult.TestType = "VC";
+                            spiroResult.Code = parm.Code;
+                            spiroResult.ParameterType = parm.ParameterType;
+                            spiroResult.CreatedDate = DateTime.Now;
+                            spiroResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                            spiroResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                            MainPage.mainPage.mainpagecontext.SpiroResult = spiroResult;
+                            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.SpiroResult);
+                        }
+                    }
+                }
+                //Toast.ShowToast("", "Successfully Saved.");
+            }
 
             //CtrlspiroResult.Height = ht * 6;//gridInstrumentPanel.ActualHeight;
             //CtrlspiroResult.Width = wdth * 4;//gridInstrumentPanel.ActualWidth; ;
+
             Resultspiropopup.IsOpen = _spirometerToggle;
             DeployRetractDevice(_spirometerToggle, MainPage.mainPage.Podmapping.SpirometerPodID);
         }
@@ -1236,7 +1461,24 @@ namespace VideoKallMCCST.View
             DeployRetractDevice(_stethoscopeChest, MainPage.mainPage.Podmapping.StethoscopeChestPodID);
             if (_stethoscopeChest)// && !MainPage.mainPage.isStethoscopeReadystreaming)
             {
-                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTCHEST));
+                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.STARTSTCHEST));               
+
+            }
+            if (_stethoscopeChest == false)
+            {
+                var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;             
+                if (MainPage.mainPage.targetpath!=null)
+                {
+                    ChestStethoscopeTestResult chestStethoscopeResult = new ChestStethoscopeTestResult();
+                    chestStethoscopeResult.Patient = null;
+                    chestStethoscopeResult.ChairId = 123456;
+                    chestStethoscopeResult.CreatedDate = DateTime.Now;
+                    chestStethoscopeResult.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+                    chestStethoscopeResult.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+                    MainPage.mainPage.mainpagecontext.ChestResult = chestStethoscopeResult;
+                    chestStethoscopeResult.Recording_Path = MainPage.mainPage.targetpath;
+                    await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ChestResult);
+                }
             }
         }
 
@@ -1527,6 +1769,57 @@ namespace VideoKallMCCST.View
                 string s = ex.Message;
             }
 
+        }
+        async void DisplayImage(string imageName)
+        {
+            try
+            {
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(MainPage.mainPage.rootImageFolder.Path);
+                StorageFile storageFile = await folder.GetFileAsync(imageName);
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    // Set the image source to the selected bitmap
+
+                    if (storageFile != null)
+                    {
+                        // Ensure the stream is disposed once the image is loaded
+                        using (IRandomAccessStream fileStream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read))
+                        {
+                           // bitMap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
+                            await bitmapImage.SetSourceAsync(fileStream);
+                            Convertion(fileStream);
+                        }
+                    }
+                    //ImageToByeArray(bitMap);
+
+                });
+            }
+            catch (Exception ex)
+            {
+                MainPage.mainPage.LogExceptions(ex.Message);
+            }
+        }
+
+        private byte[] ImageToByeArray(WriteableBitmap bitMap)
+        {
+            using (Stream stream = bitMap.PixelBuffer.AsStream())
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                buffer = memoryStream.ToArray();
+            }
+            return buffer;
+        }
+
+        async Task<byte[]> Convertion(IRandomAccessStream s)
+        {
+            using (var dr = new DataReader(s.GetInputStreamAt(0)))
+            {
+                buffer = new byte[s.Size];
+                await dr.LoadAsync((uint)s.Size);
+                dr.ReadBytes(buffer);
+            }
+            return buffer;
         }
     }
 

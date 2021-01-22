@@ -7,8 +7,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using VideoKallMCCST.Communication;
 using VideoKallMCCST.Helpers;
+using VideoKallMCCST.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
@@ -29,6 +31,9 @@ namespace VideoKallMCCST.Results
 {
     public sealed partial class OtoscopeimageViewer : UserControl
     {
+        BitmapImage bitmapImage = new BitmapImage();
+        WriteableBitmap bitMap = null;
+      public  byte[] buffer = null;
         public OtoscopeimageViewer()
         {
             this.InitializeComponent();
@@ -95,9 +100,60 @@ namespace VideoKallMCCST.Results
             }
 
             if (!isDermascope)
+            {
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
+            }
             else
+            {
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
+            }
+
+            //if (!isDermascope){
+            //    MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPOTOSCOPE);
+
+            //    try
+            //    {
+            //        if (buffer != null)
+            //        {
+            //            // DisplayImage(oto.ImageName);
+            //            OtoscopeTestResult otoscope = new OtoscopeTestResult();
+            //            otoscope.ChairId = 123456;
+            //            otoscope.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+            //            otoscope.CreatedDate = DateTime.Now;
+            //            //otoscope.PatientId = 16042;
+            //            otoscope.Image = buffer;
+            //            otoscope.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+            //            MainPage.mainPage.mainpagecontext.OtoResult = otoscope;
+            //            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.OtoResult);
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        string s = ex.Message;
+            //    }
+            //}
+            //else {
+            //    MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.STOPDERMO);
+            //    try
+            //    {
+            //        if (buffer != null)
+            //        {
+            //            DermatoscopeTestResult Dermoscope = new DermatoscopeTestResult();
+            //            Dermoscope.ChairId = 123456;
+            //            Dermoscope.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+            //            Dermoscope.CreatedDate = DateTime.Now;
+            //            Dermoscope.Image = buffer;
+            //            Dermoscope.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+            //            MainPage.mainPage.mainpagecontext.DermoResult = Dermoscope;
+            //            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.DermoResult);
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        string s = ex.Message;
+            //    }
+            //}
+                
 
             ImageViewer.Source = null;
             BtnTakePic.IsEnabled = true;
@@ -117,7 +173,7 @@ namespace VideoKallMCCST.Results
 
         }
 
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        private  void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             if (!MainPage.mainPage.PoddeployretractcmdStatus.IsPodDeployed())
             {
@@ -125,18 +181,29 @@ namespace VideoKallMCCST.Results
                 return;
             }
             // SetImagefolder();
-            // DisplayImage(ImageName);
+            // DisplayImage(ImageName);           
+
             if (!isDermascope)
+            {              
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.OTOSAVEIMAGE);
+                //Toast.ShowToast("", "Successfully Saved");
+                Toast.ShowToast("", "Image Moved Successfully to Destination Folder");
+                
+            }
             else
+            {
                 MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.DERSAVEIMAGE);
-            BtnSave.IsEnabled = false;
+                //Toast.ShowToast("", "Successfully Saved");
+                Toast.ShowToast("", "Image Moved Successfully to Destination Folder");
+            }
+        
+            BtnSave.IsEnabled = false;           
         }
 
 
         string strRootFolder = "VideoKall";
         string strRootFolderPath = @"\\192.168.0.33\";// VideoKall";
-        string ImageName = "capturedImage.png";
+       public string ImageName = "capturedImage.png";
 
         private async void SetImagefolder()
         {
@@ -163,6 +230,8 @@ namespace VideoKallMCCST.Results
             }
         }
 
+        
+
 
         async void DisplayImage(string imageName)
         {
@@ -173,20 +242,24 @@ namespace VideoKallMCCST.Results
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
                     // Set the image source to the selected bitmap
-                    BitmapImage bitmapImage = new BitmapImage();
+                    
                     if (storageFile != null)
                     {
                         // Ensure the stream is disposed once the image is loaded
                         using (IRandomAccessStream fileStream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read))
                         {
+                            //bitMap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
                             await bitmapImage.SetSourceAsync(fileStream);
+                            Convert(fileStream);
                         }
                     }
                     //  ShowHideMessage(false);
                     ImageViewer.Source = bitmapImage;
+                    //ImageToByeArray(bitMap);
+                  
                     BtnTakePic.IsEnabled = true;
+                                     
                 });
-
                 MainPage.mainPage.MicroscopeStatus?.Invoke(true);
             }
             catch (Exception ex)
@@ -205,6 +278,26 @@ namespace VideoKallMCCST.Results
                     MainPage.mainPage.MicroscopeStatus?.Invoke(false);
                 });
             }
+        }
+
+        private byte[] ImageToByeArray(WriteableBitmap bitMap)
+        {           
+            using (Stream stream = bitMap.PixelBuffer.AsStream())
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                buffer = memoryStream.ToArray();
+            }
+            return buffer;
+        }
+
+        async Task<byte[]> Convert(IRandomAccessStream s)
+        {
+            var dr = new DataReader(s.GetInputStreamAt(0));
+            buffer = new byte[s.Size];
+            await dr.LoadAsync((uint)s.Size);
+            dr.ReadBytes(buffer);
+            return buffer;
         }
 
         private void BtnBrowse_Click(object sender, RoutedEventArgs e)

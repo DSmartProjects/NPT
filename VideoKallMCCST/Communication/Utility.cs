@@ -55,10 +55,13 @@ namespace VideoKallMCCST.Communication
                 var fileTextData = await Windows.Storage.FileIO.ReadLinesAsync(PmmConfigFile);              
                 string url = string.Empty;
                 string api_url = string.Empty;
+                string test_result_api_url = string.Empty;
                 foreach (var line in fileTextData)
                 {
                     var urlData = line;
-                    if (urlData.Contains("API_URL"))
+                    if (urlData.Contains("TestResult_API_URL"))
+                        test_result_api_url = urlData.Substring(urlData.IndexOf("http") + 0);
+                    else if (urlData.Contains("API_URL"))
                         api_url = urlData.Substring(urlData.IndexOf("http") + 0);
                     else if (urlData.Contains("URL"))
                         url = urlData.Substring(urlData.IndexOf("http") + 0);
@@ -68,7 +71,9 @@ namespace VideoKallMCCST.Communication
                 PMMConfiguration pmmConfig = new PMMConfiguration();
                 pmmConfig.URL =!string.IsNullOrWhiteSpace(url)?url.ToString().Trim():string.Empty;
                 pmmConfig.API_URL = !string.IsNullOrWhiteSpace(api_url) ? api_url.ToString().Trim() : string.Empty;
-                MainPage.mainPage.mainpagecontext.PMMConfig = pmmConfig;
+                pmmConfig.TestResultAPI_URL = !string.IsNullOrWhiteSpace(test_result_api_url) ? test_result_api_url.ToString().Trim() : string.Empty;
+                //MainPage.mainPage.mainpagecontext.PMMConfig = pmmConfig;
+                VideoKallLoginPage.LoginPage._loginVM.PMMConfig = pmmConfig;
             }
             catch (Exception ex)
             {

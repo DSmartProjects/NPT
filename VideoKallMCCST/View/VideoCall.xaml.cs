@@ -8,6 +8,7 @@ using VideoKallMCCST.Communication;
 using VideoKallMCCST.Helpers;
 using VideoKallMCCST.Model;
 using VideoKallMCCST.ViewModel;
+using Windows.Media.Devices;
 using Windows.Media.MediaProperties;
 using Windows.System.Display;
 using Windows.System.Threading;
@@ -17,6 +18,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -34,19 +36,43 @@ namespace VideoKallMCCST.View
         int isTerminator = 0;
         bool activated = false;
         bool isMuted = false;
+        bool isChairrecline = true;
+        bool ischairIncline = false;
         IncomingConnectionEventArgs incommingCall = null;
+        IncomingConnectionEventArgs incommingCall2 = null;
         public VideoCallViewModel _videoCallVM = null;
         static DispatcherTimer timer = null;
-       
         public VideoCall()
         {
             this.InitializeComponent();
             rootPage.EnsureMediaExtensionManager();
+            Window.Current.VisibilityChanged += new WindowVisibilityChangedEventHandler(RenualCall);
+            
+            MainPage.mainPage.VideoCallReset += VideoCallReset;
             _videoCallVM = MainPage.VideoCallVM;
             this.DataContext = _videoCallVM;
             _videoCallVM.DefaultVisibilities();
+            SetChairPosition();
+        }
+        private async void RenualCall(object sender, Windows.UI.Core.VisibilityChangedEventArgs e)
+        {
+            if (e.Visible)
+            {
+                if (device != null)
+                {
+                    await EndCallAsync();
+                }
+
+            }
         }
 
+        private  void VideoCallReset(bool isCameFromLogout)
+        {
+            if (device!=null && device.mediaSink!=null)
+            {
+                device.mediaSink.Dispose();
+            }
+        }
         private async void TimerCallbackCompleted(object sender, object e)
         {
             timer.Stop();
@@ -54,10 +80,21 @@ namespace VideoKallMCCST.View
             await EndCallAsync();
         }
 
+        public void SetChairPosition()
+        {
+            UprightChair.BorderBrush = GetColorFromHexa("#0183DD");
+            LeaningChair.Opacity = 0.50;
+            recline.Opacity = 0.50;
+        }
+
         public async void CallDevice(CaptureDevice device)
         {
-            PreviewVideo.Source = device.CaptureSource;
-            await device.CaptureSource.StartPreviewAsync();
+            if (device.CaptureSource.CameraStreamState.Equals(CameraStreamState.Streaming))
+            {
+                PreviewVideo.Source = device.CaptureSource;
+                await device.CaptureSource.StartPreviewAsync();
+            }
+
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -142,17 +179,17 @@ namespace VideoKallMCCST.View
 
         async void Device_IncomingConnectionArrived(object sender, IncomingConnectionEventArgs e)
         {
-            incommingCall = e;          
+            incommingCall = e;
             await Dispatcher.RunAsync(CoreDispatcherPriority.High, (() =>
             {
                 timer = new DispatcherTimer();
                 timer.Start();
-                timer.Interval = TimeSpan.FromSeconds(Constants.MIN_Media_Duration);            
+                timer.Interval = TimeSpan.FromSeconds(Constants.MIN_Media_Duration);
                 timer.Tick += TimerCallbackCompleted;
                 _videoCallVM.IncomingCallRingVisibility = Visibility.Visible;
                 _videoCallVM.AcceptVisiblity = Visibility.Visible;
                 IncomingCallRing.Play();
-            }));           
+            }));
         }
 
 
@@ -183,7 +220,7 @@ namespace VideoKallMCCST.View
         private async Task EndCallAsync()
         {
             incommingCall = null;
-              //await device.CleanUpAsync();
+            //await device.CleanUpAsync();
             // end the CallButton. session
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, (() =>
             {
@@ -224,19 +261,37 @@ namespace VideoKallMCCST.View
 
         private void Apchair1_Click(object sender, RoutedEventArgs e)
         {
+            UprightChair.BorderBrush = GetColorFromHexa("#0183DD");
+            LeaningChair.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
+            LeaningChair.Opacity = 0.50;
+            recline.Opacity = 0.50;
+            UprightChair.Opacity = 1.0;
+            UprightChair.Opacity = 1.0;
             MainPage.mainPage.SeatReclineMsg?.Invoke(false);
+            isChairrecline = false;
         }
-
         private void Apchair2_Click(object sender, RoutedEventArgs e)
         {
+            LeaningChair.Opacity = 1.0;
+            recline.Opacity = 1.0;
+            UprightChair.Opacity = 0.50;
+            UprightChair.Opacity = 0.50;
+            LeaningChair.BorderBrush = GetColorFromHexa("#0183DD");
+            UprightChair.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
+            UprightChair.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
             MainPage.mainPage.SeatReclineMsg?.Invoke(true);
+            isChairrecline = true;
         }
 
         private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)
         {
             SearchPatient searchPatient = new SearchPatient();
             await searchPatient.ShowAsync();
+            btnSaveClinicalNotes.IsEnabled = true;
             //SearchPatientPOP.IsOpen = true;
+
+            //MainPage.mainPage.pagePlaceHolder.Navigate(typeof(TestPanelExpander));
+
         }
         private async void Accept_Click(object sender, RoutedEventArgs e)
         {
@@ -273,13 +328,13 @@ namespace VideoKallMCCST.View
 
                 if (!((bool)roleIsActive))
                 {
-                // Passive client
-                RemoteVideo.Source = new Uri(remoteAddress);
+                    // Passive client
+                    RemoteVideo.Source = new Uri(remoteAddress);
                 }
                 remoteAddress = remoteAddress.Replace("stsp://", "");
             }));
 
-        }
+        }        
 
 
         async Task EndVideoCall()
@@ -388,6 +443,8 @@ namespace VideoKallMCCST.View
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             btnSearchPatient.IsEnabled = false;
+            btnSaveClinicalNotes.IsEnabled = false;
+
             SMCConnecteionStatus();
 
             SMCCommChannel = new CommunicationChannel();
@@ -489,6 +546,22 @@ namespace VideoKallMCCST.View
                 TxtSMCStatus.Background = GetColorFromHexa("#FFC10D");
             }
         }
+
+        private async void BtnSaveClinicalNotes_Click(object sender, RoutedEventArgs e)
+        {
+            ClinicalNote clinicalNote = new ClinicalNote();
+            clinicalNote.Patient = null;
+            clinicalNote.ChairId = 123456;
+            clinicalNote.Notes = WrapWholeWords.Text;
+            clinicalNote.CreatedDate = DateTime.Now;
+            clinicalNote.CreatedBy = VideoKallLoginPage.LoginPage._loginVM.TokUserId;
+            //clinicalNote.PatientId = 31051;
+            clinicalNote.PatientId = MainPage.VideoCallVM.PatientDetails != null && MainPage.VideoCallVM.PatientDetails.ID > 0 ? MainPage.VideoCallVM.PatientDetails.ID : 0;
+            MainPage.mainPage.mainpagecontext.ClinicalNote = clinicalNote;
+            await VideoKallLoginPage.LoginPage.HttpClient.POST(MainPage.mainPage.mainpagecontext.ClinicalNote);
+        }
+
+
         public CommunicationChannel SMCCommChannel { get; private set; }
 
         int intervalcount = 0;

@@ -22,13 +22,25 @@ namespace VideoKallMCCST
             this.InitializeComponent();
             mainPage = this;
             this.DataContext = mainpagecontext;
+            if (VideoKallLoginPage.LoginPage._loginVM.IsAdmin==false)
+            {
+                //spSettings.Visibility = Visibility.Collapsed;
+                //AdminBlock.Text = "Nurse";
+            }
+            else if (VideoKallLoginPage.LoginPage._loginVM.IsAdmin)
+            {
+                //spSettings.Visibility = Visibility.Visible;
+                //AdminBlock.Text = "Admin";
+            }
             VideoCallVM = new VideoCallViewModel();
+           // HttpClient = new HttpClientManager();
             RightPanelHolder.Navigate(typeof(VideoCall));
             pagePlaceHolder.Navigate(typeof(LogoPage));
             NotifyStatusCallback += UpdateNotification;          
         }
       
         public StorageFolder rootImageFolder { get; set; }
+        public string targetpath { get; set;}
         async void UpdateNotification(string s, int code)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -563,6 +575,7 @@ namespace VideoKallMCCST
         }
         public bool IsUserLogedin { get; set; }
         public static VideoCallViewModel VideoCallVM = null;
+      // public  HttpClientManager HttpClient = null;
         public static MainPage mainPage;
         public MainPageViewModel mainpagecontext = new MainPageViewModel();
         public delegate void NotifyStatus(string message, int code = 0);
@@ -609,6 +622,7 @@ namespace VideoKallMCCST
         public bool Weightstatus { get; set; } = false;
         public BoolDelegate Heightdelegate;
         public BoolDelegate Weightdelegate;
+        public BoolDelegate VideoCallReset;
 
     }
 }

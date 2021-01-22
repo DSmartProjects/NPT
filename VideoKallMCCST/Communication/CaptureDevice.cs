@@ -223,7 +223,7 @@ namespace VideoKallMCCST.Communication
                 mediaSink = new StspMediaSinkProxy();
                 mediaSink.IncomingConnectionEvent += mediaSink_IncomingConnectionEvent;
 
-                var mfExtension = await mediaSink.InitializeAsync(encodingProfile.Audio, encodingProfile.Video);
+                var mfExtension = await mediaSink.InitializeAsync(encodingProfile.Video, encodingProfile.Audio);
                 await mediaCapture.StartRecordToCustomSinkAsync(encodingProfile, mfExtension);
 
                 recordingStarted = true;

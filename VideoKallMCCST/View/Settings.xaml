@@ -10,12 +10,13 @@
     <Grid BorderBrush="#DBDBDB" BorderThickness="1,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="30,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -51,7 +52,7 @@
                       <Run FontFamily="Open Sans">:</Run>
                     </Span>
             </TextBlock>
-            <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Grid.Row="4" Grid.Column="1"  x:Name="TxtIPaddressCtrl"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"   Text="{Binding TxtIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Grid.Row="4" Grid.Column="1" FontFamily="Open Sans" FontSize="13"  x:Name="TxtIPaddressCtrl"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"   Text="{Binding TxtIpAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
             <TextBlock VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82">                  
                     <Span FontWeight="SemiBold">
@@ -61,7 +62,7 @@
                     </Span>
             </TextBlock>
 
-            <TextBox HorizontalAlignment="Left" Width="100" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" x:Name="TxtPortNoCtrl"  Margin="0,0,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"  Text="{Binding TxtProtNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox HorizontalAlignment="Left" Width="100" VerticalAlignment="Center" Grid.Row="5" FontSize="13" FontFamily="Open Sans" Grid.Column="1" x:Name="TxtPortNoCtrl"  Margin="0,0,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"  Text="{Binding TxtProtNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
             <TextBlock VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Temperature     :" Margin="0,0,0,0" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
 
@@ -69,7 +70,7 @@
 
             <TextBlock VerticalAlignment="Center"  Grid.Row="7" Grid.Column="0" Text="Filter Heart      :" FontFamily="Open Sans" Margin="0,0,0,0" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
             <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
-                <TextBox VerticalAlignment="Center"  x:Name="TxtFilterHeart"  Margin="0,0,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" TextChanged="TxtFilterHeart_TextChanged"></TextBox>
+                <TextBox VerticalAlignment="Center"  x:Name="TxtFilterHeart"  Margin="0,0,0,0" FontSize="13" FontFamily="Open Sans" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" TextChanged="TxtFilterHeart_TextChanged"></TextBox>
                 <TextBlock VerticalAlignment="Center" Margin="20,0,0,0" Text="Hz" Grid.Row="1" Grid.Column="1"  FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
             </StackPanel>
 
@@ -79,7 +80,7 @@
             <TextBlock VerticalAlignment="Center" Grid.Row="8" Grid.Column="0"  Text="Filter Lungs  :" FontFamily="Open Sans"  Margin="0,0,0,0"  FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
 
             <StackPanel VerticalAlignment="Center" Grid.Row="8" Grid.Column="1"  Orientation="Horizontal">
-                <TextBox VerticalAlignment="Center"  x:Name="TxtFilterlungs" Margin="0,0,0,0" BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" TextChanged="TxtFilterlungs_TextChanged"></TextBox>
+                <TextBox VerticalAlignment="Center"  x:Name="TxtFilterlungs" Margin="0,0,0,0" BorderBrush="#BFBFBF" FontSize="13" FontFamily="Open Sans" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" TextChanged="TxtFilterlungs_TextChanged"></TextBox>
                 <TextBlock VerticalAlignment="Center" Text="Hz" Grid.Row="1" Margin="20,0,0,0" Grid.Column="1" FontFamily="Open Sans" FontSize="12" FontWeight="SemiBold" Foreground="#194F82"></TextBlock>
 
             </StackPanel>
@@ -94,7 +95,7 @@
                   </Span>
             </TextBlock>
 
-            <TextBox VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" x:Name="txtPMM_URL" Margin="0,0,0,0" Text="{Binding PMMConfig.URL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtPMM_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" ></TextBox>
+            <TextBox VerticalAlignment="Center" Grid.Row="9" Grid.Column="1" x:Name="txtPMM_URL" Margin="0,0,0,0" FontSize="13" FontFamily="Open Sans" TextChanged="TxtPMM_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5" ></TextBox>
 
 
 
@@ -107,7 +108,18 @@
                   </Span>
             </TextBlock>
 
-            <TextBox VerticalAlignment="Center" Grid.Row="10" Grid.Column="1"  x:Name="txtPMM_API_URL" Margin="0,0,0,0" Text="{Binding PMMConfig.API_URL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtPMM_API_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"></TextBox>
+            <TextBox VerticalAlignment="Center" Grid.Row="10" Grid.Column="1" FontSize="13" FontFamily="Open Sans"  x:Name="txtPMM_API_URL" Margin="0,0,0,0"  TextChanged="TxtPMM_API_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"></TextBox>
+
+            <TextBlock VerticalAlignment="Center" Grid.Row="11" Grid.Column="0"   FontFamily="Open Sans"  Margin="0,0,0,0"  FontSize="12" FontWeight="SemiBold" Foreground="#194F82">
+                  <Span FontWeight="SemiBold">
+                      <Run FontFamily="Open Sans">Test Result API URL</Run>
+                      <Run FontSize="15" Foreground="Red">*</Run>
+                      <Run FontFamily="Open Sans">:</Run>
+                  </Span>
+            </TextBlock>
+
+            <TextBox VerticalAlignment="Center" Grid.Row="11" Grid.Column="1"  x:Name="txtTestResult_API_URL" Margin="0,0,0,0" FontSize="13" FontFamily="Open Sans" TextChanged="TxtTestResult_API_URL_TextChanged"  BorderBrush="#BFBFBF" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5"></TextBox>
+
 
         </Grid>
 

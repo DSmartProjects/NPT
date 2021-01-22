@@ -54,8 +54,8 @@ namespace VideoKallMCCST.Results
         ObservableCollection<FlowVolumeData> fvcFlowVolumeCollection = new ObservableCollection<FlowVolumeData>();
         ObservableCollection<FlowVolumeData> fvctFlowVolumeCollection = new ObservableCollection<FlowVolumeData>();
         ObservableCollection<FlowVolumeData>  vcFlowVolumeCollection = new ObservableCollection<FlowVolumeData>();
-        ObservableCollection<VCResults> VCResultsColl = new ObservableCollection<VCResults>();
-        ObservableCollection<VCResults> FVCResultsColl = new ObservableCollection<VCResults>();
+       public ObservableCollection<VCResults> VCResultsColl = new ObservableCollection<VCResults>();
+       public ObservableCollection<VCResults> FVCResultsColl = new ObservableCollection<VCResults>();
         void dummydata()
         {
             //    FlowVolumeData data = new FlowVolumeData();
@@ -301,6 +301,7 @@ namespace VideoKallMCCST.Results
 
 
             MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.StopSpiro);
+            
         }
 
         private void StartVC_Click(object sender, RoutedEventArgs e)
@@ -337,6 +338,7 @@ namespace VideoKallMCCST.Results
             StopVC.IsEnabled = false;
             isStarted = false;
             MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.StopSpiro);
+
         }
 
         private async void BtnDone_Click(object sender, RoutedEventArgs e)

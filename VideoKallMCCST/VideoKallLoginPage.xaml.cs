@@ -19,6 +19,7 @@ using VideoKallMCCST.ViewModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using VideoKallMCCST.Communication;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,12 +30,14 @@ namespace VideoKallMCCST
     /// </summary>
     public sealed partial class VideoKallLoginPage : Page
     {
-        private LoginPageViewModel _loginVM = null;
+        internal LoginPageViewModel _loginVM = null;
         public static VideoKallLoginPage LoginPage;
+        public HttpClientManager HttpClient = null;
         public VideoKallLoginPage()
         {
             LoginPage = this;
             _loginVM = new LoginPageViewModel();
+            HttpClient = new HttpClientManager();       
             this.InitializeComponent();
             this.DataContext = _loginVM;
         }

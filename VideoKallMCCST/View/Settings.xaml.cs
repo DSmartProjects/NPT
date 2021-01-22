@@ -42,10 +42,17 @@ namespace VideoKallMCCST.View
             MainPage.mainPage.REQ_MSG_VisibilityCompleted += REQ_MSG_Visibility;
             TxtimageFolder.Text = "\\\\"+ MainPage.mainPage.SMCCommChannel.IPAddress+"\\" + strRootFolder;
             TxtDataAcq.Text = MainPage.mainPage.isDataAcquitionappConnected ? "Connected" : "Not Connected ";
-            if(MainPage.mainPage.isDataAcquitionappConnected)
-                TxtDataAcq.Foreground= GetColorFromHexa("#34CBA8");
+            if (MainPage.mainPage.isDataAcquitionappConnected)
+            {
+                TxtDataAcq.Foreground = GetColorFromHexa("#34CBA8");
+                BtnConnectdaq.IsEnabled = false;
+            }
             else
+            {
                 TxtDataAcq.Foreground = GetColorFromHexa("#ED604A");
+                BtnConnectdaq.IsEnabled = true;
+            }
+
 
             MainPage.mainPage.DQConnectionCallback += UpdateConnectionStatus;
             TxtTmpUnitbtn.IsOn = MainPage.mainPage.mainpagecontext.ThermometerUnitF;
@@ -279,8 +286,14 @@ namespace VideoKallMCCST.View
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Utility ut = new Utility();
-            var pmm_Config = Task.Run(async () => { return await ut.ReadPMMConfigurationFile(); }).Result;
-            ReadSTConfigFile();
+            var pmm_Config = Task.Run(async () => { return await ut.ReadPMMConfigurationFile();}).Result;
+            if (VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null)
+            {
+                txtPMM_URL.Text = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.URL;
+                txtPMM_API_URL.Text = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.API_URL;
+                txtTestResult_API_URL.Text = VideoKallLoginPage.LoginPage._loginVM.PMMConfig?.TestResultAPI_URL;
+                ReadSTConfigFile();
+            }
         }
 
         private void SaveConfig()
@@ -290,21 +303,32 @@ namespace VideoKallMCCST.View
              
         private void TxtPMM_URL_TextChanged(object sender, TextChangedEventArgs e)
         {
-            MainPage.mainPage.mainpagecontext.PMMConfig.URL = txtPMM_URL.Text;
+            if (VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null)
+                VideoKallLoginPage.LoginPage._loginVM.PMMConfig.URL = txtPMM_URL.Text;
         }
 
         private void TxtPMM_API_URL_TextChanged(object sender, TextChangedEventArgs e)
         {
-            MainPage.mainPage.mainpagecontext.PMMConfig.API_URL = txtPMM_API_URL.Text;
+            if (VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null)
+                VideoKallLoginPage.LoginPage._loginVM.PMMConfig.API_URL = txtPMM_API_URL.Text;
         }        
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            var mainpageContext = MainPage.mainPage.mainpagecontext;
+            var mainpageContext = MainPage.mainPage.mainpagecontext;            
             mainpageContext.TxtIpAddress = TxtIPaddressCtrl.Text.Trim();
             mainpageContext.TxtProtNo = TxtPortNoCtrl.Text.Trim();
-            mainpageContext.PMMConfig.URL = txtPMM_URL.Text.Trim();
-            mainpageContext.PMMConfig.API_URL = txtPMM_API_URL.Text.Trim();                        
+            VideoKallLoginPage.LoginPage._loginVM.PMMConfig = new Model.PMMConfiguration();
+            VideoKallLoginPage.LoginPage._loginVM.PMMConfig.API_URL = txtPMM_API_URL.Text.Trim();
+            VideoKallLoginPage.LoginPage._loginVM.PMMConfig.TestResultAPI_URL = txtTestResult_API_URL.Text.Trim();
+            VideoKallLoginPage.LoginPage._loginVM.PMMConfig.URL = txtPMM_URL.Text.Trim();
+            //VideoKallLoginPage.LoginPage._loginVM.PMMConfig = mainpageContext.PMMConfig;
+        }
+
+        private void TxtTestResult_API_URL_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (VideoKallLoginPage.LoginPage._loginVM.PMMConfig != null)
+                VideoKallLoginPage.LoginPage._loginVM.PMMConfig.TestResultAPI_URL = txtTestResult_API_URL.Text;
         }
     }
 

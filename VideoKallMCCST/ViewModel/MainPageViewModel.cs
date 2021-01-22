@@ -23,6 +23,45 @@ namespace VideoKallMCCST.ViewModel
     public class MainPageViewModel : INotifyPropertyChanged
     {
 
+        #region
+        private HeightTestResult _heightResult = null;
+        public HeightTestResult heightResult { get { return _heightResult; } set { _heightResult = value; OnPropertyChanged("heightResult"); } }
+
+        private WeightTestResult _weightResult = null;
+        public WeightTestResult WeightResult { get { return _weightResult; } set { _weightResult = value; OnPropertyChanged("weightResult"); } }
+
+        private BloodPressureTestResult _bpResult = null;
+        public BloodPressureTestResult BpResult { get { return _bpResult; } set { _bpResult = value; OnPropertyChanged("BpResult"); } }
+
+        private PulseOximeterTestResult _pulseResult = null;
+        public PulseOximeterTestResult PulseResult { get { return _pulseResult; } set { _pulseResult = value; OnPropertyChanged("PulseResult"); } }
+
+        private ThermometerTestResult _thermoResult = null;
+        public ThermometerTestResult ThermoResult { get { return _thermoResult; } set { _thermoResult = value; OnPropertyChanged("ThermoResult"); } }
+
+        private DermatoscopeTestResult _dermoResult = null;
+        public DermatoscopeTestResult  DermoResult { get { return _dermoResult; } set { _dermoResult = value; OnPropertyChanged("DermoResult"); } }
+
+        private OtoscopeTestResult _otoResult = null;
+        public OtoscopeTestResult OtoResult { get { return _otoResult; } set { _otoResult = value; OnPropertyChanged("OtoResult"); } }
+
+        private SpirometerTestResult _spiroResult = null;
+        public SpirometerTestResult SpiroResult { get { return _spiroResult; } set { _spiroResult = value; OnPropertyChanged("SpiroResult"); } }
+
+        private GlucoseMonitorTestResult _glucoResult = null;
+        public GlucoseMonitorTestResult GlucoResult { get { return _glucoResult; } set { _glucoResult = value; OnPropertyChanged("GlucoResult"); }}
+
+        private ChestStethoscopeTestResult _chestResult = null;
+        public ChestStethoscopeTestResult ChestResult { get { return _chestResult; } set { _chestResult = value; OnPropertyChanged("ChestResult"); } }
+
+        private SeatBackStethoscopeTestResult _seatResult = null;
+        public SeatBackStethoscopeTestResult SeatResult { get { return _seatResult; } set { _seatResult = value; OnPropertyChanged("SeatResult"); } }
+
+        private ClinicalNote _clinicalNote = null;
+        public ClinicalNote ClinicalNote { get { return _clinicalNote; } set { _clinicalNote = value; OnPropertyChanged("ClinicalNote"); } }
+
+        #endregion
+        public StorageFolder appFolder= Windows.Storage.ApplicationData.Current.LocalFolder;       
         public event PropertyChangedEventHandler PropertyChanged;
         public EventHandler<CommunicationMsg> NotifyResult;
         private void OnPropertyChanged(string propertyName)
@@ -143,6 +182,7 @@ namespace VideoKallMCCST.ViewModel
         }
         async void ExecuteSaveIPAddress()
         {
+            PMMConfig = VideoKallLoginPage.LoginPage._loginVM.PMMConfig;
             //// Create the message dialog and set its content
             //var messageDialog = new MessageDialog("Do you want to save the details");
 
@@ -165,8 +205,9 @@ namespace VideoKallMCCST.ViewModel
             REQ_MSG_Visibility = Visibility.Collapsed;
             var isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
                                    && !string.IsNullOrEmpty(TxtProtNo)
-                                   && !string.IsNullOrEmpty(PMMConfig.URL)
-                                   && !string.IsNullOrEmpty(PMMConfig.API_URL));
+                                   && !string.IsNullOrEmpty(PMMConfig?.URL)
+                                   && !string.IsNullOrEmpty(PMMConfig?.API_URL)
+                                   && !string.IsNullOrEmpty(PMMConfig?.TestResultAPI_URL));
             if (!isMandatoryFieldValuesFilled)
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Failure);
@@ -203,8 +244,9 @@ namespace VideoKallMCCST.ViewModel
 
             isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
                                           && !string.IsNullOrEmpty(TxtProtNo)
-                                          && !string.IsNullOrEmpty(PMMConfig.URL)
-                                          && !string.IsNullOrEmpty(PMMConfig.API_URL));
+                                          && !string.IsNullOrEmpty(PMMConfig?.URL)
+                                          && !string.IsNullOrEmpty(PMMConfig?.API_URL)
+                                          && !string.IsNullOrEmpty(PMMConfig?.TestResultAPI_URL));
             if (isMandatoryFieldValuesFilled)
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Success);
@@ -231,8 +273,9 @@ namespace VideoKallMCCST.ViewModel
             REQ_MSG_Visibility = Visibility.Collapsed;
             var isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
                                    && !string.IsNullOrEmpty(TxtProtNo)
-                                   && !string.IsNullOrEmpty(PMMConfig.URL)
-                                   && !string.IsNullOrEmpty(PMMConfig.API_URL));
+                                   && !string.IsNullOrEmpty(PMMConfig?.URL)
+                                   && !string.IsNullOrEmpty(PMMConfig?.API_URL)
+                                   && !string.IsNullOrEmpty(PMMConfig?.TestResultAPI_URL));
             if (!isMandatoryFieldValuesFilled)
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Failure);
@@ -269,8 +312,9 @@ namespace VideoKallMCCST.ViewModel
 
             isMandatoryFieldValuesFilled = (!string.IsNullOrEmpty(TxtIpAddress)
                                           && !string.IsNullOrEmpty(TxtProtNo)
-                                          && !string.IsNullOrEmpty(PMMConfig.URL)
-                                          && !string.IsNullOrEmpty(PMMConfig.API_URL));
+                                          && !string.IsNullOrEmpty(PMMConfig?.URL)
+                                          && !string.IsNullOrEmpty(PMMConfig?.API_URL)
+                                          && !string.IsNullOrEmpty(PMMConfig?.TestResultAPI_URL));
             if (isMandatoryFieldValuesFilled)
             {
                 MainPage.mainPage.REQ_MSG_VisibilityCompleted?.Invoke(Constants.Success);
@@ -295,7 +339,7 @@ namespace VideoKallMCCST.ViewModel
             try
             {
                 string pmm_Config_FileName = "PMM_Config.txt";
-                string msg = "URL :" + " " + PMMConfig.URL + Environment.NewLine + "API_URL :" + " " + PMMConfig.API_URL;
+                string msg = "URL :" + " " + PMMConfig.URL + Environment.NewLine + "API_URL :" + " " + PMMConfig.API_URL + Environment.NewLine + "TestResult_API_URL :" + " " + PMMConfig.TestResultAPI_URL;
                 var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 Windows.Storage.StorageFile pinfofile = await localFolder.CreateFileAsync(pmm_Config_FileName, CreationCollisionOption.OpenIfExists);
                 await Windows.Storage.FileIO.WriteTextAsync(pinfofile, msg, Windows.Storage.Streams.UnicodeEncoding.Utf8);
@@ -309,7 +353,7 @@ namespace VideoKallMCCST.ViewModel
 
         public async void ExecuteBrowserCommand()
         {
-            StorageFolder appFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+             appFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
             await Launcher.LaunchFolderAsync(appFolder);
         }
         ///
@@ -377,8 +421,14 @@ namespace VideoKallMCCST.ViewModel
             }
         }
         public void ExecuteLogoutCommand()
-        {            
-            MainPage.mainPage.Frame.Navigate(typeof(VideoKallLoginPage));
+        {
+            //MainPage.mainPage.Frame.Navigate(typeof(VideoKallLoginPage));
+            MainPage.mainPage.VideoCallReset?.Invoke(true);
+            Frame rootFrame = Window.Current.Content as Frame;
+            Window.Current.Content = rootFrame;
+            MainPage.mainPage.IsUserLogedin = false;
+            rootFrame.BackStack.Clear();           
+            rootFrame.Navigate(typeof(VideoKallLoginPage));
         }
 
     }//class
