@@ -24,13 +24,13 @@ namespace VideoKallMCCST
             this.DataContext = mainpagecontext;
             if (VideoKallLoginPage.LoginPage._loginVM.IsAdmin==false)
             {
-                //spSettings.Visibility = Visibility.Collapsed;
-                //AdminBlock.Text = "Nurse";
+                spSettings.Visibility = Visibility.Collapsed;
+                AdminBlock.Text = "Nurse";
             }
             else if (VideoKallLoginPage.LoginPage._loginVM.IsAdmin)
             {
-                //spSettings.Visibility = Visibility.Visible;
-                //AdminBlock.Text = "Admin";
+                spSettings.Visibility = Visibility.Visible;
+                AdminBlock.Text = "Admin";
             }
             VideoCallVM = new VideoCallViewModel();
            // HttpClient = new HttpClientManager();
