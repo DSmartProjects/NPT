@@ -433,27 +433,6 @@ namespace VideoKallMCCST.ViewModel
             rootFrame.Navigate(typeof(VideoKallLoginPage));
         }
         
-        string strRootFolder = "VideoKall";
-        string strRootFolderPath = "";
-        public async void BindSharedFolderPath()
-        {
-            try
-            {
-                FolderPicker folderPicker = new FolderPicker();
-                folderPicker.FileTypeFilter.Add(".png");
-
-                if (string.IsNullOrEmpty(strRootFolderPath))
-                    folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
-                
-                MainPage.mainPage.rootImageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
-                strRootFolderPath = MainPage.mainPage.rootImageFolder.Path;
-
-            }
-            catch (Exception ex)
-            {
-                string s = ex.Message;
-            }
-        }
 
     }//class
 }
