@@ -80,7 +80,20 @@ namespace VideoKallMCCST.ViewModel
             OnPropertyChanged(TxtSBCConnected);
 
         }
-        public bool IsSMCConnected { get; set; }
+        private bool _isSMCConnected = false;
+        public bool IsSMCConnected
+        {
+            get
+            {
+                return _isSMCConnected;
+            }
+            set
+            {
+                _isSMCConnected = value;
+                OnPropertyChanged("IsSMCConnected");
+            }
+        }
+        //public bool IsSMCConnected { get; set; }
         public string TxtSBCConnected { get; set; }
         private ICommand _accountCommand = null;
         public ICommand AccountCommand
