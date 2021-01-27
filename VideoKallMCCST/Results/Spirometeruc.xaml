@@ -141,9 +141,9 @@
 
                             <controls:DataGridTextColumn Width="*" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Header="Code" IsReadOnly="True"  Binding="{Binding Code}" />
                             <controls:DataGridTextColumn Width="*" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Header="Name" IsReadOnly="True"  Binding="{Binding Name}" />
-                            <controls:DataGridTextColumn Width="*" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Header="MeasuredValue" IsReadOnly="True"  Binding="{Binding MeasuredValue}" />
-                            <controls:DataGridTextColumn Width="*" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Header="MeasureUnit" IsReadOnly="True"  Binding="{Binding MeasureUnit}" />
-                            <controls:DataGridTextColumn Width="*" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Header="ParameterType" IsReadOnly="True" Binding="{Binding ParameterType}" />
+                            <controls:DataGridTextColumn MinWidth="110" Width="*" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Header="Measured Value" IsReadOnly="True"  Binding="{Binding MeasuredValue}" />
+                            <controls:DataGridTextColumn MinWidth="110" Width="*" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Header="Measured Unit" IsReadOnly="True"  Binding="{Binding MeasureUnit}" />
+                            <controls:DataGridTextColumn MinWidth="110" Width="*" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" Header="Parameter Type" IsReadOnly="True" Binding="{Binding ParameterType}" />
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>
                         
@@ -213,9 +213,9 @@
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn  Header="Code" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"   Binding="{Binding Code}" Width="100" />
                             <controls:DataGridTextColumn  Header="Name" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"  Binding="{Binding Name}" Width="100"  />
-                            <controls:DataGridTextColumn  Header="MeasuredValue" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"  Binding="{Binding MeasuredValue}" Width="100" />
-                            <controls:DataGridTextColumn  Header="MeasureUnit" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"  Binding="{Binding MeasureUnit}" Width="200" />
-                            <controls:DataGridTextColumn  Header="ParameterType" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"  Binding="{Binding ParameterType}" Width="200"  />
+                            <controls:DataGridTextColumn MinWidth="110" Header="Measured Value" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"  Binding="{Binding MeasuredValue}" />
+                            <controls:DataGridTextColumn MinWidth="110"  Header="Measured Unit" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"  Binding="{Binding MeasureUnit}"  />
+                            <controls:DataGridTextColumn MinWidth="110" Header="Parameter Type" FontFamily="Open Sans" Foreground="#464646"  FontSize="12" FontWeight="SemiBold" IsReadOnly="True"  Binding="{Binding ParameterType}" />
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>
                 </Grid>
