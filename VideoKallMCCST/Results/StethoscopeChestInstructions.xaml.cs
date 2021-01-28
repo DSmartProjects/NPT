@@ -137,7 +137,8 @@ namespace VideoKallMCCST.Results
                 StorageFolder strRootFolderPath = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
                 if (strRootFolderPath.Path != null && strRootFolderPath != null)
                 {
-                    StorageFolder assetsFolder = null; ;
+                    StorageFolder assetsFolder = null;
+                    StorageFolder sethefolderPath = null;
                     var file = await strRootFolderPath.TryGetItemAsync("Sethescope");
                     if (file == null)
                     {
@@ -146,10 +147,12 @@ namespace VideoKallMCCST.Results
                     else
                     {
                         assetsFolder = await strRootFolderPath.GetFolderAsync("Sethescope");
-                       
+                        sethefolderPath = await StorageFolder.GetFolderFromPathAsync(assetsFolder.Path);
+
                     }
 
-                    await audioFile.MoveAsync(assetsFolder, fileRename);
+                    //await audioFile.MoveAsync(assetsFolder, fileRename);
+                    await audioFile.MoveAsync(sethefolderPath, fileRename);
                     MainPage.mainPage.targetpath = strRootFolderPath.Path + "\\Sethescope"+"\\" + fileRename;
                     Toast.ShowToast("", "File Moved Successfully to Destination Folder");
                 }
