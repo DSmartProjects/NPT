@@ -623,6 +623,6 @@ namespace VideoKallMCCST
         public BoolDelegate Heightdelegate;
         public BoolDelegate Weightdelegate;
         public BoolDelegate VideoCallReset;
-
+        public bool IsSpiroBankBluetooth { get; set; } = true;
     }
 }

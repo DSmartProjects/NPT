@@ -284,7 +284,12 @@ namespace VideoKallMCCST.Results
             double h = spgrid.ActualHeight;
             double w = spgrid.ActualWidth - 350;
 
-            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.StartSpiroFVC, x.ToString() + ":" + y.ToString() + ":" + h.ToString() + ":" + w.ToString()));
+            if (MainPage.mainPage.IsSpiroBankBluetooth)
+            {
+                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.StartSpiroFVC, x.ToString() + ":" + y.ToString() + ":" + h.ToString() + ":" + w.ToString()));
+            }
+            else
+                MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.StartSpiroFVC, x.ToString() + ":" + y.ToString() + ":" + h.ToString() + ":" + w.ToString()));
         }
 
         private void StopFVC_Click(object sender, RoutedEventArgs e)
@@ -299,8 +304,12 @@ namespace VideoKallMCCST.Results
             isStarted = false;
             StopFVC.IsEnabled = false;
 
-
-            MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.StopSpiro);
+            if (MainPage.mainPage.IsSpiroBankBluetooth)
+            {
+                MainPage.mainPage.SMCCommChannel.SendMessage(CommunicationCommands.StopSpiro);
+            }
+            else
+                MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(CommunicationCommands.StopSpiro);
             
         }
 
@@ -322,6 +331,12 @@ namespace VideoKallMCCST.Results
             double x = 1000;
             double h = spgrid.ActualHeight;
             double w = spgrid.ActualWidth - 350;
+
+            if (MainPage.mainPage.IsSpiroBankBluetooth)
+            {
+                MainPage.mainPage.SMCCommChannel.SendMessage(string.Format(CommunicationCommands.StartSpiroVC, x.ToString() + ":" + y.ToString() + ":" + h.ToString() + ":" + w.ToString()));
+            }
+            else
             MainPage.mainPage.CommToDataAcq.SendMessageToDataacquistionapp(string.Format(CommunicationCommands.StartSpiroVC, x.ToString() + ":" + y.ToString() + ":" + h.ToString() + ":" + w.ToString()));
 
         }
