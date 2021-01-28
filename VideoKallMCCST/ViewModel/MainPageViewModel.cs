@@ -80,7 +80,20 @@ namespace VideoKallMCCST.ViewModel
             OnPropertyChanged(TxtSBCConnected);
 
         }
-        public bool IsSMCConnected { get; set; }
+        private bool _isSMCConnected = false;
+        public bool IsSMCConnected
+        {
+            get
+            {
+                return _isSMCConnected;
+            }
+            set
+            {
+                _isSMCConnected = value;
+                OnPropertyChanged("IsSMCConnected");
+            }
+        }
+        //public bool IsSMCConnected { get; set; }
         public string TxtSBCConnected { get; set; }
         private ICommand _accountCommand = null;
         public ICommand AccountCommand
@@ -433,27 +446,6 @@ namespace VideoKallMCCST.ViewModel
             rootFrame.Navigate(typeof(VideoKallLoginPage));
         }
         
-        string strRootFolder = "VideoKall";
-        string strRootFolderPath = "";
-        public async void BindSharedFolderPath()
-        {
-            try
-            {
-                FolderPicker folderPicker = new FolderPicker();
-                folderPicker.FileTypeFilter.Add(".png");
-
-                if (string.IsNullOrEmpty(strRootFolderPath))
-                    folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
-                
-                MainPage.mainPage.rootImageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
-                strRootFolderPath = MainPage.mainPage.rootImageFolder.Path;
-
-            }
-            catch (Exception ex)
-            {
-                string s = ex.Message;
-            }
-        }
 
     }//class
 }
