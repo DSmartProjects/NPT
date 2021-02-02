@@ -42,6 +42,8 @@ namespace VideoKallMCCST.View
         IncomingConnectionEventArgs incommingCall2 = null;
         public VideoCallViewModel _videoCallVM = null;
         static DispatcherTimer timer = null;
+        SearchPatient searchPatient = new SearchPatient();
+
         public VideoCall()
         {
             this.InitializeComponent();
@@ -238,6 +240,10 @@ namespace VideoKallMCCST.View
             await InitializeAsync();
             MainPage.mainPage.RightPanelHolder.Navigate(typeof(VideoCall));
             MainPage.mainPage.pagePlaceHolder.Navigate(typeof(LogoPage));
+            if (btnSearchPatient.IsEnabled == true)
+            {
+                searchPatient.Hide();
+            }
         }
         private async Task PatientEndCallAsync()
         {
@@ -285,7 +291,7 @@ namespace VideoKallMCCST.View
 
         private async void BtnSearchPatient_Click(object sender, RoutedEventArgs e)
         {
-            SearchPatient searchPatient = new SearchPatient();
+            //SearchPatient searchPatient = new SearchPatient();
             await searchPatient.ShowAsync();
             btnSaveClinicalNotes.IsEnabled = true;
             //SearchPatientPOP.IsOpen = true;
